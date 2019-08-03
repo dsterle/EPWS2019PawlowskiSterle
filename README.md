@@ -12,6 +12,6 @@ Der Benutzer soll keine Anwendung auf seinem Smartphone installieren müssen, so
 `Lösungsansatz: Bluetooth Beacons`
 
 ## Idee 3
-Das Smartphone befindet sich in der Tasche des Benutzers. Dieser erhält beim Eingang ein NFC-Lesegerät (oder er nutzt ein NFC-fähiges Smartphone), welcher der Benutzer an das Gemälde hält um eine Audiodatei auf dem Smartphone abzuspielen. Das Smartphone ist mit Kopfhörern verbunden.
+Am Eingang des Museums erhält der Besucher einen Transponder (NFC-Tag). Dieser hat eine bestimmte ID, welche zunächst einmalig auf der Website mit dem Smartphone angegeben werden muss. Anschließend kann das Smartphone in die Tasche gesteckt werden und es muss lediglich der Transponder an ein Gemälde gehalten werden um sich eine Audiodatei über das Smartphone anzuhören. Eventuell soll es auch die Möglichkeit geben einen QR-code am Transponder zu scannen, so dass der Nutzer nicht extra die Website öffnen und die ID eingeben muss. 
 
-`Lösungsansatz: NFC`
+`Lösungsansatz: NFC, QR-Code`
