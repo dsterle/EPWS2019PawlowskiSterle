@@ -12,6 +12,6 @@ Der Benutzer soll keine Anwendung auf seinem Smartphone installieren müssen, so
 `Lösungsansatz: Bluetooth Beacons`
 
 ## Idee 3
-Der Benutzer wird mit einem Microcontroller ausgestattet. In seiner Hosentasche befindet sich sein Smartphone, welches mittels Kopfhörern mit seinen Ohren verbunden ist.
+Das Smartphone befindet sich in der Tasche des Benutzers. Dieser erhält beim Eingang ein NFC-Lesegerät (oder er nutzt ein NFC-fähiges Smartphone), welcher der Benutzer an das Gemälde hält um eine Audiodatei auf dem Smartphone abzuspielen. Das Smartphone ist mit Kopfhörern verbunden.
 
 `Lösungsansatz: NFC`
