@@ -4,19 +4,26 @@
   color: $lighter;
 }
 
+.painting-title {
+  font-size: $font-size-M;
+}
+
 .text {
   font-size: $font-size-M;
   line-height: $font-line-height-M;
+  font-weight: $regular;
   color: $lighter;
 }
 
 .button-text {
   font-size: $font-size-M;
+  font-weight: $regular;
   color: $accent;
 }
 
 .hint-text {
   font-size: $font-size-M;
+  font-weight: $regular;
   color: $light;
 }
 

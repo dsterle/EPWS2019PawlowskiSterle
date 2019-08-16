@@ -13,12 +13,13 @@ $abstand-S: 1rem * 0.5;
 $abstand-M: 1rem;
 $abstand-L: 1rem * 2;
 $abstand-XL: 1rem * 4;
+$abstand-XXL: 1rem * 4.5;
 
 //* Font Sizes *//
 
 $font-size-S: 1rem * 0.75;
 $font-size-M: 1rem;
-$font-size-L: 1rem * 1.25;
+$font-size-L: 1rem * 1.5;
 
 // Der Zeilenabstand steht im goldenen Schnitt zur font-size
 $font-line-height-S: $font-size-S * 1.618;
@@ -34,7 +35,7 @@ $font-line-height-L: $font-size-L * 1.618;
 // @import url(//fonts.googleapis.com/css?family=Montserrat:600);
 // @import url(//fonts.googleapis.com/css?family=Montserrat:600&display=swap);
 
-$font: "Montserrat";
+$font: "Montserrat", Helvetica, sans-serif;
 // $font-semibold: "Montserrat-semibold";
 
 $thin: 100;
