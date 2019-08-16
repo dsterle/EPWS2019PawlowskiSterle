@@ -7,20 +7,19 @@
         <br />Archiv
       </h1>
       <p class="text note-text">Bitte geben Sie die Nummer von Ihrem Transponder ein</p>
+      <inputField inputId="input-transponder" inputPlaceholder="Nummer..." buttonText="Ok"></inputField>
     </div>
-    <!-- <h1 class="headline">Headline</h1>
-    <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, rem.</p>
-    <p class="button-text">Button Text</p>
-    <p class="hint-text">Hint Text</p>
-    <p class="error-text">Error Text</p>
-    <p class="description-text">Description Text</p>-->
   </div>
 </template>
 
 <script>
+import inputField from "../components/inputField.vue";
+
 export default {
   name: "home",
-  components: {}
+  components: {
+    inputField
+  }
 };
 </script>
 
@@ -37,6 +36,7 @@ export default {
 
   .note-text {
     margin-top: $abstand-XL;
+    margin-bottom: 0px;
   }
 }
 </style>
