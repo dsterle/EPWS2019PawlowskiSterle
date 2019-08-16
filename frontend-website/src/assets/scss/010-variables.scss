@@ -9,11 +9,12 @@ $error: #db4437;
 //* Sizes *//
 // 1rem = 16px
 
-$abstand-S: 1rem * 0.5;
-$abstand-M: 1rem;
-$abstand-L: 1rem * 2;
-$abstand-XL: 1rem * 4;
-$abstand-XXL: 1rem * 4.5;
+$abstand-XS: 1rem * 0.25; // 4
+$abstand-S: 1rem * 0.5; // 8
+$abstand-M: 1rem; // 16
+$abstand-L: 1rem * 2; // 32
+$abstand-XL: 1rem * 4; // 64
+$abstand-XXL: 1rem * 4.5; // 72
 
 //* Font Sizes *//
 
@@ -30,14 +31,7 @@ $font-line-height-L: $font-size-L * 1.618;
 
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,600&display=swap");
 
-// @import url(//fonts.googleapis.com/css?family=Montserrat:100);
-// @import url(//fonts.googleapis.com/css?family=Montserrat:400);
-// @import url(//fonts.googleapis.com/css?family=Montserrat:600);
-// @import url(//fonts.googleapis.com/css?family=Montserrat:600&display=swap);
-
 $font: "Montserrat", Helvetica, sans-serif;
-// $font-semibold: "Montserrat-semibold";
 
-$thin: 100;
 $regular: 400;
 $semibold: 600;
