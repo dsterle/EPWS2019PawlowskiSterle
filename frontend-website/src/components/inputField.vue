@@ -27,17 +27,22 @@ export default {
   font-family: $font;
   font-weight: $regular;
   font-size: $font-size-M;
-  background: none;
-  border: none;
   padding: 0px 0px $abstand-S 0px;
   color: $lighter;
   width: 100%;
   border-bottom: 2px $light solid;
+  transition: 0.5s;
+}
+
+.input-field:focus {
+  border-bottom: 2px $accent solid;
+  transition: 0.5s;
 }
 
 .button-submit {
+  width: 100%;
+  text-align: right;
   margin-top: $abstand-L;
-  background: none;
   padding: 0px 0px 0px 0px;
   border: none;
 }
