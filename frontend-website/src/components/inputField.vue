@@ -24,9 +24,6 @@ export default {
 
 .input-field {
   margin-top: $abstand-L;
-  font-family: $font;
-  font-weight: $regular;
-  font-size: $font-size-M;
   padding: 0px 0px $abstand-S 0px;
   color: $lighter;
   width: 100%;
