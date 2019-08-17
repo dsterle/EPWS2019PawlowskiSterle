@@ -16,11 +16,13 @@ $abstand-L: 1rem * 2; // 32
 $abstand-XL: 1rem * 4; // 64
 $abstand-XXL: 1rem * 4.5; // 72
 
+$app-bar-height: 1rem * 3.375; // 54
+
 //* Font Sizes *//
 
-$font-size-S: 1rem * 0.75;
-$font-size-M: 1rem;
-$font-size-L: 1rem * 1.5;
+$font-size-S: 1rem * 0.75; // 12
+$font-size-M: 1rem; // 16
+$font-size-L: 1rem * 1.5; // 24
 
 // Der Zeilenabstand steht im goldenen Schnitt zur font-size
 $font-line-height-S: $font-size-S * 1.618;
