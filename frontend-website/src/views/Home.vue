@@ -17,9 +17,7 @@ import inputField from "../components/inputField.vue";
 
 export default {
   name: "home",
-  components: {
-    inputField
-  }
+  components: { inputField }
 };
 </script>
 
