@@ -8,7 +8,11 @@
       <h1 class="painting-title">The Crucifixion of Christ, the so-called Schottenkreuzigung</h1>
       <p class="hint-text year">1552</p>
       <accordion v-bind:item="item"></accordion>
-      <!-- <p>{{ item }}</p> -->
+      <accordion v-bind:item="item"></accordion>
+      <accordion v-bind:item="item"></accordion>
+      <accordion v-bind:item="item"></accordion>
+      <accordion v-bind:item="item"></accordion>
+      <accordion v-bind:item="item"></accordion>
     </div>
   </div>
 </template>
