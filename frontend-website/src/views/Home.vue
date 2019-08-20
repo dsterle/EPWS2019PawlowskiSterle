@@ -6,7 +6,7 @@
         <br />Lukas Cranach
         <br />Archiv
       </h1>
-      <p class="text note-text">Bitte geben Sie die Nummer von Ihrem Transponder ein</p>
+      <p class="normal-text note-text">Bitte geben Sie die Nummer von Ihrem Transponder ein</p>
       <inputField inputId="input-transponder" inputPlaceholder="Nummer..." buttonText="Ok"></inputField>
     </div>
   </div>
