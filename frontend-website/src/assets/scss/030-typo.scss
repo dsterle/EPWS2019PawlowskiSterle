@@ -1,19 +1,19 @@
 .headline {
+  font-size: $font-size-XL;
+  line-height: $font-line-height-XL;
+  color: $lighter;
+}
+
+.painting-title {
   font-size: $font-size-L;
   line-height: $font-line-height-L;
   color: $lighter;
 }
 
-.painting-title {
+.normal-text {
   font-size: $font-size-M;
   line-height: $font-line-height-M;
-  color: $lighter;
-}
-
-.text {
-  font-size: $font-size-M;
-  line-height: $font-line-height-M;
-  font-weight: $regular;
+  font-weight: $semibold;
   color: $lighter;
 }
 
@@ -37,8 +37,8 @@
 }
 
 .description-text {
-  font-size: $font-size-S;
+  font-size: $font-size-M;
   font-weight: $regular;
-  line-height: $font-line-height-S;
-  color: $lighter;
+  line-height: $font-line-height-M;
+  color: $light;
 }
