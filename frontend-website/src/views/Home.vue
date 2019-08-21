@@ -7,7 +7,7 @@
         <br />Archiv
       </h1>
       <p class="normal-text note-text">Bitte geben Sie die Nummer von Ihrem Transponder ein</p>
-      <inputField inputId="input-transponder" inputPlaceholder="Nummer..." buttonText="Ok"></inputField>
+      <inputField inputId="input-transponder" inputPlaceholder="Nummer..." buttonText="Ok" ids="[100, 101, 102]></inputField>
     </div>
   </div>
 </template>
