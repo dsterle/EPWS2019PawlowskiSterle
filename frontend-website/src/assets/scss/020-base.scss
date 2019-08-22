@@ -5,9 +5,16 @@ html {
 }
 
 input {
+  outline: none;
   background: none;
+  text-decoration: none;
   border: none;
+  border-radius: 0;
   font-family: $font;
   font-weight: $regular;
   font-size: $font-size-M;
+}
+
+input:active {
+  background-color: transparent;
 }
