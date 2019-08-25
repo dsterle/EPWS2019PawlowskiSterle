@@ -36,6 +36,7 @@ export default {
   width: 100%;
   height: 80vh;
   display: flex;
+  margin-top: -$abstand-L;
   align-items: center;
   justify-content: center;
 
