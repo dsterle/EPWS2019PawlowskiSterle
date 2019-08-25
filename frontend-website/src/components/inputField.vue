@@ -2,7 +2,7 @@
   <div>
     <form action class="form">
       <input
-        class="input-field"
+        class="hint-text input-field"
         v-bind:name="inputId"
         v-bind:id="inputId"
         v-bind:placeholder="inputPlaceholder"
@@ -45,7 +45,7 @@ function idInputValidation(ids) {
     inputField.classList.add("input-field-error");
   } else if (ids.includes(inputField.value)) {
     // TODO change localhost to domain
-    open("http://localhost:8080/waiting", "_self");
+    open("/waiting", "_self");
   }
 }
 </script>
@@ -58,7 +58,7 @@ function idInputValidation(ids) {
   padding: 0 0 $abstand-S 0;
   color: $lighter;
   width: 100%;
-  border-bottom: 1px $lighter solid;
+  border-bottom: 1px rgba(255, 255, 255, 0.5) solid;
   transition: 0.5s;
 }
 
