@@ -11,12 +11,14 @@
         max="200"
       />
       <label v-bind:for="inputId" class="input-field-error-msg"></label>
-      <input
-        class="button-submit button-text"
-        type="button"
-        v-bind:value="buttonText"
-        v-on:click="validate(ids)"
-      />
+      <div class="button-wrapper">
+        <input
+          class="button-submit button-text"
+          type="button"
+          v-bind:value="buttonText"
+          v-on:click="validate(ids)"
+        />
+      </div>
     </form>
   </div>
 </template>
@@ -66,13 +68,17 @@ function idInputValidation(ids) {
   outline: none;
 }
 
-.button-submit {
-  width: 100%;
-  text-align: right;
-  margin-top: $abstand-L;
-  padding: 0 0 0 0;
-  border: none;
-  cursor: pointer;
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+
+  .button-submit {
+    text-align: right;
+    margin-top: $abstand-L;
+    padding: 0 0 0 0;
+    border: none;
+    cursor: pointer;
+  }
 }
 
 .input-field-error {
