@@ -1,5 +1,6 @@
 <template>
   <div class="painting">
+    <fab></fab>
     <img
       src="http://lucascranach.org/thumbnails/DE_BStGS_1130_FR285E/01_Overall/DE_BStGS_1130_FR285E_2010_Overall.jpg"
       alt
@@ -14,7 +15,6 @@
       <accordion v-bind:item="item"></accordion>
       <accordion v-bind:item="item"></accordion>
     </div>
-    <fab></fab>
   </div>
 </template>
 
@@ -40,16 +40,20 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/010-variables.scss";
 
-img {
-  width: 100%;
-  height: 100%;
-}
+.painting {
+  // position: absolute;
 
-.content-wrapper {
-  padding: $abstand-M $abstand-M 0 $abstand-M;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
-  .year {
-    margin-top: $abstand-S;
+  .content-wrapper {
+    padding: $abstand-M $abstand-M 0 $abstand-M;
+
+    .year {
+      margin: $abstand-S 0 $abstand-S 0;
+    }
   }
 }
 </style>
