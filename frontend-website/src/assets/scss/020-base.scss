@@ -1,7 +1,7 @@
 html {
   background: $darker;
   font-family: $font;
-  font-weight: $semibold;
+  font-weight: $weight-semibold;
 }
 
 input {
@@ -11,7 +11,7 @@ input {
   border: none;
   border-radius: 0;
   font-family: $font;
-  font-weight: $regular;
+  font-weight: $weight-regular;
   font-size: $font-size-M;
 }
 

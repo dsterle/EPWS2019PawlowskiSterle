@@ -5,7 +5,7 @@
       alt
     />
     <div class="content-wrapper">
-      <h1 class="painting-title">The Crucifixion of Christ, the so-called Schottenkreuzigung</h1>
+      <h1 class="title-text">The Crucifixion of Christ, the so-called Schottenkreuzigung</h1>
       <p class="hint-text year">1552</p>
       <accordion v-bind:item="item"></accordion>
       <accordion v-bind:item="item"></accordion>
@@ -14,15 +14,17 @@
       <accordion v-bind:item="item"></accordion>
       <accordion v-bind:item="item"></accordion>
     </div>
+    <fab></fab>
   </div>
 </template>
 
 <script>
 import accordion from "../components/accordion";
+import fab from "../components/fab";
 
 export default {
   name: "painting",
-  components: { accordion },
+  components: { accordion, fab },
   data() {
     return {
       item: {
