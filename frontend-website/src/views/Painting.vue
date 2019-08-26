@@ -6,7 +6,7 @@
       alt
     />
     <div class="content-wrapper">
-      <h1 class="title-text">The Crucifixion of Christ, the so-called Schottenkreuzigung</h1>
+      <h1 class="title-text">Painting {{ $route.params.id }}</h1>
       <p class="hint-text year">1552</p>
       <accordion v-bind:item="item"></accordion>
       <accordion v-bind:item="item"></accordion>
