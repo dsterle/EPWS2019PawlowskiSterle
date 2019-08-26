@@ -44,7 +44,6 @@ function idInputValidation(ids) {
     errorMsg.innerHTML = "Die angegebene ID existiert nicht";
     inputField.classList.add("input-field-error");
   } else if (ids.includes(inputField.value)) {
-    // TODO change localhost to domain
     open("/waiting", "_self");
   }
 }
