@@ -89,8 +89,8 @@ function idInputValidation(ids) {
   position: absolute;
   left: $abstand-L;
   margin-top: $abstand-XXL;
-  font-weight: $regular;
-  font-size: $font-size-S;
-  color: $error;
+  // font-weight: $regular;
+  // font-size: $font-size-S;
+  // color: $error;
 }
 </style>

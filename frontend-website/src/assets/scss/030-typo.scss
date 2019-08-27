@@ -4,41 +4,42 @@
   color: $lighter;
 }
 
-.painting-title {
+.title-text {
   font-size: $font-size-L;
   line-height: $font-line-height-L;
+  font-weight: $weight-semibold;
   color: $lighter;
 }
 
 .normal-text {
   font-size: $font-size-M;
   line-height: $font-line-height-M;
-  font-weight: $semibold;
+  font-weight: $weight-semibold;
   color: $lighter;
 }
 
 .button-text {
   font-size: $font-size-L;
-  font-weight: $regular;
+  font-weight: $weight-regular;
   color: $accent;
 }
 
 .hint-text {
   font-size: $font-size-M;
-  font-weight: $regular;
+  font-weight: $weight-regular;
   line-height: $font-line-height-M;
   color: $lighter;
 }
 
 .error-text {
   font-size: $font-size-S;
-  font-weight: $regular;
+  font-weight: $weight-regular;
   color: $error;
 }
 
 .description-text {
   font-size: $font-size-M;
-  font-weight: $regular;
+  font-weight: $weight-regular;
   line-height: $font-line-height-M;
-  color: $light;
+  color: $lighter;
 }

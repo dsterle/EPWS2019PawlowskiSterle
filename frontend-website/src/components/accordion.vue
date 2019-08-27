@@ -61,6 +61,7 @@ export default {
 
     .icon-wrapper {
       display: flex;
+      align-items: center;
       width: $icon-wrapper-width;
 
       .icon {
@@ -91,8 +92,8 @@ export default {
 }
 
 .helper-description-padding {
-  padding-top: $abstand-S;
-  padding-bottom: $abstand-L;
+  margin-top: $abstand-S;
+  margin-bottom: $abstand-L;
 }
 
 .currentAudio {
