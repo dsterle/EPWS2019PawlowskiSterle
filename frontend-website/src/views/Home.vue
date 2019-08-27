@@ -8,10 +8,11 @@
       </h1>
       <p class="normal-text note-text">Bitte geben Sie die Nummer von Ihrem Transponder ein</p>
       <inputField
-        inputId="input-transponder"
+        inputID="input-transponder"
         inputPlaceholder="Nummer..."
         buttonText="Ok"
-        ids="[100, 101, 102]"
+        v-bind:error="transponderNotFound"
+        v-on:event-clicked="validateIDs"
       ></inputField>
     </div>
   </div>
@@ -22,7 +23,24 @@ import inputField from "../components/inputField.vue";
 
 export default {
   name: "home",
-  components: { inputField }
+  components: { inputField },
+  data() {
+    return {
+      paintingIDs: [100, 101, 102],
+      transponderNotFound: false
+    };
+  },
+  methods: {
+    validateIDs(data) {
+      let input = parseInt(data);
+
+      if (this.paintingIDs.includes(input)) {
+        open("/waiting", "_self");
+      } else {
+        this.transponderNotFound = true;
+      }
+    }
+  }
 };
 </script>
 
