@@ -1,17 +1,18 @@
 <template>
   <div class="home">
     <div class="home-wrapper">
-      <h1 class="headline welcome-text">
-        Willkommen im
-        <br />Lukas Cranach
-        <br />Archiv
-      </h1>
+      <div class="welcome-text">
+        <p class="headline">Willkommen im</p>
+        <h1 class="headline">Lukas Cranach</h1>
+        <p class="headline">Archiv</p>
+      </div>
       <p class="normal-text note-text">Bitte geben Sie die Nummer von Ihrem Transponder ein</p>
       <inputField
-        inputId="input-transponder"
+        inputID="input-transponder"
         inputPlaceholder="Nummer..."
         buttonText="Ok"
-        ids="[100, 101, 102]"
+        v-bind:error="transponderNotFound"
+        v-on:event-clicked="validateIDs"
       ></inputField>
     </div>
   </div>
@@ -22,7 +23,24 @@ import inputField from "../components/inputField.vue";
 
 export default {
   name: "home",
-  components: { inputField }
+  components: { inputField },
+  data() {
+    return {
+      paintingIDs: [100, 101, 102],
+      transponderNotFound: false
+    };
+  },
+  methods: {
+    validateIDs(data) {
+      let input = parseInt(data);
+
+      if (this.paintingIDs.includes(input)) {
+        open("/waiting", "_self");
+      } else {
+        this.transponderNotFound = true;
+      }
+    }
+  }
 };
 </script>
 

@@ -1,22 +1,27 @@
 <template>
   <div>
-    <form action class="form">
+    <form action>
+      <!-- wenn this.error true ist, wird die Klasse input-field-error an das input-field gebunden -->
       <input
         class="hint-text input-field"
-        v-bind:name="inputId"
-        v-bind:id="inputId"
+        v-bind:name="inputID"
+        v-bind:id="inputID"
         v-bind:placeholder="inputPlaceholder"
+        v-bind:class="{'input-field-error':this.error}"
         type="number"
-        min="1"
-        max="200"
       />
-      <label v-bind:for="inputId" class="input-field-error-msg"></label>
+      <!-- nur wenn this.error true ist wird das label gezeigt -->
+      <label
+        v-if="this.error"
+        v-bind:for="inputID"
+        class="error-text input-field-error-msg"
+      >Die Nummer konnte nicht gefunden werden</label>
       <div class="button-wrapper">
         <input
           class="button-submit button-text"
           type="button"
           v-bind:value="buttonText"
-          v-on:click="validate(ids)"
+          v-on:click="emitEvent"
         />
       </div>
     </form>
@@ -26,28 +31,14 @@
 <script>
 export default {
   name: "inputField",
-  props: ["ausgabe", "input-placeholder", "inputId", "buttonText", "ids"],
+  props: ["formID", "inputID", "input-placeholder", "buttonText", "error"],
   methods: {
-    validate: idInputValidation
+    emitEvent() {
+      let input = document.querySelector(`#${this.inputID}`).value;
+      this.$emit("event-clicked", input);
+    }
   }
 };
-
-function idInputValidation(ids) {
-  let inputField = document.querySelector(".input-field");
-
-  if (inputField.value === "") {
-    let errorMsg = document.querySelector(".input-field-error-msg");
-    errorMsg.innerHTML = "Bitte geben Sie eine ID ein";
-    inputField.classList.add("input-field-error");
-  } else if (!ids.includes(inputField.value)) {
-    let errorMsg = document.querySelector(".input-field-error-msg");
-    errorMsg.innerHTML = "Die angegebene ID existiert nicht";
-    inputField.classList.add("input-field-error");
-  } else if (ids.includes(inputField.value)) {
-    // TODO change localhost to domain
-    open("/waiting", "_self");
-  }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -89,8 +80,9 @@ function idInputValidation(ids) {
   position: absolute;
   left: $abstand-L;
   margin-top: $abstand-XXL;
-  // font-weight: $regular;
-  // font-size: $font-size-S;
-  // color: $error;
+}
+
+.visible {
+  max-height: 0px;
 }
 </style>
