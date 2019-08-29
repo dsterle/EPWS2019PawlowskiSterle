@@ -1,6 +1,6 @@
 <template>
   <div class="painting">
-    <fab></fab>
+    <fab src="../assets/icons/pause.svg"></fab>
     <img
       src="http://lucascranach.org/thumbnails/DE_BStGS_1130_FR285E/01_Overall/DE_BStGS_1130_FR285E_2010_Overall.jpg"
       alt

@@ -1,12 +1,13 @@
 <template>
   <div class="floating-action-button">
-    <img class="icon" src="../assets/icons/pause.svg" alt="Pause Button" />
+    <img class="icon" v.bind:src="this.src" alt="Pause Button" />
   </div>
 </template>
     
 <script>
 export default {
-  name: "fab"
+  name: "fab",
+  props: { src }
 };
 </script>
 
