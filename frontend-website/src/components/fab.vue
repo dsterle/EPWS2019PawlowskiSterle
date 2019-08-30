@@ -1,13 +1,18 @@
 <template>
   <div class="floating-action-button">
-    <img js-icon v-bind:src="src" v-bind:alt="alt" v-on:click="$emit('fab-clicked')" />
+    <img js-icon class="icon" v-bind:src="src" v-bind:alt="alt" v-on:click="clicked" />
   </div>
 </template>
     
 <script>
 export default {
   name: "fab",
-  props: ["src", "alt"]
+  props: ["src", "alt"],
+  methods: {
+    clicked() {
+      this.$emit("fab-clicked");
+    }
+  }
 };
 </script>
 
@@ -26,5 +31,9 @@ export default {
   bottom: 0;
   box-shadow: 0px 14px 14px rgba(0, 0, 0, 0.237602),
     0px 0px 14px rgba(0, 0, 0, 0.12);
+}
+
+.floating-action-button:active {
+  background: $accentDark;
 }
 </style>
