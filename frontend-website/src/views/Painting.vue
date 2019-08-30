@@ -40,11 +40,10 @@ export default {
     playAudio() {
       if (this.audioPlaying) {
         this.fabIcon = require("../assets/icons/play.svg");
-        this.audioPlaying = false;
       } else {
         this.fabIcon = require("../assets/icons/pause.svg");
-        this.audioPlaying = true;
       }
+      this.audioPlaying = !this.audioPlaying;
     }
   }
 };
