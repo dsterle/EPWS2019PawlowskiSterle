@@ -6,14 +6,13 @@
       alt
     />
     <div class="content-wrapper">
-      <h1 class="title-text">Painting {{ this.item }}</h1>
-      <p class="hint-text year">1552</p>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
+      <h1 class="title-text">{{ item.title }}</h1>
+      <p class="hint-text year">{{ item.dated }}</p>
+      <ul>
+        <li v-bind:key="info.name" v-for="info in item.infos">
+          <accordion v-bind:info="info"></accordion>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -33,11 +32,16 @@ export default {
       audioPlaying: true
     };
   },
-  beforeCreate() {
+  created() {
     // TODO Do this with fetch API
-    console.log(require("../data/database.json"));
-    console.log(this.$route.params.id);
-    this.id = this.$route.params.id;
+    // fetch("../data/database.json")
+    // .then(data => data.json)
+    // .then(item => console.log("item " + item));
+    let data = require("../data/database.json").gemälde;
+    this.id = parseInt(this.$route.params.id);
+    this.item = data.find(painting => {
+      return painting.id === this.id;
+    });
   },
   methods: {
     playAudio() {
