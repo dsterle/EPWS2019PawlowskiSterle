@@ -13,18 +13,18 @@
       <input
         type="button"
         class="normal-text accordion-title"
-        v-bind:value="info.name"
+        v-bind:value="title"
         js-accordion="title"
         v-on:click="playAudio"
       />
     </div>
-    <p class="description-text accordion-text invisible" js-accordion="text">{{ info.inhalt }}</p>
+    <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["info"],
+  props: ["title", "text"],
   methods: {
     open() {
       // $el gives the DOM elements of this
