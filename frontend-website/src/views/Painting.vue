@@ -10,7 +10,7 @@
       <p class="hint-text year">{{ item.dated }}</p>
       <ul>
         <li v-bind:key="info.name" v-for="info in item.infos">
-          <accordion v-bind:info="info"></accordion>
+          <accordion v-bind:title="info.name" v-bind:text="info.inhalt"></accordion>
         </li>
       </ul>
     </div>
