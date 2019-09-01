@@ -27,9 +27,10 @@ export default {
   data() {
     return {
       item: {},
-      id: -1,
+      id: {},
       fabIcon: require("../assets/icons/pause.svg"),
-      audioPlaying: true
+      audioPlaying: true,
+      audio: {}
     };
   },
   created() {
