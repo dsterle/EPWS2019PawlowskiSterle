@@ -18,12 +18,17 @@
         v-on:click="playAudio"
       />
     </div>
+    <audioSlider v-bind:current="false"></audioSlider>
     <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
   </div>
 </template>
 
 <script>
+import audioSlider from "../components/audioSlider";
+
 export default {
+  name: "accordion",
+  components: { audioSlider },
   props: ["title", "text"],
   methods: {
     open() {
