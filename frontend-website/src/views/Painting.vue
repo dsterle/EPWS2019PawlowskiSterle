@@ -6,14 +6,13 @@
       alt
     />
     <div class="content-wrapper">
-      <h1 class="title-text">Painting {{ $route.params.id }}</h1>
-      <p class="hint-text year">1552</p>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
-      <accordion v-bind:item="item"></accordion>
+      <h1 class="title-text">{{ item.title }}</h1>
+      <p class="hint-text year">{{ item.dated }}</p>
+      <ul>
+        <li v-bind:key="info.name" v-for="info in item.infos">
+          <accordion v-bind:info="info"></accordion>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -27,14 +26,22 @@ export default {
   components: { accordion, fab },
   data() {
     return {
-      item: {
-        title: "Kurzbeschreibung",
-        text:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-      },
+      item: {},
+      id: -1,
       fabIcon: require("../assets/icons/pause.svg"),
       audioPlaying: true
     };
+  },
+  created() {
+    // TODO Do this with fetch API
+    // fetch("../data/database.json")
+    // .then(data => data.json)
+    // .then(item => console.log("item " + item));
+    let data = require("../data/database.json").gemälde;
+    this.id = parseInt(this.$route.params.id);
+    this.item = data.find(painting => {
+      return painting.id === this.id;
+    });
   },
   methods: {
     playAudio() {

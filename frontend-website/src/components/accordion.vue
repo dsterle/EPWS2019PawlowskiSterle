@@ -13,18 +13,18 @@
       <input
         type="button"
         class="normal-text accordion-title"
-        value="Kurzbeschreibung"
+        v-bind:value="info.name"
         js-accordion="title"
         v-on:click="playAudio"
       />
     </div>
-    <p class="description-text accordion-text invisible" js-accordion="text">{{ item.text }}</p>
+    <p class="description-text accordion-text invisible" js-accordion="text">{{ info.inhalt }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["item"],
+  props: ["info"],
   methods: {
     open() {
       // $el gives the DOM elements of this
@@ -92,8 +92,8 @@ export default {
 }
 
 .helper-description-padding {
-  margin-top: $abstand-S;
-  margin-bottom: $abstand-L;
+  // margin-top: $abstand-XS;
+  margin-bottom: $abstand-M;
 }
 
 .currentAudio {
