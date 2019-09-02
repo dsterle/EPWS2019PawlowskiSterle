@@ -14,7 +14,10 @@
 <script>
 export default {
   name: "waiting",
-  components: {}
+  components: {},
+  created() {
+    // TODO subscribe from MQTT Broker
+  }
 };
 </script>
 
