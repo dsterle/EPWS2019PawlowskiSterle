@@ -14,7 +14,15 @@
 <script>
 export default {
   name: "waiting",
-  components: {}
+  components: {},
+  data() {
+    return {
+      id: {}
+    };
+  },
+  created() {
+    this.id = parseInt(this.$route.params.id);
+  }
 };
 </script>
 

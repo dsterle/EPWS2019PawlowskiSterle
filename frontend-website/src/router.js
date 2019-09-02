@@ -14,7 +14,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/waiting',
+      path: '/waiting/:id',
       name: 'waiting',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

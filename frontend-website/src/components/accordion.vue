@@ -18,7 +18,7 @@
         v-on:click="playAudio"
       />
     </div>
-    <audioSlider v-bind:current="false"></audioSlider>
+    <audioSlider v-bind:current="true"></audioSlider>
     <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
   </div>
 </template>

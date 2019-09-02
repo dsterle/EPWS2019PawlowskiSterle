@@ -35,7 +35,7 @@ export default {
       let input = parseInt(data);
 
       if (this.paintingIDs.includes(input)) {
-        open("/waiting", "_self");
+        open("/waiting/" + input, "_self");
       } else {
         this.transponderNotFound = true;
       }
