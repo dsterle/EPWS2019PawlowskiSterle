@@ -22,6 +22,7 @@ export default {
   },
   created() {
     this.id = parseInt(this.$route.params.id);
+    // TODO subscribe from MQTT Broker
   }
 };
 </script>
