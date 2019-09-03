@@ -32,6 +32,8 @@ export default {
 
       if (this.paintingIDs.includes(input)) {
         open("/waiting", "_self");
+      } else if (document.querySelector(".input-field").value === "") {
+        this.transponderNotFound = "noInput"
       } else {
         this.transponderNotFound = true;
       }
