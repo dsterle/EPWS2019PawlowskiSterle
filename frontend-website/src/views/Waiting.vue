@@ -15,8 +15,51 @@
 export default {
   name: "waiting",
   components: {},
-  created() {
-    // TODO subscribe from MQTT Broker
+  data() {
+    return {
+      mqtt: new Paho.MQTT.Client(this.host, this.port, this),
+      reconnectTimeout: 2000,
+      host: "hivemq.dock.moxd.io" , // TODO MQTT Server
+      port: 8000,
+      topic: "ourTopic"// TODO topic
+    }
+  },
+  methods : {
+    onMessageArrived(msg) {
+      out_msg = "Message received " + msg.payloadString + "<br>";
+      out_msg = out_msg + "Message received Topic " + msg.destinationName;
+
+      console.log(msg.destinationName);
+    },
+
+    onFailure() {
+      console.log("Connection attempt to host " + this.host + " failed");
+      setTimeout(this.MQTTconnect, this.reconnectTimeout);
+    },
+
+    onConnectionLost(error) {
+      console.log(error);
+    },
+
+    onConnect() {
+      console.log("connected");
+      this.mqtt.subscribe(this.topic);
+    },
+
+    MQTTconnect() {
+      console.log("connecting to " + this.host + " " + this.port);
+      let options = {
+        timeout: 3,
+        onSuccess: this.onConnect,
+        onFailure: this.onFailure,
+      };
+
+      this.mqtt.onMessageArrived = onMessageArrived;
+      this.mqtt.onConnectionLost = onConnectionLost;
+      this.mqtt.connect(options);
+    },
+
+
   }
 };
 </script>
