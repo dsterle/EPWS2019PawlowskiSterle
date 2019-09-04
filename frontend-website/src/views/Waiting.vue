@@ -17,49 +17,60 @@ export default {
   components: {},
   data() {
     return {
+<<<<<<< HEAD
       reconnectTimeout: 2000,
       host: "hivemq.dock.moxd.io", // TODO MQTT Server
       port: 8000,
       topic: "ourTopic",// TODO topic
       mqtt: new Paho.MQTT.Client(this.host, this.port, this)
     }
+=======
+      server: {
+        host: "hivemq.dock.moxd.io",
+        port: 8000,
+        reconnectTimeout: 2000
+      },
+      topic: {}
+    };
+>>>>>>> b6954fd59564f2a34a85ecdb9f1dccc1b7e18ed9
   },
-  methods : {
-    onMessageArrived(msg) {
-      out_msg = "Message received " + msg.payloadString + "<br>";
-      out_msg = out_msg + "Message received Topic " + msg.destinationName;
+  created() {
+    // get id from the URL
+    // this is the id on the NFC Tag
+    this.topic = this.$route.params.id;
+  },
+  mounted() {
+    var client = new Paho.MQTT.Client(
+      this.server.host,
+      this.server.port,
+      "client"
+    );
 
-      console.log(msg.destinationName);
-    },
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+    client.connect({ onSuccess: onConnect });
 
-    onFailure() {
-      console.log("Connection attempt to host " + this.host + " failed");
-      setTimeout(this.MQTTconnect, this.reconnectTimeout);
-    },
+    var this_component = this;
 
-    onConnectionLost(error) {
-      console.log(error);
-    },
+    // called when the client connects
+    function onConnect() {
+      // Once a connection has been made, the client subscribes the topic
+      client.subscribe(this_component.topic);
+    }
 
-    onConnect() {
-      console.log("connected");
-      this.mqtt.subscribe(this.topic);
-    },
+    // called when the client loses its connection
+    function onConnectionLost(responseObject) {
+      if (responseObject.errorCode !== 0) {
+        console.log("onConnectionLost:" + responseObject.errorMessage);
+      }
+    }
 
-    MQTTconnect() {
-      console.log("connecting to " + this.host + " " + this.port);
-      let options = {
-        timeout: 3,
-        onSuccess: this.onConnect,
-        onFailure: this.onFailure,
-      };
-
-      this.mqtt.onMessageArrived = onMessageArrived;
-      this.mqtt.onConnectionLost = onConnectionLost;
-      this.mqtt.connect(options);
-    },
-
-
+    // called when a message arrives
+    function onMessageArrived(message) {
+      // message contains the id of a painting
+      // now a new page will be open with the url <<domain>>/painting/<<message>>
+      open("/painting/" + message.payloadString, "_self");
+    }
   }
 };
 </script>

@@ -14,8 +14,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/waiting',
+      path: '/waiting/:id',
       name: 'waiting',
+      props: true,
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
