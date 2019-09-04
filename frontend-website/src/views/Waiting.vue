@@ -17,14 +17,18 @@ export default {
   components: {},
   data() {
     return {
-      mqtt: new Paho.MQTT.Client(this.host, this.port, this),
-      reconnectTimeout: 2000,
-      host: "hivemq.dock.moxd.io" , // TODO MQTT Server
-      port: 8000,
-      topic: "ourTopic"// TODO topic
-    }
+      server: {
+        host: "hivemq.dock.moxd.io",
+        port: 8000,
+        reconnectTimeout: 2000,
+        topic: "ourTopic"
+      }
+    };
   },
-  methods : {
+  mounted() {
+    var mqtt = new Paho.Client(this.server.host, this.server.port, "client");
+  },
+  methods: {
     onMessageArrived(msg) {
       out_msg = "Message received " + msg.payloadString + "<br>";
       out_msg = out_msg + "Message received Topic " + msg.destinationName;
@@ -51,15 +55,13 @@ export default {
       let options = {
         timeout: 3,
         onSuccess: this.onConnect,
-        onFailure: this.onFailure,
+        onFailure: this.onFailure
       };
 
       this.mqtt.onMessageArrived = onMessageArrived;
       this.mqtt.onConnectionLost = onConnectionLost;
       this.mqtt.connect(options);
-    },
-
-
+    }
   }
 };
 </script>
