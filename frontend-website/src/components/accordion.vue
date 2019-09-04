@@ -26,7 +26,8 @@
         v-on:click="$emit('playAudio', name)"
       />
     </div>
-    <slider v-if="current" class="slider" v-model="value" v-bind:min="0" v-bind:max="200"></slider>
+    <!-- <audioSlider v-if="current" ></audioSlider> -->
+    <slider v-if="current" v-model="value" v-bind:min="0" v-bind:max="200"></slider>
     <div class="accordion-content">
       <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
     </div>
@@ -34,12 +35,13 @@
 </template>
 
 <script>
+import audioSlider from "./audioSlider";
 import slider from "vue-slider-component";
-// import "vue-slider-component/theme/material.css";
+import "vue-slider-component/theme/material.css";
 
 export default {
   name: "accordion",
-  components: { slider },
+  components: { audioSlider, slider },
   props: ["name", "text", "current"],
   data() {
     return {
@@ -71,9 +73,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../assets/scss/010-variables.scss";
-@import "../../node_modules/vue-slider-component/theme/material.css";
 
 .accordion {
   .accordion-head {
@@ -139,5 +140,32 @@ export default {
 
 .currentAudio {
   color: $accent;
+}
+
+//*********************** MODIFY vue-slider-comonent
+
+.vue-slider-rail {
+  height: 2px;
+  background-color: $light;
+}
+
+.vue-slider-process {
+  background-color: $accentDark;
+}
+
+.vue-slider-mark-step {
+  background-color: $accent;
+}
+
+.vue-slider-dot-handle {
+  background-color: $accent;
+}
+
+.vue-slider-dot-tooltip-inner {
+  background-color: $accentDark;
+}
+
+.vue-slider-dot-tooltip-inner {
+  background-color: $accentDark;
 }
 </style>
