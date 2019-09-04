@@ -6,8 +6,12 @@
       <h1 class="title-text">{{ item.title }}</h1>
       <p class="hint-text year">{{ item.dated }}</p>
       <ul>
-        <li v-bind:key="info.name" v-for="info in item.infos">
-          <accordion v-bind:title="info.name" v-bind:text="info.inhalt"></accordion>
+        <li v-for="info in item.infos" v-bind:key="info.name">
+          <accordion
+            v-bind:title="info.name"
+            v-bind:text="info.inhalt"
+            v-bind:current="info.current"
+          ></accordion>
         </li>
       </ul>
     </div>
@@ -23,11 +27,10 @@ export default {
   components: { accordion, fab },
   data() {
     return {
-      item: {},
       id: {},
-      fabIcon: require("../assets/icons/pause.svg"),
-      audioPlaying: true,
-      audio: {}
+      item: {},
+      audios: new Array(),
+      fabIcon: require("../assets/icons/pause.svg")
     };
   },
   created() {
@@ -36,6 +39,18 @@ export default {
     this.id = parseInt(this.$route.params.id);
     this.item = data.find(painting => {
       return painting.id === this.id;
+    });
+
+    // to know which audio is current add a current attribute to every accordion
+    this.item.infos.forEach(element => {
+      element.current = false;
+    });
+  },
+  mounted() {
+    // every audioSrc will be stored in an Array
+    this.audios.push(this.item.audioSrc);
+    this.item.infos.forEach(info => {
+      this.audios.push(info.audioSrc);
     });
   },
   methods: {
@@ -46,9 +61,6 @@ export default {
         this.fabIcon = require("../assets/icons/pause.svg");
       }
       this.audioPlaying = !this.audioPlaying;
-    },
-    check(info) {
-      return info.hasOwnProperty("name");
     }
   }
 };
