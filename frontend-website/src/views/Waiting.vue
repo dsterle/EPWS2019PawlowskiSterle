@@ -17,14 +17,6 @@ export default {
   components: {},
   data() {
     return {
-<<<<<<< HEAD
-      reconnectTimeout: 2000,
-      host: "hivemq.dock.moxd.io", // TODO MQTT Server
-      port: 8000,
-      topic: "ourTopic",// TODO topic
-      mqtt: new Paho.MQTT.Client(this.host, this.port, this)
-    }
-=======
       server: {
         host: "hivemq.dock.moxd.io",
         port: 8000,
@@ -32,7 +24,6 @@ export default {
       },
       topic: {}
     };
->>>>>>> b6954fd59564f2a34a85ecdb9f1dccc1b7e18ed9
   },
   created() {
     // get id from the URL
