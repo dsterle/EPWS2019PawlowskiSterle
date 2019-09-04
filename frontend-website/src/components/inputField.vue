@@ -10,7 +10,7 @@
         v-bind:class="{'input-field-error':this.error}"
         type="number"
       />
-      <!-- nur wenn this.error true ist wird das label gezeigt -->
+      <!-- nur wenn this.error mit einer Meldung gefüllt ist wird das label gezeigt -->
       <label
         v-if="this.error === true"
         v-bind:for="inputID"
