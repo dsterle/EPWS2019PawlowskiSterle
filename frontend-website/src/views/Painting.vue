@@ -1,16 +1,17 @@
 <template>
   <div class="painting">
-    <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="playAudio"></fab>
+    <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
     <img v-bind:src="item.imgSrc" alt />
     <div class="content-wrapper">
       <h1 class="title-text">{{ item.title }}</h1>
       <p class="hint-text year">{{ item.dated }}</p>
-      <ul>
+      <ul class="info-list">
         <li v-for="info in item.infos" v-bind:key="info.name">
           <accordion
-            v-bind:title="info.name"
+            v-bind:name="info.name"
             v-bind:text="info.inhalt"
             v-bind:current="info.current"
+            v-on:playAudio="playAudio"
           ></accordion>
         </li>
       </ul>
@@ -54,7 +55,35 @@ export default {
     });
   },
   methods: {
-    playAudio() {
+    playAudio(name) {
+      // console.log(name);
+
+      // the attribute current of the info text which was clicked will be set to true
+      // this.item.infos.find(info => {
+      // return info.name === name;
+      // }).current = true;
+
+      // this.item.infos.forEach(info => {
+      //   if (info.name === name) {
+      //     console.log(name);
+      //     info.current = true;
+      //     console.log(info.current);
+      //   }
+      // });
+
+      for (var i = 0; i < this.item.infos.length; i++) {
+        if (this.item.infos[i].name === name) {
+          console.log("LOOOOOL");
+          // ? change key attribute to rerender list
+          // TODO there is hopefully a better way to do the key-render technique
+          this.item.infos[i].name = "Hi";
+          this.item.infos[i].name = name;
+          this.item.infos[i].current = true;
+        }
+      }
+    },
+    pause() {
+      // this.item.infos[0].name = "hi";
       if (this.audioPlaying) {
         this.fabIcon = require("../assets/icons/play.svg");
       } else {
@@ -86,6 +115,10 @@ export default {
     .year {
       margin: $abstand-S 0 $abstand-S 0;
     }
+  }
+
+  .info-list {
+    margin-bottom: $abstand-XXXL;
   }
 }
 </style>
