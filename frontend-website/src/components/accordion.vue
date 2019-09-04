@@ -1,21 +1,28 @@
 <template>
   <div class="accordion">
     <div class="accordion-head">
-      <div class="icon-wrapper">
-        <img
-          class="icon"
-          src="../assets/icons/arrow_down.svg"
-          alt="arrow down"
-          v-on:click="open"
-          js-accordion="icon"
+      <div class="left">
+        <div class="icon-wrapper">
+          <img
+            class="icon"
+            src="../assets/icons/arrow_down.svg"
+            alt="arrow down"
+            v-on:click="open"
+            js-accordion="icon"
+          />
+        </div>
+        <input
+          type="button"
+          class="normal-text accordion-title"
+          v-bind:value="name"
+          js-accordion="title"
         />
       </div>
-      <input
-        type="button"
-        class="normal-text accordion-title"
-        v-bind:value="title"
-        js-accordion="title"
-        v-on:click="playAudio"
+      <img
+        class="speaker-icon"
+        src="../assets/icons/speaker.svg"
+        alt="Lautsprecher Icon"
+        v-on:click="$emit('playAudio', name)"
       />
     </div>
     <audioSlider v-bind:current="current"></audioSlider>
@@ -29,7 +36,7 @@ import audioSlider from "../components/audioSlider";
 export default {
   name: "accordion",
   components: { audioSlider },
-  props: ["title", "text", "current"],
+  props: ["name", "text", "current"],
   methods: {
     open() {
       // $el gives the DOM elements of this
@@ -66,20 +73,29 @@ export default {
     display: flex;
     width: 100%;
     height: 1rem * 3;
+    justify-content: space-between;
 
-    .icon-wrapper {
+    .left {
       display: flex;
-      align-items: center;
-      width: $icon-wrapper-width;
 
-      .icon {
-        transition: 0.3s;
-        width: $abstand-L;
+      .icon-wrapper {
+        display: flex;
+        align-items: center;
+        width: $icon-wrapper-width;
+
+        .icon {
+          transition: 0.3s;
+          width: $abstand-L;
+        }
+      }
+
+      .accordion-title {
+        padding: 0;
       }
     }
 
-    .accordion-title {
-      padding: 0;
+    .speaker-icon {
+      margin-right: 25px;
     }
   }
   .accordion-text {
