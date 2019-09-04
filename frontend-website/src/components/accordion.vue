@@ -18,7 +18,7 @@
         v-on:click="playAudio"
       />
     </div>
-    <audioSlider v-bind:current="true"></audioSlider>
+    <audioSlider v-bind:current="current"></audioSlider>
     <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
   </div>
 </template>
@@ -29,7 +29,7 @@ import audioSlider from "../components/audioSlider";
 export default {
   name: "accordion",
   components: { audioSlider },
-  props: ["title", "text"],
+  props: ["title", "text", "current"],
   methods: {
     open() {
       // $el gives the DOM elements of this
@@ -51,6 +51,9 @@ export default {
     playAudio() {
       // TODO implement
     }
+  },
+  created() {
+    // console.log("current: " + this.current);
   }
 };
 </script>
