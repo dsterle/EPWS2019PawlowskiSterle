@@ -31,9 +31,6 @@ export default {
   },
   created() {
     // TODO Do this with fetch API
-    // fetch("../data/database.json")
-    // .then(data => data.json)
-    // .then(item => console.log("item " + item));
     let data = require("../data/database.json").gemälde;
     this.id = parseInt(this.$route.params.id);
     this.item = data.find(painting => {
