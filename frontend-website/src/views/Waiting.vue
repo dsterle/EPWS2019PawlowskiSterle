@@ -12,6 +12,8 @@
 </template>
 
 <script>
+// import mqttModule from "https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js";
+
 export default {
   name: "waiting",
   components: {},
@@ -20,9 +22,12 @@ export default {
       id: {}
     };
   },
-  created() {
-    this.id = parseInt(this.$route.params.id);
-    // TODO subscribe from MQTT Broker
+  mounted() {
+    const server = {
+      host: "mqtt.dock.moxdlab.io"
+    };
+
+    var mqtt = Paho.Client("1234", 1234, "clientjs");
   }
 };
 </script>
