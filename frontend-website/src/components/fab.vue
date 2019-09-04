@@ -11,9 +11,21 @@ export default {
   methods: {
     clicked() {
       this.$emit("fab-clicked");
+      console.log(this);
     }
   }
 };
+
+window.onscroll = function () {
+  let fab = document.querySelector(".floating-action-button");
+  if (fab.classList.contains("floating-action-button-hidden")) {
+    fab.classList.remove("floating-action-button-hidden");
+  }
+  setTimeout(function () {
+    fab.classList.add("floating-action-button-hidden");
+  }, 2000);
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -35,5 +47,9 @@ export default {
 
 .floating-action-button:active {
   background: $accentDark;
+}
+
+.floating-action-button-hidden {
+  visibility: hidden;
 }
 </style>
