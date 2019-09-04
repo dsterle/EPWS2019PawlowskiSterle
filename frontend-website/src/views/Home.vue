@@ -8,7 +8,7 @@
       inputID="input-transponder"
       inputPlaceholder="Nummer..."
       buttonText="Ok"
-      v-bind:error="transponderNotFound"
+      v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
     ></inputField>
   </div>
@@ -23,7 +23,7 @@ export default {
   data() {
     return {
       paintingIDs: [100, 101, 102],
-      transponderNotFound: false
+      errorMsg: false
     };
   },
   methods: {
@@ -32,8 +32,13 @@ export default {
 
       if (this.paintingIDs.includes(input)) {
         open("/waiting/" + input, "_self");
+<<<<<<< HEAD
+=======
+      } else if (document.querySelector(".input-field").value === "") {
+        this.errorMsg = "Bitte geben Sie eine Nummer ein";
+>>>>>>> 175f6bf2a8f541fede933179c4c92cc31a05348f
       } else {
-        this.transponderNotFound = true;
+        this.errorMsg = "Die Nummer konnte nicht gefunden werden";
       }
     }
   }

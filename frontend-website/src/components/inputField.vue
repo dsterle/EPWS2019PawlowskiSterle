@@ -10,12 +10,17 @@
         v-bind:class="{'input-field-error':this.error}"
         type="number"
       />
-      <!-- nur wenn this.error true ist wird das label gezeigt -->
+      <!-- nur wenn this.error mit einer Meldung gefüllt ist wird das label gezeigt -->
+      <label
+        v-if="this.error === true"
+        v-bind:for="inputID"
+        class="error-text input-field-error-msg"
+      >Die Nummer konnte nicht gefunden werden</label>
       <label
         v-if="this.error"
         v-bind:for="inputID"
         class="error-text input-field-error-msg"
-      >Die Nummer konnte nicht gefunden werden</label>
+      >{{ error }}</label>
       <div class="button-wrapper">
         <input
           class="button-submit button-text"

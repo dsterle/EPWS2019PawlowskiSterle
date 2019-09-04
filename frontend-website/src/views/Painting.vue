@@ -1,11 +1,7 @@
 <template>
   <div class="painting">
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="playAudio"></fab>
-    <!-- // TODO change img in database.json -->
-    <img
-      src="http://lucascranach.org/thumbnails/DE_BStGS_1130_FR285E/01_Overall/DE_BStGS_1130_FR285E_2010_Overall.jpg"
-      alt
-    />
+    <img v-bind:src="item.imgSrc" alt />
     <div class="content-wrapper">
       <h1 class="title-text">{{ item.title }}</h1>
       <p class="hint-text year">{{ item.dated }}</p>
@@ -36,9 +32,6 @@ export default {
   },
   created() {
     // TODO Do this with fetch API
-    // fetch("../data/database.json")
-    // .then(data => data.json)
-    // .then(item => console.log("item " + item));
     let data = require("../data/database.json").gemälde;
     this.id = parseInt(this.$route.params.id);
     this.item = data.find(painting => {
@@ -53,6 +46,9 @@ export default {
         this.fabIcon = require("../assets/icons/pause.svg");
       }
       this.audioPlaying = !this.audioPlaying;
+    },
+    check(info) {
+      return info.hasOwnProperty("name");
     }
   }
 };
