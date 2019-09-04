@@ -32,11 +32,8 @@ export default {
 
       if (this.paintingIDs.includes(input)) {
         open("/waiting/" + input, "_self");
-<<<<<<< HEAD
-=======
       } else if (document.querySelector(".input-field").value === "") {
         this.errorMsg = "Bitte geben Sie eine Nummer ein";
->>>>>>> 175f6bf2a8f541fede933179c4c92cc31a05348f
       } else {
         this.errorMsg = "Die Nummer konnte nicht gefunden werden";
       }
