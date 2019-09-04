@@ -15,8 +15,53 @@
 export default {
   name: "waiting",
   components: {},
+  data() {
+    return {
+      server: {
+        host: "hivemq.dock.moxd.io",
+        port: 8000,
+        reconnectTimeout: 2000
+      },
+      topic: {}
+    };
+  },
   created() {
-    // TODO subscribe from MQTT Broker
+    // get id from the URL
+    // this is the id on the NFC Tag
+    this.topic = this.$route.params.id;
+  },
+  mounted() {
+    var client = new Paho.MQTT.Client(
+      this.server.host,
+      this.server.port,
+      "client"
+    );
+
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+    client.connect({ onSuccess: onConnect });
+
+    var this_component = this;
+
+    // called when the client connects
+    function onConnect() {
+      // Once a connection has been made, the client subscribes the topic
+      client.subscribe(this_component.topic);
+    }
+
+    // called when the client loses its connection
+    function onConnectionLost(responseObject) {
+      if (responseObject.errorCode !== 0) {
+        console.log("onConnectionLost:" + responseObject.errorMessage);
+      }
+    }
+
+    // called when a message arrives
+    function onMessageArrived(message) {
+      // message contains the id of a painting
+      // now a new page will be open with the url <<domain>>/painting/<<message>>
+      open("/painting/" + message.payloadString, "_self");
+    }
   }
 };
 </script>
