@@ -45,6 +45,9 @@ export default {
         this.fabIcon = require("../assets/icons/pause.svg");
       }
       this.audioPlaying = !this.audioPlaying;
+    },
+    check(info) {
+      return info.hasOwnProperty("name");
     }
   }
 };
