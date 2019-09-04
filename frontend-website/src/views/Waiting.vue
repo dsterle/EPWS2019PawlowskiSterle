@@ -17,11 +17,11 @@ export default {
   components: {},
   data() {
     return {
-      mqtt: new Paho.MQTT.Client(this.host, this.port, this),
       reconnectTimeout: 2000,
-      host: "hivemq.dock.moxd.io" , // TODO MQTT Server
+      host: "hivemq.dock.moxd.io", // TODO MQTT Server
       port: 8000,
-      topic: "ourTopic"// TODO topic
+      topic: "ourTopic",// TODO topic
+      mqtt: new Paho.MQTT.Client(this.host, this.port, this)
     }
   },
   methods : {
