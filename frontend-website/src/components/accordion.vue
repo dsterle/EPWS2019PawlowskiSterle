@@ -26,18 +26,26 @@
         v-on:click="$emit('playAudio', name)"
       />
     </div>
-    <audioSlider v-if="current"></audioSlider>
-    <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
+    <slider v-if="current" class="slider" v-model="value" v-bind:min="0" v-bind:max="200"></slider>
+    <div class="accordion-content">
+      <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import audioSlider from "../components/audioSlider";
+import slider from "vue-slider-component";
+// import "vue-slider-component/theme/material.css";
 
 export default {
   name: "accordion",
-  components: { audioSlider },
+  components: { slider },
   props: ["name", "text", "current"],
+  data() {
+    return {
+      value: 0
+    };
+  },
   methods: {
     open() {
       // $el gives the DOM elements of this
@@ -65,9 +73,13 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/scss/010-variables.scss";
+@import "../../node_modules/vue-slider-component/theme/material.css";
 
 .accordion {
   .accordion-head {
+    padding-left: $abstand-M;
+    padding-right: $abstand-M;
+
     display: flex;
     width: 100%;
     height: 1rem * 3;
@@ -96,12 +108,18 @@ export default {
       margin-right: 25px;
     }
   }
-  .accordion-text {
-    padding-left: $icon-wrapper-width;
-    padding-right: $abstand-S;
-    max-height: 0;
-    overflow: hidden;
-    transition: 0.3s;
+
+  .accordion-content {
+    padding-left: $abstand-M;
+    padding-right: $abstand-M;
+
+    .accordion-text {
+      padding-left: $icon-wrapper-width;
+      padding-right: $abstand-S;
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.3s;
+    }
   }
 }
 

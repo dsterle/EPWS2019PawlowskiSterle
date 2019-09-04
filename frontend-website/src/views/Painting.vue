@@ -2,20 +2,20 @@
   <div class="painting">
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
     <img v-bind:src="item.imgSrc" alt />
-    <div class="content-wrapper">
+    <div class="title-wrapper">
       <h1 class="title-text">{{ item.title }}</h1>
       <p class="hint-text year">{{ item.dated }}</p>
-      <ul class="info-list">
-        <li v-for="info in item.infos" v-bind:key="info.name">
-          <accordion
-            v-bind:name="info.name"
-            v-bind:text="info.inhalt"
-            v-bind:current="info.current"
-            v-on:playAudio="setCurrent"
-          ></accordion>
-        </li>
-      </ul>
     </div>
+    <ul class="info-list">
+      <li v-for="info in item.infos" v-bind:key="info.name">
+        <accordion
+          v-bind:name="info.name"
+          v-bind:text="info.inhalt"
+          v-bind:current="info.current"
+          v-on:playAudio="setCurrent"
+        ></accordion>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -95,7 +95,7 @@ export default {
     height: 100%;
   }
 
-  .content-wrapper {
+  .title-wrapper {
     padding: $abstand-M $abstand-M 0 $abstand-M;
 
     .year {
