@@ -17,10 +17,10 @@
         class="error-text input-field-error-msg"
       >Die Nummer konnte nicht gefunden werden</label>
       <label
-        v-if="this.error === 'noInput'"
+        v-if="this.error"
         v-bind:for="inputID"
         class="error-text input-field-error-msg"
-      >Bitte geben Sie eine Nummer ein</label>
+      >{{ error }}</label>
       <div class="button-wrapper">
         <input
           class="button-submit button-text"
