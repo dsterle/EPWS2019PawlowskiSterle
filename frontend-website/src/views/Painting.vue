@@ -11,7 +11,7 @@
             v-bind:name="info.name"
             v-bind:text="info.inhalt"
             v-bind:current="info.current"
-            v-on:playAudio="playAudio"
+            v-on:playAudio="setCurrent"
           ></accordion>
         </li>
       </ul>
@@ -55,30 +55,16 @@ export default {
     });
   },
   methods: {
-    playAudio(name) {
-      // console.log(name);
-
-      // the attribute current of the info text which was clicked will be set to true
-      // this.item.infos.find(info => {
-      // return info.name === name;
-      // }).current = true;
-
-      // this.item.infos.forEach(info => {
-      //   if (info.name === name) {
-      //     console.log(name);
-      //     info.current = true;
-      //     console.log(info.current);
-      //   }
-      // });
-
+    setCurrent(name) {
       for (var i = 0; i < this.item.infos.length; i++) {
         if (this.item.infos[i].name === name) {
-          console.log("LOOOOOL");
           // ? change key attribute to rerender list
           // TODO there is hopefully a better way to do the key-render technique
-          this.item.infos[i].name = "Hi";
+          this.item.infos[i].name = "updateList";
           this.item.infos[i].name = name;
           this.item.infos[i].current = true;
+        } else {
+          this.item.infos[i].current = false;
         }
       }
     },

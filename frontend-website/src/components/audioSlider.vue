@@ -1,7 +1,7 @@
 <template>
   <div class="audio-slider">
-    <div v-if="current" class="line"></div>
-    <div v-if="current" class="current-dot"></div>
+    <div class="line"></div>
+    <div class="current-dot"></div>
   </div>
 </template>
 

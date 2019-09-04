@@ -16,6 +16,7 @@
           class="normal-text accordion-title"
           v-bind:value="name"
           js-accordion="title"
+          v-bind:class="{'currentAudio':current}"
         />
       </div>
       <img
@@ -25,7 +26,7 @@
         v-on:click="$emit('playAudio', name)"
       />
     </div>
-    <audioSlider v-bind:current="current"></audioSlider>
+    <audioSlider v-if="current"></audioSlider>
     <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
   </div>
 </template>
@@ -58,9 +59,6 @@ export default {
     playAudio() {
       // TODO implement
     }
-  },
-  created() {
-    // console.log("current: " + this.current);
   }
 };
 </script>
@@ -117,6 +115,7 @@ export default {
 
 .helper-description-padding {
   // margin-top: $abstand-XS;
+  margin-top: $abstand-S;
   margin-bottom: $abstand-M;
 }
 
