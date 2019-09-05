@@ -1,13 +1,13 @@
 <template>
   <div class="painting">
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
-    <img v-bind:src="item.imgSrc" alt />
+    <img v-bind:src="painting.imgSrc" alt />
     <div class="title-wrapper">
-      <h1 class="title-text">{{ item.title }}</h1>
-      <p class="hint-text year">{{ item.dated }}</p>
+      <h1 class="title-text">{{ painting.title }}</h1>
+      <p class="hint-text year">{{ painting.dated }}</p>
     </div>
     <ul class="info-list">
-      <li v-for="info in item.infos" v-bind:key="info.name">
+      <li v-for="info in painting.infos" v-bind:key="info.name">
         <accordion
           v-bind:name="info.name"
           v-bind:text="info.inhalt"
@@ -22,6 +22,7 @@
 <script>
 import accordion from "../components/accordion";
 import fab from "../components/fab";
+import { Howl, Howler } from "howler";
 
 export default {
   name: "painting",
@@ -29,47 +30,74 @@ export default {
   data() {
     return {
       id: {},
-      item: {},
+      painting: {},
       audios: new Array(),
-      fabIcon: require("../assets/icons/pause.svg")
+      fabIcon: require("../assets/icons/pause.svg"),
+      audioTitle: {}
     };
   },
   created() {
-    // TODO Do this with fetch API
-    let data = require("../data/database.json").gemälde;
+    // lade unsere simulierte Datenbank
+    let paintings = require("../data/database.js").paintings;
+    // das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
     this.id = parseInt(this.$route.params.id);
-    this.item = data.find(painting => {
+    this.painting = paintings.find(painting => {
       return painting.id === this.id;
     });
 
-    // to know which audio is current add a current attribute to every accordion
-    this.item.infos.forEach(element => {
-      element.current = false;
+    // audioTitle ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
+    this.audioTitle = new Howl({
+      src: [this.painting.audioSrc]
     });
-  },
-  mounted() {
-    // every audioSrc will be stored in an Array
-    this.audios.push(this.item.audioSrc);
-    this.item.infos.forEach(info => {
-      this.audios.push(info.audioSrc);
+    this.audioTitle.play();
+
+    // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
+    // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
+    this.painting.infos.forEach(info => {
+      info.current = false;
+      info.audio = new Howl({
+        src: [info.audioSrc]
+      });
     });
   },
   methods: {
     setCurrent(name) {
-      for (var i = 0; i < this.item.infos.length; i++) {
-        if (this.item.infos[i].name === name) {
+      // for (var i = 0; i < this.painting.infos.length; i++) {
+      //   if (this.painting.infos[i].name === name) {
+      //     // ? change key attribute to rerender list
+      //     // TODO there is hopefully a better way to do the key-render technique
+      //     this.painting.infos[i].name = "update-list";
+      //     this.painting.infos[i].name = name;
+      //     this.painting.infos[i].current = true;
+      //     // di jeweilige Audiodatei wird abgespielt
+      //     this.painting.infos[i].audio.play();
+      //   } else {
+      //     // jedes andere Audio wird gestoppt
+      //     this.audioTitle.stop();
+      //     this.painting.infos[i].audio.stop();
+      //     this.painting.infos[i].current = false;
+      //   }
+      // }
+
+      this.painting.infos.forEach(info => {
+        if (info.name === name) {
           // ? change key attribute to rerender list
           // TODO there is hopefully a better way to do the key-render technique
-          this.item.infos[i].name = "updateList";
-          this.item.infos[i].name = name;
-          this.item.infos[i].current = true;
+          info.name = "";
+          info.name = name;
+          info.current = true;
+          info.audio.play();
         } else {
-          this.item.infos[i].current = false;
+          // jedes andere Audio wird gestoppt und current wird wieder auf false gesetzt
+          this.audioTitle.stop();
+          info.audio.stop();
+          info.current = false;
         }
-      }
+      });
     },
+    updateSlider() {},
     pause() {
-      // this.item.infos[0].name = "hi";
+      // this.painting.infos[0].name = "hi";
       if (this.audioPlaying) {
         this.fabIcon = require("../assets/icons/play.svg");
       } else {
