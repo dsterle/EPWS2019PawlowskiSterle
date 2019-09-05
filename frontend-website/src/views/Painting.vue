@@ -44,6 +44,9 @@ export default {
   mounted() {
     // lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
+    var _this = this;
+    var painting = this.painting;
+
     // das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
     this.id = parseInt(this.$route.params.id);
     this.painting = paintings.find(painting => {
@@ -52,14 +55,15 @@ export default {
 
     // audioTitle ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
     this.audioTitle = new Howl({
-      src: [this.painting.audioSrc]
+      src: [this.painting.audioSrc],
+      onend: function() {
+        _this.playNext(0);
+      }
     });
     this.audioTitle.play();
 
     // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
     // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
-    var _this = this;
-    var painting = this.painting;
 
     this.painting.infos.forEach(info => {
       info.current = false;
@@ -110,11 +114,7 @@ export default {
       info.name = name;
     },
     updateSlider(info) {
-      // console.log("updateSlider ausgeführt");
-      // console.log(info);
       var loop = setInterval(() => {
-        // console.log("playing: " + info.audio.playing());
-
         if (info.currentValue < info.max) {
           info.currentValue++;
         }
