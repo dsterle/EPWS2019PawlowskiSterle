@@ -26,7 +26,7 @@
         v-on:click="$emit('playAudio', name)"
       />
     </div>
-    <slider v-if="current" v-model="value" v-bind:min="0" v-bind:max="200"></slider>
+    <slider v-if="current" v-model="currentValue" v-bind:min="0" v-bind:max="max"></slider>
     <div class="accordion-content">
       <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
     </div>
@@ -34,14 +34,13 @@
 </template>
 
 <script>
-// import audioSlider from "./audioSlider";
 import slider from "vue-slider-component";
 import "vue-slider-component/theme/material.css";
 
 export default {
   name: "accordion",
   components: { slider },
-  props: ["name", "text", "current"],
+  props: ["name", "text", "current", "min", "max", "currentValue"],
   data() {
     return {
       value: 0
@@ -64,9 +63,11 @@ export default {
         text.classList.add("helper-description-padding");
         text.style.maxHeight = text.scrollHeight + "px";
       }
-    },
-    playAudio() {
-      // TODO implement
+    }
+  },
+  computed: {
+    getCurrentValue() {
+      // return this.
     }
   }
 };
