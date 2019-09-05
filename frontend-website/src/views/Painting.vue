@@ -15,7 +15,8 @@
           v-bind:min="info.min"
           v-bind:max="info.max"
           v-bind:currentValue="info.currentValue"
-          v-on:playAudio="setCurrent"
+          v-on:play-audio="setCurrent"
+          v-on:jump-to="jumpTo"
         ></accordion>
       </li>
     </ul>
@@ -57,12 +58,10 @@ export default {
 
     // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
     // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
-    var painting = this.painting;
     var _this = this;
 
     this.painting.infos.forEach(info => {
       info.current = false;
-      // info.sliderValues = {};
       info.audio = new Howl({
         src: [info.audioSrc],
         onload: function() {
@@ -107,10 +106,10 @@ export default {
       info.name = name;
     },
     updateSlider(info) {
-      console.log("updateSlider ausgeführt");
+      // console.log("updateSlider ausgeführt");
       // console.log(info);
       var loop = setInterval(() => {
-        console.log("playing: " + info.audio.playing());
+        // console.log("playing: " + info.audio.playing());
 
         if (info.currentValue < info.max) {
           info.currentValue++;
@@ -136,6 +135,22 @@ export default {
         this.fabIcon = require("../assets/icons/pause.svg");
       }
       this.audioPlaying = !this.audioPlaying;
+    },
+    jumpTo({ name, newValue }) {
+      console.log(name);
+      console.log(newValue);
+
+      this.painting.infos.forEach(info => {
+        if (info.name === name) {
+          // ? change key attribute to rerender list
+          // TODO there is hopefully a better way to do the key-render technique
+          info.currentValue = newValue;
+          info.name = "";
+          info.name = name;
+          info.current = true;
+          info.audio.seek(newValue);
+        }
+      });
     }
   }
 };

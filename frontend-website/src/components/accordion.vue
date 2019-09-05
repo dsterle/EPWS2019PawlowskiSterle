@@ -23,10 +23,17 @@
         class="speaker-icon"
         src="../assets/icons/speaker.svg"
         alt="Lautsprecher Icon"
-        v-on:click="$emit('playAudio', name)"
+        v-on:click="$emit('play-audio', name)"
       />
     </div>
-    <slider v-if="current" v-model="currentValue" v-bind:min="0" v-bind:max="max"></slider>
+    <slider
+      audio-slider
+      v-if="current"
+      v-bind:value="currentValue"
+      v-bind:min="0"
+      v-bind:max="max"
+      v-on:change="jumpTo"
+    ></slider>
     <div class="accordion-content">
       <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
     </div>
@@ -63,12 +70,18 @@ export default {
         text.classList.add("helper-description-padding");
         text.style.maxHeight = text.scrollHeight + "px";
       }
+    },
+    jumpTo(newValue) {
+      console.log("jumpTo ausgeführt");
+      // console.log(this.$props.name);
+      this.$emit("jump-to", {
+        name: this.$props.name,
+        newValue: newValue
+      });
     }
   },
   computed: {
-    getCurrentValue() {
-      // return this.
-    }
+    getCurrentValue() {}
   }
 };
 </script>
