@@ -59,6 +59,7 @@ export default {
     // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
     // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
     var _this = this;
+    var painting = this.painting;
 
     this.painting.infos.forEach(info => {
       info.current = false;
@@ -69,6 +70,9 @@ export default {
         },
         onplay: function() {
           _this.updateSlider(info);
+        },
+        onend: function() {
+          _this.playNext(info.id + 1);
         }
       });
     });
@@ -136,10 +140,17 @@ export default {
       }
       this.audioPlaying = !this.audioPlaying;
     },
-    jumpTo({ name, newValue }) {
-      console.log(name);
-      console.log(newValue);
+    playNext(id) {
+      var nextInfo = this.painting.infos.find(element => {
+        return element.id === id;
+      });
 
+      if (nextInfo) {
+        // die nächste Audiodatei wird auf current gesetzt
+        this.setCurrent(nextInfo.name);
+      }
+    },
+    jumpTo({ name, newValue }) {
       this.painting.infos.forEach(info => {
         if (info.name === name) {
           // ? change key attribute to rerender list
@@ -148,6 +159,7 @@ export default {
           info.name = "";
           info.name = name;
           info.current = true;
+          // springe in der Audiodatei zu der Sekunde newValue
           info.audio.seek(newValue);
         }
       });

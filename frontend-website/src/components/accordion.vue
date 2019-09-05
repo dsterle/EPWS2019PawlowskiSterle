@@ -72,8 +72,6 @@ export default {
       }
     },
     jumpTo(newValue) {
-      console.log("jumpTo ausgeführt");
-      // console.log(this.$props.name);
       this.$emit("jump-to", {
         name: this.$props.name,
         newValue: newValue
