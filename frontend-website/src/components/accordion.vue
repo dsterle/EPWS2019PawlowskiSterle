@@ -26,7 +26,6 @@
         v-on:click="$emit('playAudio', name)"
       />
     </div>
-    <!-- <audioSlider v-if="current" ></audioSlider> -->
     <slider v-if="current" v-model="value" v-bind:min="0" v-bind:max="200"></slider>
     <div class="accordion-content">
       <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
@@ -35,13 +34,13 @@
 </template>
 
 <script>
-import audioSlider from "./audioSlider";
+// import audioSlider from "./audioSlider";
 import slider from "vue-slider-component";
 import "vue-slider-component/theme/material.css";
 
 export default {
   name: "accordion",
-  components: { audioSlider, slider },
+  components: { slider },
   props: ["name", "text", "current"],
   data() {
     return {
@@ -142,7 +141,7 @@ export default {
   color: $accent;
 }
 
-//*********************** MODIFY vue-slider-comonent
+//*********************** Following classes are there to style the vue-slider-comonent
 
 .vue-slider-rail {
   height: 2px;
@@ -162,10 +161,13 @@ export default {
 }
 
 .vue-slider-dot-tooltip-inner {
-  background-color: $accentDark;
+  background-color: $accent;
 }
 
 .vue-slider-dot-tooltip-inner {
-  background-color: $accentDark;
+  background-color: $accent;
+}
+.vue-slider-dot-handle::after {
+  background-color: $accentTransparent;
 }
 </style>
