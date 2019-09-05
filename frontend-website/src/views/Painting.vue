@@ -12,6 +12,9 @@
           v-bind:name="info.name"
           v-bind:text="info.inhalt"
           v-bind:current="info.current"
+          v-bind:min="info.min"
+          v-bind:max="info.max"
+          v-bind:currentValue="info.currentValue"
           v-on:playAudio="setCurrent"
         ></accordion>
       </li>
@@ -23,6 +26,7 @@
 import accordion from "../components/accordion";
 import fab from "../components/fab";
 import { Howl, Howler } from "howler";
+import Vue from "vue";
 
 export default {
   name: "painting",
@@ -36,7 +40,7 @@ export default {
       audioTitle: {}
     };
   },
-  created() {
+  mounted() {
     // lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
     // das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
@@ -53,32 +57,26 @@ export default {
 
     // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
     // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
+    var painting = this.painting;
+
+    var _this = this;
+
     this.painting.infos.forEach(info => {
       info.current = false;
+      // info.sliderValues = {};
       info.audio = new Howl({
-        src: [info.audioSrc]
+        src: [info.audioSrc],
+        onload: function() {
+          _this.setSlider(info);
+        },
+        onplay: function() {
+          _this.updateSlider(info);
+        }
       });
     });
   },
   methods: {
     setCurrent(name) {
-      // for (var i = 0; i < this.painting.infos.length; i++) {
-      //   if (this.painting.infos[i].name === name) {
-      //     // ? change key attribute to rerender list
-      //     // TODO there is hopefully a better way to do the key-render technique
-      //     this.painting.infos[i].name = "update-list";
-      //     this.painting.infos[i].name = name;
-      //     this.painting.infos[i].current = true;
-      //     // di jeweilige Audiodatei wird abgespielt
-      //     this.painting.infos[i].audio.play();
-      //   } else {
-      //     // jedes andere Audio wird gestoppt
-      //     this.audioTitle.stop();
-      //     this.painting.infos[i].audio.stop();
-      //     this.painting.infos[i].current = false;
-      //   }
-      // }
-
       this.painting.infos.forEach(info => {
         if (info.name === name) {
           // ? change key attribute to rerender list
@@ -86,6 +84,7 @@ export default {
           info.name = "";
           info.name = name;
           info.current = true;
+          // die ausgewählte Audio Information beginnt zu spielen
           info.audio.play();
         } else {
           // jedes andere Audio wird gestoppt und current wird wieder auf false gesetzt
@@ -95,9 +94,43 @@ export default {
         }
       });
     },
-    updateSlider() {},
+    setSlider(info) {
+      // Sobald das Howl geladen wurde, werden in der Info noch weitere Attribute gespeichert,
+      // die dem Slider dienen sollen
+      info.min = 0;
+      info.max = parseInt(info.audio.duration().toFixed(0));
+      info.currentValue = 0;
+
+      // TODO there is hopefully a better way to do the key-render technique
+      // TODO try this with Vue.set(array, index, newValue)
+      var name = info.name;
+      info.name = "";
+      info.name = name;
+    },
+    updateSlider(info) {
+      console.log("updateSlider ausgeführt");
+      // console.log(info);
+      var loop = setInterval(() => {
+        console.log("playing: " + info.audio.playing());
+
+        if (info.currentValue < info.max) {
+          info.currentValue++;
+        }
+        // TODO there is hopefully a better way to do the key-render technique
+        var name = info.name;
+        info.name = "...";
+        info.name = name;
+
+        if (!info.audio.playing()) {
+          // wenn das Audio nicht mehr spielt, wird currentValue wieder auf 0 gesetzt und current = false
+          // die setInterval-Methode wird beendet
+          info.currentValue = 0;
+          info.current = false;
+          clearInterval(loop);
+        }
+      }, 1000);
+    },
     pause() {
-      // this.painting.infos[0].name = "hi";
       if (this.audioPlaying) {
         this.fabIcon = require("../assets/icons/play.svg");
       } else {
