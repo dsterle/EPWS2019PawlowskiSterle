@@ -58,7 +58,6 @@ export default {
     // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
     // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
     var painting = this.painting;
-
     var _this = this;
 
     this.painting.infos.forEach(info => {
