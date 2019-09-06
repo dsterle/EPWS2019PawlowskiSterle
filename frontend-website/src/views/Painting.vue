@@ -44,8 +44,7 @@ export default {
       fabIcon: require("../assets/icons/pause.svg"),
       pauseIcon: require("../assets/icons/pause.svg"),
       playIcon: require("../assets/icons/play.svg"),
-      currentLoop: {},
-      pausedInfo: {}
+      currentLoop: {}
     };
   },
   mounted() {
@@ -74,6 +73,7 @@ export default {
 
     this.painting.infos.forEach(info => {
       info.current = false;
+      info.paused = false;
       info.audio = new Howl({
         src: [info.audioSrc],
         onload: function() {
@@ -114,6 +114,8 @@ export default {
           info.audio.play();
         } else {
           info.current = false;
+          info.paused = false;
+          info.currentValue = 0;
           this.fabIcon = this.pauseIcon;
         }
       });
@@ -134,31 +136,43 @@ export default {
       this.currentLoop = setInterval(() => {
         info.currentValue = playingInfo.audio.seek().toFixed(0);
         _this.rerenderInfo(info);
-      }, 20);
+      }, 100);
     },
     pause() {
       var playingInfo = this.getPlayingInfo();
 
       if (playingInfo) {
-        this.fabIcon = this.playIcon;
-        playingInfo.audio.pause();
-        this.pausedInfo = playingInfo;
-        clearInterval(this.currentLoop);
+        // Die aktuell spielende Info wird pausiert
+        this.pauseInfo(playingInfo);
       } else if (this.titleInfo.audio.playing()) {
-        this.titleInfo.audio.pause();
-        this.fabIcon = this.playIcon;
-        this.titleInfo.paused = true;
+        // Der Titel wird pausiert
+        this.pauseInfo(this.titleInfo);
       } else if (this.titleInfo.paused) {
-        this.titleInfo.paused = false;
-        this.titleInfo.audio.play();
-        this.fabIcon = this.pauseIcon;
+        // Der Titel wird wieder abgespielt
+        this.playInfo(this.titleInfo);
       } else {
-        this.fabIcon = this.pauseIcon;
-        this.updateSlider(this.pausedInfo);
-        this.pausedInfo.audio.play();
+        // Die pasierte Info wird wieder abgespielt
+        this.playInfo(this.getPausedInfo());
+        this.updateSlider(this.getPausedInfo());
       }
     },
+    pauseInfo(info) {
+      // Die übergebene Info wird pausiert, dazu wird
+      // - das Icon für den fab gesetzt
+      // - der currentLoop, der für den AUdio-Slider verantwortlich ist beendet
+      info.paused = true;
+      info.audio.pause();
+      this.fabIcon = this.playIcon;
+      clearInterval(this.currentLoop);
+    },
+    playInfo(info) {
+      // Hier wird das audio-Object der Info weitergespielt und das Icon für den fab gesetzt
+      info.paused = false;
+      info.audio.play();
+      this.fabIcon = this.pauseIcon;
+    },
     playNext(id) {
+      //
       var nextInfo = this.painting.infos.find(info => {
         return info.id === id;
       });
@@ -188,6 +202,11 @@ export default {
     getPlayingInfo() {
       return this.painting.infos.find(info => {
         return info.audio.playing();
+      });
+    },
+    getPausedInfo() {
+      return this.painting.infos.find(info => {
+        return info.paused;
       });
     }
   }
