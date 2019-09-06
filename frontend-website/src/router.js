@@ -25,7 +25,7 @@ export default new Router({
       }
     },
     {
-      path: '/painting/:id',
+      path: '/user/:userid/painting/:id',
       name: 'painting',
       props: true,
       // route level code-splitting
