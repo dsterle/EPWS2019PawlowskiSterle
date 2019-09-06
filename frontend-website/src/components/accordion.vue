@@ -1,30 +1,58 @@
 <template>
   <div class="accordion">
     <div class="accordion-head">
-      <div class="icon-wrapper">
-        <img
-          class="icon"
-          src="../assets/icons/arrow_down.svg"
-          alt="arrow down"
-          v-on:click="open"
-          js-accordion="icon"
+      <div class="left">
+        <div class="icon-wrapper">
+          <img
+            class="icon"
+            src="../assets/icons/arrow_down.svg"
+            alt="arrow down"
+            v-on:click="open"
+            js-accordion="icon"
+          />
+        </div>
+        <input
+          type="button"
+          class="normal-text accordion-title"
+          v-bind:value="name"
+          js-accordion="title"
+          v-bind:class="{'currentAudio':current}"
         />
       </div>
-      <input
-        type="button"
-        class="normal-text accordion-title"
-        v-bind:value="info.name"
-        js-accordion="title"
-        v-on:click="playAudio"
+      <img
+        class="speaker-icon"
+        src="../assets/icons/speaker.svg"
+        alt="Lautsprecher Icon"
+        v-on:click="$emit('play-audio', id)"
       />
     </div>
-    <p class="description-text accordion-text invisible" js-accordion="text">{{ info.inhalt }}</p>
+    <slider
+      audio-slider
+      v-if="current"
+      v-bind:value="currentValue"
+      v-bind:min="0"
+      v-bind:max="max"
+      v-on:change="jumpTo"
+    ></slider>
+    <div class="accordion-content">
+      <p class="description-text accordion-text invisible" js-accordion="text">{{ text }}</p>
+    </div>
   </div>
 </template>
 
 <script>
+import slider from "vue-slider-component";
+import "vue-slider-component/theme/material.css";
+
 export default {
-  props: ["info"],
+  name: "accordion",
+  components: { slider },
+  props: ["id", "name", "text", "current", "min", "max", "currentValue"],
+  data() {
+    return {
+      value: 0
+    };
+  },
   methods: {
     open() {
       // $el gives the DOM elements of this
@@ -43,43 +71,67 @@ export default {
         text.style.maxHeight = text.scrollHeight + "px";
       }
     },
-    playAudio() {
-      // TODO implement
+    jumpTo(newValue) {
+      this.$emit("jump-to", {
+        name: this.$props.name,
+        newValue: newValue
+      });
     }
+  },
+  computed: {
+    getCurrentValue() {}
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../assets/scss/010-variables.scss";
 
 .accordion {
   .accordion-head {
+    padding-left: $abstand-M;
+    padding-right: $abstand-M;
+
     display: flex;
     width: 100%;
     height: 1rem * 3;
+    justify-content: space-between;
 
-    .icon-wrapper {
+    .left {
       display: flex;
-      align-items: center;
-      width: $icon-wrapper-width;
 
-      .icon {
-        transition: 0.3s;
-        width: $abstand-L;
+      .icon-wrapper {
+        display: flex;
+        align-items: center;
+        width: $icon-wrapper-width;
+
+        .icon {
+          transition: 0.3s;
+          width: $abstand-L;
+        }
+      }
+
+      .accordion-title {
+        padding: 0;
       }
     }
 
-    .accordion-title {
-      padding: 0;
+    .speaker-icon {
+      margin-right: 25px;
     }
   }
-  .accordion-text {
-    padding-left: $icon-wrapper-width;
-    padding-right: $abstand-S;
-    max-height: 0;
-    overflow: hidden;
-    transition: 0.3s;
+
+  .accordion-content {
+    padding-left: $abstand-M;
+    padding-right: $abstand-M;
+
+    .accordion-text {
+      padding-left: $icon-wrapper-width;
+      padding-right: $abstand-S;
+      max-height: 0;
+      overflow: hidden;
+      transition: 0.3s;
+    }
   }
 }
 
@@ -93,10 +145,41 @@ export default {
 
 .helper-description-padding {
   // margin-top: $abstand-XS;
+  margin-top: $abstand-S;
   margin-bottom: $abstand-M;
 }
 
 .currentAudio {
   color: $accent;
+}
+
+//*********************** Following classes are there to style the vue-slider-comonent
+
+.vue-slider-rail {
+  height: 2px;
+  background-color: $light;
+}
+
+.vue-slider-process {
+  background-color: $accentDark;
+}
+
+.vue-slider-mark-step {
+  background-color: $accent;
+}
+
+.vue-slider-dot-handle {
+  background-color: $accent;
+}
+
+.vue-slider-dot-tooltip-inner {
+  background-color: $accent;
+}
+
+.vue-slider-dot-tooltip-inner {
+  background-color: $accent;
+}
+.vue-slider-dot-handle::after {
+  background-color: $accentTransparent;
 }
 </style>
