@@ -36,8 +36,9 @@ export default {
   data() {
     return {
       id: {},
+      // Das aktuelle Gemälde
       painting: {},
-      audios: new Array(),
+      // Der Titel des Gemäldes
       titleInfo: {
         paused: false,
         audio: {}
@@ -45,16 +46,18 @@ export default {
       fabIcon: require("../assets/icons/pause.svg"),
       pauseIcon: require("../assets/icons/pause.svg"),
       playIcon: require("../assets/icons/play.svg"),
+      // currentLoop beinhaltet eine setInterval-Methode, die sich um die
+      // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {}
     };
   },
   mounted() {
-    // lade unsere simulierte Datenbank
+    // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
     var _this = this;
     var painting = this.painting;
 
-    // das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
+    // Das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
     this.id = parseInt(this.$route.params.id);
     this.painting = paintings.find(painting => {
       return painting.id === this.id;
@@ -64,16 +67,16 @@ export default {
     this.titleInfo.audio = new Howl({
       src: [this.painting.audioSrc],
       onend: function() {
-        _this.playNext(0);
+        _this.setCurrent(0);
       }
     });
     this.titleInfo.audio.play();
 
-    // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
-    // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
-
+    // Schleife über jede Info (Accordion)
     this.painting.infos.forEach(info => {
+      // current zeigt an, ob die Info ausgewählt ist (kann währenddessen auch pausiert sein)
       info.current = false;
+      // paused zeigt an, ob die Info pausiert ist
       info.paused = false;
       info.audio = new Howl({
         src: [info.audioSrc],
@@ -88,7 +91,6 @@ export default {
           info.currentValue = 0;
           info.current = false;
           clearInterval(_this.currentLoop);
-          // _this.playNext(info.id + 1);
           _this.setCurrent(info.id + 1);
         }
       });
@@ -96,19 +98,17 @@ export default {
   },
   methods: {
     setCurrent(id) {
-      // Zuerst werden alle Audiodateien, die
+      /**
+       * setCurrent ist dazu da eine Info mit der übergebenen id auszuwählen
+       */
+
+      // Falls der Titel noch gesprochen wird, wird dieser gestoppt
       this.titleInfo.audio.stop();
       var _this = this;
 
-      var playingInfo = this.getPlayingInfo();
-
-      if (playingInfo) {
-        playingInfo.audio.stop();
-        playingInfo.current = false;
-      }
-
       this.painting.infos.forEach(info => {
         if (info.id === id) {
+          // Wenn die id übereinstimmt, wird current auf true gesetzt und currentValue auf 0 zurückgesetzt
           clearInterval(this.currentLoop);
           info.current = true;
           info.currentValue = 0;
@@ -116,24 +116,29 @@ export default {
           this.rerenderInfo(info);
           info.audio.play();
         } else {
-          info.audio.stop();
-          info.current = false;
-          info.paused = false;
-          info.currentValue = 0;
-          this.fabIcon = this.pauseIcon;
+          // Wenn die id nicht übereinstimmt, wird die Info resettet
+          _this.resetInfo(info);
           _this.rerenderInfo(info);
         }
       });
+      // Das fabIcon wird auf Pause zurückgesetzt
+      this.fabIcon = this.pauseIcon;
     },
+    /**
+     * setSlider dient dazu den Audio-Slider zu setzen
+     * max ist die Länge der Audiodatei
+     */
     setSlider(info) {
-      // Sobald das Howl geladen wurde, werden in der Info noch weitere Attribute gespeichert,
-      // die dem Slider dienen sollen
       info.min = 0;
       info.max = parseInt(info.audio.duration().toFixed(0));
       info.currentValue = 0;
 
       this.rerenderInfo(info);
     },
+    /**
+     * updateSlider wird jedes mal ausgeführt, wenn eine Audiodatei anfängt zu spielen
+     * Hier fängt ein Loop an, der den value des Audio-Sliders regelmäßig aktualisiert
+     */
     updateSlider(info) {
       var _this = this;
       var playingInfo = this.getPlayingInfo();
@@ -143,6 +148,9 @@ export default {
         _this.rerenderInfo(info);
       }, 100);
     },
+    /**
+     * pause wird ausgeführt, sobald der fab geklickt wurde
+     */
     pause() {
       var playingInfo = this.getPlayingInfo();
 
@@ -161,32 +169,30 @@ export default {
         this.updateSlider(this.getPausedInfo());
       }
     },
+    /**
+     * pauseInfo dient dazu eine Info zu pausieren
+     */
     pauseInfo(info) {
-      // Die übergebene Info wird pausiert, dazu wird
-      // - das Icon für den fab gesetzt
-      // - der currentLoop, der für den AUdio-Slider verantwortlich ist beendet
+      // Die übergebene Info wird pausiert, dazu wird der currentLoop, der für den AUdio-Slider verantwortlich ist beendet
       info.paused = true;
       info.audio.pause();
       this.fabIcon = this.playIcon;
       clearInterval(this.currentLoop);
     },
+    /**
+     * playInfo dient dazu eine Info, die pausiert war, wieder abzuspielen
+     */
     playInfo(info) {
       // Hier wird das audio-Object der Info weitergespielt und das Icon für den fab gesetzt
       info.paused = false;
       info.audio.play();
       this.fabIcon = this.pauseIcon;
     },
-    playNext(id) {
-      //
-      var nextInfo = this.painting.infos.find(info => {
-        return info.id === id;
-      });
-
-      if (nextInfo) {
-        // die nächste Audiodatei wird auf current gesetzt
-        this.setCurrent(id);
-      }
-    },
+    /**
+     * jumpTo wird ausgeführt wenn der Benutzer den Audio-Slider zu einer anderen Position zieht
+     * name ist der Name des Accordions
+     * newValue ist die neue value zu der gesprungen werden soll
+     */
     jumpTo({ name, newValue }) {
       this.painting.infos.forEach(info => {
         if (info.name === name) {
@@ -198,17 +204,38 @@ export default {
         }
       });
     },
+    /**
+     * rerenderInfo dient dazu die Liste der Accordions neu zu rendern
+     * name ist hierbei ein key-Attribut und sobald dieses verändert wurde, wird die
+     * gesamte Info-Liste aktualisiert
+     */
     rerenderInfo(info) {
       // TODO hopefully there is a better way to do the key-render technique
       var name = info.name;
       info.name = "";
       info.name = name;
     },
+    /**
+     * resetInfo setzt die Attribute der übergebenen Info zurück
+     */
+    resetInfo(info) {
+      info.audio.stop();
+      info.current = false;
+      info.paused = false;
+      info.currentValue = 0;
+    },
+    /**
+     * getPlayingInfo gibt die Info, die gerade abgespielt wird
+     */
     getPlayingInfo() {
       return this.painting.infos.find(info => {
         return info.audio.playing();
       });
     },
+    /**
+     * getPausedInfo gibt die die Info, die aktuell pausiert ist
+     * es kann immer nur eine Info gleichzeitig pausiert sein
+     */
     getPausedInfo() {
       return this.painting.infos.find(info => {
         return info.paused;
