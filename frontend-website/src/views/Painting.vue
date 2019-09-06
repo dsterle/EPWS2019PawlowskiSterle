@@ -1,5 +1,10 @@
 <template>
   <div class="painting">
+    <div class="app-bar-wrapper">
+      <a class="back-icon" href="/">
+        <img src="../assets/icons/arrow_back.svg" />
+      </a>
+    </div>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
     <img v-bind:src="painting.imgSrc" alt />
     <div class="title-wrapper">
@@ -249,6 +254,19 @@ export default {
 @import "../assets/scss/010-variables.scss";
 
 .painting {
+  .app-bar-wrapper {
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+    position: absolute;
+    display: flex;
+    height: $app-bar-height;
+    width: 100%;
+    align-items: center;
+
+    .back-icon {
+      margin-left: $abstand-M;
+    }
+  }
+
   .fab {
     position: fixed;
     margin: 0 $abstand-M $abstand-M 0;
