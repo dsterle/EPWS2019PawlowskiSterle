@@ -23,7 +23,7 @@
         class="speaker-icon"
         src="../assets/icons/speaker.svg"
         alt="Lautsprecher Icon"
-        v-on:click="$emit('play-audio', name)"
+        v-on:click="$emit('play-audio', id)"
       />
     </div>
     <slider
@@ -47,7 +47,7 @@ import "vue-slider-component/theme/material.css";
 export default {
   name: "accordion",
   components: { slider },
-  props: ["name", "text", "current", "min", "max", "currentValue"],
+  props: ["id", "name", "text", "current", "min", "max", "currentValue"],
   data() {
     return {
       value: 0
