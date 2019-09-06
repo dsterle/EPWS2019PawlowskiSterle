@@ -37,7 +37,10 @@ export default {
       id: {},
       painting: {},
       audios: new Array(),
-      audioTitle: {},
+      titleInfo: {
+        paused: false,
+        audio: {}
+      },
       fabIcon: require("../assets/icons/pause.svg"),
       pauseIcon: require("../assets/icons/pause.svg"),
       playIcon: require("../assets/icons/play.svg"),
@@ -57,14 +60,14 @@ export default {
       return painting.id === this.id;
     });
 
-    // audioTitle ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
-    this.audioTitle = new Howl({
+    // titleInfo ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
+    this.titleInfo.audio = new Howl({
       src: [this.painting.audioSrc],
       onend: function() {
         _this.playNext(0);
       }
     });
-    this.audioTitle.play();
+    this.titleInfo.audio.play();
 
     // um zu wissen welches Accordion gerade abgespielt wird, wird jedem ein current = false Attribut gegeben
     // außerdem wird jedem Accordion ein Howl gegeben, mit der das Audio manipuliert werden kann
@@ -92,7 +95,7 @@ export default {
   methods: {
     setCurrent(name) {
       // Zuerst werden alle Audiodateien, die
-      this.audioTitle.stop();
+      this.titleInfo.audio.stop();
 
       var playingInfo = this.getPlayingInfo();
 
@@ -141,32 +144,23 @@ export default {
         playingInfo.audio.pause();
         this.pausedInfo = playingInfo;
         clearInterval(this.currentLoop);
+      } else if (this.titleInfo.audio.playing()) {
+        this.titleInfo.audio.pause();
+        this.fabIcon = this.playIcon;
+        this.titleInfo.paused = true;
+      } else if (this.titleInfo.paused) {
+        this.titleInfo.paused = false;
+        this.titleInfo.audio.play();
+        this.fabIcon = this.pauseIcon;
       } else {
         this.fabIcon = this.pauseIcon;
         this.updateSlider(this.pausedInfo);
         this.pausedInfo.audio.play();
       }
-
-      // var currentInfo = this.painting.infos.find(info => {
-      //   return info.current;
-      // });
-
-      // if (currentInfo) {
-      //   console.log("pause");
-      //   this.fabIcon = this.playIcon;
-      //   currentInfo.audio.pause();
-      //   this.pausedInfo = currentInfo;
-      //   clearInterval(this.currentLoop);
-      // } else if (!this.getPlayingInfo()) {
-      //   console.log("further");
-      //   this.fabIcon = this.pauseIcon;
-      //   this.updateSlider(this.pausedInfo);
-      //   this.pausedInfo.audio.play();
-      // }
     },
     playNext(id) {
-      var nextInfo = this.painting.infos.find(element => {
-        return element.id === id;
+      var nextInfo = this.painting.infos.find(info => {
+        return info.id === id;
       });
 
       if (nextInfo) {
@@ -179,7 +173,6 @@ export default {
         if (info.name === name) {
           info.currentValue = newValue;
 
-          // info.current = true;
           this.rerenderInfo(info);
           // springe in der Audiodatei zu der Sekunde newValue
           info.audio.seek(newValue);
