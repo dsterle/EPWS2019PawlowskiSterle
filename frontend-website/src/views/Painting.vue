@@ -77,12 +77,10 @@ export default {
           _this.setSlider(info);
         },
         onplay: function() {
-          // console.log("onplay " + info.name);
           clearInterval(_this.currentLoop);
           _this.updateSlider(info);
         },
         onend: function() {
-          // console.log("onend " + info.name);
           info.currentValue = 0;
           info.current = false;
           clearInterval(_this.currentLoop);
@@ -111,6 +109,9 @@ export default {
           info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
           info.audio.play();
+        } else {
+          info.current = false;
+          this.fabIcon = this.pauseIcon;
         }
       });
     },
@@ -125,7 +126,6 @@ export default {
     },
     updateSlider(info) {
       var _this = this;
-
       var playingInfo = this.getPlayingInfo();
 
       this.currentLoop = setInterval(() => {
@@ -146,7 +146,23 @@ export default {
         this.updateSlider(this.pausedInfo);
         this.pausedInfo.audio.play();
       }
-      this.audioPlaying = !this.audioPlaying;
+
+      // var currentInfo = this.painting.infos.find(info => {
+      //   return info.current;
+      // });
+
+      // if (currentInfo) {
+      //   console.log("pause");
+      //   this.fabIcon = this.playIcon;
+      //   currentInfo.audio.pause();
+      //   this.pausedInfo = currentInfo;
+      //   clearInterval(this.currentLoop);
+      // } else if (!this.getPlayingInfo()) {
+      //   console.log("further");
+      //   this.fabIcon = this.pauseIcon;
+      //   this.updateSlider(this.pausedInfo);
+      //   this.pausedInfo.audio.play();
+      // }
     },
     playNext(id) {
       var nextInfo = this.painting.infos.find(element => {
