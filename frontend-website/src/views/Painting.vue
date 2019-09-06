@@ -9,6 +9,7 @@
     <ul class="info-list">
       <li v-for="info in painting.infos" v-bind:key="info.name">
         <accordion
+          v-bind:id="info.id"
           v-bind:name="info.name"
           v-bind:text="info.inhalt"
           v-bind:current="info.current"
@@ -87,13 +88,14 @@ export default {
           info.currentValue = 0;
           info.current = false;
           clearInterval(_this.currentLoop);
-          _this.playNext(info.id + 1);
+          // _this.playNext(info.id + 1);
+          _this.setCurrent(info.id + 1);
         }
       });
     });
   },
   methods: {
-    setCurrent(name) {
+    setCurrent(id) {
       // Zuerst werden alle Audiodateien, die
       this.titleInfo.audio.stop();
 
@@ -105,7 +107,7 @@ export default {
       }
 
       this.painting.infos.forEach(info => {
-        if (info.name === name) {
+        if (info.id === id) {
           this.rerenderInfo(info);
           clearInterval(this.currentLoop);
           info.current = true;
@@ -113,6 +115,7 @@ export default {
           // die ausgewählte Audio Information beginnt zu spielen
           info.audio.play();
         } else {
+          console.log(info.id + " " + info.name);
           info.current = false;
           info.paused = false;
           info.currentValue = 0;
@@ -134,7 +137,7 @@ export default {
       var playingInfo = this.getPlayingInfo();
 
       this.currentLoop = setInterval(() => {
-        info.currentValue = playingInfo.audio.seek().toFixed(0);
+        info.currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
         _this.rerenderInfo(info);
       }, 100);
     },
@@ -151,7 +154,7 @@ export default {
         // Der Titel wird wieder abgespielt
         this.playInfo(this.titleInfo);
       } else {
-        // Die pasierte Info wird wieder abgespielt
+        // Die pausierte Info wird wieder abgespielt
         this.playInfo(this.getPausedInfo());
         this.updateSlider(this.getPausedInfo());
       }
@@ -179,7 +182,7 @@ export default {
 
       if (nextInfo) {
         // die nächste Audiodatei wird auf current gesetzt
-        this.setCurrent(nextInfo.name);
+        this.setCurrent(id);
       }
     },
     jumpTo({ name, newValue }) {
