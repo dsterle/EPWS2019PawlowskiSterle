@@ -98,6 +98,7 @@ export default {
     setCurrent(id) {
       // Zuerst werden alle Audiodateien, die
       this.titleInfo.audio.stop();
+      var _this = this;
 
       var playingInfo = this.getPlayingInfo();
 
@@ -108,18 +109,19 @@ export default {
 
       this.painting.infos.forEach(info => {
         if (info.id === id) {
-          this.rerenderInfo(info);
           clearInterval(this.currentLoop);
           info.current = true;
           info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
+          this.rerenderInfo(info);
           info.audio.play();
         } else {
-          console.log(info.id + " " + info.name);
+          info.audio.stop();
           info.current = false;
           info.paused = false;
           info.currentValue = 0;
           this.fabIcon = this.pauseIcon;
+          _this.rerenderInfo(info);
         }
       });
     },
