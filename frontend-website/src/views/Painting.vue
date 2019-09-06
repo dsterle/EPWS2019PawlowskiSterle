@@ -37,8 +37,12 @@ export default {
       id: {},
       painting: {},
       audios: new Array(),
+      audioTitle: {},
       fabIcon: require("../assets/icons/pause.svg"),
-      audioTitle: {}
+      pauseIcon: require("../assets/icons/pause.svg"),
+      playIcon: require("../assets/icons/play.svg"),
+      currentLoop: {},
+      pausedInfo: {}
     };
   },
   mounted() {
@@ -73,9 +77,15 @@ export default {
           _this.setSlider(info);
         },
         onplay: function() {
+          // console.log("onplay " + info.name);
+          clearInterval(_this.currentLoop);
           _this.updateSlider(info);
         },
         onend: function() {
+          // console.log("onend " + info.name);
+          info.currentValue = 0;
+          info.current = false;
+          clearInterval(_this.currentLoop);
           _this.playNext(info.id + 1);
         }
       });
@@ -83,20 +93,24 @@ export default {
   },
   methods: {
     setCurrent(name) {
+      // Zuerst werden alle Audiodateien, die
+      this.audioTitle.stop();
+
+      var playingInfo = this.getPlayingInfo();
+
+      if (playingInfo) {
+        playingInfo.audio.stop();
+        playingInfo.current = false;
+      }
+
       this.painting.infos.forEach(info => {
         if (info.name === name) {
-          // ? change key attribute to rerender list
-          // TODO there is hopefully a better way to do the key-render technique
-          info.name = "";
-          info.name = name;
+          this.rerenderInfo(info);
+          clearInterval(this.currentLoop);
           info.current = true;
+          info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
           info.audio.play();
-        } else {
-          // jedes andere Audio wird gestoppt und current wird wieder auf false gesetzt
-          this.audioTitle.stop();
-          info.audio.stop();
-          info.current = false;
         }
       });
     },
@@ -107,36 +121,30 @@ export default {
       info.max = parseInt(info.audio.duration().toFixed(0));
       info.currentValue = 0;
 
-      // TODO there is hopefully a better way to do the key-render technique
-      // TODO try this with Vue.set(array, index, newValue)
-      var name = info.name;
-      info.name = "";
-      info.name = name;
+      this.rerenderInfo(info);
     },
     updateSlider(info) {
-      var loop = setInterval(() => {
-        if (info.currentValue < info.max) {
-          info.currentValue++;
-        }
-        // TODO there is hopefully a better way to do the key-render technique
-        var name = info.name;
-        info.name = "...";
-        info.name = name;
+      var _this = this;
 
-        if (!info.audio.playing()) {
-          // wenn das Audio nicht mehr spielt, wird currentValue wieder auf 0 gesetzt und current = false
-          // die setInterval-Methode wird beendet
-          info.currentValue = 0;
-          info.current = false;
-          clearInterval(loop);
-        }
-      }, 1000);
+      var playingInfo = this.getPlayingInfo();
+
+      this.currentLoop = setInterval(() => {
+        info.currentValue = playingInfo.audio.seek().toFixed(0);
+        _this.rerenderInfo(info);
+      }, 20);
     },
     pause() {
-      if (this.audioPlaying) {
-        this.fabIcon = require("../assets/icons/play.svg");
+      var playingInfo = this.getPlayingInfo();
+
+      if (playingInfo) {
+        this.fabIcon = this.playIcon;
+        playingInfo.audio.pause();
+        this.pausedInfo = playingInfo;
+        clearInterval(this.currentLoop);
       } else {
-        this.fabIcon = require("../assets/icons/pause.svg");
+        this.fabIcon = this.pauseIcon;
+        this.updateSlider(this.pausedInfo);
+        this.pausedInfo.audio.play();
       }
       this.audioPlaying = !this.audioPlaying;
     },
@@ -153,15 +161,24 @@ export default {
     jumpTo({ name, newValue }) {
       this.painting.infos.forEach(info => {
         if (info.name === name) {
-          // ? change key attribute to rerender list
-          // TODO there is hopefully a better way to do the key-render technique
           info.currentValue = newValue;
-          info.name = "";
-          info.name = name;
-          info.current = true;
+
+          // info.current = true;
+          this.rerenderInfo(info);
           // springe in der Audiodatei zu der Sekunde newValue
           info.audio.seek(newValue);
         }
+      });
+    },
+    rerenderInfo(info) {
+      // TODO hopefully there is a better way to do the key-render technique
+      var name = info.name;
+      info.name = "";
+      info.name = name;
+    },
+    getPlayingInfo() {
+      return this.painting.infos.find(info => {
+        return info.audio.playing();
       });
     }
   }
