@@ -56,6 +56,9 @@ export default {
       currentLoop: {}
     };
   },
+  created() {
+    this.topic = this.$route.params.userid;
+  },
   mounted() {
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
@@ -100,6 +103,8 @@ export default {
         }
       });
     });
+
+    handleMQTTConnection();
   },
   methods: {
     setCurrent(id) {
@@ -245,6 +250,42 @@ export default {
       return this.painting.infos.find(info => {
         return info.paused;
       });
+    },
+    /**
+     * handleMQTTConnection
+     */
+    handleMQTTConnection() {
+      // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
+      var client = new Paho.MQTT.Client(
+        this.server.host,
+        this.server.port,
+        "client"
+      );
+
+      client.onConnectionLost = onConnectionLost;
+      client.onMessageArrived = onMessageArrived;
+      client.connect({ onSuccess: onConnect });
+
+      var this_component = this;
+
+      // Wird aufgerufen, wenn sich der Client verbindet
+      function onConnect() {
+        client.subscribe(this_component.topic);
+      }
+
+      // Wird aufgerufen, wenn die Verbindung veloren geht
+      function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+          console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
+      }
+
+      // Wird aufgerufen, wenn die Nachricht ankommt
+      function onMessageArrived(message) {
+        // Die Nachricht beinhaltet die ID eines Gemäldes
+        // Eine URL mit der jeweiligen ID wird geöffnet
+        open("/painting/" + message.payloadString, "_self");
+      }
     }
   }
 };
