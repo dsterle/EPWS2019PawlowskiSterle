@@ -31,7 +31,7 @@ export default {
       let input = parseInt(data);
 
       if (this.paintingIDs.includes(input)) {
-        open(__dirname + "/waiting/" + input, "_self");
+        open("cranach_erweiterte_interaktion/waiting/" + input, "_self");
       } else if (document.querySelector(".input-field").value === "") {
         this.errorMsg = "Bitte geben Sie eine Nummer ein";
       } else {
