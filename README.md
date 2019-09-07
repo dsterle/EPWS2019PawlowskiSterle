@@ -1,17 +1,18 @@
 # Cranach erweiterte Interaktion
 
-## Projekt
-Unser Projekt beschäftigt sich mit der Domäne Lucas Cranach und stellt eine Anwendung dar, die einem Museumsbesucher das Leben erleichtert. In einem Webbrowser sollen spezifische Informationen über die Gemälde in der Nähe des Besuchers angezeigt werden. Unser Ziel ist es ein Designkonzept für eine mobile Anwendung umzusetzen und uns mit folgenden Ideen zu beschäftigen:
+Willkommen zu unserem Projekt Cranach Erweiterte Interaktion!
+Dieses Projekt findet im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik statt.
 
-## Idee 1
-Die Gemälde werden mit beispielsweise einem Button ausgestattet, den der Benutzer betätigen kann. Betätigt der Benutzer diesen Button, so wird ihm die jeweilige Website des Gemäldes auf seinem Smartphone angezeigt. Eine andere Möglichkeit wäre ein Ultraschall-Sensor, vor den lediglich das Iphone gehalten werden muss.
+## Kontext
 
-## Idee 2
-Der Benutzer soll keine Anwendung auf seinem Smartphone installieren müssen, sondern lediglich eine Website öffnen. Geht der Benutzer nun zu einem bestimmten Gemälde hin, so wird dieses im Webbrowser angezeigt.
+Der Kontext ist der ein Besuch in einem Museum über Gemälde des Künstlers Lucas Cranach. Hierbei sollen dem Benutzer Informationen über bestimmte Gemälde zur Verfügung gestellt werden.
 
-`Lösungsansatz: Bluetooth Beacons`
+## Idee
 
-## Idee 3
-Am Eingang des Museums erhält der Besucher einen Transponder (NFC-Tag). Dieser hat eine bestimmte ID, welche zunächst einmalig auf der Website mit dem Smartphone angegeben werden muss. Anschließend kann das Smartphone in die Tasche gesteckt werden und es muss lediglich der Transponder an ein Gemälde gehalten werden um sich eine Audiodatei über das Smartphone anzuhören. Eventuell soll es auch die Möglichkeit geben einen QR-code am Transponder zu scannen, so dass der Nutzer nicht extra die Website öffnen und die ID eingeben muss. 
+Nach etlichen Ideen über die Richtungen, in die unser System gehen kann (Sie finden unsere Entscheidungen unter dem Reiter Wiki im Kapitel Entscheidungslogbuch) haben wir nun eine Anwendung erstellt, die es dem Benutzer erleichtern soll, Informationen über das Gemälde, vor welchem er sich befindet, zu erhalten. Besonders wichtig war uns dabei der Gedanke, dass der Benutzer nicht extra eine native App auf seinem Smartphone installieren muss, da das mit einem zu großen Aufwand verbunden ist.
+Des Weiteren war ein wichtiger Punkt für uns, dass die Gemälde im Museum eine größere Gewichtung haben als das Handy des Benutzers, denn in einem Museum möchte man nicht mit seinem Smartphone beschäftigt sein, sondern man möchte sich auf die Bilder konzentrieren.
+Unsere Anwendung ist so konzipiert, dass man die Informationen über bestimmte Gemälde über seine Kopfhörer anhören kann und sein Handy dabei in der Hosentasche lassen kann. Natürlich kann man die Informationen aber auch visuell einsehen. Damit Sie sich ein besseres Bild davon machen können, folgt nun ein Szenario:
 
-`Lösungsansatz: NFC, QR-Code`
+## Szenario
+
+Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In dem Museum angekommen, bekommt er an der Rezeption den WLAN-Schlüssel und verbindet sich mit diesem. Nun öffnet er die Website des Lucas Cranach Museums. Außerdem bekommt er noch ein kleines Gerät ausgehändigt, einen NFC-Tag, welchen er lediglich vor ein Gemälde halten muss um Informationen zu diesem auf sein Handy zu bekommen. Auf dem NFC-Tag befindet sich eine Nummer, die Simon auf der Website des Museums eingibt. Nun verbindet er sein Smartphon mit seinen neuen Kopfhörern und steckt es in seine Hosentasche. Sobald Simon nun ein interessantes Gemälde sieht, über das er mehr erfahren möchte, hält er lediglich den NFC-Tag an das, vor dem Gemälde stehende, Lesegerät und über seine Kopfhörern beginnt eine Stimme über das Gemälde zu reden.

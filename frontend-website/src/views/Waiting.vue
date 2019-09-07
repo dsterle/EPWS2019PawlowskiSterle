@@ -26,11 +26,11 @@ export default {
     };
   },
   created() {
-    // get id from the URL
-    // this is the id on the NFC Tag
+    // Speichere die ID in der URL als topic
     this.topic = this.$route.params.id;
   },
   mounted() {
+    // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
     var client = new Paho.MQTT.Client(
       this.server.host,
       this.server.port,
@@ -43,24 +43,24 @@ export default {
 
     var this_component = this;
 
-    // called when the client connects
+    // Wird aufgerufen, wenn sich der Client verbindet
     function onConnect() {
-      // Once a connection has been made, the client subscribes the topic
       client.subscribe(this_component.topic);
     }
 
-    // called when the client loses its connection
+    // Wird aufgerufen, wenn die Verbindung veloren geht
     function onConnectionLost(responseObject) {
       if (responseObject.errorCode !== 0) {
         console.log("onConnectionLost:" + responseObject.errorMessage);
       }
     }
 
-    // called when a message arrives
+    // Wird aufgerufen, wenn die Nachricht ankommt
     function onMessageArrived(message) {
-      // message contains the id of a painting
-      // now a new page will be open with the url <<domain>>/painting/<<message>>
-      open("/painting/" + message.payloadString, "_self");
+      // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
+      // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
+      var userid = this.topic;
+      open("/user/" + userid + "/painting/" + message.payloadString, "_self");
     }
   }
 };
