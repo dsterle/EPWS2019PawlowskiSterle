@@ -118,8 +118,10 @@ export default {
 
       this.painting.infos.forEach(info => {
         if (info.id === id) {
+          // Falls die Audioinfo, die angeklickt wurde noch aktiv ist, wird diese zuerst gestoppt
+          info.audio.stop();
           // Wenn die id übereinstimmt, wird current auf true gesetzt und currentValue auf 0 zurückgesetzt
-          clearInterval(this.currentLoop);
+          clearInterval(_this.currentLoop);
           info.current = true;
           info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
