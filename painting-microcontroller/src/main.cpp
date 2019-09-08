@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include <PubSubClient.h>
-#include <WiFi.h>
+#include <WiFi.h> 
 #include <MFRC522.h> //library responsible for communicating with the module RFID-RC522
 #include <SPI.h> //library responsible for communicating of SPI bus
-#define SS_PIN    21
-#define RST_PIN   22
-#define ourTopic "100"
+
+#define SS_PIN    21 //slave select pin
+#define RST_PIN   22 //reset pin
 #define client_name "cranach"
 #define painting_ID "2"
 
@@ -24,7 +24,15 @@ int status = WL_IDLE_STATUS;
 char ssid[] = "moxd-lab";
 char pass[] = "gf3heTS11c";
 char receiveMsg[1024];
+int block = 2;  //block where the ID of the NFC Tag is written
+int nfcTagsUIDs[] = {1073479220, 432423423};
 
+byte blockcontent[16] = {"100"};  //ID that is written into a NFC tag
+byte nfcTopic[16];  //ID that is read from the NFC Tag and the topic where the paintingID is published to
+byte uid[3];
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
+MFRC522::MIFARE_Key mfrcKey;  // key which is necessary for authentication to write data into the NFC tag
 WiFiClient espcClient;
 PubSubClient client(espcClient);
 
@@ -49,8 +57,6 @@ void connectMQTT()
     if (client.connect(client_name))
     {
       Serial.println("[X] MQTT connected");
-      Serial.print("subscribe: ");
-      Serial.println(client.subscribe(ourTopic));
     }
     else
     {
@@ -82,31 +88,96 @@ void connectWIFI()
   }
 }
 
+int writeBlock(int blockNumber, byte arrayAddress[]) 
+{
+  //this makes sure that we only write into data blocks
+  //every 4th block is a trailer block for the access/security info
+  int largestModulo4Number = blockNumber / 4 * 4;
+  int trailerBlock = largestModulo4Number + 3;  //determine trailer block for the sector
+  if (blockNumber > 2 && (blockNumber + 1) % 4 == 0) {
+    Serial.print(blockNumber);
+    Serial.println(" is a trailer block:");
+    return 2;
+  } //block number is a trailer block (modulo 4); quit and send error code 2
+  
+  Serial.print(blockNumber);
+  Serial.println(" is a data block:");
+  
+  //authentication of the desired block for access
 
-// Defined pins to module RC522
-MFRC522 mfrc522(SS_PIN, RST_PIN); 
+  byte status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, trailerBlock, &mfrcKey, &(mfrc522.uid));
+  //this method is used to authenticate a certain block for writing or reading
+  if (status != MFRC522::STATUS_OK) {
+         Serial.print("PCD_Authenticate() failed: ");
+         Serial.println(status);
+         return 3;
+  }
+
+  //writing into the block   
+  status = mfrc522.MIFARE_Write(blockNumber, arrayAddress, 16);
+  if (status != MFRC522::STATUS_OK) {
+           Serial.print("MIFARE_Write() failed: ");
+           Serial.println(status);
+           return 4;
+  }
+  Serial.println("block was written");
+  return 0;
+}
+
+int readBlock(int blockNumber, byte arrayAddress[]) 
+{
+  int largestModulo4Number = blockNumber / 4 * 4;
+  int trailerBlock = largestModulo4Number + 3;  
+
+  byte status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, trailerBlock, &mfrcKey, &(mfrc522.uid));
+
+  if (status != MFRC522::STATUS_OK) {
+         Serial.print("PCD_Authenticate() failed (read): ");
+         Serial.println(status);
+         return 3;
+  }
+
+  //reading the block     
+  byte buffersize = 18; 
+  status = mfrc522.MIFARE_Read(blockNumber, arrayAddress, &buffersize);
+  if (status != MFRC522::STATUS_OK) {
+          Serial.print("MIFARE_read() failed: ");
+          Serial.println(status);
+          return 4;
+  }
+  Serial.println("block was read");
+  return 0;
+}
+
+boolean uidExists(byte* uid) {
+  for (int i = 0; i < sizeof(nfcTagsUIDs); i++) {
+    if(nfcTagsUIDs[i] == (int)uid) {
+      return true;
+    }
+  }
+  return false;
+}
+
 void setup() 
 {
   Serial.begin(9600);
   SPI.begin(); // Init SPI bus
   
-  connectWIFI();
-  client.setServer("hivemq.dock.moxd.io", 1883);
-  client.setCallback(testCallback);
-  connectMQTT();
+  // connectWIFI();
+  // client.setServer("hivemq.dock.moxd.io", 1883);
+  // client.setCallback(testCallback);
+  // if (!client.connected()) {
+  //    connectMQTT();
+  // }
 
-  // Init MFRC522
+  for (byte i = 0; i < 6; i++) {
+    mfrcKey.keyByte[i] = 0xFF;
+  }
   mfrc522.PCD_Init(); 
-  Serial.println("Approach your reader card...");
-  mfrc522.PCD_DumpVersionToSerial();
-
+  Serial.println("Legen Sie einen NFC Tag auf den NFC Reader...");
 }
 
 void loop() {
-  if (!client.connected())
-  {
-    connectMQTT();
-  }
 
   if(!mfrc522.PICC_IsNewCardPresent()){
     return;
@@ -115,7 +186,23 @@ void loop() {
     return;
   }
   
-  //Informationsabruf des RFID-Gerätes
-  mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
-  client.publish(ourTopic, painting_ID);
+  // writeBlock(block, blockcontent); //write byte data in the block 2
+  readBlock(block, nfcTopic);
+  Serial.print("read content: ");
+  for (int j = 0; j < 3; j++)
+  {
+    Serial.write (nfcTopic[j]); //Serial.write() transmits the ASCII numbers as human readable characters to serial monitor
+  }
+
+  Serial.print("uid: ");
+  for (int i = 0; i < mfrc522.uid.size; i++) {
+    uid[i] = mfrc522.uid.uidByte[i];
+    Serial.print(uid[i]);
+  }
+
+  if(uidExists(uid)) {
+    client.publish((char*) nfcTopic, painting_ID);
+  } else {
+    Serial.println("Der NFC Tag gehört nicht zum Lucas Cranach digital archive");
+  }
 }
