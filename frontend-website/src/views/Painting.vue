@@ -53,13 +53,53 @@ export default {
       playIcon: require("../assets/icons/play.svg"),
       // currentLoop beinhaltet eine setInterval-Methode, die sich um die
       // Aktualisierung des Audio-SLiders kümmert
-      currentLoop: {}
+      currentLoop: {},
+      server: {
+        host: "hivemq.dock.moxd.io",
+        port: 8000,
+        reconnectTimeout: 2000
+      },
+      topic: {}
     };
   },
   created() {
     this.topic = this.$route.params.userid;
   },
   mounted() {
+    // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
+    var client = new Paho.MQTT.Client(
+            this.server.host,
+            this.server.port,
+            "client"
+    );
+
+    client.onConnectionLost = onConnectionLost;
+    client.onMessageArrived = onMessageArrived;
+    client.connect({ onSuccess: onConnect });
+
+    var this_component = this;
+
+    // Wird aufgerufen, wenn sich der Client verbindet
+    function onConnect() {
+      client.subscribe(this_component.topic);
+      console.log("subscricbed: " + this_component.topic);
+    }
+
+    // Wird aufgerufen, wenn die Verbindung veloren geht
+    function onConnectionLost(responseObject) {
+      if (responseObject.errorCode !== 0) {
+        console.log("onConnectionLost:" + responseObject.errorMessage);
+      }
+    }
+
+    // Wird aufgerufen, wenn die Nachricht ankommt
+    function onMessageArrived(message) {
+      console.log("message: " + message.payloadString)
+      // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
+      // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
+      var userid = this_component.topic;
+      open("/user/" + userid + "/painting/" + message.payloadString, "_self");
+    }
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
     var _this = this;
@@ -104,7 +144,7 @@ export default {
       });
     });
 
-    handleMQTTConnection();
+    this.handleMQTTConnection();
   },
   methods: {
     setCurrent(id) {
@@ -286,7 +326,7 @@ export default {
       function onMessageArrived(message) {
         // Die Nachricht beinhaltet die ID eines Gemäldes
         // Eine URL mit der jeweiligen ID wird geöffnet
-        open("/painting/" + message.payloadString, "_self");
+        open("/user/" + this.topic + "/painting/" + message.payloadString, "_self");
       }
     }
   }

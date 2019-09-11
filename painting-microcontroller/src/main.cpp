@@ -7,7 +7,7 @@
 #define SS_PIN    21 //slave select pin
 #define RST_PIN   22 //reset pin
 #define client_name "cranach"
-#define painting_ID "2"
+#define painting_ID "1"
 
 /* Pin Configuration:
 VCC   -> 3V3
@@ -28,8 +28,8 @@ int block = 2;  //block where the ID of the NFC Tag is written
 int nfcTagsUIDs[] = {1073479220, 432423423};
 
 byte blockcontent[16] = {"100"};  //ID that is written into a NFC tag
-byte nfcTopic[16];  //ID that is read from the NFC Tag and the topic where the paintingID is published to
-byte uid[3];
+byte nfcTopic[3];  //ID that is read from the NFC Tag and the topic where the paintingID is published to
+byte uid[16];
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
 MFRC522::MIFARE_Key mfrcKey;  // key which is necessary for authentication to write data into the NFC tag
@@ -75,7 +75,7 @@ void connectWIFI()
     Serial.println(ssid);
 
     status = WiFi.begin(ssid, pass);
-    delay(1000);
+    delay(4000);
   }
 
   if (status != WL_CONNECTED)
@@ -163,12 +163,12 @@ void setup()
   Serial.begin(9600);
   SPI.begin(); // Init SPI bus
   
-  // connectWIFI();
-  // client.setServer("hivemq.dock.moxd.io", 1883);
-  // client.setCallback(testCallback);
-  // if (!client.connected()) {
-  //    connectMQTT();
-  // }
+  connectWIFI();
+  client.setServer("hivemq.dock.moxd.io", 1883);
+  client.setCallback(testCallback);
+  if (!client.connected()) {
+     connectMQTT();
+  }
 
   for (byte i = 0; i < 6; i++) {
     mfrcKey.keyByte[i] = 0xFF;
@@ -180,7 +180,7 @@ void setup()
 void loop() {
 
   if(!mfrc522.PICC_IsNewCardPresent()){
-    return;
+    //return;
   }
   if(!mfrc522.PICC_ReadCardSerial()){
     return;
@@ -194,7 +194,7 @@ void loop() {
     Serial.write (nfcTopic[j]); //Serial.write() transmits the ASCII numbers as human readable characters to serial monitor
   }
 
-  Serial.print("uid: ");
+  Serial.print("\nuid: ");
   for (int i = 0; i < mfrc522.uid.size; i++) {
     uid[i] = mfrc522.uid.uidByte[i];
     Serial.print(uid[i]);
@@ -202,7 +202,6 @@ void loop() {
 
   if(uidExists(uid)) {
     client.publish((char*) nfcTopic, painting_ID);
-    Serial.println("Published");
   } else {
     Serial.println("Der NFC Tag gehört nicht zum Lucas Cranach digital archive");
   }
