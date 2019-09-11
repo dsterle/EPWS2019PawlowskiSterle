@@ -20,7 +20,7 @@ export default {
       server: {
         host: "hivemq.dock.moxd.io",
         port: 8000,
-        reconnectTimeout: 2000
+        reconnectTimeout: 1000
       },
       topic: {}
     };
@@ -46,6 +46,7 @@ export default {
     // Wird aufgerufen, wenn sich der Client verbindet
     function onConnect() {
       client.subscribe(this_component.topic);
+      console.log("subscricbed: " + this_component.topic);
     }
 
     // Wird aufgerufen, wenn die Verbindung veloren geht
@@ -57,6 +58,7 @@ export default {
 
     // Wird aufgerufen, wenn die Nachricht ankommt
     function onMessageArrived(message) {
+      console.log("message: " + message.payloadString)
       // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
       // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
       var userid = this.topic;

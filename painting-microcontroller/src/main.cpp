@@ -202,6 +202,7 @@ void loop() {
 
   if(uidExists(uid)) {
     client.publish((char*) nfcTopic, painting_ID);
+    Serial.println("Published");
   } else {
     Serial.println("Der NFC Tag gehört nicht zum Lucas Cranach digital archive");
   }
