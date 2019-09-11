@@ -20,7 +20,7 @@ export default {
       server: {
         host: "hivemq.dock.moxd.io",
         port: 8000,
-        reconnectTimeout: 2000
+        reconnectTimeout: 10000
       },
       topic: {}
     };

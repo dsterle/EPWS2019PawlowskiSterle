@@ -70,7 +70,7 @@ export default {
     var client = new Paho.MQTT.Client(
             this.server.host,
             this.server.port,
-            "client"
+            "client2"
     );
 
     client.onConnectionLost = onConnectionLost;
@@ -326,7 +326,7 @@ export default {
       function onMessageArrived(message) {
         // Die Nachricht beinhaltet die ID eines Gemäldes
         // Eine URL mit der jeweiligen ID wird geöffnet
-        open("/user/" + this.topic + "/painting/" + message.payloadString, "_self");
+        open("/user/" + _this.topic + "/painting/" + message.payloadString, "_self");
       }
     }
   }

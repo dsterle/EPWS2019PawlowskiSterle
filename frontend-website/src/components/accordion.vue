@@ -117,7 +117,7 @@ export default {
     }
 
     .speaker-icon {
-      margin-right: 25px;
+      margin-right: 10px;
     }
   }
 

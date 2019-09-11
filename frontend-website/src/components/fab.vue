@@ -20,7 +20,7 @@ export default {
 @import "../assets/scss/010-variables.scss";
 
 .floating-action-button {
-  z-index: 1;
+  z-index: 6;
   background: $accent;
   width: $fab-size;
   height: $fab-size;

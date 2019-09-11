@@ -26,6 +26,7 @@ char pass[] = "gf3heTS11c";
 char receiveMsg[1024];
 int block = 2;  //block where the ID of the NFC Tag is written
 int nfcTagsUIDs[] = {1073479220, 432423423};
+char* lastTopic = (char* )"";
 
 byte blockcontent[16] = {"100"};  //ID that is written into a NFC tag
 byte nfcTopic[3];  //ID that is read from the NFC Tag and the topic where the paintingID is published to
@@ -180,12 +181,16 @@ void setup()
 void loop() {
 
   if(!mfrc522.PICC_IsNewCardPresent()){
-    //return;
+    return;
   }
   if(!mfrc522.PICC_ReadCardSerial()){
     return;
   }
-  
+
+  if (!client.connected()) {
+     connectMQTT();
+  }
+
   // writeBlock(block, blockcontent); //write byte data in the block 2
   readBlock(block, nfcTopic);
   Serial.print("read content: ");
@@ -201,8 +206,12 @@ void loop() {
   }
 
   if(uidExists(uid)) {
+    Serial.println("Topic: ");
+    Serial.println((char*) nfcTopic);
     client.publish((char*) nfcTopic, painting_ID);
+    Serial.println("published");
   } else {
     Serial.println("Der NFC Tag gehört nicht zum Lucas Cranach digital archive");
   }
+  mfrc522.PCD_Init();
 }
