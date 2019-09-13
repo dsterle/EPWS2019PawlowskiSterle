@@ -28,10 +28,9 @@ export default {
   },
   methods: {
     validateIDs(data) {
-      let input = parseInt(data);
 
-      if (this.paintingIDs.includes(input)) {
-        open("/waiting/" + input, "_self");
+      if (this.paintingIDs.includes(parseInt(data))) {
+        this.$router.push({ path: `waiting/${data}`});
       } else if (document.querySelector(".input-field").value === "") {
         this.errorMsg = "Bitte geben Sie eine Nummer ein";
       } else {

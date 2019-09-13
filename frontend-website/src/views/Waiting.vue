@@ -62,7 +62,7 @@ export default {
       // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
       // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
       var userid = this_component.topic;
-      open("/user/" + userid + "/painting/" + message.payloadString, "_self");
+      this.$router.push({ path: `user/${userid}/painting/${message.payloadString}`});
     }
   }
 };

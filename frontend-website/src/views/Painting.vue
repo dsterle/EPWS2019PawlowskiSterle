@@ -98,7 +98,7 @@ export default {
       // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
       // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
       var userid = this_component.topic;
-      open("/user/" + userid + "/painting/" + message.payloadString, "_self");
+      this.$router.push({ path: `user/${userid}/painting/${message.payloadString}`});
     }
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
@@ -326,7 +326,7 @@ export default {
       function onMessageArrived(message) {
         // Die Nachricht beinhaltet die ID eines Gemäldes
         // Eine URL mit der jeweiligen ID wird geöffnet
-        open("/user/" + _this.topic + "/painting/" + message.payloadString, "_self");
+        this.$router.push({ path: `user/${_this.topic}/painting/${message.payloadString}`});
       }
     }
   }
