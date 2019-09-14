@@ -12,14 +12,17 @@
 </template>
 
 <script>
+  let mqtt = require('mqtt');
+  let client = {};
 export default {
   name: "waiting",
   components: {},
   data() {
     return {
       server: {
-        host: "hivemq.dock.moxd.io",
-        port: 8000,
+        //host: "hivemq.dock.moxd.io",
+        host: "192.168.178.50",
+        port: 1883,
         reconnectTimeout: 10000
       },
       topic: {}
@@ -34,12 +37,13 @@ export default {
     var client = new Paho.MQTT.Client(
       this.server.host,
       this.server.port,
-      "client"
+      "vueClient"
     );
+
 
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
-    client.connect({ onSuccess: onConnect });
+    client.connect({ onSuccess: onConnect, onFailure: onFailure});
 
     var this_component = this;
 
@@ -47,6 +51,10 @@ export default {
     function onConnect() {
       client.subscribe(this_component.topic);
       console.log("subscricbed: " + this_component.topic);
+    }
+
+    function onFailure() {
+      console.log("connection failed");
     }
 
     // Wird aufgerufen, wenn die Verbindung veloren geht

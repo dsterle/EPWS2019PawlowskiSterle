@@ -21,8 +21,10 @@ IRQ   -> NC (Not Connected)
 */
 
 int status = WL_IDLE_STATUS;
-char ssid[] = "moxd-lab";
-char pass[] = "gf3heTS11c";
+// char ssid[] = "moxd-lab";
+// char pass[] = "gf3heTS11c";
+char ssid[] = "KevinGast";
+char pass[] = "GastKevin2018";
 char receiveMsg[1024];
 int block = 2;  //block where the ID of the NFC Tag is written
 int nfcTagsUIDs[] = {1073479220, 432423423};
@@ -164,12 +166,13 @@ void setup()
   Serial.begin(9600);
   SPI.begin(); // Init SPI bus
   
-  // connectWIFI();
-  // client.setServer("hivemq.dock.moxd.io", 1883);
-  // client.setCallback(testCallback);
-  // if (!client.connected()) {
-  //    connectMQTT();
-  // }
+  connectWIFI();
+  //client.setServer("hivemq.dock.moxd.io", 1883);
+  client.setServer("192.168.178.50", 1883);
+  client.setCallback(testCallback);
+  if (!client.connected()) {
+     connectMQTT();
+  }
 
   for (byte i = 0; i < 6; i++) {
     mfrcKey.keyByte[i] = 0xFF;
@@ -191,7 +194,7 @@ void loop() {
   //    connectMQTT();
   // }
 
-  writeBlock(block, blockcontent); //write byte data in the block 2
+  //writeBlock(block, blockcontent); //write byte data in the block 2
   readBlock(block, nfcTopic);
   Serial.print("read content: ");
   for (int j = 0; j < 3; j++)
@@ -208,8 +211,8 @@ void loop() {
   if(uidExists(uid)) {
     Serial.println("Topic: ");
     Serial.println((char*) nfcTopic);
-    // client.publish((char*) nfcTopic, painting_ID);
-    // Serial.println("published");
+    client.publish((char*) nfcTopic, painting_ID);
+    Serial.println("published");
   } else {
     Serial.println("Der NFC Tag gehört nicht zum Lucas Cranach digital archive");
   }
