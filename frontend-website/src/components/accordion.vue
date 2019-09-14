@@ -2,12 +2,11 @@
   <div class="accordion">
     <div class="accordion-head">
       <div class="left">
-        <div class="icon-wrapper">
+        <div class="icon-wrapper" v-on:click="open">
           <img
             class="icon"
             src="../assets/icons/arrow_down.svg"
             alt="arrow down"
-            v-on:click="open"
             js-accordion="icon"
           />
         </div>
@@ -17,6 +16,7 @@
           v-bind:value="name"
           js-accordion="title"
           v-bind:class="{'currentAudio':current}"
+          v-on:click="open"
         />
       </div>
       <img
