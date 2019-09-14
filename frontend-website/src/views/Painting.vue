@@ -1,7 +1,7 @@
 <template>
   <div class="painting">
     <div class="app-bar-wrapper">
-      <a class="back-icon" href="/">
+      <a class="back-icon" @click="$router.go(-1)">
         <img src="../assets/icons/arrow_back.svg" />
       </a>
     </div>
@@ -147,6 +147,10 @@ export default {
     this.handleMQTTConnection();
   },
   methods: {
+    previousPage() {
+      this.$router.go(-1);
+    },
+
     setCurrent(id) {
       /**
        * setCurrent ist dazu da eine Info mit der übergebenen id auszuwählen

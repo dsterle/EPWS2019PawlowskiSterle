@@ -1,7 +1,7 @@
 <template>
   <div class="waiting">
     <div class="app-bar-wrapper">
-      <a class="back-icon" href="/">
+      <a class="back-icon" @click="$router.go(-1)">
         <img src="../assets/icons/arrow_back.svg" />
       </a>
     </div>
