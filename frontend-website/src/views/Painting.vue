@@ -339,11 +339,12 @@ export default {
 .painting {
   .app-bar-wrapper {
     background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
-    position: absolute;
+    position: fixed;
     display: flex;
     height: $app-bar-height;
     width: 100%;
     align-items: center;
+    z-index: 2;
 
     .back-icon {
       margin-left: $abstand-M;
