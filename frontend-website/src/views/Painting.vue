@@ -1,7 +1,7 @@
 <template>
   <div class="painting">
     <div class="app-bar-wrapper">
-      <a class="back-icon" @click="$router.go(-1)">
+      <a class="back-icon" @click="$router.push({path: `/`})">
         <img src="../assets/icons/arrow_back.svg" />
       </a>
     </div>
@@ -64,6 +64,15 @@ export default {
   },
   created() {
     this.topic = this.$route.params.userid;
+
+    // titleInfo ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
+    this.titleInfo.audio = new Howl({
+      src: [this.painting.audioSrc],
+      onend: function() {
+        this.setCurrent(0);
+      }
+    });
+    this.titleInfo.audio.play();
   },
   mounted() {
     // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
@@ -111,15 +120,6 @@ export default {
       return painting.id === this.id;
     });
 
-    // titleInfo ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
-    this.titleInfo.audio = new Howl({
-      src: [this.painting.audioSrc],
-      onend: function() {
-        _this.setCurrent(0);
-      }
-    });
-    this.titleInfo.audio.play();
-
     // Schleife über jede Info (Accordion)
     this.painting.infos.forEach(info => {
       // current zeigt an, ob die Info ausgewählt ist (kann währenddessen auch pausiert sein)
@@ -147,10 +147,6 @@ export default {
     this.handleMQTTConnection();
   },
   methods: {
-    previousPage() {
-      this.$router.go(-1);
-    },
-
     setCurrent(id) {
       /**
        * setCurrent ist dazu da eine Info mit der übergebenen id auszuwählen
