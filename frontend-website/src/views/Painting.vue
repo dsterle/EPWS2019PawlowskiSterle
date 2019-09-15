@@ -55,7 +55,8 @@ export default {
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
       server: {
-        host: "hivemq.dock.moxd.io",
+        //host: "hivemq.dock.moxd.io",
+          host: "broker.hivemq.com",
         port: 8000,
         reconnectTimeout: 2000
       },
@@ -107,7 +108,7 @@ export default {
       // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
       // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
       var userid = this_component.topic;
-      this.$router.push({ path: `user/${userid}/painting/${message.payloadString}`});
+      this_component.$router.push({name: 'painting', params: {userid: userid, id: message.payloadString}})
     }
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
@@ -144,7 +145,7 @@ export default {
       });
     });
 
-    this.handleMQTTConnection();
+    //this.handleMQTTConnection();
   },
   methods: {
     setCurrent(id) {
@@ -326,8 +327,22 @@ export default {
       function onMessageArrived(message) {
         // Die Nachricht beinhaltet die ID eines Gemäldes
         // Eine URL mit der jeweiligen ID wird geöffnet
-        this.$router.push({ path: `user/${_this.topic}/painting/${message.payloadString}`});
+        //this.$router.push({ path: `user/${_this.topic}/painting/${message.payloadString}`});
+        //this_component.$router.push({name: 'painting', params: {userid: this_component.topic, id: message.payloadString}})
       }
+    }
+  },
+  beforeRouteUpdate (to, from, next) {
+    if (to.path !== from.path) {
+      let paintings = require("../data/database.js").paintings;
+      let painting = this.painting;
+      this.id = parseInt(to.params.id);
+      this.painting = paintings.find(painting => {
+        return painting.id === this.id;
+      });
+      next();
+    } else {
+      next(false);
     }
   }
 };

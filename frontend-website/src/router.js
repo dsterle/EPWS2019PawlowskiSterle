@@ -35,5 +35,6 @@ export default new Router({
         return import(/* webpackChunkName: "about" */ './views/Painting.vue')
       }
     }
-  ]
-})
+  ],
+});
+

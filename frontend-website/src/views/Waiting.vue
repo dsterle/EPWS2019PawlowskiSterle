@@ -18,7 +18,8 @@ export default {
   data() {
     return {
       server: {
-        host: "hivemq.dock.moxd.io",
+        //host: "hivemq.dock.moxd.io",
+          host: "broker.hivemq.com",
         port: 8000,
         reconnectTimeout: 10000
       },
@@ -62,7 +63,8 @@ export default {
       // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
       // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
       var userid = this_component.topic;
-      this.$router.push({ path: `user/${userid}/painting/${message.payloadString}`});
+      //this_component.$router.push({ path: `/user/${userid}/painting/${message.payloadString}`});
+        this_component.$router.push({name: 'painting', params: {userid: userid, id: message.payloadString}})
     }
   }
 };
