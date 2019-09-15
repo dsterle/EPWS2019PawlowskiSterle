@@ -76,40 +76,39 @@ export default {
     this.titleInfo.audio.play();
   },
   mounted() {
-    // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
-    var client = new Paho.MQTT.Client(
-            this.server.host,
-            this.server.port,
-            "client2"
-    );
-
-    client.onConnectionLost = onConnectionLost;
-    client.onMessageArrived = onMessageArrived;
-    client.connect({ onSuccess: onConnect });
-
     var this_component = this;
-
-    // Wird aufgerufen, wenn sich der Client verbindet
-    function onConnect() {
-      client.subscribe(this_component.topic);
-      console.log("subscricbed: " + this_component.topic);
-    }
-
-    // Wird aufgerufen, wenn die Verbindung veloren geht
-    function onConnectionLost(responseObject) {
-      if (responseObject.errorCode !== 0) {
-        console.log("onConnectionLost:" + responseObject.errorMessage);
-      }
-    }
-
-    // Wird aufgerufen, wenn die Nachricht ankommt
-    function onMessageArrived(message) {
-      console.log("message: " + message.payloadString)
-      // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
-      // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
-      var userid = this_component.topic;
-      this_component.$router.push({name: 'painting', params: {userid: userid, id: message.payloadString}})
-    }
+    // // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
+    // var client = new Paho.MQTT.Client(
+    //         this.server.host,
+    //         this.server.port,
+    //         "client2"
+    // );
+    //
+    // client.onConnectionLost = onConnectionLost;
+    // client.onMessageArrived = onMessageArrived;
+    // client.connect({ onSuccess: onConnect });
+    //
+    // // Wird aufgerufen, wenn sich der Client verbindet
+    // function onConnect() {
+    //   client.subscribe(this_component.topic);
+    //   console.log("subscricbed: " + this_component.topic);
+    // }
+    //
+    // // Wird aufgerufen, wenn die Verbindung veloren geht
+    // function onConnectionLost(responseObject) {
+    //   if (responseObject.errorCode !== 0) {
+    //     console.log("onConnectionLost:" + responseObject.errorMessage);
+    //   }
+    // }
+    //
+    // // Wird aufgerufen, wenn die Nachricht ankommt
+    // function onMessageArrived(message) {
+    //   console.log("message: " + message.payloadString)
+    //   // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
+    //   // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
+    //   var userid = this_component.topic;
+    //   this_component.$router.push({name: 'painting', params: {userid: userid, id: message.payloadString}})
+    // }
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
     var _this = this;
@@ -145,7 +144,7 @@ export default {
       });
     });
 
-    //this.handleMQTTConnection();
+    this.handleMQTTConnection();
   },
   methods: {
     setCurrent(id) {
@@ -299,7 +298,7 @@ export default {
      */
     handleMQTTConnection() {
       // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
-      var client = new Paho.MQTT.Client(
+      let client = new Paho.MQTT.Client(
         this.server.host,
         this.server.port,
         "client"
@@ -309,7 +308,7 @@ export default {
       client.onMessageArrived = onMessageArrived;
       client.connect({ onSuccess: onConnect });
 
-      var this_component = this;
+      let this_component = this;
 
       // Wird aufgerufen, wenn sich der Client verbindet
       function onConnect() {
@@ -328,7 +327,8 @@ export default {
         // Die Nachricht beinhaltet die ID eines Gemäldes
         // Eine URL mit der jeweiligen ID wird geöffnet
         //this.$router.push({ path: `user/${_this.topic}/painting/${message.payloadString}`});
-        //this_component.$router.push({name: 'painting', params: {userid: this_component.topic, id: message.payloadString}})
+        let userid = this_component.topic;
+        this_component.$router.push({name: 'painting', params: {userid: userid, id: message.payloadString}})
       }
     }
   },
