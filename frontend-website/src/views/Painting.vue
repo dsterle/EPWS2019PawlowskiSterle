@@ -55,8 +55,8 @@ export default {
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
       server: {
-        host: "hivemq.dock.moxd.io",
-        port: 8000,
+        host: "test.mosquitto.org",
+        port: 8081,
         reconnectTimeout: 2000
       },
       topic: {}
@@ -305,7 +305,7 @@ export default {
 
       client.onConnectionLost = onConnectionLost;
       client.onMessageArrived = onMessageArrived;
-      client.connect({ onSuccess: onConnect });
+      client.connect({ onSuccess: onConnect, useSSL: true });
 
       let this_component = this;
 

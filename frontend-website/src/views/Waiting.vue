@@ -18,8 +18,8 @@ export default {
   data() {
     return {
       server: {
-        host: "hivemq.dock.moxd.io",
-        port: 8000,
+        host: "test.mosquitto.org",
+        port: 8081,
         reconnectTimeout: 10000
       },
       topic: {}
@@ -39,7 +39,7 @@ export default {
 
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
-    client.connect({ onSuccess: onConnect });
+    client.connect({ onSuccess: onConnect, useSSL: true });
 
     var this_component = this;
 
