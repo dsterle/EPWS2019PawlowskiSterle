@@ -18,8 +18,7 @@ export default {
   data() {
     return {
       server: {
-        //host: "hivemq.dock.moxd.io",
-          host: "broker.hivemq.com",
+        host: "hivemq.dock.moxd.io",
         port: 8000,
         reconnectTimeout: 10000
       },

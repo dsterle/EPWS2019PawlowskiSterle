@@ -55,8 +55,7 @@ export default {
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
       server: {
-        //host: "hivemq.dock.moxd.io",
-          host: "broker.hivemq.com",
+        host: "hivemq.dock.moxd.io",
         port: 8000,
         reconnectTimeout: 2000
       },
