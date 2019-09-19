@@ -54,11 +54,6 @@ export default {
       // currentLoop beinhaltet eine setInterval-Methode, die sich um die
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
-      server: {
-        host: "test.mosquitto.org",
-        port: 8081,
-        reconnectTimeout: 2000
-      },
       topic: {}
     };
   },
