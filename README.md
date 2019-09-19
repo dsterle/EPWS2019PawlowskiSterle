@@ -3,7 +3,7 @@
 Willkommen zu unserem Projekt Cranach Erweiterte Interaktion!
 Dieses Projekt findet im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik statt.
 
-## Link zu der Web Anwendung 
+## Link zur Web Anwendung 
 
 https://dsterle.github.io/cranach_erweiterte_interaktion/
 
