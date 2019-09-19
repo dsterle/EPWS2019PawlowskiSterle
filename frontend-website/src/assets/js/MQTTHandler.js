@@ -12,8 +12,6 @@ exports.handleMQTTConnection = function (this_component, topic) {
         "client"
     );
 
-    console.log(server.host);
-
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
     client.connect({ onSuccess: onConnect, useSSL: true });
