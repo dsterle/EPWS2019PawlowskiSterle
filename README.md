@@ -9,7 +9,7 @@ https://dsterle.github.io/cranach_erweiterte_interaktion/
 
 ## Kontext
 
-Der Kontext ist der ein Besuch in einem Museum über Gemälde des Künstlers Lucas Cranach. Hierbei sollen dem Benutzer Informationen über bestimmte Gemälde zur Verfügung gestellt werden.
+Der Kontext ist der ein Besuch in einem Museum über Gemälde des Künstlers Lucas Cranach. Hierbei sollen dem Benutzer besondere Informationen über diese Gemälde zur Verfügung gestellt werden.
 
 ## Idee
 
