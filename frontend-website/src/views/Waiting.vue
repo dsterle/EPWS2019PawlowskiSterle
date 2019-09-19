@@ -19,11 +19,6 @@ export default {
   components: {},
   data() {
     return {
-      server: {
-        host: "test.mosquitto.org",
-        port: 8081,
-        reconnectTimeout: 10000
-      },
       topic: {}
     };
   },
