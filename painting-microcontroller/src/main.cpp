@@ -7,7 +7,8 @@
 #define SS_PIN    21 //slave select pin
 #define RST_PIN   22 //reset pin
 #define client_name "cranach"
-#define painting_ID "1"
+#define painting_ID "2"
+
 
 /* Pin Configuration:
 VCC   -> 3V3
@@ -23,8 +24,8 @@ IRQ   -> NC (Not Connected)
 int status = WL_IDLE_STATUS;
 // char ssid[] = "moxd-lab";
 // char pass[] = "gf3heTS11c";
-char ssid[] = "KevinGast";
-char pass[] = "GastKevin2018";
+char ssid[] = "FRITZ!Box 7490";
+char pass[] = "32213714005654579014";
 char receiveMsg[1024];
 int block = 2;  //block where the ID of the NFC Tag is written
 int nfcTagsUIDs[] = {1073479220, 432423423};
@@ -193,7 +194,7 @@ void loop() {
      connectMQTT();
   }
 
-  writeBlock(block, blockcontent); //write byte data in the block 2
+  //writeBlock(block, blockcontent); //write byte data in the block 2
   readBlock(block, nfcTopic);
   Serial.print("read content: ");
   for (int j = 0; j < 3; j++)
