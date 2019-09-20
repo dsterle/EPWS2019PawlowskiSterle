@@ -54,11 +54,6 @@ export default {
       // currentLoop beinhaltet eine setInterval-Methode, die sich um die
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
-      server: {
-        host: "test.mosquitto.org",
-        port: 8081,
-        reconnectTimeout: 2000
-      },
       topic: {}
     };
   },
@@ -76,38 +71,7 @@ export default {
   },
   mounted() {
     var this_component = this;
-    // // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
-    // var client = new Paho.MQTT.Client(
-    //         this.server.host,
-    //         this.server.port,
-    //         "client2"
-    // );
-    //
-    // client.onConnectionLost = onConnectionLost;
-    // client.onMessageArrived = onMessageArrived;
-    // client.connect({ onSuccess: onConnect });
-    //
-    // // Wird aufgerufen, wenn sich der Client verbindet
-    // function onConnect() {
-    //   client.subscribe(this_component.topic);
-    //   console.log("subscricbed: " + this_component.topic);
-    // }
-    //
-    // // Wird aufgerufen, wenn die Verbindung veloren geht
-    // function onConnectionLost(responseObject) {
-    //   if (responseObject.errorCode !== 0) {
-    //     console.log("onConnectionLost:" + responseObject.errorMessage);
-    //   }
-    // }
-    //
-    // // Wird aufgerufen, wenn die Nachricht ankommt
-    // function onMessageArrived(message) {
-    //   console.log("message: " + message.payloadString)
-    //   // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
-    //   // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
-    //   var userid = this_component.topic;
-    //   this_component.$router.push({name: 'painting', params: {userid: userid, id: message.payloadString}})
-    // }
+
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
     var _this = this;
@@ -143,7 +107,9 @@ export default {
       });
     });
 
-    this.handleMQTTConnection();
+    var MQTTHandler = require("../assets/js/MQTTHandler");
+    // MQTTHandler.handleMQTTConnection(this.server.host);
+    MQTTHandler.handleMQTTConnection(this, this.topic);
   },
   methods: {
     setCurrent(id) {
@@ -291,47 +257,9 @@ export default {
       return this.painting.infos.find(info => {
         return info.paused;
       });
-    },
-    /**
-     * handleMQTTConnection
-     */
-    handleMQTTConnection() {
-      // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
-      let client = new Paho.MQTT.Client(
-        this.server.host,
-        this.server.port,
-        "client"
-      );
-
-      client.onConnectionLost = onConnectionLost;
-      client.onMessageArrived = onMessageArrived;
-      client.connect({ onSuccess: onConnect, useSSL: true });
-
-      let this_component = this;
-
-      // Wird aufgerufen, wenn sich der Client verbindet
-      function onConnect() {
-        client.subscribe(this_component.topic);
-      }
-
-      // Wird aufgerufen, wenn die Verbindung veloren geht
-      function onConnectionLost(responseObject) {
-        if (responseObject.errorCode !== 0) {
-          console.log("onConnectionLost:" + responseObject.errorMessage);
-        }
-      }
-
-      // Wird aufgerufen, wenn die Nachricht ankommt
-      function onMessageArrived(message) {
-        // Die Nachricht beinhaltet die ID eines Gemäldes
-        // Eine URL mit der jeweiligen ID wird geöffnet
-        //this.$router.push({ path: `user/${_this.topic}/painting/${message.payloadString}`});
-        let userid = this_component.topic;
-        this_component.$router.push({name: 'painting', params: {userid: userid, id: message.payloadString}})
-      }
     }
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     if (to.path !== from.path) {
       let paintings = require("../data/database.js").paintings;
       let painting = this.painting;
