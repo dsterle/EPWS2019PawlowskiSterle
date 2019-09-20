@@ -199,7 +199,7 @@ void loop() {
   Serial.print("read content: ");
   for (int j = 0; j < 3; j++)
   {
-    Serial.write (nfcTopic[j]); //Serial.write() transmits the ASCII numbers as human readable characters to serial monitor
+    Serial.write (nfcTopic[j]); //transmits the ASCII numbers as human readable characters to serial monitor
   }
 
   Serial.print("\nuid: ");
