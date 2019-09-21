@@ -109,7 +109,7 @@ export default {
 
     var MQTTHandler = require("../assets/js/MQTTHandler");
     // MQTTHandler.handleMQTTConnection(this.server.host);
-    MQTTHandler.handleMQTTConnection(this, this.topic);
+    MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
     setCurrent(id) {
