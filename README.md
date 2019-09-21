@@ -26,7 +26,6 @@ Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In
 * ein Microcontroller mit NFC-Reader
 * ein WLAN-fähiges Gerät mit Zugang zu einem Browser (Idealerweise ein Smartphone)
 * ein NFC-Tag des Lucas Cranach Museums
-* ein MQTT-Broker (aktuell wird im Code der des moxd labs der TH Köln in Gummersbach verwendet)
 
 ## Projekt lokal aufsetzen
 
