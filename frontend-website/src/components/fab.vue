@@ -28,8 +28,6 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  right: 0;
-  bottom: 0;
   box-shadow: 0px 14px 14px rgba(0, 0, 0, 0.237602),
     0px 0px 14px rgba(0, 0, 0, 0.12);
 }

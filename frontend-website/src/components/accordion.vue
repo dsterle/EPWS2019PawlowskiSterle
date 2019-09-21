@@ -28,6 +28,7 @@
     </div>
     <slider
       audio-slider
+      class="slider"
       v-if="current"
       v-bind:value="currentValue"
       v-bind:min="0"
