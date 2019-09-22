@@ -64,6 +64,7 @@ export default {
     this.titleInfo.audio = new Howl({
       src: [this.painting.audioSrc],
       onend: function() {
+        // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
         this.setCurrent(0);
       }
     });
