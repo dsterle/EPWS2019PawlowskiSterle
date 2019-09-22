@@ -60,14 +60,41 @@ export default {
   created() {
     this.topic = this.$route.params.userid;
 
+    let audio = this;
+    let context = new AudioContext();
+
     // titleInfo ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
     this.titleInfo.audio = new Howl({
       src: [this.painting.audioSrc],
+      onloaderror: function() {
+        audio.titleInfo.audio = new Howl({
+          src: [audio.painting.audioSrc],
+          onload: function() {
+            audio.titleInfo.audio.play();
+          },
+          onend: function() {
+            // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
+            audio.setCurrent(0);
+          }
+        })
+      },
       onend: function() {
         // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
         this.setCurrent(0);
       }
     });
+    // context.resume().then(function () {
+    //   audio.titleInfo.audio = new Howl({
+    //     src: [audio.painting.audioSrc],
+    //     onload: function() {
+    //       audio.titleInfo.audio.play();
+    //     },
+    //     onend: function() {
+    //       // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
+    //       audio.setCurrent(0);
+    //     }
+    //   })
+    // });
     this.titleInfo.audio.play();
   },
   mounted() {
@@ -289,7 +316,7 @@ export default {
       this.painting = paintings.find(painting => {
         return painting.id === this.id;
       });
-      getPlayingInfo().stop();
+      //from.this.getPlayingInfo().stop();
       next();
     } else {
       next(false);
