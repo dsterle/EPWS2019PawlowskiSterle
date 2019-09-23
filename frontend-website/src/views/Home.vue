@@ -55,7 +55,7 @@ export default {
 
   .note-text {
     margin-top: $abstand-XL;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 }
 </style>

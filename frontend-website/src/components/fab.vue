@@ -28,8 +28,8 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  box-shadow: 0px 14px 14px rgba(0, 0, 0, 0.237602),
-    0px 0px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 14px 14px rgba(0, 0, 0, 0.237602),
+    0 0 14px rgba(0, 0, 0, 0.12);
 }
 
 .floating-action-button:active {

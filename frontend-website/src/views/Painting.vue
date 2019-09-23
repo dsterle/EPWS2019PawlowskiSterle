@@ -1,8 +1,8 @@
 <template>
   <div class="painting">
     <div class="app-bar-wrapper">
-      <a class="back-icon" @click="$router.push({path: `/`})">
-        <img src="../assets/icons/arrow_back.svg" />
+      <a class="back-icon" @click="$router.push({name: `/`}, () => {$router.go(0)})">
+        <img src="../assets/icons/arrow_back.svg" alt="back"/>
       </a>
     </div>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
@@ -61,7 +61,6 @@ export default {
     this.topic = this.$route.params.userid;
 
     let audio = this;
-    let context = new AudioContext();
 
     // titleInfo ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
     this.titleInfo.audio = new Howl({
@@ -87,12 +86,10 @@ export default {
     this.titleInfo.audio.play();
   },
   mounted() {
-    var this_component = this;
 
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
-    var _this = this;
-    var painting = this.painting;
+    let _this = this;
 
     // Das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
     this.id = parseInt(this.$route.params.id);
@@ -124,7 +121,7 @@ export default {
       });
     });
 
-    var MQTTHandler = require("../assets/js/MQTTHandler");
+    const MQTTHandler = require("../assets/js/MQTTHandler");
     // MQTTHandler.handleMQTTConnection(this.server.host);
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
@@ -136,7 +133,7 @@ export default {
 
       // Falls der Titel noch gesprochen wird, wird dieser gestoppt
       this.titleInfo.audio.stop();
-      var _this = this;
+      let _this = this;
 
       this.painting.infos.forEach(info => {
         if (info.id === id) {
@@ -174,11 +171,11 @@ export default {
      * Hier fängt ein Loop an, der den value des Audio-Sliders regelmäßig aktualisiert
      */
     updateSlider(info) {
-      var _this = this;
-      var playingInfo = this.getPlayingInfo();
+      let _this = this;
+      let playingInfo = this.getPlayingInfo();
 
       this.currentLoop = setInterval(() => {
-        var currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
+        let currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
         // Wenn die Audiodatei am Ende ist wird der Slider nicht bis zum rechten Rand bewegt,
         // da sonst die gesamte Seite etwas größer wird
         if (currentValue !== playingInfo.max) {
@@ -191,7 +188,7 @@ export default {
      * pause wird ausgeführt, sobald der fab geklickt wurde
      */
     pause() {
-      var playingInfo = this.getPlayingInfo();
+      let playingInfo = this.getPlayingInfo();
 
       if (playingInfo) {
         // Die aktuell spielende Info wird pausiert
@@ -249,7 +246,7 @@ export default {
      * gesamte Info-Liste aktualisiert
      */
     rerenderInfo(info) {
-      var name = info.name;
+      let name = info.name;
       info.name = "";
       info.name = name;
     },
@@ -283,7 +280,6 @@ export default {
   beforeRouteUpdate(to, from, next) {
     if (to.path !== from.path) {
       let paintings = require("../data/database.js").paintings;
-      let painting = this.painting;
       this.id = parseInt(to.params.id);
       this.painting = paintings.find(painting => {
         return painting.id === this.id;

@@ -88,6 +88,6 @@ export default {
 }
 
 .visible {
-  max-height: 0px;
+  max-height: 0;
 }
 </style>

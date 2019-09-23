@@ -57,8 +57,8 @@ export default {
   methods: {
     open() {
       // $el gives the DOM elements of this
-      var text = this.$el.querySelector("[js-accordion=text]");
-      var icon = this.$el.querySelector("[js-accordion=icon]");
+      const text = this.$el.querySelector("[js-accordion=text]");
+      const icon = this.$el.querySelector("[js-accordion=icon]");
 
       if (text.style.maxHeight) {
         //* accordion is open and should be closed
@@ -137,7 +137,7 @@ export default {
 }
 
 .invisible {
-  max-height: 0px;
+  max-height: 0;
 }
 
 .turn-icon {

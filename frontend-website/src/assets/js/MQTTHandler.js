@@ -5,7 +5,8 @@ server = {
 };
 
 exports.handleMQTTConnection = function (this_component, topic, clientName) {
-    //TODO quick&dirty Lösung, damit mehrere user sich mit der selben topic verbinden können
+    //quick&dirty Lösung, damit mehrere user sich mit der selben topic verbinden können
+    //TODO bessere Lösung finden (z.B. Verzeichnis mit clientIDs erstellen)
     clientName = clientName + topic + "_" + Math.random();
     // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
     const client = new Paho.MQTT.Client(
@@ -39,8 +40,6 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
     function onMessageArrived(message) {
         // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
         // und die empfangene Nachricht: die Gemälde ID, des Gemäldes das geöffnet werden soll
-        var userid = topic;
-        //this_component.$router.push({ path: `/user/${userid}/painting/${message.payloadString}`});
 
         if (message.payloadString === this_component.$route.params.id) {
             return;
@@ -48,11 +47,9 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
             return;
         } else  {
             console.log("message: " + message.payloadString);
-            this_component.$router.push({ name: 'painting', params: { userid: userid, id: message.payloadString } },
+            this_component.$router.push({ name: 'painting', params: { userid: topic, id: message.payloadString } },
                 () => {this_component.$router.go(0)});
-            //window.open("http://localhost:8080/user/100/painting/" + message.payloadString, "_self");
         }
-
         currentPainting = message.payloadString;
     }
 };
