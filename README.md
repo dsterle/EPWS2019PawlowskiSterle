@@ -33,7 +33,7 @@ Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In
 2. Ins Verzeichnis "frontend-website" gehen
 3. Command "npm install" ausführen
 4. Command "npm run serve" ausführen
-5. Code im Verzeichnis "painting-microcontroller" auf den Microcontroller laden (gegebenenfalls vorher "ssID" und "pass" anpassen, um sich mit dem WLAN verbinden zu können)
+5. Code im Verzeichnis "painting-microcontroller" auf den Microcontroller laden (gegebenenfalls vorher die Variablen "ssID" und "pass" im Code anpassen, um sich mit dem WLAN verbinden zu können)
 6. Microcontroller starten
 
 Nun kann die Website geöffnet werden. Geben Sie anschließend die Nummer auf der Rückseite des NFC-Tags ein (Zu Testzwecken nehmen Sie unseren konfigurierten NFC-Tag und geben Sie "100" ein) und drücken auf "Ok". Nun halten Sie Ihr NFC-Tag an den NFC-Reader und erfahren Sie mehr über die Gemälde von Lucas Cranach... 
