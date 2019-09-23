@@ -5,6 +5,8 @@ server = {
 };
 
 exports.handleMQTTConnection = function (this_component, topic, clientName) {
+    //TODO quick&dirty Lösung, damit mehrere user sich mit der selben topic verbinden können
+    clientName = clientName + topic + "_" + Math.random();
     // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
     const client = new Paho.MQTT.Client(
         server.host,

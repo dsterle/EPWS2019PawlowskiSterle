@@ -70,6 +70,7 @@ export default {
         audio.titleInfo.audio = new Howl({
           src: [audio.painting.audioSrc],
           onload: function() {
+            audio.titleInfo.audio.stop();
             audio.titleInfo.audio.play();
           },
           onend: function() {
