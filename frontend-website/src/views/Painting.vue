@@ -76,25 +76,13 @@ export default {
             // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
             audio.setCurrent(0);
           }
-        })
+        });
       },
       onend: function() {
         // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
         this.setCurrent(0);
       }
     });
-    // context.resume().then(function () {
-    //   audio.titleInfo.audio = new Howl({
-    //     src: [audio.painting.audioSrc],
-    //     onload: function() {
-    //       audio.titleInfo.audio.play();
-    //     },
-    //     onend: function() {
-    //       // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
-    //       audio.setCurrent(0);
-    //     }
-    //   })
-    // });
     this.titleInfo.audio.play();
   },
   mounted() {
@@ -135,7 +123,7 @@ export default {
       });
     });
 
-    this.setPositionOfFab();
+    // this.setPositionOfFab();
     var MQTTHandler = require("../assets/js/MQTTHandler");
     // MQTTHandler.handleMQTTConnection(this.server.host);
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
@@ -210,8 +198,13 @@ export default {
       var playingInfo = this.getPlayingInfo();
 
       this.currentLoop = setInterval(() => {
-        info.currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
-        _this.rerenderInfo(info);
+        var currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
+        // Wenn die Audiodatei am Ende ist wird der Slider nicht bis zum rechten Rand bewegt,
+        // da sonst die gesamte Seite etwas größer wird
+        if (currentValue !== playingInfo.max) {
+          info.currentValue = currentValue;
+          _this.rerenderInfo(info);
+        }
       }, 100);
     },
     /**
@@ -276,7 +269,6 @@ export default {
      * gesamte Info-Liste aktualisiert
      */
     rerenderInfo(info) {
-      // TODO hopefully there is a better way to do the key-render technique
       var name = info.name;
       info.name = "";
       info.name = name;
@@ -344,7 +336,9 @@ export default {
 
   .fab {
     position: fixed;
-    // margin: 0 $abstand-M $abstand-M 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 $abstand-M $abstand-M 0;
   }
 
   img {
