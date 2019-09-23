@@ -123,32 +123,11 @@ export default {
       });
     });
 
-    // this.setPositionOfFab();
     var MQTTHandler = require("../assets/js/MQTTHandler");
     // MQTTHandler.handleMQTTConnection(this.server.host);
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
-    /**
-     * Problem: Wenn der fab zur rechten und unteren Seite ein margin hat, schiebt er
-     * sich im Laufe des Abspielens der Audiodatei hin und her
-     * (manchmal wird der Screen größer)
-     * Deswegen werden in dieser Methode die Maße des Screens ermittelt und dem fab ein
-     * linkes und rechtes margin gegeben
-     * Am Ende soll der fab in der unteren rechten Ecke des Screens zu finden sein
-     */
-    setPositionOfFab() {
-      var fab = this.$el.querySelector("[js-fab]");
-
-      var fabSize = 56;
-      var margin = 16;
-
-      const marginLeft = screen.width - fabSize - margin;
-      const marginTop = screen.height - fabSize - margin;
-
-      fab.style.marginLeft = marginLeft + "px";
-      fab.style.marginTop = marginTop + "px";
-    },
     setCurrent(id) {
       /**
        * setCurrent ist dazu da eine Info mit der übergebenen id auszuwählen
