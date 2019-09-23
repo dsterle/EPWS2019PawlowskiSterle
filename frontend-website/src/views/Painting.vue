@@ -316,7 +316,6 @@ export default {
       this.painting = paintings.find(painting => {
         return painting.id === this.id;
       });
-      //from.this.getPlayingInfo().stop();
       next();
     } else {
       next(false);

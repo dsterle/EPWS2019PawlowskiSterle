@@ -14,7 +14,9 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
 
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
-    client.connect({ onSuccess: onConnect, useSSL: true });
+    client.connect({ onSuccess: onConnect, useSSL: true});
+
+
 
     let currentPainting;
 
@@ -29,8 +31,8 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
         if (responseObject.errorCode !== 0) {
             console.log("onConnectionLost:" + responseObject.errorMessage);
         }
+        client.connect({useSSL: true});
     }
-
     // Wird aufgerufen, wenn die Nachricht ankommt
     function onMessageArrived(message) {
         // Die Nachricht beinhaltet die userid, mit der sich der Nutzer angemeldet hat
@@ -41,10 +43,12 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
         if (message.payloadString === this_component.$route.params.id) {
             return;
         } else if (message.payloadString === currentPainting) {
-            return
+            return;
         } else  {
             console.log("message: " + message.payloadString);
-            this_component.$router.push({ name: 'painting', params: { userid: userid, id: message.payloadString } })
+            this_component.$router.push({ name: 'painting', params: { userid: userid, id: message.payloadString } },
+                () => {this_component.$router.go(0)});
+            //window.open("http://localhost:8080/user/100/painting/" + message.payloadString, "_self");
         }
 
         currentPainting = message.payloadString;
