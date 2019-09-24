@@ -284,6 +284,7 @@ export default {
       this.painting = paintings.find(painting => {
         return painting.id === this.id;
       });
+      this.$router.go(0);
       next();
     } else {
       next(false);
