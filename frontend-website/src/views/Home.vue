@@ -57,5 +57,9 @@ export default {
     margin-top: $abstand-XL;
     margin-bottom: 0;
   }
+
+  ol {
+    list-style-type: "decimal";
+  };
 }
 </style>

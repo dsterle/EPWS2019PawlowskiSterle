@@ -34,6 +34,13 @@ export default new Router({
       component: function () {
         return import(/* webpackChunkName: "about" */ './views/Painting.vue')
       }
+    },
+    {
+      path: '/docs',
+      name: 'documentation',
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Docs.vue')
+      }
     }
   ],
 });
