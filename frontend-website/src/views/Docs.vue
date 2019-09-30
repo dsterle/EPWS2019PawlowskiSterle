@@ -434,25 +434,6 @@ export default {
       navItems: [],
       jumpItems: []
     };
-  },
-  mounted() {
-    // console.log(this.$el.querySelectorAll(".navlist-item"));
-    this.navItems = this.$el.querySelectorAll(".navlist-item");
-    this.jumpItems = this.$el.querySelectorAll(".jump-item");
-    // console.log(this.jumpItems);
-    // console.log(this.$el.querySelector("#kontext").getBoundingClientRect().top);
-
-    window.addEventListener("scroll", () => {
-      let currentPos = parseInt(window.pageYOffset);
-
-      // this.jumpItems.forEach(jumpItem => {
-      //   console.log("currentPosition: " + currentPos);
-      //   console.log(jumpItem.get);
-      //   if (currentPos >= jumpItem.getBoundingClientRect().top) {
-      //     console.log(jumpItem.innerHTML);
-      //   }
-      // });
-    });
   }
 };
 </script>
