@@ -3,52 +3,52 @@
     <nav class="navlist">
       <p class="inhaltsverzeichnis-headline normal-text">Inhaltsverzeichnis</p>
       <ul>
-        <li>
+        <li class="navlist-item">
           <a href="#kontext">Kontext</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#idee">Idee</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#szenario">Szenario</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#vorraussetzungen">Vorraussetzungen</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#projektlokalaufsetzen">Projekt lokal aufsetzen</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#konzept">Konzept</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#userjourney">User Journey</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#behindthescenes">Behind the scenes</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#urluebersicht">URL-Übersicht</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#zeitplan">Zeitplan</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#entscheidungslogbuch">Entscheidungslogbuch</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#browserkompatibilitaet">Browserkompatibilität</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#offenepunkte">Offene Punkte</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#fazit">Fazit</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#problemebeiderentwicklung">Probleme bei der Entwicklung</a>
         </li>
-        <li>
+        <li class="navlist-item">
           <a href="#projektarbeit">Projektarbeit</a>
         </li>
       </ul>
@@ -58,25 +58,28 @@
       <p
         class="hint-text"
       >Willkommen zu unserem Projekt Cranach Erweiterte Interaktion! Dieses Projekt findet im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik statt.</p>
-      <h2 id="kontext" class="title-text">Kontext</h2>
+      <h2 id="kontext" class="title-text jump-item">Kontext</h2>
       <p
         class="hint-text"
       >Der Kontext ist der ein Besuch in einem Museum über Gemälde des Künstlers Lucas Cranach. Hierbei sollen dem Benutzer besondere Informationen über diese Gemälde zur Verfügung gestellt werden.</p>
-      <h2 id="idee" class="title-text">Idee</h2>
+      <h2 id="#idee" class="title-text jump-item">Idee</h2>
       <p
         class="hint-text"
       >Nach etlichen Ideen über die Richtungen, in die unser System gehen kann (Sie finden unsere Entscheidungen unter dem Reiter Wiki im Kapitel Entscheidungslogbuch) haben wir nun eine Anwendung erstellt, die es dem Benutzer erleichtern soll, Informationen über das Gemälde, vor welchem er sich befindet, zu erhalten. Besonders wichtig war uns dabei der Gedanke, dass der Benutzer nicht extra eine native App auf seinem Smartphone installieren muss, da das mit einem zu großen Aufwand verbunden ist. Des Weiteren war ein wichtiger Punkt für uns, dass die Gemälde im Museum eine größere Gewichtung haben als das Handy des Benutzers, denn in einem Museum möchte man nicht mit seinem Smartphone beschäftigt sein, sondern man möchte sich auf die Bilder konzentrieren. Unsere Anwendung ist so konzipiert, dass man die Informationen über bestimmte Gemälde über seine Kopfhörer anhören kann und sein Handy dabei in der Hosentasche lassen kann. Natürlich kann man die Informationen aber auch visuell einsehen. Damit Sie sich ein besseres Bild davon machen können, folgt nun ein Szenario:</p>
-      <h2 id="szenario" class="title-text">Szenario</h2>
+      <h2 id="szenario" class="title-text jump-item">Szenario</h2>
       <p
         class="hint-text"
       >Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In dem Museum angekommen, bekommt er an der Rezeption den WLAN-Schlüssel und verbindet sich mit diesem. Nun öffnet er die Website des Lucas Cranach Museums. Außerdem bekommt er noch ein kleines Gerät ausgehändigt, einen NFC-Tag, welchen er lediglich vor ein Gemälde halten muss um Informationen zu diesem auf sein Handy zu bekommen. Auf dem NFC-Tag befindet sich eine Nummer, die Simon auf der Website des Museums eingibt. Nun verbindet er sein Smartphon mit seinen neuen Kopfhörern und steckt es in seine Hosentasche. Sobald Simon nun ein interessantes Gemälde sieht, über das er mehr erfahren möchte, hält er lediglich den NFC-Tag an das, vor dem Gemälde stehende, Lesegerät und über seine Kopfhörern beginnt eine Stimme über das Gemälde zu reden.</p>
-      <h2 id="vorraussetzungen" class="title-text">Voraussetzungen, um das Projekt lokal aufzusetzen</h2>
+      <h2
+        id="vorraussetzungen"
+        class="title-text jump-item"
+      >Voraussetzungen, um das Projekt lokal aufzusetzen</h2>
       <ul class="listWithoutTable">
         <li>ein Microcontroller mit NFC-Reader</li>
         <li>ein WLAN-fähiges Gerät mit Zugang zu einem Browser (Idealerweise ein Smartphone)</li>
         <li>ein NFC-Tag des Lucas Cranach Museums</li>
       </ul>
-      <h2 id="projektlokalaufsetzen" class="title-text">Projekt lokal aufsetzen</h2>
+      <h2 id="projektlokalaufsetzen" class="title-text jump-item">Projekt lokal aufsetzen</h2>
       <ol class="listWithoutTable">
         <li>Repository klonen</li>
         <li>Ins Verzeichnis "frontend-website" gehen</li>
@@ -89,17 +92,17 @@
       <p
         class="hint-text"
       >Nun kann die Website geöffnet werden. Geben Sie anschließend die Nummer auf der Rückseite des NFC-Tags ein (Zu Testzwecken nehmen Sie unseren konfigurierten NFC-Tag und geben Sie "100" ein) und drücken auf "Ok". Nun halten Sie Ihr NFC-Tag an den NFC-Reader und erfahren Sie mehr über die Gemälde von Lucas Cranach...</p>
-      <h2 id="konzept" class="headline">Konzept</h2>
+      <h2 id="konzept" class="headline jump-item">Konzept</h2>
       <img src="../../../_material/konzept.png" alt="konzept" />
-      <h2 id="userjourney" class="title-text">User Journey</h2>
+      <h2 id="userjourney" class="title-text jump-item">User Journey</h2>
       <p
         class="hint-text"
       >Als allererstes bekommt der Benutzer das Passwort für das WLAN-Netzwerk des Museums und kann sich mit diesem verbinden. Als nächstes wird dem Benutzer ein NFC-Tag ausgehändigt. Auf diesem NFC-Tag befindet sich eine Nummer. Anschließend öffnet er auf seinem Smartphone die Website des Museums und kann diese Nummer im Frontend eingeben. Bei seinem Museumsbesuch kann der Nutzer nun zu einem beliebigen Gemälde gehen. Vor jedem Gemälde ist ein Microcontroller mit einem NFC-Lesegerät angebracht. Damit sich die URL mit spezifischen Informationen zu einem Gemälde öffnet, muss der Nutzer lediglich zu eben diesem gehen und kann seinen NFC-Tag vor den Microcontroller halten.</p>
-      <h2 id="behindthescenes" class="title-text">Behind the scenes</h2>
+      <h2 id="behindthescenes" class="title-text jump-item">Behind the scenes</h2>
       <p
         class="hint-text"
       >Jeder NFC-Tag ist mit einer user_ID ausgestattet und jedes Gemälde mit einer painting_ID. Die Nummer, die der Nutzer am Anfang auf der Home-Seite eingibt und bestätigt, ist die user_ID. Sobald ein Nutzer seinen NFC-Tag vor einen Microcontroller hält, liest das jeweilige NFC-Lesegerät die user_ID aus und published eine Nachricht mit dem topic user_ID und dem Inhalt painting_ID. Die Website, die auf dem Smartphone des Nutzers offen ist subscribed das topic user_ID Nun weiß die Website welche URL sie öffnen muss:</p>
-      <h2 id="urluebersicht" class="title-text">URL Übersicht</h2>
+      <h2 id="urluebersicht" class="title-text jump-item">URL Übersicht</h2>
       <table>
         <tr>
           <th class="url-column">URL</th>
@@ -127,7 +130,7 @@
           <td>https://dsterle.github.io/cranach_erweiterte_interaktion/#/docs</td>
         </tr>
       </table>
-      <h2 id="zeitplan" class="title-text">Zeitplan</h2>
+      <h2 id="zeitplan" class="title-text jump-item">Zeitplan</h2>
       <table>
         <tr>
           <th>Thema</th>
@@ -302,7 +305,7 @@
       <p
         class="hint-text"
       >Die angegebenen Tage Zeitaufwand sind eine Schätzung und dienen lediglich zur Übersicht.</p>
-      <h2 id="entscheidungslogbuch" class="headline">Entscheidungslogbuch</h2>
+      <h2 id="entscheidungslogbuch" class="headline jump-item">Entscheidungslogbuch</h2>
       <h2 class="entscheidungs-headline removeBorder">QR</h2>
       <p
         class="hint-text"
@@ -356,7 +359,7 @@
       <p
         class="sub-text"
       >Wir haben uns innerhalb des Kurses "Frontend-Development 1" mit einem Javascript Framework names howler.js beschäftigt, mit welchem man Audiodateien abspielen und manipulieren kann. Wir benutzen dies ebenfalls in unserem Projekt um die Audios über die Gemäldeinformationen abspielen zu können.</p>
-      <h2 id="browserkompatibilitaet" class="headline">Browserkompatibilität</h2>
+      <h2 id="browserkompatibilitaet" class="headline jump-item">Browserkompatibilität</h2>
       <table>
         <tr>
           <th>Browser</th>
@@ -390,7 +393,7 @@
           href="https://dsterle.github.io/cranach_erweiterte_interaktion/"
         >https://dsterle.github.io/cranach_erweiterte_interaktion/</a>
       </p>
-      <h2 id="offenepunkte" class="headline">Offene Punkte</h2>
+      <h2 id="offenepunkte" class="headline jump-item">Offene Punkte</h2>
       <p
         class="hint-text"
       >Die folgenden Punkte haben wir aus Zeit- oder anderweitigen Gründen nicht mehr in das Projekt integrieren können:</p>
@@ -402,17 +405,17 @@
         <li>Kompatibilität für alle Browser</li>
         <li>In unserer URL steht im Moment noch ein #, da unsere Vue Anwendung alles in die index.html hineinrendert. Der nächste Schritt wäre mithilfe von Nuxt.js mehrere html Seiten rendern zu können</li>
       </ul>
-      <h2 id="fazit" class="headline">Fazit</h2>
+      <h2 id="fazit" class="headline jump-item">Fazit</h2>
       <p class="hint-text">
         Zum Ende hin stellt sich die Frage, ob wir unser anfänglich gestelltes Ziel erreicht haben. Die Antwort lautet: Ja! Unser Ziel war es ein System zu entwickeln, welches den Museumsbesuchern die Möglichkeit gibt, die Gemälde des Museums zu betrachten und sich zusätzliche Informationen anzueignen ohne dafür jedes Mal auf das Handy schauen zu müssen. Die Besucher müssen dafür lediglich ihren Transponder vor ein Gemälde (NFC-Reader) halten, die an das Smartphone angeschlossenen Kopfhörer einsetzen und das Handy kann in der Tasche bleiben.
         Zwar haben wir ursprünglich verschiedene Ansätze probiert (wie Sie im Entscheidungs-logbuch und im Zeitplan sehen können), sind jedoch der Ansicht die bestmögliche Umsetzung für diesen Use Case gefunden zu haben.
       </p>
-      <h2 id="problemebeiderentwicklung" class="title-text">Probleme bei der Entwicklung</h2>
+      <h2 id="problemebeiderentwicklung" class="title-text jump-item">Probleme bei der Entwicklung</h2>
       <p class="hint-text">
         Eine große Herausforderung war die Aneignung von Vuejs. Da wir dieses Thema lediglich einmal in der Vorlesung behandelt haben, hat uns dieser Teil viel Zeit gekostet. Jedoch konnten wir dadurch unsere Kompetenzen in der Selbstaneignung von Wissen enorm verbessern.
         Abgesehen davon, hatten wir Probleme bei der Einbindung des Microcontrollers in unser System, da dieses Themenfeld groß ist und wir uns auch hier viele Dinge selbst aneignen mussten. Außerdem haben wir viel Zeit verloren, da wir erst nach einiger Zeit feststellen mussten, dass unser NFC-Reader defekt war.
       </p>
-      <h2 id="projektarbeit" class="title-text">Projektarbeit</h2>
+      <h2 id="projektarbeit" class="title-text jump-item">Projektarbeit</h2>
       <p
         class="hint-text"
       >Durch den intensiven Einsatz von Github in den vergangenen Monaten, konnten wir hervorragend kol­la­bo­ra­tiv arbeiten, ohne uns dafür extra verabreden zu müssen. Wir haben neue Möglichkeiten kennengelernt, die Github bereitstellt und uns bei der gemeinsamen Entwicklung enorm geholfen haben.</p>
@@ -425,7 +428,32 @@
 
 <script>
 export default {
-  name: "Docs"
+  name: "Docs",
+  data() {
+    return {
+      navItems: [],
+      jumpItems: []
+    };
+  },
+  mounted() {
+    // console.log(this.$el.querySelectorAll(".navlist-item"));
+    this.navItems = this.$el.querySelectorAll(".navlist-item");
+    this.jumpItems = this.$el.querySelectorAll(".jump-item");
+    // console.log(this.jumpItems);
+    // console.log(this.$el.querySelector("#kontext").getBoundingClientRect().top);
+
+    window.addEventListener("scroll", () => {
+      let currentPos = parseInt(window.pageYOffset);
+
+      // this.jumpItems.forEach(jumpItem => {
+      //   console.log("currentPosition: " + currentPos);
+      //   console.log(jumpItem.get);
+      //   if (currentPos >= jumpItem.getBoundingClientRect().top) {
+      //     console.log(jumpItem.innerHTML);
+      //   }
+      // });
+    });
+  }
 };
 </script>
 
@@ -453,14 +481,18 @@ export default {
     }
 
     .inhaltsverzeichnis-headline {
-      padding-top: $abstand-XL;
+      padding-top: $abstand-L;
       padding-bottom: $abstand-L;
       font-size: 20px;
     }
 
     li {
-      padding-bottom: 12px;
+      padding-top: 16px;
       font-weight: $weight-regular;
+    }
+
+    .currentListItem {
+      color: $accent;
     }
   }
 
