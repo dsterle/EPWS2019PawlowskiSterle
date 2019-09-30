@@ -52,6 +52,9 @@
           <a href="#projektarbeit">Projektarbeit</a>
         </li>
       </ul>
+      <p class="footnote">
+        Autoren: Dennis Sterle und Hendrik Gregor Pawlowski
+      </p>
     </nav>
     <div class="content">
       <h1 class="first-headline removeBorder">Cranach erweiterte Interaktion</h1>
@@ -62,7 +65,7 @@
       <p
         class="hint-text"
       >Der Kontext ist der ein Besuch in einem Museum über Gemälde des Künstlers Lucas Cranach. Hierbei sollen dem Benutzer besondere Informationen über diese Gemälde zur Verfügung gestellt werden.</p>
-      <h2 id="#idee" class="title-text jump-item">Idee</h2>
+      <h2 id="idee" class="title-text jump-item">Idee</h2>
       <p
         class="hint-text"
       >Nach etlichen Ideen über die Richtungen, in die unser System gehen kann (Sie finden unsere Entscheidungen unter dem Reiter Wiki im Kapitel Entscheidungslogbuch) haben wir nun eine Anwendung erstellt, die es dem Benutzer erleichtern soll, Informationen über das Gemälde, vor welchem er sich befindet, zu erhalten. Besonders wichtig war uns dabei der Gedanke, dass der Benutzer nicht extra eine native App auf seinem Smartphone installieren muss, da das mit einem zu großen Aufwand verbunden ist. Des Weiteren war ein wichtiger Punkt für uns, dass die Gemälde im Museum eine größere Gewichtung haben als das Handy des Benutzers, denn in einem Museum möchte man nicht mit seinem Smartphone beschäftigt sein, sondern man möchte sich auf die Bilder konzentrieren. Unsere Anwendung ist so konzipiert, dass man die Informationen über bestimmte Gemälde über seine Kopfhörer anhören kann und sein Handy dabei in der Hosentasche lassen kann. Natürlich kann man die Informationen aber auch visuell einsehen. Damit Sie sich ein besseres Bild davon machen können, folgt nun ein Szenario:</p>
@@ -254,6 +257,7 @@
             </ul>
           </td>
           <td>8 Tage</td>
+          <td></td>
         </tr>
         <tr>
           <td>
@@ -300,6 +304,7 @@
             </ul>
           </td>
           <td>3 Tage</td>
+          <td></td>
         </tr>
       </table>
       <p
@@ -462,7 +467,7 @@ export default {
     }
 
     .inhaltsverzeichnis-headline {
-      padding-top: $abstand-L;
+      padding-top: $abstand-M;
       padding-bottom: $abstand-L;
       font-size: 20px;
     }
@@ -474,6 +479,13 @@ export default {
 
     .currentListItem {
       color: $accent;
+    }
+
+    .footnote {
+      font-size: $font-size-XS;
+      font-style: italic;
+      position: fixed;
+      bottom: 5px;
     }
   }
 

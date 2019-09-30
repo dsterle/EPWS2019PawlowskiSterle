@@ -11,6 +11,7 @@
       v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
     ></inputField>
+    <input type="button" class="docs-button" value="Docs" @click="$router.push({ name: 'documentation'})">
   </div>
 </template>
 
@@ -61,5 +62,15 @@ export default {
   ol {
     list-style-type: "decimal";
   };
+
+  .docs-button {
+    color: $accent;
+    font-size: $font-size-S;
+    background: none;
+    border: none;
+    position: absolute;
+    bottom: 45px;
+    padding: 0;
+  }
 }
 </style>
