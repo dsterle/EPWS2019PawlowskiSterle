@@ -7,6 +7,8 @@ Wir haben uns dazu entschieden unser bestehendes Projekt aus dem Modul „Web-De
 Unsere neue Zielsetzung ist eine formative Evaluierung, durch die der bereits bestehende Prototyp analysiert, mithilfe von Testpersonen eventuelle Schwächen verbessert und neue Innovationen entwickelt werden sollen. Des Weiteren soll das System mit einem Backend ausgestattet werden, sodass die Audiodateien nicht auf der Frontend Seite gespeichert, sondern von einer weiteren Instanz zur Verfügung gestellt werden. Zudem wird die Anwendung mithilfe des Frameworks NuxtJS erneuert, um die Weiterentwicklung des Systems zu erleichtern und dieses performanter zu machen.
 
 ---
+## Unsere Anwendung
+---
 
 Willkommen zu unserem Projekt Cranach Erweiterte Interaktion!
 Dieses Projekt findet im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik statt.
