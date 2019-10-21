@@ -4,7 +4,7 @@ Wir haben uns dazu entschieden unser bestehendes Projekt aus dem Modul „Web-De
 
 ## Zielsetzung
 
-Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen soweit wie möglich marktreif zu machen. Hierfür sollen notwendige Features, die diese Marktreife erst ermöglichen, identifiziert und implementiert werden. Des Weiteren sollen bis jetzt nicht berücksichtigte Perspektiven (die Sicht Museumsleiters, ...) miteinbezogen werden.
+Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen soweit wie möglich marktreif zu machen. Hierfür sollen notwendige Features, die diese Marktreife erst ermöglichen, identifiziert und implementiert werden. Des Weiteren sollen bis jetzt nicht berücksichtigte Perspektiven (die Sicht Museumsleiters, ...) miteinbezogen werden. Die Annäherung an die Marktreife soll durch eine Evaluation unterstützt werden.
 
 ---
 # inGuide: Unsere Anwendung
