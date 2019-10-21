@@ -8,7 +8,6 @@ Unsere neue Zielsetzung ist eine formative Evaluierung, durch die der bereits be
 
 ---
 # inGuide: Unsere Anwendung
----
 
 Willkommen zu unserem Projekt inGuide!
 Dieses Projekt fand seinen Ursprung im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik. Aktuell wird es mit der obenen genannten Problemstellung und Zielsetzung in dem Kurs "Entwicklungsprojekt" weiter entwickelt.
