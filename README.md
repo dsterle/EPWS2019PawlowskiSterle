@@ -4,7 +4,7 @@ Wir haben uns dazu entschieden unser bestehendes Projekt aus dem Modul „Web-De
 
 ## Zielsetzung
 
-Unsere neue Zielsetzung ist eine formative Evaluierung, durch die der bereits bestehende Prototyp analysiert, mithilfe von Testpersonen eventuelle Schwächen verbessert und neue Innovationen entwickelt werden sollen. Des Weiteren soll das System mit einem Backend ausgestattet werden, sodass die Audiodateien nicht auf der Frontend Seite gespeichert, sondern von einer weiteren Instanz zur Verfügung gestellt werden. Zudem wird die Anwendung mithilfe des Frameworks NuxtJS erneuert, um die Weiterentwicklung des Systems zu erleichtern und dieses performanter zu machen.
+Unsere neue Zielsetzung ist eine formative Evaluierung, durch die der bereits bestehende Prototyp analysiert werden soll. Mthilfe von Testpersonen sollen eventuelle Schwächen verbessert und neue Innovationen entwickelt werden. Des Weiteren soll das System mit einem Backend ausgestattet werden, sodass Informationen über Gemälde nicht auf der Frontend Seite gespeichert, sondern von einer weiteren Instanz zur Verfügung gestellt werden. Zudem wird die Anwendung mithilfe des Frameworks NuxtJS erneuert, um die Weiterentwicklung des Systems zu erleichtern und dieses performanter zu machen.
 
 ---
 # inGuide: Unsere Anwendung
