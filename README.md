@@ -1,6 +1,6 @@
 ## Problemraum
 
-Wir haben uns dazu entschieden unser bestehendes Projekt aus dem Modul „Web-Development“ des vorherigen Semesters weiterzuentwickeln. Der Problemraum ist ein Museumsbesuch, bei welchem dem Nutzer Informationen über die Gemälde bereitgestellt werden, vor denen er sich gerade befindet, ohne dass dieser die ganze Zeit auf sein Handy schauen muss.
+Dieses Projekt ist eine Weiterentwicklung des Systems aus dem Modul „Web-Development“. Der Problemraum ist ein Museumsbesuch, bei welchem dem Nutzer Informationen über die Gemälde bereitgestellt werden, vor denen er sich gerade befindet, ohne dass dieser die ganze Zeit auf sein Handy schauen muss.
 
 ## Zielsetzung
 
