@@ -33,8 +33,8 @@ Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In
 ## Voraussetzungen, um das Projekt lokal aufzusetzen
 
 * ein Microcontroller mit NFC-Reader
+* ein NFC-Tag
 * ein WLAN-fähiges Gerät mit Zugang zu einem Browser (Idealerweise ein Smartphone)
-* ein NFC-Tag des Lucas Cranach Museums
 
 ## Projekt lokal aufsetzen
 
@@ -45,5 +45,5 @@ Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In
 5. Code im Verzeichnis "painting-microcontroller" auf den Microcontroller laden (gegebenenfalls vorher die Variablen "ssID" und "pass" im Code anpassen, um sich mit dem WLAN verbinden zu können)
 6. Microcontroller starten
 
-Nun kann die Website geöffnet werden. Geben Sie anschließend die Nummer auf der Rückseite des NFC-Tags ein (Zu Testzwecken nehmen Sie unseren konfigurierten NFC-Tag und geben Sie "100" ein) und drücken auf "Ok". Nun halten Sie Ihr NFC-Tag an den NFC-Reader und erfahren Sie mehr über die Gemälde von Lucas Cranach... 
+Nun kann die Website geöffnet werden. Geben Sie anschließend die Nummer auf der Rückseite des NFC-Tags ein (Zu Testzwecken nehmen Sie unseren konfigurierten NFC-Tag und geben Sie "100" ein) und drücken auf "Ok". Nun halten Sie Ihr NFC-Tag an den NFC-Reader und erfahren Sie mehr über das jeweilige Gemälde... 
 
