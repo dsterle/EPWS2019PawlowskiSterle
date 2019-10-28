@@ -2,7 +2,7 @@
   <div class="waiting">
     <div class="app-bar-wrapper">
       <a class="back-icon" @click="$router.go(-1)">
-        <img src="../assets/icons/arrow_back.svg" alt="back"/>
+        <img src="../assets/icons/arrow_back.svg" alt="back" />
       </a>
     </div>
     <div class="content-wrapper">
@@ -29,6 +29,20 @@ export default {
   mounted() {
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "waitingClient");
+
+    /// TEST ///
+    /*
+    this.$router.push(
+      {
+        name: "painting",
+        params: { userid: 100, id: 2 }
+      },
+      () => {
+        this_component.$router.go(0);
+      }
+    );
+    */
+    /// TEST ///
   }
 };
 </script>
