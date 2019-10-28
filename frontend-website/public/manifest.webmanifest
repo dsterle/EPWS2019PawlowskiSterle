@@ -4,7 +4,7 @@
     "start_url": ".",
     "display": "standalone",
     "background_color": "#1F1F1F",
-    "description": "blablabla",
+    "description": "inGuide is an interactive Tour Guide which offers informations about paintings or artworks with NFC-technology",
     "icons": [
         {
             "src": "./thumbnail/testicon.png",
