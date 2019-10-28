@@ -1,0 +1,15 @@
+{
+    "name": "inGuide",
+    "short_name": "Guide",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000",
+    "description": "blablabla",
+    "icons": [
+        {
+            "src": "../src/assets/icons/thumbnail/testicon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
