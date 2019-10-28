@@ -1,6 +1,6 @@
 {
-    "name": "inGuide",
-    "short_name": "Guide",
+    "name": "interactive Guide",
+    "short_name": "inGuide",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#000",
