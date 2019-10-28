@@ -3,7 +3,7 @@
     "short_name": "inGuide",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#000",
+    "background_color": "#1F1F1F",
     "description": "blablabla",
     "icons": [
         {
