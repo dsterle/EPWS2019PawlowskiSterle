@@ -17,7 +17,7 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
 
     client.onConnectionLost = onConnectionLost;
     client.onMessageArrived = onMessageArrived;
-    client.connect({ onSuccess: onConnect, useSSL: true});
+    client.connect({ onSuccess: onConnect, useSSL: true });
 
 
 
@@ -34,7 +34,7 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
         if (responseObject.errorCode !== 0) {
             console.log("onConnectionLost:" + responseObject.errorMessage);
         }
-        client.connect({useSSL: true});
+        client.connect({ useSSL: true });
     }
     // Wird aufgerufen, wenn die Nachricht ankommt
     function onMessageArrived(message) {
@@ -45,10 +45,10 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
             return;
         } else if (message.payloadString === currentPainting) {
             return;
-        } else  {
+        } else {
             console.log("message: " + message.payloadString);
             this_component.$router.push({ name: 'painting', params: { userid: topic, id: message.payloadString } },
-                () => {this_component.$router.go(0)});
+                () => { this_component.$router.go(0) });
         }
         currentPainting = message.payloadString;
     }
