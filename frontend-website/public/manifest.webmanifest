@@ -7,7 +7,7 @@
     "description": "blablabla",
     "icons": [
         {
-            "src": "../src/assets/icons/thumbnail/testicon.png",
+            "src": "./thumbnail/testicon.png",
             "sizes": "512x512",
             "type": "image/png"
         }
