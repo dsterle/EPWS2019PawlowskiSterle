@@ -1,7 +1,16 @@
-# Cranach erweiterte Interaktion
+## Problemraum
 
-Willkommen zu unserem Projekt Cranach Erweiterte Interaktion!
-Dieses Projekt findet im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik statt.
+Dieses Projekt ist eine Weiterentwicklung des Systems aus dem Modul „Web-Development“. Der Problemraum ist ein Museumsbesuch, bei welchem dem Nutzer Informationen über die Gemälde bereitgestellt werden, vor denen er sich gerade befindet, ohne dass dieser die ganze Zeit auf sein Handy schauen muss.
+
+## Zielsetzung
+
+Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen soweit wie möglich marktreif zu machen. Hierfür sollen notwendige Features, die diese Marktreife erst ermöglichen, identifiziert und implementiert werden. Des Weiteren sollen bis jetzt nicht berücksichtigte Perspektiven (die Sicht Museumsleiters, ...) miteinbezogen werden. Die Annäherung an die Marktreife soll durch eine Evaluation unterstützt werden.
+
+---
+# inGuide: Unsere Anwendung
+
+Willkommen zu unserem Projekt inGuide!
+Dieses Projekt fand seinen Ursprung im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik. Aktuell wird es mit der obenen genannten Problemstellung und Zielsetzung in dem Kurs "Entwicklungsprojekt" weiter entwickelt.
 
 ## Link zur Web Anwendung 
 
@@ -9,7 +18,7 @@ https://dsterle.github.io/cranach_erweiterte_interaktion/
 
 ## Kontext :art:
 
-Der Kontext ist der ein Besuch in einem Museum über Gemälde des Künstlers Lucas Cranach. Hierbei sollen dem Benutzer besondere Informationen über diese Gemälde zur Verfügung gestellt werden.
+Der Kontext ist der ein Besuch in einem Museum über Gemälde eines beliebigen Künstlers. Hierbei sollen dem Benutzer besondere Informationen über diese Gemälde zur Verfügung gestellt werden.
 
 ## Idee :bulb:
 
@@ -24,8 +33,8 @@ Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In
 ## Voraussetzungen, um das Projekt lokal aufzusetzen
 
 * ein Microcontroller mit NFC-Reader
+* ein NFC-Tag
 * ein WLAN-fähiges Gerät mit Zugang zu einem Browser (Idealerweise ein Smartphone)
-* ein NFC-Tag des Lucas Cranach Museums
 
 ## Projekt lokal aufsetzen
 
@@ -36,5 +45,5 @@ Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In
 5. Code im Verzeichnis "painting-microcontroller" auf den Microcontroller laden (gegebenenfalls vorher die Variablen "ssID" und "pass" im Code anpassen, um sich mit dem WLAN verbinden zu können)
 6. Microcontroller starten
 
-Nun kann die Website geöffnet werden. Geben Sie anschließend die Nummer auf der Rückseite des NFC-Tags ein (Zu Testzwecken nehmen Sie unseren konfigurierten NFC-Tag und geben Sie "100" ein) und drücken auf "Ok". Nun halten Sie Ihr NFC-Tag an den NFC-Reader und erfahren Sie mehr über die Gemälde von Lucas Cranach... 
+Nun kann die Website geöffnet werden. Geben Sie anschließend die Nummer auf der Rückseite des NFC-Tags ein (Zu Testzwecken nehmen Sie unseren konfigurierten NFC-Tag und geben Sie "100" ein) und drücken auf "Ok". Nun halten Sie Ihr NFC-Tag an den NFC-Reader und erfahren Sie mehr über das jeweilige Gemälde... 
 

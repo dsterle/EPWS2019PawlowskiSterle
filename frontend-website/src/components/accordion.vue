@@ -94,7 +94,6 @@ export default {
     padding-right: $abstand-M;
 
     display: flex;
-    width: 100%;
     height: 1rem * 3;
     justify-content: space-between;
 
