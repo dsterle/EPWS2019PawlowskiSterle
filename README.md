@@ -1,30 +1,33 @@
+# inGuide: Unsere Anwendung
+
+Willkommen zu unserem Projekt inGuide!
+Dieses Projekt fand seinen Ursprung im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik. Aktuell wird es mit dem nun folgenden Problemraum und der Zielsetzung in dem Kurs "Entwicklungsprojekt" weiter entwickelt.
+
+## Link zur Web Anwendung 
+
+https://dsterle.github.io/cranach_erweiterte_interaktion/
+
+---
+
 ## Problemraum
 
-Dieses Projekt ist eine Weiterentwicklung des Systems aus dem Modul „Web-Development“. Der Problemraum ist ein Museumsbesuch, bei welchem dem Nutzer Informationen über die Gemälde bereitgestellt werden, vor denen er sich gerade befindet, ohne dass dieser die ganze Zeit auf sein Handy schauen muss.
+Dieses Projekt ist eine Weiterentwicklung des Systems aus dem Modul „Web-Development“. Der Problemraum ist ein Museumsbesuch, bei welchem dem Nutzer detaillierte Informationen über die Gemälde bereitgestellt werden, vor denen er sich gerade befindet, ohne dass dieser die ganze Zeit auf sein Handy schauen muss.
 
 ## Zielsetzung
 
 Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen soweit wie möglich marktreif zu machen. Hierfür sollen notwendige Features, die diese Marktreife erst ermöglichen, identifiziert und implementiert werden. Des Weiteren sollen bis jetzt nicht berücksichtigte Perspektiven (die Sicht Museumsleiters, ...) miteinbezogen werden. Die Annäherung an die Marktreife soll durch eine Evaluation unterstützt werden.
 
 ---
-# inGuide: Unsere Anwendung
 
-Willkommen zu unserem Projekt inGuide!
-Dieses Projekt fand seinen Ursprung im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik. Aktuell wird es mit der obenen genannten Problemstellung und Zielsetzung in dem Kurs "Entwicklungsprojekt" weiter entwickelt.
+> Der folgende Text bezieht sich noch auf das Fach Webdevelopment aus dem Sommersemester 2019
 
-## Link zur Web Anwendung 
-
-https://dsterle.github.io/cranach_erweiterte_interaktion/
-
-## Kontext :art:
-
-Der Kontext ist der ein Besuch in einem Museum über Gemälde eines beliebigen Künstlers. Hierbei sollen dem Benutzer besondere Informationen über diese Gemälde zur Verfügung gestellt werden.
+---
 
 ## Idee :bulb:
 
-Nach etlichen Ideen über die Richtungen, in die unser System gehen kann (Sie finden unsere Entscheidungen unter dem Reiter Wiki im Kapitel Entscheidungslogbuch) haben wir nun eine Anwendung erstellt, die es dem Benutzer erleichtern soll, Informationen über das Gemälde, vor welchem er sich befindet, zu erhalten. Besonders wichtig war uns dabei der Gedanke, dass der Benutzer nicht extra eine native App auf seinem Smartphone installieren muss, da das mit einem zu großen Aufwand verbunden ist.
+Nach etlichen Ideen über die Richtungen, in die unser System gehen kann haben wir nun im Rahmen des Kurses "Webdevelopment" eine Anwendung erstellt, die es dem Benutzer erleichtern soll, Informationen über das Gemälde, vor welchem er sich befindet, zu erhalten. Besonders wichtig war uns dabei der Gedanke, dass der Benutzer nicht extra eine native App auf seinem Smartphone installieren muss, da das mit einem zu großen Aufwand verbunden ist.
 Des Weiteren war ein wichtiger Punkt für uns, dass die Gemälde im Museum eine größere Gewichtung haben als das Handy des Benutzers, denn in einem Museum möchte man nicht mit seinem Smartphone beschäftigt sein, sondern man möchte sich auf die Bilder konzentrieren.
-Unsere Anwendung ist so konzipiert, dass man die Informationen über bestimmte Gemälde über seine Kopfhörer anhören kann und sein Handy dabei in der Hosentasche lassen kann. Natürlich kann man die Informationen aber auch visuell einsehen. Damit Sie sich ein besseres Bild davon machen können, folgt nun ein Szenario:
+Unsere Anwendung ist so konzipiert, dass man die Informationen über bestimmte Gemälde über seine Kopfhörer anhören und sein Handy dabei in der Hosentasche lassen kann. Natürlich kann man die Informationen aber auch visuell einsehen. Damit Sie sich ein besseres Bild davon machen können, folgt nun ein Szenario:
 
 ## Szenario :clapper:
 

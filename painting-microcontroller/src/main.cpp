@@ -7,7 +7,7 @@
 #define SS_PIN    21 //slave select pin
 #define RST_PIN   22 //reset pin
 #define client_name "cranach"
-#define painting_ID "2"
+#define painting_ID "1"
 
 
 /* Pin Configuration:
