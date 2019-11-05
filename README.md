@@ -21,6 +21,8 @@ Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen so
 
 > Der folgende Text bezieht sich noch auf das Fach Webdevelopment aus dem Sommersemester 2019
 
+---
+
 ## Idee :bulb:
 
 Nach etlichen Ideen über die Richtungen, in die unser System gehen kann haben wir nun im Rahmen des Kurses "Webdevelopment" eine Anwendung erstellt, die es dem Benutzer erleichtern soll, Informationen über das Gemälde, vor welchem er sich befindet, zu erhalten. Besonders wichtig war uns dabei der Gedanke, dass der Benutzer nicht extra eine native App auf seinem Smartphone installieren muss, da das mit einem zu großen Aufwand verbunden ist.
