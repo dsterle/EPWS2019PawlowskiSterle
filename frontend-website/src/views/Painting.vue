@@ -2,7 +2,7 @@
   <div class="painting">
     <div class="app-bar-wrapper">
       <a class="back-icon" @click="$router.push({name: `/`}, () => {$router.go(0)})">
-        <img src="../assets/icons/arrow_back.svg" alt="back"/>
+        <img src="../assets/icons/arrow_back.svg" alt="back" />
       </a>
     </div>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
@@ -86,7 +86,6 @@ export default {
     this.titleInfo.audio.play();
   },
   mounted() {
-
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
     let _this = this;

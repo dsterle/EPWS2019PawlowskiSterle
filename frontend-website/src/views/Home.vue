@@ -11,7 +11,7 @@
       v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
     ></inputField>
-    <input type="button" class="docs-button" value="Docs" @click="$router.push({ name: 'documentation'})">
+    <!--<input type="button" class="docs-button" value="Docs" @click="$router.push({ name: 'documentation'})">-->
   </div>
 </template>
 
@@ -29,9 +29,8 @@ export default {
   },
   methods: {
     validateIDs(data) {
-
       if (this.paintingIDs.includes(parseInt(data))) {
-        this.$router.push({ path: `waiting/${data}`});
+        this.$router.push({ path: `waiting/${data}` });
       } else if (document.querySelector(".input-field").value === "") {
         this.errorMsg = "Bitte geben Sie eine Nummer ein";
       } else {
@@ -61,7 +60,7 @@ export default {
 
   ol {
     list-style-type: "decimal";
-  };
+  }
 
   .docs-button {
     color: $accent;
