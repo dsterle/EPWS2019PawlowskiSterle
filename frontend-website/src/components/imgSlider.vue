@@ -34,7 +34,17 @@ export default {
   }
 
   .VueCarousel-dot-container {
-    margin-top: 0px !important;
+    position: absolute;
+    // width: 100px;
+    // height: auto;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+    transform: rotate(180deg);
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    // margin-top: 0px !important;
   }
 }
 </style>
