@@ -6,7 +6,8 @@
       </a>
     </div>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
-    <img v-bind:src="painting.imgSrc" alt />
+    <imgSlider v-bind:imgSrc="painting.imgSrc"></imgSlider>
+    <!-- <img v-bind:src="painting.imgSrc" alt /> -->
     <div class="title-wrapper">
       <h1 class="title-text">{{ painting.title }}</h1>
       <p class="hint-text year">{{ painting.dated }}</p>
@@ -34,10 +35,11 @@ import accordion from "../components/accordion";
 import fab from "../components/fab";
 import { Howl, Howler } from "howler";
 import Vue from "vue";
+import imgSlider from "../components/imgSlider";
 
 export default {
   name: "painting",
-  components: { accordion, fab },
+  components: { accordion, fab, imgSlider },
   data() {
     return {
       id: {},

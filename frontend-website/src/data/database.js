@@ -5,7 +5,10 @@ exports.paintings = [
         inventarnummer: "CH_SORW_1925-1b",
         title: "Bildnis des Johannes Cuspinian",
         link: "bildnis-des-johannes-cuspinian",
-        imgSrc: "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
+        imgSrc: [
+            "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
+            "http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg"
+        ],
         dated: 1502,
         audioSrc: require("../assets/audio/painting-1/1-Titel.mp3"),
         infos: [
@@ -53,7 +56,7 @@ exports.paintings = [
         inventarnummer: "CH_SORW_1925-1a",
         title: "Bildnis der Anna Cuspinian",
         link: "bildnis-der-anna-cuspinian",
-        imgSrc: "http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg",
+        imgSrc: ["http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg"],
         dated: 1502,
         audioSrc: require("../assets/audio/painting-2/1-Titel.mp3"),
         infos: [
@@ -95,7 +98,7 @@ exports.paintings = [
         inventarnummer: "AT_KHM_GG6905",
         title: "Kreuzigung Christi, sog. \"Schottenkreuzigung\"",
         link: "kreuzigung-christi-sog-schottenkreuzigung",
-        imgSrc: "http://lucascranach.org/thumbnails/AT_KHM_GG6905_FR001/01_Overall/AT_KHM_GG6905_FR001_Image-date-unknown_Overall-001.jpg",
+        imgSrc: ["http://lucascranach.org/thumbnails/AT_KHM_GG6905_FR001/01_Overall/AT_KHM_GG6905_FR001_Image-date-unknown_Overall-001.jpg"],
         dated: 1501,
         audioSrc: require("../assets/audio/painting-3/1-Titel.mp3"),
         infos: [
