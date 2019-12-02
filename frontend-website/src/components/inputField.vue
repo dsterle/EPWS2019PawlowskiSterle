@@ -50,11 +50,13 @@ export default {
 @import "../assets/scss/010-variables.scss";
 
 .input-field {
+  box-sizing: border-box;
   margin-top: $abstand-L;
-  padding: 0 0 $abstand-S 0;
-  color: $lighter;
   width: 100%;
-  border-bottom: 1px rgba(255, 255, 255, 0.5) solid;
+  padding: $abstand-S $abstand-M $abstand-S $abstand-M;
+  color: $lighter;
+  border-radius: 24px;
+  border: 1px rgba(255, 255, 255, 0.5) solid;
   transition: 0.5s;
 }
 
