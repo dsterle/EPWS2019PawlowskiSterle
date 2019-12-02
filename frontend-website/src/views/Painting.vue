@@ -104,8 +104,12 @@ export default {
       info.current = false;
       // paused zeigt an, ob die Info pausiert ist
       info.paused = false;
+
       info.audio = new Howl({
         src: [info.audioSrc],
+        // src: [
+        // "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/3-Provenienz.mp3"
+        // ],
         onload: function() {
           _this.setSlider(info);
         },
