@@ -2,12 +2,13 @@
 
 $evenDarker: #2b2b2b;
 $darker: #222324;
-$light: #888888;
+$light: #4a4a4a;
 $lighter: #fff;
-$accent: #00c2ff;
-$accentDark: #0091d4;
+// $accent: #00c2ff;
+$accent: #bb86fc;
+$accentDark: #916ebd;
 $accentTransparent: #00c3ff38;
-$error: #db4437;
+$error: #c84f4f;
 
 //* Sizes *//
 // 1rem = 16px
@@ -41,10 +42,11 @@ $font-line-height-XL: $font-size-XL * $golden-ratio;
 
 //* Font *//
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,500,600&display=swap");
 
 $font: "Montserrat", Helvetica, sans-serif;
 
 $weight-light: 300;
 $weight-regular: 400;
+$weight-medium: 500;
 $weight-semibold: 600;
