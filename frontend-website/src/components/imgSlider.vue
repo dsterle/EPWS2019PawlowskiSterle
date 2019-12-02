@@ -33,6 +33,8 @@ export default {
     height: auto;
   }
 
+  // modifying the classes of vue-carousel
+
   .VueCarousel-dot-container {
     position: absolute;
     display: flex;
@@ -46,12 +48,10 @@ export default {
 
   .VueCarousel-dot {
     background-color: #7f7f7f !important;
-    // vertical-align: bottom !important;
   }
 
   .VueCarousel-dot--active {
     background-color: #fff !important;
-    // vertical-align: bottom !important;
   }
 }
 </style>
