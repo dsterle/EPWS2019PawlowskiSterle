@@ -3,23 +3,9 @@
 Willkommen zu unserem Projekt inGuide!
 Dieses Projekt fand seinen Ursprung im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik. Aktuell wird es mit dem nun folgenden Problemraum und der Zielsetzung in dem Kurs "Entwicklungsprojekt" weiter entwickelt.
 
-## Link zur Web Anwendung 
+## :link: Link zur Web Anwendung 
 
 https://dsterle.github.io/cranach_erweiterte_interaktion/
-
----
-
-## Problemraum
-
-Dieses Projekt ist eine Weiterentwicklung des Systems aus dem Modul „Web-Development“. Der Problemraum ist ein Museumsbesuch, bei welchem dem Nutzer detaillierte Informationen über die Gemälde bereitgestellt werden, vor denen er sich gerade befindet, ohne dass dieser die ganze Zeit auf sein Handy schauen muss.
-
-## Zielsetzung
-
-Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen soweit wie möglich marktreif zu machen. Hierfür sollen notwendige Features, die diese Marktreife erst ermöglichen, identifiziert und implementiert werden. Des Weiteren sollen bis jetzt nicht berücksichtigte Perspektiven (die Sicht Museumsleiters, ...) miteinbezogen werden. Die Annäherung an die Marktreife soll durch eine Evaluation unterstützt werden.
-
----
-
-> Der folgende Text bezieht sich noch auf das Fach Webdevelopment aus dem Sommersemester 2019
 
 ---
 
@@ -32,6 +18,14 @@ Unsere Anwendung ist so konzipiert, dass man die Informationen über bestimmte G
 ## Szenario :clapper:
 
 Simon ist auf dem Weg zu einer Ausstellung über den Künstler Lucas Cranach. In dem Museum angekommen, bekommt er an der Rezeption den WLAN-Schlüssel und verbindet sich mit diesem. Nun öffnet er die Website des Lucas Cranach Museums. Außerdem bekommt er noch ein kleines Gerät ausgehändigt, einen NFC-Tag, welchen er lediglich vor ein Gemälde halten muss um Informationen zu diesem auf sein Handy zu bekommen. Auf dem NFC-Tag befindet sich eine Nummer, die Simon auf der Website des Museums eingibt. Nun verbindet er sein Smartphon mit seinen neuen Kopfhörern und steckt es in seine Hosentasche. Sobald Simon nun ein interessantes Gemälde sieht, über das er mehr erfahren möchte, hält er lediglich den NFC-Tag an das, vor dem Gemälde stehende, Lesegerät und über seine Kopfhörern beginnt eine Stimme über das Gemälde zu reden.
+
+## :exclamation: Problemraum
+
+Dieses Projekt ist eine Weiterentwicklung des Systems aus dem Modul „Web-Development“. Der Problemraum ist ein Museumsbesuch, bei welchem dem Nutzer detaillierte Informationen über die Gemälde bereitgestellt werden, vor denen er sich gerade befindet, ohne dass dieser die ganze Zeit auf sein Handy schauen muss.
+
+## :checkered_flag: Zielsetzung
+
+Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen soweit wie möglich marktreif zu machen. Hierfür sollen notwendige Features, die diese Marktreife erst ermöglichen, identifiziert und implementiert werden. Des Weiteren sollen bis jetzt nicht berücksichtigte Perspektiven (die Sicht Museumsleiters, ...) miteinbezogen werden. Die Annäherung an die Marktreife soll durch eine Evaluation unterstützt werden.
 
 ## Voraussetzungen, um das Projekt lokal aufzusetzen
 
