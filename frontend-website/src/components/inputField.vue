@@ -1,10 +1,9 @@
 <template>
   <div>
-    <!-- <form> -->
-    <!-- <form action> -->
     <!-- wenn this.error true ist, wird die Klasse input-field-error an das input-field gebunden -->
     <div class="wrapper">
       <input
+        inputField
         class="hint-text input-field"
         v-bind:name="inputID"
         v-bind:id="inputID"
@@ -32,8 +31,6 @@
         v-bind:class="{'button-error':this.error}"
       />
     </div>
-    <!-- </form> -->
-    <!-- </form> -->
   </div>
 </template>
 
@@ -63,12 +60,12 @@ export default {
 
   .input-field {
     padding: $abstand-S $abstand-M $abstand-S $abstand-M;
-    color: $lighter;
+    color: white;
     flex-grow: 1;
     margin-right: $abstand-M;
     box-sizing: border-box;
     border-radius: 5px;
-    border: 1px rgba(255, 255, 255, 0.5) solid;
+    border: 1px $light solid;
     transition: 0.5s;
   }
 

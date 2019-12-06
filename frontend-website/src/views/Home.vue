@@ -3,7 +3,6 @@
     <div class="welcome-text">
       <h1 class="headline">Willkommen im Lucas Cranach Archiv</h1>
     </div>
-    <!-- <p class="normal-text note-text">Bitte geben Sie die Nummer von Ihrem Transponder ein</p> -->
     <inputField
       class="inputField"
       inputID="input-transponder"
@@ -12,7 +11,6 @@
       v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
     ></inputField>
-    <!--<input type="button" class="docs-button" value="Docs" @click="$router.push({ name: 'documentation'})">-->
   </div>
 </template>
 
