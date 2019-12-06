@@ -12,10 +12,10 @@
       v-on:event-clicked="validateIDs"
     ></inputField>
     <!--<input type="button" class="docs-button" value="Docs" @click="$router.push({ name: 'documentation'})">-->
-    <div class="installPrompt">
-      <img src="../../public/thumbnail/testicon-256x256.png" alt="icon">
-      <span id="addToHomeScreen">Zum Startbildschirm hinzufügen</span>
-    </div>
+<!--    <div class="installPrompt">-->
+<!--      <img src="../../public/thumbnail/testicon-256x256.png" alt="icon">-->
+<!--      <span id="addToHomeScreen">Zum Startbildschirm hinzufügen</span>-->
+<!--    </div>-->
   </div>
 </template>
 
