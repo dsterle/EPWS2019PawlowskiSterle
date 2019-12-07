@@ -9,8 +9,10 @@
         v-bind:id="inputID"
         v-bind:placeholder="inputPlaceholder"
         v-bind:class="{'input-field-error':this.error}"
-        type="number"
+        type="text"
         v-on:focus="setErrorFalse"
+        size="4"
+        maxlength="4"
       />
       <!-- nur wenn this.error mit einer Meldung gefüllt ist wird das label gezeigt -->
       <label
@@ -62,6 +64,7 @@ export default {
     padding: $abstand-S $abstand-M $abstand-S $abstand-M;
     color: white;
     flex-grow: 1;
+    flex-shrink: 1;
     margin-right: $abstand-M;
     box-sizing: border-box;
     border-radius: 5px;

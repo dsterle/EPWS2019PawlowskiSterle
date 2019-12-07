@@ -6,7 +6,7 @@
     <inputField
       class="inputField"
       inputID="input-transponder"
-      inputPlaceholder="Chip Nummer"
+      inputPlaceholder="Chip Nr"
       buttonText="Ok"
       v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
