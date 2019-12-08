@@ -40,14 +40,9 @@ export default {
   components: { accordion, fab },
   data() {
     return {
-      id: {},
+      id: 0,
       // Das aktuelle Gemälde
       painting: {},
-      // Der Titel des Gemäldes
-      titleInfo: {
-        paused: false,
-        audio: {}
-      },
       fabIcon: require("../assets/icons/pause.svg"),
       pauseIcon: require("../assets/icons/pause.svg"),
       playIcon: require("../assets/icons/play.svg"),
@@ -60,35 +55,10 @@ export default {
   created() {
     this.topic = this.$route.params.userid;
 
-    let audio = this;
+    // TODO in diesem Teil soll die API angesprochen werden, um an die Bildinformationen zu gelangen
 
-    // titleInfo ist der Titel des Gemäldes, dieser wird zu Beginn abgespielt und kann nicht erneut ausgewählt werden
-    this.titleInfo.audio = new Howl({
-      src: [this.painting.audioSrc],
-      onloaderror: function() {
-        audio.titleInfo.audio = new Howl({
-          src: [audio.painting.audioSrc],
-          onload: function() {
-            audio.titleInfo.audio.stop();
-            audio.titleInfo.audio.play();
-          },
-          onend: function() {
-            // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
-            audio.setCurrent(0);
-          }
-        });
-      },
-      onend: function() {
-        // Wenn der Titel zu Ende abgespielt wurde, wird die erste Audiodatei auf current gesetzt
-        this.setCurrent(0);
-      }
-    });
-    this.titleInfo.audio.play();
-  },
-  mounted() {
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
-    let _this = this;
 
     // Das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
     this.id = parseInt(this.$route.params.id);
@@ -96,42 +66,51 @@ export default {
       return painting.id === this.id;
     });
 
-    // Schleife über jede Info (Accordion)
-    this.painting.infos.forEach(info => {
-      // current zeigt an, ob die Info ausgewählt ist (kann währenddessen auch pausiert sein)
-      info.current = false;
-      // paused zeigt an, ob die Info pausiert ist
-      info.paused = false;
-      info.audio = new Howl({
-        src: [info.audioSrc],
-        onload: function() {
-          _this.setSlider(info);
-        },
-        onplay: function() {
-          clearInterval(_this.currentLoop);
-          _this.updateSlider(info);
-        },
-        onend: function() {
-          info.currentValue = 0;
-          info.current = false;
-          clearInterval(_this.currentLoop);
-          _this.setCurrent(info.id + 1);
-        }
-      });
-    });
+    //*
 
+    this.setupPaintingInfos();
+  },
+  mounted() {
+    this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
-    // MQTTHandler.handleMQTTConnection(this.server.host);
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
-    setCurrent(id) {
-      /**
-       * setCurrent ist dazu da eine Info mit der übergebenen id auszuwählen
-       */
+    /**
+     * setupPaintingInfos ist dazu da jedes Info-Accordion mit einer Sounddatei zu versehen
+     * Es werden Informationen gespeichert, ob die Datei gerade läuft oder pausiert wurde usw.
+     */
+    setupPaintingInfos() {
+      let _this = this;
 
-      // Falls der Titel noch gesprochen wird, wird dieser gestoppt
-      this.titleInfo.audio.stop();
+      // Schleife über jede Info (Accordion)
+      this.painting.infos.forEach(info => {
+        // current zeigt an, ob die Info ausgewählt ist (kann währenddessen auch pausiert sein)
+        info.current = false;
+        // paused zeigt an, ob die Info pausiert ist
+        info.paused = false;
+        info.audio = new Howl({
+          src: [info.audioSrc],
+          onload: function() {
+            _this.setSlider(info);
+          },
+          onplay: function() {
+            clearInterval(_this.currentLoop);
+            _this.updateSlider(info);
+          },
+          onend: function() {
+            info.currentValue = 0;
+            info.current = false;
+            clearInterval(_this.currentLoop);
+            _this.setCurrent(info.id + 1);
+          }
+        });
+      });
+    },
+    /**
+     * setCurrent ist dazu da eine Info mit der übergebenen id auszuwählen
+     */
+    setCurrent(id) {
       let _this = this;
 
       this.painting.infos.forEach(info => {
@@ -192,12 +171,6 @@ export default {
       if (playingInfo) {
         // Die aktuell spielende Info wird pausiert
         this.pauseInfo(playingInfo);
-      } else if (this.titleInfo.audio.playing()) {
-        // Der Titel wird pausiert
-        this.pauseInfo(this.titleInfo);
-      } else if (this.titleInfo.paused) {
-        // Der Titel wird wieder abgespielt
-        this.playInfo(this.titleInfo);
       } else {
         // Die pausierte Info wird wieder abgespielt
         this.playInfo(this.getPausedInfo());
