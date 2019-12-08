@@ -1,14 +1,18 @@
 <template>
   <div>
-    <form action>
-      <!-- wenn this.error true ist, wird die Klasse input-field-error an das input-field gebunden -->
+    <!-- wenn this.error true ist, wird die Klasse input-field-error an das input-field gebunden -->
+    <div class="wrapper">
       <input
+        inputField
         class="hint-text input-field"
         v-bind:name="inputID"
         v-bind:id="inputID"
         v-bind:placeholder="inputPlaceholder"
         v-bind:class="{'input-field-error':this.error}"
-        type="number"
+        type="text"
+        v-on:focus="setErrorFalse"
+        size="4"
+        maxlength="4"
       />
       <!-- nur wenn this.error mit einer Meldung gefüllt ist wird das label gezeigt -->
       <label
@@ -21,15 +25,14 @@
         v-bind:for="inputID"
         class="error-text input-field-error-msg"
       >{{ error }}</label>
-      <div class="button-wrapper">
-        <input
-          class="button-submit button-text"
-          type="button"
-          v-bind:value="buttonText"
-          v-on:click="emitEvent"
-        />
-      </div>
-    </form>
+      <input
+        class="button-submit button-text"
+        type="button"
+        v-bind:value="buttonText"
+        v-on:click="emitEvent"
+        v-bind:class="{'button-error':this.error}"
+      />
+    </div>
   </div>
 </template>
 
@@ -37,10 +40,14 @@
 export default {
   name: "inputField",
   props: ["formID", "inputID", "input-placeholder", "buttonText", "error"],
+  mounted() {},
   methods: {
     emitEvent() {
       let input = document.querySelector(`#${this.inputID}`).value;
       this.$emit("event-clicked", input);
+    },
+    setErrorFalse() {
+      this.error = false;
     }
   }
 };
@@ -49,45 +56,53 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/010-variables.scss";
 
-.input-field {
-  margin-top: $abstand-L;
-  padding: 0 0 $abstand-S 0;
-  color: $lighter;
-  width: 100%;
-  border-bottom: 1px rgba(255, 255, 255, 0.5) solid;
-  transition: 0.5s;
-}
-
-.input-field:focus {
-  border-bottom: 2px $accent solid;
-  transition: 0.5s;
-  outline: none;
-}
-
-.button-wrapper {
+.wrapper {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+
+  .input-field {
+    padding: $abstand-S $abstand-M $abstand-S $abstand-M;
+    color: white;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-right: $abstand-M;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px $light solid;
+    transition: 0.5s;
+  }
+
+  .input-field:focus {
+    border: 1px $accent solid;
+    transition: 0.5s;
+    outline: none;
+  }
 
   .button-submit {
-    text-align: right;
-    margin-top: $abstand-L;
-    padding: 0 0 0 0;
-    border: none;
+    background: $accent;
+    padding: 0 $abstand-M 0 $abstand-M;
+    border-radius: 5px;
+    color: $darker;
     cursor: pointer;
+    transition: 0.5s;
   }
-}
 
-.input-field-error {
-  border-bottom: 2px $error solid !important;
-}
+  .button-error {
+    background: $light;
+  }
 
-.input-field-error-msg {
-  position: absolute;
-  left: $abstand-L;
-  margin-top: $abstand-XXL;
-}
+  .input-field-error {
+    border: 1px $error solid !important;
+  }
 
-.visible {
-  max-height: 0;
+  .input-field-error-msg {
+    position: absolute;
+    left: $abstand-L;
+    margin-top: $abstand-XL;
+  }
+
+  .visible {
+    max-height: 0;
+  }
 }
 </style>

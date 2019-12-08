@@ -6,7 +6,8 @@
       </a>
     </div>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
-    <img v-bind:src="painting.imgSrc" alt />
+    <imgSlider v-bind:imgSrc="painting.imgSrc"></imgSlider>
+    <!-- <img v-bind:src="painting.imgSrc" alt /> -->
     <div class="title-wrapper">
       <h1 class="title-text">{{ painting.title }}</h1>
       <p class="hint-text year">{{ painting.dated }}</p>
@@ -34,10 +35,11 @@ import accordion from "../components/accordion";
 import fab from "../components/fab";
 import { Howl, Howler } from "howler";
 import Vue from "vue";
+import imgSlider from "../components/imgSlider";
 
 export default {
   name: "painting",
-  components: { accordion, fab },
+  components: { accordion, fab, imgSlider },
   data() {
     return {
       id: {},
@@ -102,8 +104,12 @@ export default {
       info.current = false;
       // paused zeigt an, ob die Info pausiert ist
       info.paused = false;
+
       info.audio = new Howl({
         src: [info.audioSrc],
+        // src: [
+        // "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/3-Provenienz.mp3"
+        // ],
         onload: function() {
           _this.setSlider(info);
         },
