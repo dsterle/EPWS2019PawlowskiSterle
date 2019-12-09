@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="content-wrapper">
-      <p class="hint-text note-text">Halten Sie Ihren Transponder vor ein Gemälde...</p>
+      <p class="hint-text note-text">Halten Sie Ihren Chip vor ein Gemälde...</p>
     </div>
   </div>
 </template>
