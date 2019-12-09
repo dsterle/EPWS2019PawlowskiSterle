@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import VueQrcodeReader from "vue-qrcode-reader";
 
-Vue.use(Router);
+Vue.use(Router, VueQrcodeReader);
 
 export default new Router({
-  mode: 'hash',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {

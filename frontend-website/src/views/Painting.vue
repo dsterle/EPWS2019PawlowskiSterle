@@ -299,7 +299,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/010-variables.scss";
+  @import "../assets/scss/site.scss";
 
 .painting {
   .app-bar-wrapper {

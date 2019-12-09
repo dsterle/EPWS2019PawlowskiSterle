@@ -7,7 +7,7 @@
 #define SS_PIN    21 //slave select pin
 #define RST_PIN   22 //reset pin
 #define client_name "cranach"
-#define painting_ID "2"
+#define painting_ID "1"
 
 
 /* Pin Configuration:
@@ -26,18 +26,17 @@ int status = WL_IDLE_STATUS;
 // char pass[] = "gf3heTS11c";
 // char ssid[] = "FRITZ!Box 7430 LN";
 // char pass[] = "57363119688740951515";
-// char ssid[] = "prism";
-// char pass[] = "hallo";
-
-char ssid[] = "FRITZ!Box 7490";
-char pass[] = "32213714005654579014";
+char ssid[] = "prism";
+char pass[] = "hallo123";
+// char ssid[] = "FRITZ!Box 7490";
+// char pass[] = "32213714005654579014";
 
 char receiveMsg[1024];
 int block = 2;  //block where the ID of the NFC Tag is written
 int nfcTagsUIDs[] = {1073479220, 432423423};
 char* lastTopic = (char* )"";
 
-byte blockcontent[] = {"100"};  //ID that is written into a NFC tag
+byte blockcontent[] = {"101"};  //ID that is written into a NFC tag
 byte nfcTopic[3];  //ID that is read from the NFC Tag and the topic where the paintingID is published to
 byte uid[16];
 
