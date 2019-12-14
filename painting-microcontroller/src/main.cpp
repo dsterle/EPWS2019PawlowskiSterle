@@ -24,8 +24,15 @@ IRQ   -> NC (Not Connected)
 int status = WL_IDLE_STATUS;
 // char ssid[] = "moxd-lab";
 // char pass[] = "gf3heTS11c";
-char ssid[] = "FRITZ!Box 7430 LN";
-char pass[] = "57363119688740951515";
+// char ssid[] = "FRITZ!Box 7430 LN";
+// char pass[] = "57363119688740951515";
+// char ssid[] = "prism";
+// char pass[] = "hallo";
+char ssid[] = "Hendriks nicer Hotspot";
+char pass[] = "sagichnicht";
+// char ssid[] = "FRITZ!Box 7490";
+// char pass[] = "32213714005654579014";
+
 char receiveMsg[1024];
 int block = 2;  //block where the ID of the NFC Tag is written
 int nfcTagsUIDs[] = {1073479220, 432423423};

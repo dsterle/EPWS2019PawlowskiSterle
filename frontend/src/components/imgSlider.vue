@@ -27,7 +27,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/010-variables.scss";
+
 .container {
+  border-bottom: 2px solid $light;
+
   .image {
     width: 100%;
     height: auto;
