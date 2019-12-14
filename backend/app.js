@@ -1,7 +1,6 @@
 var express = require("express");
 var graphqlHTTP = require("express-graphql");
 var { buildSchema } = require("graphql");
-var bodyParser = require("body-parser");
 var app = express();
 
 app.listen(4000);
