@@ -1,8 +1,8 @@
 var { buildSchema } = require("graphql");
 
 const schema = buildSchema(`
-    type Visitor {
-      transponder: ID!
+    type Chip {
+      chipnr: ID!
       borrowed: Boolean!
       history: [String]
     }
@@ -16,14 +16,14 @@ const schema = buildSchema(`
     }
 
     type Query {
-      visitors: [Visitor!]!
-      visitor: Visitor!
+      chips: [Chip!]!
+      chip: Chip!
       paintings: [Painting!]!
       painting(id: ID!): Painting
     }
 
     type Mutation {
-      putVisitor(transponder: ID!, borrowed: Boolean!, history: [String]): Visitor
+      putChip(chipnr: ID!, borrowed: Boolean!, history: [String]): Chip
     }
 
     schema {

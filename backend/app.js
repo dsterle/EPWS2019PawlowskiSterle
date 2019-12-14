@@ -4,17 +4,18 @@ var { buildSchema } = require("graphql");
 var app = express();
 
 var schema = require('./schema.js').schema;
+const DB_paintings = require("./data/database").paintings;
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: {
-    visitors: () => {
+    chips: () => {
       return DB_visitors;
     },
-    visitor: (args) => {
+    chip: (args) => {
       return DB_visitors[0];
     },
-    putVisitor: (args) => {
+    putchip: (args) => {
       // TODO store visitor in database
 
       return args.name;
