@@ -36,6 +36,7 @@ import fab from "../components/fab";
 import { Howl, Howler } from "howler";
 import Vue from "vue";
 import imgSlider from "../components/imgSlider";
+import axios from "axios";
 
 export default {
   name: "painting",
@@ -57,7 +58,34 @@ export default {
   created() {
     this.topic = this.$route.params.userid;
 
-    // TODO in diesem Teil soll die API angesprochen werden, um an die Bildinformationen zu gelangen
+    console.log("created started");
+
+    const _axios = axios.create({
+      httpsAgent: new https.Agent({
+        rejectUnauthorized: false
+      })
+    });
+
+    _axios({
+      url: "https://1jzxrj179.lp.gql.zone/graphql",
+      method: "post",
+      data: {
+        query: `
+          {
+            painting(id: ${this.id}) {
+              title
+            }
+          }
+        `
+      }
+    })
+      .then(result => {
+        // console.log(result.data);
+        console.log("then started");
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
