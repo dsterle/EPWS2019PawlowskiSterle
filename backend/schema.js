@@ -6,13 +6,23 @@ const schema = buildSchema(`
       borrowed: Boolean!
       history: [String]
     }
-    
+
     type Painting {
       id: ID!
       objectName: String!
       inventarnummer: String!
       title: String!
       link: String!
+      imgSrc: [String!]!
+      dated: Int!
+      infos: [Info!]!
+    }
+
+    type Info {
+      id: Int!
+      name: String!
+      inhalt: String!
+      audioSrc: String!
     }
 
     type Query {
