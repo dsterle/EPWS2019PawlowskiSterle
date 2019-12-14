@@ -9,10 +9,10 @@ app.use('/graphql', graphqlHTTP({
   schema: schema,
   rootValue: {
     chips: () => {
-      return DB_visitors;
+      // return DB_visitors;
     },
     chip: (args) => {
-      return DB_visitors[0];
+      // return DB_paintings.find(painting => painting.id === parseInt(args.id));
     },
     putchip: (args) => {
       // TODO store visitor in database
