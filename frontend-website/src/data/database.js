@@ -7,7 +7,8 @@ exports.paintings = [
         link: "bildnis-des-johannes-cuspinian",
         imgSrc: [
             "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
-            "http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg"
+            "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_2008-11_Overall.jpg",
+            "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_image-date-unknown_Overall-002.jpg"
         ],
         dated: 1502,
         audioSrc: require("../assets/audio/painting-1/1-Titel.mp3"),
@@ -56,7 +57,10 @@ exports.paintings = [
         inventarnummer: "CH_SORW_1925-1a",
         title: "Bildnis der Anna Cuspinian",
         link: "bildnis-der-anna-cuspinian",
-        imgSrc: ["http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg"],
+        imgSrc: [
+            "http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg",
+            "http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall-001.jpg"
+        ],
         dated: 1502,
         audioSrc: require("../assets/audio/painting-2/1-Titel.mp3"),
         infos: [
