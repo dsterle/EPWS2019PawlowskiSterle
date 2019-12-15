@@ -271,10 +271,7 @@ export default {
   async beforeRouteUpdate(to, from, next) {
     if (to.path !== from.path) {
       this.id = parseInt(to.params.id);
-      // let paintings = require("../data/database.js").paintings;
-      // this.painting = paintings.find(painting => {
-      // return painting.id === this.id;
-      // });
+
       let result = await axios({
         method: "POST",
         url: "http://localhost:4000/graphql",
