@@ -58,50 +58,22 @@ export default {
   },
   async created() {
     this.topic = this.$route.params.userid;
+    this.id = parseInt(this.$route.params.id);
 
-    console.log("created started");
-
-    const _axios = axios.create({
-      httpsAgent: new https.Agent({
-        rejectUnauthorized: false
-      })
-    });
-
-    // TODO get the right ID for requesting the correct painting
-
-    console.log(this.id);
-
-    var result = await _axios({
+    this.painting = await axios({
       method: "POST",
       url: "http://localhost:4000/graphql",
       data: {
         query: `
           {
-            painting(id: 1) {
+            painting(id: ${this.id}) {
               title
             }
           }
         `
       }
-    });
+    }).data.data;
     console.log(result.data.data);
-
-    // fetch("https://1jzxrj179.lp.gql.zone/graphql", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ query: "{ paintings { title } }" })
-    // })
-    //   .then(res => res.json())
-    //   .then(res => console.log(res.data));
-
-    // Lade unsere simulierte Datenbank
-    let paintings = require("../data/database.js").paintings;
-
-    // Das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
-    this.id = parseInt(this.$route.params.id);
-    this.painting = paintings.find(painting => {
-      return painting.id === this.id;
-    });
 
     //*
 
