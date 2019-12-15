@@ -4,13 +4,11 @@ exports.paintings = [
     objectName: "FR006",
     inventarnummer: "CH_SORW_1925-1b",
     title: "Bildnis des Johannes Cuspinian",
-    link: "bildnis-des-johannes-cuspinian",
     imgSrc: [
       "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
       "http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg"
     ],
     dated: 1502,
-    audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/1-Titel.mp3",
     infos: [
       {
         id: 0,
@@ -55,10 +53,9 @@ exports.paintings = [
     objectName: "FR007",
     inventarnummer: "CH_SORW_1925-1a",
     title: "Bildnis der Anna Cuspinian",
-    link: "bildnis-der-anna-cuspinian",
     imgSrc: ["http://lucascranach.org/thumbnails/CH_SORW_1925-1a_FR007/01_Overall/CH_SORW_1925-1a_FR007_1998-11_Overall.jpg"],
     dated: 1502,
-    audioSrc: "audioSrc Test", infos: [
+    infos: [
       {
         id: 0,
         name: "Kurzbeschreibung",
@@ -96,10 +93,8 @@ exports.paintings = [
     objectName: "FR001",
     inventarnummer: "AT_KHM_GG6905",
     title: "Kreuzigung Christi, sog. \"Schottenkreuzigung\"",
-    link: "kreuzigung-christi-sog-schottenkreuzigung",
     imgSrc: ["http://lucascranach.org/thumbnails/AT_KHM_GG6905_FR001/01_Overall/AT_KHM_GG6905_FR001_Image-date-unknown_Overall-001.jpg"],
     dated: 1501,
-    audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-3/1-Titel.mp3",
     infos: [
       {
         id: 0,
