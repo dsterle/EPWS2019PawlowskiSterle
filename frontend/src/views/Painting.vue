@@ -60,7 +60,7 @@ export default {
     this.topic = this.$route.params.userid;
     this.id = parseInt(this.$route.params.id);
 
-    this.painting = await axios({
+    let result = await axios({
       method: "POST",
       url: "http://localhost:4000/graphql",
       data: {
@@ -68,21 +68,31 @@ export default {
           {
             painting(id: ${this.id}) {
               title
+              imgSrc
+              dated
+              infos {
+                id
+                name
+                inhalt
+                audioSrc
+              }
             }
           }
         `
       }
-    }).data.data;
-    console.log(result.data.data);
+    });
+    this.painting = result.data.data.painting;
 
-    //*
-
-    //* this.setupPaintingInfos();
+    this.setupPaintingInfos();
+    this.setCurrent(0);
+    const MQTTHandler = require("../assets/js/MQTTHandler");
+    MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   mounted() {
-    //* this.setCurrent(0);
-    //* const MQTTHandler = require("../assets/js/MQTTHandler");
-    //* MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
+    // console.log("mounted started");
+    // this.setCurrent(0);
+    // const MQTTHandler = require("../assets/js/MQTTHandler");
+    // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
     /**
@@ -258,13 +268,35 @@ export default {
       });
     }
   },
-  beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate(to, from, next) {
     if (to.path !== from.path) {
-      let paintings = require("../data/database.js").paintings;
       this.id = parseInt(to.params.id);
-      this.painting = paintings.find(painting => {
-        return painting.id === this.id;
+      // let paintings = require("../data/database.js").paintings;
+      // this.painting = paintings.find(painting => {
+      // return painting.id === this.id;
+      // });
+      let result = await axios({
+        method: "POST",
+        url: "http://localhost:4000/graphql",
+        data: {
+          query: `
+          {
+            painting(id: ${this.id}) {
+              title
+              imgSrc
+              dated
+              infos {
+                id
+                name
+                inhalt
+                audioSrc
+              }
+            }
+          }
+        `
+        }
       });
+      this.painting = result.data.data.painting;
       this.$router.go(0);
       next();
     } else {
