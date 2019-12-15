@@ -37,6 +37,7 @@ import { Howl, Howler } from "howler";
 import Vue from "vue";
 import imgSlider from "../components/imgSlider";
 import axios from "axios";
+import https from "https";
 
 export default {
   name: "painting",
@@ -55,7 +56,7 @@ export default {
       topic: {}
     };
   },
-  created() {
+  async created() {
     this.topic = this.$route.params.userid;
 
     console.log("created started");
@@ -66,26 +67,32 @@ export default {
       })
     });
 
-    _axios({
-      url: "https://1jzxrj179.lp.gql.zone/graphql",
-      method: "post",
+    // TODO get the right ID for requesting the correct painting
+
+    console.log(this.id);
+
+    var result = await _axios({
+      method: "POST",
+      url: "http://localhost:4000/graphql",
       data: {
         query: `
           {
-            painting(id: ${this.id}) {
+            painting(id: 1) {
               title
             }
           }
         `
       }
-    })
-      .then(result => {
-        // console.log(result.data);
-        console.log("then started");
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    });
+    console.log(result.data.data);
+
+    // fetch("https://1jzxrj179.lp.gql.zone/graphql", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ query: "{ paintings { title } }" })
+    // })
+    //   .then(res => res.json())
+    //   .then(res => console.log(res.data));
 
     // Lade unsere simulierte Datenbank
     let paintings = require("../data/database.js").paintings;
@@ -98,12 +105,12 @@ export default {
 
     //*
 
-    this.setupPaintingInfos();
+    //* this.setupPaintingInfos();
   },
   mounted() {
-    this.setCurrent(0);
-    const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
+    //* this.setCurrent(0);
+    //* const MQTTHandler = require("../assets/js/MQTTHandler");
+    //* MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
     /**
