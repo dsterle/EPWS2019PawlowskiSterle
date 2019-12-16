@@ -36,6 +36,8 @@ import fab from "../components/fab";
 import { Howl, Howler } from "howler";
 import Vue from "vue";
 import imgSlider from "../components/imgSlider";
+import axios from "axios";
+import https from "https";
 
 export default {
   name: "painting",
@@ -54,28 +56,43 @@ export default {
       topic: {}
     };
   },
-  created() {
+  async created() {
     this.topic = this.$route.params.userid;
-
-    // TODO in diesem Teil soll die API angesprochen werden, um an die Bildinformationen zu gelangen
-
-    // Lade unsere simulierte Datenbank
-    let paintings = require("../data/database.js").paintings;
-
-    // Das Gemälde mit der bestimmten ID wird aus der Datenbank herausgesucht und gespeichert
     this.id = parseInt(this.$route.params.id);
-    this.painting = paintings.find(painting => {
-      return painting.id === this.id;
-    });
 
-    //*
+    let result = await axios({
+      method: "POST",
+      url: "http://localhost:4000/graphql",
+      data: {
+        query: `
+          {
+            painting(id: ${this.id}) {
+              title
+              imgSrc
+              dated
+              infos {
+                id
+                name
+                inhalt
+                audioSrc
+              }
+            }
+          }
+        `
+      }
+    });
+    this.painting = result.data.data.painting;
 
     this.setupPaintingInfos();
-  },
-  mounted() {
     this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
+  },
+  mounted() {
+    // console.log("mounted started");
+    // this.setCurrent(0);
+    // const MQTTHandler = require("../assets/js/MQTTHandler");
+    // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
     /**
@@ -251,13 +268,32 @@ export default {
       });
     }
   },
-  beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate(to, from, next) {
     if (to.path !== from.path) {
-      let paintings = require("../data/database.js").paintings;
       this.id = parseInt(to.params.id);
-      this.painting = paintings.find(painting => {
-        return painting.id === this.id;
+
+      let result = await axios({
+        method: "POST",
+        url: "http://localhost:4000/graphql",
+        data: {
+          query: `
+          {
+            painting(id: ${this.id}) {
+              title
+              imgSrc
+              dated
+              infos {
+                id
+                name
+                inhalt
+                audioSrc
+              }
+            }
+          }
+        `
+        }
       });
+      this.painting = result.data.data.painting;
       this.$router.go(0);
       next();
     } else {
