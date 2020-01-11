@@ -36,6 +36,14 @@ export default new Router({
       }
     },
     {
+      path: "/user/:userid/settings",
+      name: 'settings',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Settings.vue')
+      }
+    },
+    {
       path: '/docs',
       name: 'documentation',
       component: function () {

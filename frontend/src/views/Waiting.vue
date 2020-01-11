@@ -4,6 +4,10 @@
       <a class="back-icon" @click="$router.go(-1)">
         <img src="../assets/icons/arrow_back.svg" alt="back" />
       </a>
+      <span>Waiting</span>
+      <a class="settings-icon" @click="$router.push({ name: 'settings', params: {userid: topic}})">
+        <i class="fas fa-cog"></i>
+      </a>
     </div>
     <div class="content-wrapper">
       <p class="hint-text note-text">Halten Sie Ihren Chip vor ein Gemälde...</p>
@@ -50,15 +54,9 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/010-variables.scss";
 
-.app-bar-wrapper {
-  display: flex;
-  height: $app-bar-height;
-  width: 100%;
-  align-items: center;
-
-  .back-icon {
-    margin-left: $abstand-M;
-  }
+.settings-icon {
+  position: absolute;
+  right: $abstand-M;
 }
 
 .content-wrapper {
