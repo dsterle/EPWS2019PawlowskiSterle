@@ -1,12 +1,10 @@
 <template>
-  <div class="setting">
-    <a @click="$router.replace({name: page})">
+  <div class="setting" @click="$router.push({name: page})">
       <span class="setting-description">
         <i v-bind:class="icon"></i>
         {{description}}
         <i class="fas fa-chevron-right"></i>
       </span>
-    </a>
   </div>
 </template>
 

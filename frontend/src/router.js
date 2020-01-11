@@ -44,6 +44,14 @@ export default new Router({
       }
     },
     {
+      path: "/user/:userid/settings/layout",
+      name: 'layout',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Layout.vue')
+      }
+    },
+    {
       path: '/docs',
       name: 'documentation',
       component: function () {

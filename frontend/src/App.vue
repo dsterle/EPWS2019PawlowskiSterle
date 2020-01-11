@@ -15,7 +15,7 @@ export default {};
 @import "./src/assets/scss/site.scss";
 
 .app-bar-wrapper {
-  position: absolute;
+  position: relative;
   left: 0;
   top: 0;
   display: flex;
