@@ -44,7 +44,7 @@
       width: 100%;
     }
     i {
-      font-size: $font-size-L;
+      font-size: $font-size-XL;
       color: $lighter;
       position: absolute;
       margin-top: $abstand-L;
