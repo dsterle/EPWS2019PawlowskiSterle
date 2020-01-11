@@ -38,7 +38,7 @@
   @import "../assets/scss/010-variables.scss";
   .settings {
     .content {
-      margin-top: $abstand-S;
+      margin-top: $abstand-M;
     }
   }
 

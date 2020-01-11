@@ -39,7 +39,6 @@
       padding: $abstand-M;
       position: relative;
       top: $abstand-L;
-      left: $abstand-M;
       color: $lighter;
       font-size: $font-size-L;
       width: 100%;
