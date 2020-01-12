@@ -14,7 +14,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/waiting/:id',
+      path: '/waiting/:userid',
       name: 'waiting',
       props: true,
       // route level code-splitting

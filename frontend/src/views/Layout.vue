@@ -1,21 +1,16 @@
 <template>
   <div class="layout">
-    <div class="app-bar-wrapper">
-      <a class="back-icon" @click="$router.go(-1)">
-        <img src="../assets/icons/arrow_back.svg" alt="back" />
-      </a>
-      <span>Layout</span>
-    </div>
+    <headBar headline="Layout"></headBar>
     <span class="setting">Dark Mode</span>
     <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i>
   </div>
 </template>
 
 <script>
-
+  import headBar from "../components/headBar";
     export default {
         name: "Layout",
-        components: {},
+        components: {headBar},
         methods: {
             toggle() {
                 let toggleIcon = document.querySelector(".toggleDarkMode");
