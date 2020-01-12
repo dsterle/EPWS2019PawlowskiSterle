@@ -63,28 +63,80 @@ export default {
     this.topic = this.$route.params.userid;
     this.id = parseInt(this.$route.params.id);
 
-    let result = await axios({
-      method: "POST",
-      url: "http://localhost:4000/graphql",
-      data: {
-        query: `
-          {
-            painting(id: ${this.id}) {
-              title
-              imgSrc
-              dated
-              infos {
-                id
-                name
-                inhalt
-                audioSrc
+    // let result = await axios({
+    //   method: "POST",
+    //   url: "http://localhost:4000/graphql",
+    //   data: {
+    //     query: `
+    //       {
+    //         painting(id: ${this.id}) {
+    //           title
+    //           imgSrc
+    //           dated
+    //           infos {
+    //             id
+    //             name
+    //             inhalt
+    //             audioSrc
+    //           }
+    //         }
+    //       }
+    //     `
+    //   }
+    // });
+    // this.painting = result.data.data.painting;
+      this.painting = {
+          id: 1,
+          objectName: "FR006",
+          inventarnummer: "CH_SORW_1925-1b",
+          title: "Bildnis des Johannes Cuspinian",
+          imgSrc: [
+              "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
+              "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_2008-11_Overall.jpg",
+              "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_image-date-unknown_Overall-002.jpg"
+          ],
+          dated: 1502,
+          infos: [
+              {
+                  id: 0,
+                  name: "Kurzbeschreibung",
+                  inhalt: "Brustbildnis des Historiographen Dr. Johannes Cuspinian (eigentlich Spiessheimer)\nTeil eines Diptychons (Gegenstück zum Bildnis der Anna Cuspinian)",
+                  audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/2-Kurzbeschreibung.mp3",
+              },
+              {
+                  id: 1,
+                  name: "Provenienz",
+                  inhalt: "Sammlung Charles I, König von England\n- Familie Locker-Lampson, England \n- Baron of Sandys, England\n- Kunsthandel  A. -G., Luzern, Julius Böhler gall.\n- 1925 durch Reinhart erworben",
+                  audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/3-Provenienz.mp3",
+              },
+              {
+                  id: 2,
+                  name: "Maße",
+                  inhalt: "Maße Bildträger: 60,3 x 45,5 x 0,45-0,55 cm (Format nahezu original)",
+                  audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/4-Maße.mp3",
+              },
+              {
+                  id: 3,
+                  name: "Material/Technik",
+                  inhalt: "Malerei auf Fichtenholz (Picea sp.)",
+                  audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/5-MaterialTechnik.mp3",
+              },
+              {
+                  id: 4,
+                  name: "Beschriftung",
+                  inhalt: "Ein gemaltes Allianzwappen der Familien Spiessheimer (latinisiert Cuspinianus) und Putsch auf der Rückseite fragmentarisch erhalten",
+                  audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/6-Beschriftung.mp3",
+              },
+              {
+                  id: 5,
+                  name: "Ausstellungsgeschichte",
+                  inhalt: "Bern 1939-1940, Nr. 62-63, Taf. III\nZürich 1940-1941, Nr. 39-40, Taf. XI-XII\nWinterthur 1955, Nr. 42-43, Taf. V.\nKronach 1994, Nr. 118",
+                  audioSrc: "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/7-Ausstellungsgeschichte.mp3",
               }
-            }
-          }
-        `
-      }
-    });
-    this.painting = result.data.data.painting;
+          ]
+      };
+    this.checkCategoriesToShow(Vue.$cookies.get("categoriesToShow"), this.painting.infos);
+    console.log(this.painting.infos)
 
     this.setupPaintingInfos();
     this.setCurrent(0);
@@ -100,6 +152,36 @@ export default {
     // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
+      checkCategoriesToShow(categoriesToShow, paintingInfos) {
+          let _this = this;
+          let newInfos = [];
+          if (categoriesToShow !== null) {
+              categoriesToShow = categoriesToShow.split(",");
+              for (let i=0; i<categoriesToShow.length; i++) {
+                  switch (categoriesToShow[i]) {
+                      case "kurzbeschreibung":
+                          newInfos.push(paintingInfos[0]);
+                          break;
+                      case "provenienz":
+                          newInfos.push(paintingInfos[1]);
+                          break;
+                      case "masse":
+                          newInfos.push(paintingInfos[2]);
+                          break;
+                      case "material":
+                          newInfos.push(paintingInfos[3]);
+                          break;
+                      case "beschriftung":
+                          newInfos.push(paintingInfos[4]);
+                          break;
+                      case "ausstellungsgeschichte":
+                          newInfos.push(paintingInfos[5]);
+                          break;
+                  }
+              }
+              _this.painting.infos = newInfos;
+          }
+      },
     /**
      * setupPaintingInfos ist dazu da jedes Info-Accordion mit einer Sounddatei zu versehen
      * Es werden Informationen gespeichert, ob die Datei gerade läuft oder pausiert wurde usw.
