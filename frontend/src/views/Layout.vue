@@ -79,7 +79,6 @@
                         categoriesToShow.push(categories[i].name);
                 }
                 Vue.$cookies.set("categoriesToShow", categoriesToShow);
-                console.log("Hier: " + Vue.$cookies.get("categoriesToShow"))
             }
         }
     }

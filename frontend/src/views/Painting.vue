@@ -1,6 +1,6 @@
 <template>
   <div class="painting">
-    <headBar v-bind:headline="painting.title"></headBar>
+    <headBar v-bind:headline="painting.title.substring(0, 18) + '...'"></headBar>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
     <imgSlider v-bind:imgSrc="painting.imgSrc"></imgSlider>
     <!-- <img v-bind:src="painting.imgSrc" alt /> -->
@@ -136,8 +136,6 @@ export default {
           ]
       };
     this.checkCategoriesToShow(Vue.$cookies.get("categoriesToShow"), this.painting.infos);
-    console.log(this.painting.infos)
-
     this.setupPaintingInfos();
     this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
