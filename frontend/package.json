@@ -11,6 +11,7 @@
     "howler": "^2.1.2",
     "vue": "^2.6.10",
     "vue-carousel": "^0.18.0",
+    "vue-cookies": "^1.6.1",
     "vue-router": "^3.0.3",
     "vue-slider-component": "^3.0.40"
   },

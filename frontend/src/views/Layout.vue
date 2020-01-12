@@ -3,14 +3,16 @@
     <headBar headline="Layout"></headBar>
     <span class="setting">Dark Mode</span>
     <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i>
+    <toolBar current-page="settings"></toolBar>
   </div>
 </template>
 
 <script>
   import headBar from "../components/headBar";
+  import toolBar from "../components/toolBar";
     export default {
         name: "Layout",
-        components: {headBar},
+        components: {headBar, toolBar},
         methods: {
             toggle() {
                 let toggleIcon = document.querySelector(".toggleDarkMode");

@@ -5,7 +5,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            currentPainting: {}
+        }
+    }
+};
 </script>
 
 

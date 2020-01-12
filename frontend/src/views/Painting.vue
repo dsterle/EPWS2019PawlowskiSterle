@@ -1,10 +1,6 @@
 <template>
   <div class="painting">
-    <div class="app-bar-wrapper">
-      <a class="back-icon" @click="$router.push({name: `/`}, () => {$router.go(0)})">
-        <img src="../assets/icons/arrow_back.svg" alt="back" />
-      </a>
-    </div>
+    <headBar v-bind:headline="painting.title"></headBar>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
     <imgSlider v-bind:imgSrc="painting.imgSrc"></imgSlider>
     <!-- <img v-bind:src="painting.imgSrc" alt /> -->
@@ -27,6 +23,7 @@
         ></accordion>
       </li>
     </ul>
+    <toolBar current-page="painting"></toolBar>
   </div>
 </template>
 
@@ -38,10 +35,16 @@ import Vue from "vue";
 import imgSlider from "../components/imgSlider";
 import axios from "axios";
 import https from "https";
+import headBar from "../components/headBar";
+import toolBar from "../components/toolBar";
+import VueCookies from 'vue-cookies'
+
+
+Vue.use(VueCookies);
 
 export default {
   name: "painting",
-  components: { accordion, fab, imgSlider },
+  components: { accordion, fab, imgSlider, headBar, toolBar },
   data() {
     return {
       id: 0,
@@ -89,6 +92,8 @@ export default {
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   mounted() {
+      this.currentPainting = parseInt(this.$route.params.id);
+      Vue.$cookies.set("currentPainting", parseInt(this.$route.params.id));
     // console.log("mounted started");
     // this.setCurrent(0);
     // const MQTTHandler = require("../assets/js/MQTTHandler");
@@ -307,24 +312,11 @@ export default {
 @import "../assets/scss/010-variables.scss";
 
 .painting {
-  .app-bar-wrapper {
-    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
-    position: fixed;
-    display: flex;
-    height: $app-bar-height;
-    width: 100%;
-    align-items: center;
-    z-index: 2;
-
-    .back-icon {
-      margin-left: $abstand-M;
-    }
-  }
 
   .fab {
     position: fixed;
     right: 0;
-    bottom: 0;
+    bottom: $abstand-XL;
     margin: 0 $abstand-M $abstand-M 0;
   }
 
