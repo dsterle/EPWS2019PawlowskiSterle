@@ -33,6 +33,8 @@ $font-size-S: 1rem * 0.75; // 12
 $font-size-M: 1rem; // 16
 $font-size-L: 1rem * 1.25; // 20
 $font-size-XL: 1rem * 1.5; // 24
+$font-size-XXL: 1rem * 1.75; // 28
+$font-size-XXXL: 1rem * 1.2; // 32
 
 // Der Zeilenabstand steht im goldenen Schnitt zur font-size
 $font-line-height-S: $font-size-S * $golden-ratio;

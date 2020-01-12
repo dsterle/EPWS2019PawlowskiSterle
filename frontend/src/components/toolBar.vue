@@ -2,7 +2,8 @@
   <div class="toolBar">
     <i class="fas fa-home" @click="$router.push({name: 'waiting', params: {userid: user}})"></i>
     <i class="fas fa-search" @click="$router.push({name: 'search'})"></i>
-    <i class="fas fa-image" @click="$router.push({name: 'painting', params: {userid: user, id: paintingId}})"></i>
+    <i v-if="!isNaN(this.$cookies.get('currentPainting'))" class="fas fa-image" @click="$router.push({name: 'painting', params: {userid: user, id: paintingId}})"></i>
+    <i v-else class="fas fa-image" @click="$router.push({name: 'noPainting', params: {userid: user}})"></i>
     <i class="fas fa-history" @click="$router.push({name: 'history', params: {userid: user}})"></i>
     <i class="fas fa-cog" @click="$router.push({name: 'settings', params: {userid: user}})"></i>
   </div>
@@ -19,7 +20,8 @@
         data() {
             return {
                 user: {},
-                paintingId: {}
+                paintingId: {},
+                currentPageAvailable: false
             }
         },
         methods: {
@@ -74,7 +76,11 @@
     }
 
     .currentPage {
-      color: $darker !important;
+      color: $darker;
+    }
+
+    .inActive {
+      opacity: 0.3;
     }
   }
 </style>
