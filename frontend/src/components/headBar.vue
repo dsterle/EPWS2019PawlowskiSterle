@@ -36,7 +36,7 @@
     }
 
     .pageInfo {
-      position: fixed;
+      position: absolute;
       right: $abstand-M;
     }
 

@@ -2,9 +2,9 @@
   <div class="settings">
     <headBar headline="Einstellungen"></headBar>
     <div class="content">
-      <settingButton icon="fas fa-align-left" description="Layout" page="layout"></settingButton>
+      <settingButton icon="fas fa-align-left" description="Darstellung" page="layout"></settingButton>
       <settingButton icon="fas fa-palette" description="Farben" page="#"></settingButton>
-      <settingButton icon="fas fa-headphones-alt" description="Modi" page="#"></settingButton>
+      <settingButton icon="fas fa-headphones-alt" description="Audio" page="audio"></settingButton>
       <settingButton icon="fas fa-globe-americas" description="Sprache" page="#"></settingButton>
     </div>
     <toolBar current-page="settings"></toolBar>

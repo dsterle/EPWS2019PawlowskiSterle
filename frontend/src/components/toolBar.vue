@@ -70,6 +70,7 @@
     padding: $abstand-M 0 $abstand-M 0;
     background: $accentDark;
     color: $lighter;
+    z-index: 5;
 
     i {
       font-size: $font-size-XL;

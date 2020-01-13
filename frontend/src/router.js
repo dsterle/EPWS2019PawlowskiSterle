@@ -63,6 +63,14 @@ export default new Router({
       }
     },
     {
+      path: "/user/:userid/settings/audio",
+      name: 'audio',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Audio.vue')
+      }
+    },
+    {
       path: '/docs',
       name: 'documentation',
       component: function () {
