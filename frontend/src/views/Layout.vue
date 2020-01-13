@@ -174,9 +174,6 @@
       background-color: $accent;
     }
 
-    .vue-slider-dot-tooltip-inner {
-      background-color: $accent;
-    }
     .vue-slider-dot-handle::after {
       background-color: $accentTransparent;
     }

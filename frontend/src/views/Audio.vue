@@ -105,4 +105,31 @@
     }
   }
 
+  //*********************** Following classes are there to style the vue-slider-comonent
+
+  .vue-slider-rail {
+    height: 2px;
+    background-color: $light;
+  }
+
+  .vue-slider-process {
+    background-color: $accentDark;
+  }
+
+  .vue-slider-mark-step {
+    background-color: $accent;
+  }
+
+  .vue-slider-dot-handle {
+    background-color: $accent;
+  }
+
+  .vue-slider-dot-tooltip-inner {
+    background-color: $accent;
+  }
+
+  .vue-slider-dot-handle::after {
+    background-color: $accentTransparent;
+  }
+
 </style>
