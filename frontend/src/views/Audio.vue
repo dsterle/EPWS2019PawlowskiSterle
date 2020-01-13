@@ -8,12 +8,23 @@
       <span class="setting">Lautstärke</span>
       <slider
               class="slider"
-              v-model="sliderValue"
+              v-model="soundValue"
+              :interval="2"
               :drag-on-click="true"
+              :contained="true"
+      ></slider>
+      <span class="setting">Geschwindigkeit</span>
+      <slider
+              class="slider"
+              v-model="speedValue"
+              :adsorb="true"
+              :data="data"
+              :drag-on-click="true"
+              :contained="true"
       ></slider>
       <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
-    <toolBar current-page="Settings"></toolBar>
+    <toolBar current-page="settings"></toolBar>
   </div>
 </template>
 
@@ -30,7 +41,9 @@
         components: {headBar, toolBar, slider},
         data() {
             return {
-                sliderValue: 0
+                soundValue: 50,
+                speedValue: 1,
+                data: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
             }
         },
         methods: {
@@ -83,6 +96,12 @@
       border-radius: 5px;
       border: none;
       color: $lighter;
+    }
+
+    .slider {
+      color: $lighter;
+      margin-left: $abstand-L;
+      margin-right: $abstand-L;
     }
   }
 

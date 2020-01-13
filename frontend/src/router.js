@@ -63,6 +63,22 @@ export default new Router({
       }
     },
     {
+      path: "/user/:userid/settings/colors",
+      name: 'colors',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Colors.vue')
+      }
+    },
+    {
+      path: "/user/:userid/settings/language",
+      name: 'language',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Language.vue')
+      }
+    },
+    {
       path: "/user/:userid/settings/audio",
       name: 'audio',
       props: true,

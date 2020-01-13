@@ -3,9 +3,9 @@
     <headBar headline="Einstellungen"></headBar>
     <div class="content">
       <settingButton icon="fas fa-align-left" description="Darstellung" page="layout"></settingButton>
-      <settingButton icon="fas fa-palette" description="Farben" page="#"></settingButton>
+      <settingButton icon="fas fa-palette" description="Farben" page="colors"></settingButton>
       <settingButton icon="fas fa-headphones-alt" description="Audio" page="audio"></settingButton>
-      <settingButton icon="fas fa-globe-americas" description="Sprache" page="#"></settingButton>
+      <settingButton icon="fas fa-globe-americas" description="Sprache" page="language"></settingButton>
     </div>
     <toolBar current-page="settings"></toolBar>
   </div>
