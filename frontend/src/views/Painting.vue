@@ -64,10 +64,10 @@ export default {
       this.id = parseInt(this.$route.params.id);
 
       let _this = this;
-      window.onblur = function() {
-          if (_this.getPlayingInfo() !== undefined)
-              _this.pause();
-      };
+      // window.onblur = function() {
+      //     if (_this.getPlayingInfo() !== undefined)
+      //         _this.pause();
+      // };
       // let result = await axios({
       //   method: "POST",
       //   url: "http://localhost:4000/graphql",
@@ -140,6 +140,12 @@ export default {
               }
           ]
       };
+      for (let i=0; i < Vue.prototype.$audioHowls.length; i++) {
+          if (Vue.prototype.$audioHowls[i] !== undefined) {
+              console.log("abgefangen");
+              return;
+          }
+      }
       this.checkCategoriesToShow(Vue.$cookies.get("categoriesToShow"), this.painting.infos);
       this.setupPaintingInfos();
       this.setCurrent(0);
@@ -200,22 +206,23 @@ export default {
         info.current = false;
         // paused zeigt an, ob die Info pausiert ist
         info.paused = false;
-        info.audio = new Howl({
-          src: [info.audioSrc],
-          onload: function() {
-            _this.setSlider(info);
-          },
-          onplay: function() {
-            clearInterval(_this.currentLoop);
-            _this.updateSlider(info);
-          },
-          onend: function() {
-            info.currentValue = 0;
-            info.current = false;
-            clearInterval(_this.currentLoop);
-            _this.setCurrent(info.id + 1);
-          }
+        Vue.prototype.$audioHowls[info.id] = new Howl({
+            src: [info.audioSrc],
+            onload: function() {
+                _this.setSlider(info);
+            },
+            onplay: function() {
+                clearInterval(_this.currentLoop);
+                _this.updateSlider(info);
+            },
+            onend: function() {
+                info.currentValue = 0;
+                info.current = false;
+                clearInterval(_this.currentLoop);
+                _this.setCurrent(info.id + 1);
+            }
         });
+        info.audio = Vue.prototype.$audioHowls[info.id];
       });
     },
     /**

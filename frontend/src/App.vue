@@ -5,11 +5,17 @@
 </template>
 
 <script>
+    import { Howl, Howler } from "howler";
+    import Vue from "vue";
 export default {
+    components: {Howl, Vue},
     data() {
         return {
-            currentPainting: {}
+
         }
+    },
+    created() {
+        Vue.prototype.$audioHowls = []
     }
 };
 </script>
