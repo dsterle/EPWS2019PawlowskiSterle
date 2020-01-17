@@ -19,6 +19,7 @@
               class="slider"
               ref="speedSlider"
               v-model="speedValue"
+              :value="speedValue"
               :adsorb="true"
               :data="data"
               :drag-on-click="true"
@@ -48,12 +49,14 @@
                 data: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
             }
         },
+        mounted() {
+            this.checkCookies();
+        },
         methods: {
             toggle() {
                 let toggleIcon = document.querySelector(".toggleAutoplay");
                 if (toggleIcon.classList.contains("fa-toggle-on")) {
                     toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
-
                 } else {
                     toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
                 }
@@ -66,6 +69,21 @@
                     Vue.$cookies.set("autoplay", false);
                 Vue.$cookies.set("volume", this.$refs.volumeSlider.getValue());
                 Vue.$cookies.set("audioSpeed", this.$refs.speedSlider.getValue());
+            },
+            checkCookies() {
+                if (Vue.$cookies.get("autoplay") !== null) {
+                    if (Vue.$cookies.get("autoplay") === "true")
+                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-on toggleAutoplay";
+                    else
+                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-off toggleAutoplay";
+                }
+                if (Vue.$cookies.get("volume") !== null)
+                    this.soundValue = Vue.$cookies.get("volume");
+                if (Vue.$cookies.get("audioSpeed") !== null) {
+                    this.speedValue = parseFloat(Vue.$cookies.get("audioSpeed"));
+                    this.$refs.speedSlider.setValue(parseFloat(Vue.$cookies.get("audioSpeed")));
+                }
+
             }
         }
     }

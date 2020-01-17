@@ -66,7 +66,7 @@
         created() {
 
         }, mounted() {
-            this.checkCategories();
+            this.checkCookies();
         },
         methods: {
             toggle() {
@@ -78,12 +78,22 @@
                     toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
                 }
             },
-            checkCategories() {
+            checkCookies() {
+                if (Vue.$cookies.get("darkMode") !== null) {
+                    if (Vue.$cookies.get("darkMode") === "true")
+                        document.querySelector(".toggleDarkMode").className = "fas fa-toggle-on toggleDarkMode";
+                    else
+                        document.querySelector(".toggleDarkMode").className = "fas fa-toggle-off toggleDarkMode";
+                }
                 let categories = document.querySelectorAll(".category");
                 let categoriesToShow = Vue.$cookies.get("categoriesToShow");
                 for (let i=0; i<categories.length; i++) {
                     if (categoriesToShow !== null)
                       categories[i].checked = categoriesToShow.includes(categories[i].name);
+                }
+                if (Vue.$cookies.get("fontSize") !== null) {
+                    this.sliderValue = Vue.$cookies.get("fontSize");
+                    this.$refs.slider.setValue((Vue.$cookies.get("fontSize")));
                 }
             },
             saveSettings() {
