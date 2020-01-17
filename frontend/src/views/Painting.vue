@@ -271,12 +271,16 @@ export default {
       let playingInfo = this.getPlayingInfo();
 
       this.currentLoop = setInterval(() => {
-        let currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
+        // let currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
+          let currentValue = parseInt(Vue.prototype.$audioHowls[playingInfo.id].seek().toFixed(0));
+          Vue.$cookies.set("audioSliderPostition", currentValue);
         // Wenn die Audiodatei am Ende ist wird der Slider nicht bis zum rechten Rand bewegt,
         // da sonst die gesamte Seite etwas größer wird
         if (currentValue !== playingInfo.max) {
-          info.currentValue = currentValue;
-          _this.rerenderInfo(info);
+          // info.currentValue = currentValue;
+            playingInfo.currentValue = currentValue;
+          // _this.rerenderInfo(info);
+            _this.rerenderInfo(playingInfo)
         }
       }, 100);
     },
@@ -301,7 +305,8 @@ export default {
     pauseInfo(info) {
       // Die übergebene Info wird pausiert, dazu wird der currentLoop, der für den AUdio-Slider verantwortlich ist beendet
       info.paused = true;
-      info.audio.pause();
+      // info.audio.pause();
+      Vue.prototype.$audioHowls[info.id].pause();
       this.fabIcon = this.playIcon;
       clearInterval(this.currentLoop);
     },
@@ -311,7 +316,8 @@ export default {
     playInfo(info) {
       // Hier wird das audio-Object der Info weitergespielt und das Icon für den fab gesetzt
       info.paused = false;
-      info.audio.play();
+      // info.audio.play();
+      Vue.prototype.$audioHowls[info.id].play();
       this.fabIcon = this.pauseIcon;
     },
     /**
@@ -326,7 +332,8 @@ export default {
 
           this.rerenderInfo(info);
           // springe in der Audiodatei zu der Sekunde newValue
-          info.audio.seek(newValue);
+          // info.audio.seek(newValue);
+            Vue.prototype.$audioHowls[info.id].seek(newValue);
         }
       });
     },
@@ -353,9 +360,14 @@ export default {
      * getPlayingInfo gibt die Info, die gerade abgespielt wird
      */
     getPlayingInfo() {
-      return this.painting.infos.find(info => {
-        return info.audio.playing();
-      });
+      // return this.painting.infos.find(info => {
+      //   return info.audio.playing();
+      // });
+        for (let i=0; i < Vue.prototype.$audioHowls.length; i++) {
+            if (Vue.prototype.$audioHowls[i] !== undefined)
+                if (Vue.prototype.$audioHowls[i].playing())
+                    return this.painting.infos[i];
+        }
     },
     /**
      * getPausedInfo gibt die die Info, die aktuell pausiert ist
