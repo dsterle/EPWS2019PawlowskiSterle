@@ -33,6 +33,7 @@
       <span class="setting">Schriftgröße</span>
       <slider
               class="slider"
+              ref="slider"
               v-model="sliderValue"
               :adsorb="true"
               :data="data"
@@ -87,12 +88,18 @@
             },
             saveSettings() {
                 let categories = document.querySelectorAll(".category");
+                let darkMode = document.querySelector(".fa-toggle-off");
+                if (darkMode === null)
+                    Vue.$cookies.set("darkMode", true);
+                else
+                    Vue.$cookies.set("darkMode", false);
                 let categoriesToShow = [];
                 for (let i=0; i<categories.length; i++) {
                     if (categories[i].checked)
                         categoriesToShow.push(categories[i].name);
                 }
                 Vue.$cookies.set("categoriesToShow", categoriesToShow);
+                Vue.$cookies.set("fontSize", this.$refs.slider.getValue());
             }
         }
     }

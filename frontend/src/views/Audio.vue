@@ -3,11 +3,12 @@
     <headBar headline="Audio"></headBar>
     <div class="content">
       <span class="setting">Autoplay
-        <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i>
+        <i class="fas fa-toggle-on toggleAutoplay" v-on:click="toggle"></i>
       </span>
       <span class="setting">Lautstärke</span>
       <slider
               class="slider"
+              ref="volumeSlider"
               v-model="soundValue"
               :interval="2"
               :drag-on-click="true"
@@ -16,6 +17,7 @@
       <span class="setting">Geschwindigkeit</span>
       <slider
               class="slider"
+              ref="speedSlider"
               v-model="speedValue"
               :adsorb="true"
               :data="data"
@@ -48,7 +50,7 @@
         },
         methods: {
             toggle() {
-                let toggleIcon = document.querySelector(".toggleDarkMode");
+                let toggleIcon = document.querySelector(".toggleAutoplay");
                 if (toggleIcon.classList.contains("fa-toggle-on")) {
                     toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
 
@@ -57,13 +59,13 @@
                 }
             },
             saveSettings() {
-                // let categories = document.querySelectorAll(".category");
-                // let categoriesToShow = [];
-                // for (let i=0; i<categories.length; i++) {
-                //     if (categories[i].checked)
-                //         categoriesToShow.push(categories[i].name);
-                // }
-                // Vue.$cookies.set("categoriesToShow", categoriesToShow);
+                let autoplay = document.querySelector(".fa-toggle-off");
+                if (autoplay === null)
+                    Vue.$cookies.set("autoplay", true);
+                else
+                    Vue.$cookies.set("autoplay", false);
+                Vue.$cookies.set("volume", this.$refs.volumeSlider.getValue());
+                Vue.$cookies.set("audioSpeed", this.$refs.speedSlider.getValue());
             }
         }
     }

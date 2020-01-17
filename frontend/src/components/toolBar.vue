@@ -68,7 +68,7 @@
     left: 0;
     width: 100%;
     padding: $abstand-M 0 $abstand-M 0;
-    background: $accentDark;
+    background: $evenDarker;
     color: $lighter;
     z-index: 5;
 
@@ -77,7 +77,7 @@
     }
 
     .currentPage {
-      color: $darker;
+      color: $accent;
     }
 
     .inActive {

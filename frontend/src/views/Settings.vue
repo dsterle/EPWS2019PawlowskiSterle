@@ -35,7 +35,6 @@
   @import "../assets/scss/010-variables.scss";
   .settings {
     .content {
-      margin-top: $abstand-M;
       width: 90%;
       height: 90%;
     }

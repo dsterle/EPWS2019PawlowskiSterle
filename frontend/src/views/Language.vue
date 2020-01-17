@@ -3,31 +3,10 @@
     <headBar headline="Sprache"></headBar>
     <div class="content">
       <ul class="languageList">
-        <li id="german">
-        <span>
-<!--          <i class="fas fa-check"></i>Deutsch-->
-          Deutsch
-        </span>
-          <img src="../assets/flags/german.png" alt="german">
-        </li>
-        <li id="bEnglish">
-        <span>
-          Br. English
-        </span>
-          <img src="../assets/flags/british-english.png" alt="british-english">
-        </li>
-        <li id="aEnglish">
-        <span>
-          Am. English
-        </span>
-          <img src="../assets/flags/american-english.png" alt="american-english">
-        </li>
-        <li id="french">
-        <span>
-          Français
-        </span>
-          <img src="../assets/flags/french.png" alt="french">
-        </li>
+        <language-button language="Deutsch" language-id="german" :lang-src="require('../assets/flags/german.png')" lang-class="selected"></language-button>
+        <language-button language="Br. English" language-id="bEnglish" :lang-src="require('../assets/flags/british-english.png')"></language-button>
+        <language-button language="Am. English" language-id="aEnglish" :lang-src="require('../assets/flags/american-english.png')"></language-button>
+        <language-button language="Français" language-id="french" :lang-src="require('../assets/flags/french.png')"></language-button>
       </ul>
     </div>
     <toolBar current-page="settings"></toolBar>
@@ -37,13 +16,26 @@
 <script>
     import headBar from "../components/headBar";
     import toolBar from "../components/toolBar";
+    import languageButton from "../components/languageButton";
     import VueCookies from 'vue-cookies'
     import Vue from "vue";
 
     Vue.use(VueCookies);
     export default {
         name: "Language",
-        components: {headBar, toolBar}
+        components: {headBar, toolBar, languageButton},
+        methods: {
+            changeLanguage(id) {
+                document.querySelector(".selected").classList.remove("selected");
+                document.querySelector("#" + id).classList.add("selected");
+                Vue.$cookies.set("language", document.querySelector(".selected").id);
+            }
+        },
+        mounted() {
+            if (Vue.$cookies.get("language") !== null) {
+                this.changeLanguage(Vue.$cookies.get("language"));
+            }
+        }
     }
 </script>
 
@@ -51,20 +43,8 @@
   @import "../assets/scss/010-variables.scss";
 
   .language {
-    .languageList {
-      li {
-        display: flex;
-        justify-content: space-between;
-        margin: $abstand-L $abstand-M $abstand-M $abstand-M;
-        color: $lighter;
-        font-size: $font-size-L;
-        line-height: $font-line-height-L;
-
-        img {
-          width: $abstand-XL;
-          height: $abstand-L;
-        }
-      }
+    .selected {
+      color: $accent;
     }
   }
 

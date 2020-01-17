@@ -1,6 +1,6 @@
 <template>
   <div class="painting">
-    <headBar v-bind:headline="painting.title.substring(0, 18) + '...'"></headBar>
+    <headBar v-if="painting.title !== undefined" v-bind:headline="painting.title.substring(0, 18) + '...'"></headBar>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
     <imgSlider class="image" v-bind:imgSrc="painting.imgSrc"></imgSlider>
     <!-- <img v-bind:src="painting.imgSrc" alt /> -->
@@ -60,31 +60,36 @@ export default {
     };
   },
   async created() {
-    this.topic = this.$route.params.userid;
-    this.id = parseInt(this.$route.params.id);
+      this.topic = this.$route.params.userid;
+      this.id = parseInt(this.$route.params.id);
 
-    // let result = await axios({
-    //   method: "POST",
-    //   url: "http://localhost:4000/graphql",
-    //   data: {
-    //     query: `
-    //       {
-    //         painting(id: ${this.id}) {
-    //           title
-    //           imgSrc
-    //           dated
-    //           infos {
-    //             id
-    //             name
-    //             inhalt
-    //             audioSrc
-    //           }
-    //         }
-    //       }
-    //     `
-    //   }
-    // });
-    // this.painting = result.data.data.painting;
+      let _this = this;
+      window.onblur = function() {
+          if (_this.getPlayingInfo() !== undefined)
+              _this.pause();
+      };
+      // let result = await axios({
+      //   method: "POST",
+      //   url: "http://localhost:4000/graphql",
+      //   data: {
+      //     query: `
+      //       {
+      //         painting(id: ${this.id}) {
+      //           title
+      //           imgSrc
+      //           dated
+      //           infos {
+      //             id
+      //             name
+      //             inhalt
+      //             audioSrc
+      //           }
+      //         }
+      //       }
+      //     `
+      //   }
+      // });
+      // this.painting = result.data.data.painting;
       this.painting = {
           id: 1,
           objectName: "FR006",
@@ -135,15 +140,16 @@ export default {
               }
           ]
       };
-    this.checkCategoriesToShow(Vue.$cookies.get("categoriesToShow"), this.painting.infos);
-    this.setupPaintingInfos();
-    this.setCurrent(0);
-    const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
+      this.checkCategoriesToShow(Vue.$cookies.get("categoriesToShow"), this.painting.infos);
+      this.setupPaintingInfos();
+      this.setCurrent(0);
+      const MQTTHandler = require("../assets/js/MQTTHandler");
+      MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   mounted() {
       this.currentPainting = parseInt(this.$route.params.id);
       Vue.$cookies.set("currentPainting", parseInt(this.$route.params.id));
+      // Vue.$cookies.set("currentPaintingAudioPosition", )
     // console.log("mounted started");
     // this.setCurrent(0);
     // const MQTTHandler = require("../assets/js/MQTTHandler");

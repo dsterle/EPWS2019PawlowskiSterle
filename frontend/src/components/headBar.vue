@@ -28,7 +28,8 @@
     align-items: center;
     color: $lighter;
     font-size: $font-size-L;
-    background: $accentDark;
+    font-weight: $weight-semibold;
+    background: $evenDarker;
 
     .back-icon {
       margin-left: $abstand-M;
