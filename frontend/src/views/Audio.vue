@@ -92,9 +92,9 @@
     .saveButton {
       position: absolute;
       right: $abstand-M;
-      bottom: $abstand-L;
       background: $accent;
       padding: $abstand-S;
+      margin-top: $abstand-M;
       border-radius: 5px;
       border: none;
       color: $lighter;

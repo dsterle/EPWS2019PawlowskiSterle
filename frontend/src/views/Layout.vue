@@ -109,6 +109,7 @@
   @import "../assets/scss/010-variables.scss";
 
   .layout {
+    min-height: 610px;
 
     .content {
     }
