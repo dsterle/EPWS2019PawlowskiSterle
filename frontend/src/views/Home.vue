@@ -11,6 +11,7 @@
       v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
     ></inputField>
+
     <input type="button" value="Tutorial starten" class="button-text tutorialButton" @click="$router.push({name: 'tutorial'})">
   </div>
 </template>
@@ -28,6 +29,12 @@ export default {
     };
   },
   methods: {
+      writeCache() {
+          localStorage.audio = "Hello";
+      },
+      printCache() {
+          console.log(localStorage.audio)
+      },
     validateIDs(data) {
       if (this.paintingIDs.includes(parseInt(data))) {
         this.$router.push({ path: `waiting/${data}` });
@@ -63,11 +70,12 @@ export default {
   }
 
   .tutorialButton {
-    background: $accent;
+    background: none;
     padding: $abstand-S $abstand-M $abstand-S $abstand-M;
     margin-top: $abstand-XXL;
     border-radius: 5px;
-    color: $darker;
+    border: 2px solid $accent;
+    color: $accent;
     width: 100%;
     cursor: pointer;
     transition: 0.5s;
