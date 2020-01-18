@@ -10,19 +10,6 @@ const DB_paintings = require("./data/database").paintings;
 //** Models */
 const Painting = require("./models/painting");
 
-/*
-
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://paintingReadingUser:K7395ODRGHL@inguidecluster-cuy5l.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
-
-*/
-
 const startServer = async () => {
 
   app.use(cors());
