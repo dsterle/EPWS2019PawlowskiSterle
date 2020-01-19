@@ -42,7 +42,7 @@ const startServer = async () => {
         // painting.save().then().catch(err => console.log(err));
 
         return Painting.find({ id: args.id }).then(painting => {
-
+          console.log(painting[0]);
           return painting[0];
 
         }).catch(err => {
