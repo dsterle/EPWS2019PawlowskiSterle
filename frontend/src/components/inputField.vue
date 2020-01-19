@@ -82,7 +82,7 @@ export default {
     background: $accent;
     padding: 0 $abstand-M 0 $abstand-M;
     border-radius: 5px;
-    color: $darker;
+    color: $lighter;
     cursor: pointer;
     transition: 0.5s;
   }

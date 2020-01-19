@@ -1,22 +1,21 @@
 <template>
   <div class="waiting">
-    <div class="app-bar-wrapper">
-      <a class="back-icon" @click="$router.go(-1)">
-        <img src="../assets/icons/arrow_back.svg" alt="back" />
-      </a>
-    </div>
+    <headBar headline="Home"></headBar>
     <div class="content-wrapper">
       <p class="hint-text note-text">Halten Sie Ihren Chip vor ein Gemälde...</p>
     </div>
+    <toolBar current-page="home"></toolBar>
   </div>
 </template>
 
 <script>
 // import handleMQTTConnection from "../assets/js/handleMQTTConnection";
+import toolBar from "../components/toolBar.vue";
+import headBar from "../components/headBar";
 
 export default {
   name: "waiting",
-  components: {},
+  components: {toolBar, headBar},
   data() {
     return {
       topic: {}
@@ -24,7 +23,7 @@ export default {
   },
   created() {
     // Speichere die ID in der URL als topic
-    this.topic = this.$route.params.id;
+    this.topic = this.$route.params.userid;
   },
   mounted() {
     const MQTTHandler = require("../assets/js/MQTTHandler");
@@ -50,15 +49,9 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/scss/010-variables.scss";
 
-.app-bar-wrapper {
-  display: flex;
-  height: $app-bar-height;
-  width: 100%;
-  align-items: center;
-
-  .back-icon {
-    margin-left: $abstand-M;
-  }
+.settings-icon {
+  position: absolute;
+  right: $abstand-M;
 }
 
 .content-wrapper {

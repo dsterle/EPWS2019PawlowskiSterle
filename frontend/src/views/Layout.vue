@@ -1,0 +1,198 @@
+<template>
+  <div class="layout">
+    <headBar headline="Darstellung"></headBar>
+    <div class="content">
+      <span class="setting">Dark Mode <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i></span>
+      <span class="setting">Kategorien anzeigen:</span>
+      <ul>
+        <li>
+          <label for="kurzbeschreibung">Kurzbeschreibung</label>
+          <input class="category" name="kurzbeschreibung" id="kurzbeschreibung" type="checkbox" checked>
+        </li>
+        <li>
+          <label for="provenienz">Provenienz</label>
+          <input class="category" name="provenienz" id="provenienz" type="checkbox" checked>
+        </li>
+        <li>
+          <label for="masse">Maße</label>
+          <input class="category" name="masse" id="masse" type="checkbox" checked>
+        </li>
+        <li>
+          <label for="material">Material/Technik</label>
+          <input class="category" name="material" id="material" type="checkbox" checked>
+        </li>
+        <li>
+          <label for="beschriftung">Beschriftung</label>
+          <input class="category" name="beschriftung" id="beschriftung" type="checkbox" checked>
+        </li>
+        <li>
+          <label for="ausstellungsgeschichte">Ausstellungsgeschichte</label>
+          <input class="category" name="ausstellungsgeschichte" id="ausstellungsgeschichte" type="checkbox" checked>
+        </li>
+      </ul>
+      <span class="setting">Schriftgröße</span>
+      <slider
+              class="slider"
+              ref="slider"
+              v-model="sliderValue"
+              :adsorb="true"
+              :data="data"
+              :marks="true"
+              :drag-on-click="true"
+      ></slider>
+      <button class="saveButton button-text" @click="saveSettings">Speichern</button>
+    </div>
+    <toolBar current-page="settings"></toolBar>
+  </div>
+</template>
+
+<script>
+  import headBar from "../components/headBar";
+  import toolBar from "../components/toolBar";
+  import slider from "vue-slider-component";
+  import VueCookies from 'vue-cookies'
+  import Vue from "vue";
+
+  Vue.use(VueCookies);
+    export default {
+        name: "Layout",
+        components: {headBar, toolBar, slider},
+        data() {
+            return {
+                sliderValue: 'a',
+                data: ["Klein", "Mittel", "Groß"]
+            }
+        },
+        created() {
+
+        }, mounted() {
+            this.checkCookies();
+        },
+        methods: {
+            toggle() {
+                let toggleIcon = document.querySelector(".toggleDarkMode");
+                if (toggleIcon.classList.contains("fa-toggle-on")) {
+                    toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
+
+                } else {
+                    toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
+                }
+            },
+            checkCookies() {
+                if (Vue.$cookies.get("darkMode") !== null) {
+                    if (Vue.$cookies.get("darkMode") === "true")
+                        document.querySelector(".toggleDarkMode").className = "fas fa-toggle-on toggleDarkMode";
+                    else
+                        document.querySelector(".toggleDarkMode").className = "fas fa-toggle-off toggleDarkMode";
+                }
+                let categories = document.querySelectorAll(".category");
+                let categoriesToShow = Vue.$cookies.get("categoriesToShow");
+                for (let i=0; i<categories.length; i++) {
+                    if (categoriesToShow !== null)
+                      categories[i].checked = categoriesToShow.includes(categories[i].name);
+                }
+                if (Vue.$cookies.get("fontSize") !== null) {
+                    this.sliderValue = Vue.$cookies.get("fontSize");
+                    this.$refs.slider.setValue((Vue.$cookies.get("fontSize")));
+                }
+            },
+            saveSettings() {
+                let categories = document.querySelectorAll(".category");
+                let darkMode = document.querySelector(".fa-toggle-off");
+                if (darkMode === null)
+                    Vue.$cookies.set("darkMode", true);
+                else
+                    Vue.$cookies.set("darkMode", false);
+                let categoriesToShow = [];
+                for (let i=0; i<categories.length; i++) {
+                    if (categories[i].checked)
+                        categoriesToShow.push(categories[i].name);
+                }
+                Vue.$cookies.set("categoriesToShow", categoriesToShow);
+                Vue.$cookies.set("fontSize", this.$refs.slider.getValue());
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+  @import "../assets/scss/010-variables.scss";
+
+  .layout {
+    min-height: 610px;
+
+    .content {
+    }
+
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      padding: $abstand-M;
+      color: $lighter;
+      font-size: $font-size-L;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: $abstand-S;
+      margin-left: $abstand-L;
+      margin-right: $abstand-S;
+      color: $lighter;
+      font-size: $font-size-M;
+    }
+
+    i {
+      font-size: $font-size-XL;
+      color: $lighter;
+    }
+
+    .category {
+      width: $font-size-M;
+      height: $font-size-M;
+    }
+
+    .slider {
+      color: $lighter;
+      margin-left: $abstand-L;
+      margin-right: $abstand-L;
+    }
+
+    .saveButton {
+      position: absolute;
+      right: $abstand-M;
+      bottom: $abstand-L;
+      background: $accent;
+      padding: $abstand-S;
+      border-radius: 5px;
+      border: none;
+      color: $lighter;
+    }
+  }
+    //*********************** Following classes are there to style the vue-slider-comonent
+
+    .vue-slider-rail {
+      height: 2px;
+      background-color: $light;
+    }
+
+    .vue-slider-process {
+      background-color: $accentDark;
+    }
+
+    .vue-slider-mark-step {
+      background-color: $accent;
+    }
+
+    .vue-slider-dot-handle {
+      background-color: $accent;
+    }
+
+    .vue-slider-dot-tooltip-inner {
+      background-color: $accent;
+    }
+
+    .vue-slider-dot-handle::after {
+      background-color: $accentTransparent;
+    }
+</style>

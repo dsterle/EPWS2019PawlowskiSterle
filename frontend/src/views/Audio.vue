@@ -1,0 +1,155 @@
+<template>
+  <div class="audio">
+    <headBar headline="Audio"></headBar>
+    <div class="content">
+      <span class="setting">Autoplay
+        <i class="fas fa-toggle-on toggleAutoplay" v-on:click="toggle"></i>
+      </span>
+      <span class="setting">Lautstärke</span>
+      <slider
+              class="slider"
+              ref="volumeSlider"
+              v-model="soundValue"
+              :interval="2"
+              :drag-on-click="true"
+              :contained="true"
+      ></slider>
+      <span class="setting">Geschwindigkeit</span>
+      <slider
+              class="slider"
+              ref="speedSlider"
+              v-model="speedValue"
+              :value="speedValue"
+              :adsorb="true"
+              :data="data"
+              :drag-on-click="true"
+              :contained="true"
+      ></slider>
+      <button class="saveButton button-text" @click="saveSettings">Speichern</button>
+    </div>
+    <toolBar current-page="settings"></toolBar>
+  </div>
+</template>
+
+<script>
+    import headBar from "../components/headBar";
+    import toolBar from "../components/toolBar";
+    import slider from "vue-slider-component";
+    import VueCookies from 'vue-cookies'
+    import Vue from "vue";
+
+    Vue.use(VueCookies);
+    export default {
+        name: "Audio",
+        components: {headBar, toolBar, slider},
+        data() {
+            return {
+                soundValue: 50,
+                speedValue: 1,
+                data: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
+            }
+        },
+        mounted() {
+            this.checkCookies();
+        },
+        methods: {
+            toggle() {
+                let toggleIcon = document.querySelector(".toggleAutoplay");
+                if (toggleIcon.classList.contains("fa-toggle-on")) {
+                    toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
+                } else {
+                    toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
+                }
+            },
+            saveSettings() {
+                let autoplay = document.querySelector(".fa-toggle-off");
+                if (autoplay === null)
+                    Vue.$cookies.set("autoplay", true);
+                else
+                    Vue.$cookies.set("autoplay", false);
+                Vue.$cookies.set("volume", this.$refs.volumeSlider.getValue());
+                Vue.$cookies.set("audioSpeed", this.$refs.speedSlider.getValue());
+            },
+            checkCookies() {
+                if (Vue.$cookies.get("autoplay") !== null) {
+                    if (Vue.$cookies.get("autoplay") === "true")
+                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-on toggleAutoplay";
+                    else
+                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-off toggleAutoplay";
+                }
+                if (Vue.$cookies.get("volume") !== null)
+                    this.soundValue = Vue.$cookies.get("volume");
+                if (Vue.$cookies.get("audioSpeed") !== null) {
+                    this.speedValue = parseFloat(Vue.$cookies.get("audioSpeed"));
+                    this.$refs.speedSlider.setValue(parseFloat(Vue.$cookies.get("audioSpeed")));
+                }
+
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+  @import "../assets/scss/010-variables.scss";
+  @import "../../node_modules/vue-slider-component/theme/material.css";
+
+  .audio {
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      padding: $abstand-M;
+      color: $lighter;
+      font-size: $font-size-L;
+    }
+
+    i {
+      font-size: $font-size-XL;
+      color: $lighter;
+    }
+
+    .saveButton {
+      position: absolute;
+      right: $abstand-M;
+      background: $accent;
+      padding: $abstand-S;
+      margin-top: $abstand-M;
+      border-radius: 5px;
+      border: none;
+      color: $lighter;
+    }
+
+    .slider {
+      color: $lighter;
+      margin-left: $abstand-L;
+      margin-right: $abstand-L;
+    }
+  }
+
+  //*********************** Following classes are there to style the vue-slider-comonent
+
+  .vue-slider-rail {
+    height: 2px;
+    background-color: $light;
+  }
+
+  .vue-slider-process {
+    background-color: $accentDark;
+  }
+
+  .vue-slider-mark-step {
+    background-color: $accent;
+  }
+
+  .vue-slider-dot-handle {
+    background-color: $accent;
+  }
+
+  .vue-slider-dot-tooltip-inner {
+    background-color: $accent;
+  }
+
+  .vue-slider-dot-handle::after {
+    background-color: $accentTransparent;
+  }
+
+</style>

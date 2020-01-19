@@ -3,6 +3,7 @@
 $evenDarker: #18191a;
 $darker: #222324;
 $light: #4a4a4a;
+$middleLight: #cdcdcd;
 $lighter: #fff;
 $input-outline: #919192;
 $accent: #708ce0;
@@ -22,6 +23,7 @@ $abstand-XL: 1rem * 4; // 64
 $abstand-XXL: 1rem * 4.5; // 72
 $abstand-XXXL: 1rem * 5; // 80
 
+
 $app-bar-height: 1rem * 3.375; // 54
 $icon-wrapper-width: 1rem * 3; // 48
 $fab-size: 1rem * 3.5; // 56
@@ -33,6 +35,8 @@ $font-size-S: 1rem * 0.75; // 12
 $font-size-M: 1rem; // 16
 $font-size-L: 1rem * 1.25; // 20
 $font-size-XL: 1rem * 1.5; // 24
+$font-size-XXL: 1rem * 1.75; // 28
+$font-size-XXXL: 1rem * 1.2; // 32
 
 // Der Zeilenabstand steht im goldenen Schnitt zur font-size
 $font-line-height-S: $font-size-S * $golden-ratio;

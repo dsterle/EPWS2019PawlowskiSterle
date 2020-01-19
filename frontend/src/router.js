@@ -14,7 +14,18 @@ export default new Router({
       component: Home
     },
     {
-      path: '/waiting/:id',
+      path: '/tutorial',
+      name: 'tutorial',
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Tutorial.vue')
+      }
+    },
+    {
+      path: '/waiting/:userid',
       name: 'waiting',
       props: true,
       // route level code-splitting
@@ -33,6 +44,57 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: function () {
         return import(/* webpackChunkName: "about" */ './views/Painting.vue')
+      }
+    },
+    {
+      path: '/user/:userid/noPainting',
+      name: 'noPainting',
+      props: true,
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/NoPainting.vue')
+      }
+    },
+    {
+      path: "/user/:userid/settings",
+      name: 'settings',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Settings.vue')
+      }
+    },
+    {
+      path: "/user/:userid/settings/layout",
+      name: 'layout',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Layout.vue')
+      }
+    },
+    {
+      path: "/user/:userid/settings/colors",
+      name: 'colors',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Colors.vue')
+      }
+    },
+    {
+      path: "/user/:userid/settings/language",
+      name: 'language',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Language.vue')
+      }
+    },
+    {
+      path: "/user/:userid/settings/audio",
+      name: 'audio',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Audio.vue')
       }
     },
     {
