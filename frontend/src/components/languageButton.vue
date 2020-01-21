@@ -10,10 +10,6 @@
 </template>
 
 <script>
-    import VueCookies from 'vue-cookies'
-    import Vue from "vue";
-
-    Vue.use(VueCookies);
 
     export default {
         name: "languageButton",
@@ -22,7 +18,7 @@
             changeLanguage(id) {
                 document.querySelector(".selected").classList.remove("selected");
                 document.querySelector("#" + id).classList.add("selected");
-                Vue.$cookies.set("language", document.querySelector(".selected").id);
+                localStorage.language = document.querySelector(".selected").id;
             }
         }
     }

@@ -37,10 +37,6 @@ import axios from "axios";
 import https from "https";
 import headBar from "../components/headBar";
 import toolBar from "../components/toolBar";
-import VueCookies from 'vue-cookies'
-
-
-Vue.use(VueCookies);
 
 export default {
   name: "painting",
@@ -64,10 +60,10 @@ export default {
       this.id = parseInt(this.$route.params.id);
 
       let _this = this;
-      window.onblur = function() {
-          if (_this.getPlayingInfo() !== undefined)
-              _this.pause();
-      };
+      // window.onblur = function() {
+      //     if (_this.getPlayingInfo() !== undefined)
+      //         _this.pause();
+      // };
       let result = await axios({
         method: "POST",
         url: "http://localhost:4000/graphql",
@@ -146,7 +142,7 @@ export default {
               return;
           }
       }
-      this.checkCategoriesToShow(Vue.$cookies.get("categoriesToShow"), this.painting.infos);
+      this.checkCategoriesToShow(localStorage.categoriesToShow, this.painting.infos);
       this.setupPaintingInfos();
       this.setCurrent(0);
       const MQTTHandler = require("../assets/js/MQTTHandler");
@@ -154,7 +150,7 @@ export default {
   },
   mounted() {
       this.currentPainting = parseInt(this.$route.params.id);
-      Vue.$cookies.set("currentPainting", parseInt(this.$route.params.id));
+      localStorage.currentPainting = parseInt(this.$route.params.id);
       // Vue.$cookies.set("currentPaintingAudioPosition", )
     // console.log("mounted started");
     // this.setCurrent(0);
@@ -273,7 +269,7 @@ export default {
       this.currentLoop = setInterval(() => {
         // let currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
           let currentValue = parseInt(Vue.prototype.$audioHowls[playingInfo.id].seek().toFixed(0));
-          Vue.$cookies.set("audioSliderPostition", currentValue);
+          localStorage.audioSliderPostition = currentValue;
         // Wenn die Audiodatei am Ende ist wird der Slider nicht bis zum rechten Rand bewegt,
         // da sonst die gesamte Seite etwas größer wird
         if (currentValue !== playingInfo.max) {

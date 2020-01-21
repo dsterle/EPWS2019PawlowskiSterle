@@ -35,10 +35,7 @@
     import headBar from "../components/headBar";
     import toolBar from "../components/toolBar";
     import slider from "vue-slider-component";
-    import VueCookies from 'vue-cookies'
-    import Vue from "vue";
 
-    Vue.use(VueCookies);
     export default {
         name: "Audio",
         components: {headBar, toolBar, slider},
@@ -50,7 +47,7 @@
             }
         },
         mounted() {
-            this.checkCookies();
+            this.checkLocalStorage();
         },
         methods: {
             toggle() {
@@ -63,25 +60,22 @@
             },
             saveSettings() {
                 let autoplay = document.querySelector(".fa-toggle-off");
-                if (autoplay === null)
-                    Vue.$cookies.set("autoplay", true);
-                else
-                    Vue.$cookies.set("autoplay", false);
-                Vue.$cookies.set("volume", this.$refs.volumeSlider.getValue());
-                Vue.$cookies.set("audioSpeed", this.$refs.speedSlider.getValue());
+                localStorage.autoplay = autoplay === null;
+                localStorage.volume = this.$refs.volumeSlider.getValue();
+                localStorage.audioSpeed = this.$refs.speedSlider.getValue();
             },
-            checkCookies() {
-                if (Vue.$cookies.get("autoplay") !== null) {
-                    if (Vue.$cookies.get("autoplay") === "true")
+            checkLocalStorage() {
+                if (localStorage.autoplay) {
+                    if (localStorage.autoplay === "true")
                         document.querySelector(".toggleAutoplay").className = "fas fa-toggle-on toggleAutoplay";
                     else
                         document.querySelector(".toggleAutoplay").className = "fas fa-toggle-off toggleAutoplay";
                 }
-                if (Vue.$cookies.get("volume") !== null)
-                    this.soundValue = Vue.$cookies.get("volume");
-                if (Vue.$cookies.get("audioSpeed") !== null) {
-                    this.speedValue = parseFloat(Vue.$cookies.get("audioSpeed"));
-                    this.$refs.speedSlider.setValue(parseFloat(Vue.$cookies.get("audioSpeed")));
+                if (localStorage.volume)
+                    this.soundValue = localStorage.volume;
+                if (localStorage.audioSpeed) {
+                    this.speedValue = parseFloat(localStorage.audioSpeed);
+                    this.$refs.speedSlider.setValue(parseFloat(localStorage.audioSpeed))
                 }
 
             }

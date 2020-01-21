@@ -17,10 +17,7 @@
     import headBar from "../components/headBar";
     import toolBar from "../components/toolBar";
     import languageButton from "../components/languageButton";
-    import VueCookies from 'vue-cookies'
-    import Vue from "vue";
 
-    Vue.use(VueCookies);
     export default {
         name: "Language",
         components: {headBar, toolBar, languageButton},
@@ -28,12 +25,12 @@
             changeLanguage(id) {
                 document.querySelector(".selected").classList.remove("selected");
                 document.querySelector("#" + id).classList.add("selected");
-                Vue.$cookies.set("language", document.querySelector(".selected").id);
+                localStorage.language = document.querySelector(".selected").id;
             }
         },
         mounted() {
-            if (Vue.$cookies.get("language") !== null) {
-                this.changeLanguage(Vue.$cookies.get("language"));
+            if (localStorage.language) {
+                this.changeLanguage(localStorage.language);
             }
         }
     }

@@ -50,10 +50,7 @@
   import headBar from "../components/headBar";
   import toolBar from "../components/toolBar";
   import slider from "vue-slider-component";
-  import VueCookies from 'vue-cookies'
-  import Vue from "vue";
 
-  Vue.use(VueCookies);
     export default {
         name: "Layout",
         components: {headBar, toolBar, slider},
@@ -66,7 +63,7 @@
         created() {
 
         }, mounted() {
-            this.checkCookies();
+            this.checkLocalStorage();
         },
         methods: {
             toggle() {
@@ -78,38 +75,38 @@
                     toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
                 }
             },
-            checkCookies() {
-                if (Vue.$cookies.get("darkMode") !== null) {
-                    if (Vue.$cookies.get("darkMode") === "true")
+            checkLocalStorage() {
+                if (localStorage.darkMode) {
+                    if (localStorage.darkMode === "true")
                         document.querySelector(".toggleDarkMode").className = "fas fa-toggle-on toggleDarkMode";
                     else
                         document.querySelector(".toggleDarkMode").className = "fas fa-toggle-off toggleDarkMode";
                 }
                 let categories = document.querySelectorAll(".category");
-                let categoriesToShow = Vue.$cookies.get("categoriesToShow");
+                let categoriesToShow = localStorage.categoriesToShow;
                 for (let i=0; i<categories.length; i++) {
-                    if (categoriesToShow !== null)
+                    if (categoriesToShow)
                       categories[i].checked = categoriesToShow.includes(categories[i].name);
+                    if (categoriesToShow.length === 0)  //wenn das array leer ist, funktioniert includes nicht
+                        categories[i].checked = false;
                 }
-                if (Vue.$cookies.get("fontSize") !== null) {
-                    this.sliderValue = Vue.$cookies.get("fontSize");
-                    this.$refs.slider.setValue((Vue.$cookies.get("fontSize")));
+                if (localStorage.fontSize) {
+                    this.sliderValue = localStorage.fontSize;
+                    this.$refs.slider.setValue(localStorage.fontSize);
                 }
             },
             saveSettings() {
                 let categories = document.querySelectorAll(".category");
                 let darkMode = document.querySelector(".fa-toggle-off");
-                if (darkMode === null)
-                    Vue.$cookies.set("darkMode", true);
-                else
-                    Vue.$cookies.set("darkMode", false);
+
+                localStorage.darkMode = darkMode === null;
                 let categoriesToShow = [];
                 for (let i=0; i<categories.length; i++) {
                     if (categories[i].checked)
                         categoriesToShow.push(categories[i].name);
                 }
-                Vue.$cookies.set("categoriesToShow", categoriesToShow);
-                Vue.$cookies.set("fontSize", this.$refs.slider.getValue());
+                localStorage.categoriesToShow = categoriesToShow;
+                localStorage.fontSize = this.$refs.slider.getValue();
             }
         }
     }

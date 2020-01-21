@@ -29,12 +29,6 @@ export default {
     };
   },
   methods: {
-      writeCache() {
-          localStorage.audio = "Hello";
-      },
-      printCache() {
-          console.log(localStorage.audio)
-      },
     validateIDs(data) {
       if (this.paintingIDs.includes(parseInt(data))) {
         this.$router.push({ path: `waiting/${data}` });
