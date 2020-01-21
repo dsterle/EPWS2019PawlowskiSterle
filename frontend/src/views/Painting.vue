@@ -151,7 +151,6 @@ export default {
   mounted() {
       this.currentPainting = parseInt(this.$route.params.id);
       localStorage.currentPainting = parseInt(this.$route.params.id);
-      // Vue.$cookies.set("currentPaintingAudioPosition", )
     // console.log("mounted started");
     // this.setCurrent(0);
     // const MQTTHandler = require("../assets/js/MQTTHandler");

@@ -2,7 +2,7 @@
   <div class="noPainting">
     <headBar headline="Kein Gemälde"></headBar>
     <div class="content-wrapper">
-      <p class="hint-text note-text">Es scheint, als hätten Sie noch kein Gemälde besucht.<br>Oder Sie haben Ihre Cookies deaktiviert.</p>
+      <p class="hint-text note-text">Es scheint, als hätten Sie noch kein Gemälde besucht.</p>
     </div>
     <toolBar current-page="painting"></toolBar>
   </div>

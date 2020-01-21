@@ -2,7 +2,7 @@
   <div class="toolBar">
     <i class="fas fa-home" @click="$router.push({name: 'waiting', params: {userid: user}})"></i>
     <i class="fas fa-search" @click="$router.push({name: 'search'})"></i>
-    <i v-if="!isNaN(this.$cookies.get('currentPainting'))" class="fas fa-image" @click="$router.push({name: 'painting', params: {userid: user, id: paintingId}})"></i>
+    <i v-if="!isNaN(currentPageAvailable)" class="fas fa-image" @click="$router.push({name: 'painting', params: {userid: user, id: paintingId}})"></i>
     <i v-else class="fas fa-image" @click="$router.push({name: 'noPainting', params: {userid: user}})"></i>
     <i class="fas fa-history" @click="$router.push({name: 'history', params: {userid: user}})"></i>
     <i class="fas fa-cog" @click="$router.push({name: 'settings', params: {userid: user}})"></i>
@@ -10,10 +10,6 @@
 </template>
 
 <script>
-    import VueCookies from 'vue-cookies'
-    import Vue from "vue";
-
-    Vue.use(VueCookies);
     export default {
         name: "appBar",
         props: ["currentPage"],
@@ -21,7 +17,7 @@
             return {
                 user: {},
                 paintingId: {},
-                currentPageAvailable: false
+                currentPageAvailable: localStorage.currentPainting
             }
         },
         methods: {
@@ -51,7 +47,7 @@
             this.user = this.$route.params.userid;
         },
         mounted() {
-            this.paintingId = Vue.$cookies.get("currentPainting");
+            this.paintingId = localStorage.currentPainting;
             this.changeIcon(this.currentPage)
         }
     }
