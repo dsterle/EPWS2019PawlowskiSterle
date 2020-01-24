@@ -1,33 +1,54 @@
 <template>
-  <div class="tutorial">
-    <headBar headline="Einführung"></headBar>
-    <imgSlider class="tutorialPages" v-bind:imgSrc="tutorials"></imgSlider>
+  <div class="container">
+    <div js-page class="page one active">
+      <p class="normal-text">Page One</p>
+      <button v-on:click="plusSlide(-1)">Prev</button>
+      <button v-on:click="plusSlide(1)">Next</button>
+    </div>
+    <div js-page class="page two">
+      <p class="normal-text">Page Two</p>
+      <button v-on:click="plusSlide(-1)">Prev</button>
+      <button v-on:click="plusSlide(1)">Next</button>
+    </div>
+    <div js-page class="page three">
+      <p class="normal-text">Page Three</p>
+      <button v-on:click="plusSlide(-1)">Nein</button>
+      <button v-on:click="plusSlide(1)">Ja</button>
+    </div>
   </div>
 </template>
 
 <script>
-    import headBar from "../components/headBar";
-    import imgSlider from "../components/imgSlider";
-    import VueCookies from 'vue-cookies'
-    import Vue from "vue";
-    export default {
-        name: "Tutorial",
-        components: {headBar, imgSlider,  VueCookies, Vue},
-        data() {
-            return {
-                tutorials: [
-                    "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
-                    "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_2008-11_Overall.jpg",
-                    "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_image-date-unknown_Overall-002.jpg"
-                ]
-            }
-        }
-    }
+export default {
+  data() {
+    return {
+      slides: []
+    };
+  },
+  mounted() {
+    this.slides = this.$el.querySelectorAll("[js-page]");
+    console.log(this.slides);
+  },
+  methods: {
+    showSlide(n) {}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/scss/010-variables.scss";
-  .tutorialPages{
+@import "../assets/scss/010-variables.scss";
+@import "../assets/scss/030-typo.scss";
 
+.container {
+  .page {
+    position: absolute;
+    opacity: 0;
+    // display: none;
   }
+
+  .active {
+    opacity: 1;
+    // display: block;
+  }
+}
 </style>

@@ -103,6 +103,13 @@ export default new Router({
       component: function () {
         return import(/* webpackChunkName: "about" */ './views/Docs.vue')
       }
+    },
+    {
+      path: '/tutorial',
+      name: 'tutorial',
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Tutorial.vue')
+      }
     }
   ],
 });
