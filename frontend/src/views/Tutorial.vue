@@ -25,9 +25,7 @@
     </div>
     <div js-page class="page three">
       <div class="content">
-        <p class="normal-text">Page Three</p>
-        <div>Nein</div>
-        <div>Ja</div>
+        <thirdScreen></thirdScreen>
       </div>
       <div class="navigation">
         <div class="floating-action-button prev" v-on:click="showSlide(-1)">
