@@ -1,30 +1,55 @@
 <template>
   <div class="container">
     <div js-page class="page one active">
-      <p class="normal-text">Page One</p>
-      <img class="next" v-on:click="showSlide(1)" :src="icon_arrowBack" alt />
+      <div class="content">
+        <firstScreen></firstScreen>
+      </div>
+      <div class="navigation">
+        <div class="floating-action-button next" v-on:click="showSlide(1)">
+          <img class="icon" :src="icon_arrowBack" alt />
+        </div>
+      </div>
     </div>
     <div js-page class="page two">
-      <p class="normal-text">Page Two</p>
-      <img class="prev" v-on:click="showSlide(-1)" :src="icon_arrowBack" alt />
-      <img class="next" v-on:click="showSlide(1)" :src="icon_arrowBack" alt />
+      <div class="content">
+        <secondScreen></secondScreen>
+      </div>
+      <div class="navigation">
+        <div class="floating-action-button prev" v-on:click="showSlide(-1)">
+          <img class="icon" :src="icon_arrowBack" alt />
+        </div>
+        <div class="floating-action-button next" v-on:click="showSlide(1)">
+          <img class="icon" :src="icon_arrowBack" alt />
+        </div>
+      </div>
     </div>
     <div js-page class="page three">
-      <p class="normal-text">Page Three</p>
-      <img class="prev" v-on:click="showSlide(-1)" :src="icon_arrowBack" alt />
-      <div>Nein</div>
-      <div>Ja</div>
+      <div class="content">
+        <p class="normal-text">Page Three</p>
+        <div>Nein</div>
+        <div>Ja</div>
+      </div>
+      <div class="navigation">
+        <div class="floating-action-button prev" v-on:click="showSlide(-1)">
+          <img class="icon" :src="icon_arrowBack" alt />
+        </div>
+      </div>
     </div>
     <div class="indicator">
-      <div class="dot one current"></div>
-      <div class="dot two current"></div>
-      <div class="dot three current"></div>
+      <div class="dot one" v-bind:class="{active: currentSlide === 0}"></div>
+      <div class="dot two" v-bind:class="{active: currentSlide === 1}"></div>
+      <div class="dot three" v-bind:class="{active: currentSlide === 2}"></div>
     </div>
   </div>
 </template>
 
 <script>
+import firstScreen from "../components/tutorial-screens/first";
+import secondScreen from "../components/tutorial-screens/second";
+import thirdScreen from "../components/tutorial-screens/third";
+
 export default {
+  components: { firstScreen, secondScreen, thirdScreen },
   data() {
     return {
       currentSlide: 0,
@@ -54,26 +79,58 @@ export default {
 @import "../assets/scss/030-typo.scss";
 
 .container {
+  height: 100%;
+
   .page {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    // opacity: 0;
+    padding: 128px $abstand-L $abstand-L $abstand-L;
     display: none;
 
-    .prev {
-      float: left;
+    .floating-action-button.prev {
+      position: absolute;
+      left: $abstand-M;
+      bottom: $abstand-L;
+      // float: left;
+      background: $light;
     }
 
-    .next {
-      float: right;
-      transform: rotate(180deg);
+    .floating-action-button.next {
+      position: absolute;
+      right: $abstand-M;
+      bottom: $abstand-L;
+      // float: right;
+
+      .icon {
+        z-index: 6;
+        transform: rotate(180deg);
+      }
     }
   }
 
   .page.active {
-    // opacity: 1;
-    display: block;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .indicator {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    justify-content: center;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      margin: 10px;
+      background: grey;
+      border-radius: 5px;
+    }
+
+    .active {
+      background: white;
+    }
   }
 }
 </style>
