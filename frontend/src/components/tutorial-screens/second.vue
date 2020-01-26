@@ -2,7 +2,7 @@
   <div>
     <p
       class="headline"
-    >Sollten Sie Informationen zu einem Gemälde lesen oder hören wollen, müssen Sie nur Ihren Chip an das dazugehörige Lesegerät halten</p>
+    >Wenn Sie Informationen zu einem Gemälde lesen oder hören wollen, müssen Sie nur Ihren Chip an das dazugehörige Lesegerät halten</p>
     <div class="illustration-wrapper">
       <img src="../../assets/illustrations/handwithchip.svg" alt />
       <!-- <img src="../../assets/illustrations/painting.svg" alt /> -->
