@@ -1,9 +1,9 @@
 <template>
   <div>
     <p
-      class="headline"
+      class="headline animated fadeIn"
     >Wenn Sie Informationen zu einem Gemälde lesen oder hören wollen, müssen Sie nur Ihren Chip an das dazugehörige Lesegerät halten</p>
-    <div class="illustration-wrapper">
+    <div class="illustration-wrapper animated fadeIn">
       <img src="../../assets/illustrations/handwithchip.svg" alt />
     </div>
   </div>
@@ -19,5 +19,6 @@ export default {};
 .illustration-wrapper {
   display: flex;
   margin-top: $abstand-M;
+  animation-delay: 200ms;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p class="headline">Guten Tag!</p>
-    <p class="headline">Ich bin Ihr Museums-Assistent</p>
-    <div class="illustration-wrapper">
+    <p class="headline animated fadeIn">Guten Tag!</p>
+    <p class="headline animated fadeIn">Ich bin Ihr Museums-Assistent</p>
+    <div class="illustration-wrapper animated fadeIn">
       <img class="illustration" src="../../assets/illustrations/wavinghand.svg" alt />
     </div>
   </div>
@@ -21,5 +21,6 @@ export default {};
   display: flex;
   justify-content: center;
   align-items: center;
+  animation-delay: 200ms;
 }
 </style>

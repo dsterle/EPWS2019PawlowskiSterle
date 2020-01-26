@@ -1,13 +1,15 @@
 <template>
   <div class="container">
-    <p
-      class="headline"
-    >Möchten Sie, dass ich Ihnen die Informationen vorlese, damit SIe Ihr Handy in der Hosentasche lassen können?</p>
+    <p class="headline animated fadeIn">Möchten Sie, dass ich Ihnen die Informationen vorlese?</p>
+    <div class="illustration-wrapper">
+      <img class="person one animated fadeIn" src="../../assets/illustrations/person_one.png" alt />
+      <img class="person two animated fadeIn" src="../../assets/illustrations/person_two.png" alt />
+    </div>
     <div class="button-wrapper">
-      <div class="button --grey">
+      <div class="button --grey animated bounceIn">
         <p class="button-text">Nein</p>
       </div>
-      <div class="button">
+      <div class="button --normal animated bounceIn">
         <p class="button-text">Ja</p>
       </div>
     </div>
@@ -22,10 +24,26 @@ export default {};
 @import "../../assets/scss/010-variables.scss";
 
 .container {
+  .illustration-wrapper {
+    .person {
+      width: 50%;
+      max-width: 180px;
+      height: auto;
+      margin-top: $abstand-XL;
+    }
+
+    .person.one {
+      animation-delay: 100ms;
+    }
+
+    .person.two {
+      animation-delay: 300ms;
+    }
+  }
   .button-wrapper {
     width: 100%;
     justify-content: space-between;
-    margin-top: $abstand-L;
+    // margin-top: $abstand-L;
     display: flex;
 
     .button {
@@ -44,6 +62,11 @@ export default {};
 
     .button.--grey {
       background: $light;
+      animation-delay: 200ms;
+    }
+
+    .button.--normal {
+      animation-delay: 400ms;
     }
   }
 }
