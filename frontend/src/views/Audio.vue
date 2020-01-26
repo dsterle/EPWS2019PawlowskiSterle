@@ -10,7 +10,10 @@
               class="slider"
               ref="volumeSlider"
               v-model="soundValue"
-              :interval="2"
+              :value="soundValue"
+              :adsorb="true"
+              :interval="1"
+              :max="9"
               :drag-on-click="true"
               :contained="true"
       ></slider>
@@ -21,7 +24,8 @@
               v-model="speedValue"
               :value="speedValue"
               :adsorb="true"
-              :data="data"
+              :interval="0.1"
+              :max="2"
               :drag-on-click="true"
               :contained="true"
       ></slider>
@@ -35,15 +39,16 @@
     import headBar from "../components/headBar";
     import toolBar from "../components/toolBar";
     import slider from "vue-slider-component";
+    import { Howl, Howler } from "howler";
+    import Vue from "vue";
 
     export default {
         name: "Audio",
-        components: {headBar, toolBar, slider},
+        components: {headBar, toolBar, slider, Vue, Howl},
         data() {
             return {
-                soundValue: 50,
+                soundValue: 1,
                 speedValue: 1,
-                data: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]
             }
         },
         mounted() {
@@ -71,11 +76,13 @@
                     else
                         document.querySelector(".toggleAutoplay").className = "fas fa-toggle-off toggleAutoplay";
                 }
-                if (localStorage.volume)
-                    this.soundValue = localStorage.volume;
+                if (localStorage.volume) {
+                  this.soundValue = parseInt(localStorage.volume);
+                  this.$refs.volumeSlider.setValue(parseFloat(localStorage.volume));
+                }
                 if (localStorage.audioSpeed) {
                     this.speedValue = parseFloat(localStorage.audioSpeed);
-                    this.$refs.speedSlider.setValue(parseFloat(localStorage.audioSpeed))
+                    this.$refs.speedSlider.setValue(parseFloat(localStorage.audioSpeed));
                 }
 
             }
