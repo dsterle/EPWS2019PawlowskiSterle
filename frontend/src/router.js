@@ -105,7 +105,7 @@ export default new Router({
       }
     },
     {
-      path: '/tutorial',
+      path: '/user/:userid/tutorial',
       name: 'tutorial',
       component: function () {
         return import(/* webpackChunkName: "about" */ './views/Tutorial.vue')
