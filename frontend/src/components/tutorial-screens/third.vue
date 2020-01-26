@@ -2,7 +2,7 @@
   <div class="container">
     <p
       class="headline"
-    >Ich kann Ihnen die Informationen auch vorlesen, damit Sie Ihr Handy in der Hosentasche lassen können</p>
+    >Möchten Sie, dass ich Ihnen die Informationen vorlese, damit SIe Ihr Handy in der Hosentasche lassen können?</p>
     <div class="button-wrapper">
       <div class="button --grey">
         <p class="button-text">Nein</p>
@@ -31,7 +31,7 @@ export default {};
     .button {
       display: flex;
       justify-content: center;
-      width: $button-width;
+      width: 40%;
       background: $accent;
       padding: $abstand-M 0;
       border-radius: 5px;
