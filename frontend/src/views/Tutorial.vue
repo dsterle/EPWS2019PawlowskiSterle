@@ -2,33 +2,33 @@
   <div class="container">
     <div js-page class="page one active">
       <div class="content">
-        <firstScreen></firstScreen>
+        <firstScreen class="animate fadeI"></firstScreen>
       </div>
       <div class="navigation">
-        <div class="floating-action-button next" v-on:click="showSlide(1)">
+        <div class="floating-action-button next animated bounceIn" v-on:click="showSlide(1)">
           <img class="icon" :src="icon_arrowBack" alt />
         </div>
       </div>
     </div>
     <div js-page class="page two">
       <div class="content">
-        <secondScreen></secondScreen>
+        <secondScreen class="animate fadeI"></secondScreen>
       </div>
       <div class="navigation">
-        <div class="floating-action-button prev" v-on:click="showSlide(-1)">
+        <div class="floating-action-button prev animated bounceIn" v-on:click="showSlide(-1)">
           <img class="icon" :src="icon_arrowBack" alt />
         </div>
-        <div class="floating-action-button next" v-on:click="showSlide(1)">
+        <div class="floating-action-button next animated bounceIn" v-on:click="showSlide(1)">
           <img class="icon" :src="icon_arrowBack" alt />
         </div>
       </div>
     </div>
     <div js-page class="page three">
       <div class="content">
-        <thirdScreen></thirdScreen>
+        <thirdScreen class="animate fadeI"></thirdScreen>
       </div>
       <div class="navigation">
-        <div class="floating-action-button prev" v-on:click="showSlide(-1)">
+        <div class="floating-action-button prev animated bounceIn" v-on:click="showSlide(-1)">
           <img class="icon" :src="icon_arrowBack" alt />
         </div>
       </div>
@@ -121,8 +121,9 @@ export default {
       width: 10px;
       height: 10px;
       margin: 10px;
-      background: grey;
+      background: #4b4b4b;
       border-radius: 5px;
+      transition: 0.3s;
     }
 
     .active {
