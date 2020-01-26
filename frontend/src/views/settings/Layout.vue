@@ -47,8 +47,8 @@
 </template>
 
 <script>
-  import headBar from "../components/headBar";
-  import toolBar from "../components/toolBar";
+  import headBar from "../../components/headBar";
+  import toolBar from "../../components/toolBar";
   import slider from "vue-slider-component";
 
     export default {
@@ -87,7 +87,7 @@
                 for (let i=0; i<categories.length; i++) {
                     if (categoriesToShow)
                       categories[i].checked = categoriesToShow.includes(categories[i].name);
-                    if (categoriesToShow.length === 0)  //wenn das array leer ist, funktioniert includes nicht
+                    if (categoriesToShow && categoriesToShow.length === 0)  //wenn das array leer ist, funktioniert includes nicht
                         categories[i].checked = false;
                 }
                 if (localStorage.fontSize) {
@@ -113,7 +113,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/scss/010-variables.scss";
+  @import "../../assets/scss/010-variables";
 
   .layout {
     min-height: 610px;

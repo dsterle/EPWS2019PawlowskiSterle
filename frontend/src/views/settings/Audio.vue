@@ -11,7 +11,10 @@
         class="slider"
         ref="volumeSlider"
         v-model="soundValue"
-        :interval="2"
+        :value="soundValue"
+        :adsorb="true"
+        :interval="1"
+        :max="9"
         :drag-on-click="true"
         :contained="true"
       ></slider>
@@ -22,7 +25,8 @@
         v-model="speedValue"
         :value="speedValue"
         :adsorb="true"
-        :data="data"
+        :interval="0.1"
+        :max="2"
         :drag-on-click="true"
         :contained="true"
       ></slider>
@@ -33,6 +37,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD:frontend/src/views/Audio.vue
 import headBar from "../components/headBar";
 import toolBar from "../components/toolBar";
 import slider from "vue-slider-component";
@@ -79,12 +84,66 @@ export default {
         this.speedValue = parseFloat(localStorage.audioSpeed);
         this.$refs.speedSlider.setValue(parseFloat(localStorage.audioSpeed));
       }
+=======
+    import headBar from "../../components/headBar";
+    import toolBar from "../../components/toolBar";
+    import slider from "vue-slider-component";
+    import { Howl, Howler } from "howler";
+    import Vue from "vue";
+
+    export default {
+        name: "Audio",
+        components: {headBar, toolBar, slider, Vue, Howl},
+        data() {
+            return {
+                soundValue: 1,
+                speedValue: 1,
+            }
+        },
+        mounted() {
+            this.checkLocalStorage();
+        },
+        methods: {
+            toggle() {
+                let toggleIcon = document.querySelector(".toggleAutoplay");
+                if (toggleIcon.classList.contains("fa-toggle-on")) {
+                    toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
+                } else {
+                    toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
+                }
+            },
+            saveSettings() {
+                let autoplay = document.querySelector(".fa-toggle-off");
+                localStorage.autoplay = autoplay === null;
+                localStorage.volume = this.$refs.volumeSlider.getValue();
+                localStorage.audioSpeed = this.$refs.speedSlider.getValue();
+            },
+            checkLocalStorage() {
+                if (localStorage.autoplay) {
+                    if (localStorage.autoplay === "true")
+                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-on toggleAutoplay";
+                    else
+                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-off toggleAutoplay";
+                }
+                if (localStorage.volume) {
+                  this.soundValue = parseInt(localStorage.volume);
+                  this.$refs.volumeSlider.setValue(parseFloat(localStorage.volume));
+                }
+                if (localStorage.audioSpeed) {
+                    this.speedValue = parseFloat(localStorage.audioSpeed);
+                    this.$refs.speedSlider.setValue(parseFloat(localStorage.audioSpeed));
+                }
+
+            }
+        }
+>>>>>>> master:frontend/src/views/settings/Audio.vue
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+<<<<<<< HEAD:frontend/src/views/Audio.vue
 @import "../assets/scss/010-variables.scss";
 
 .audio {
@@ -94,6 +153,41 @@ export default {
     padding: $abstand-M;
     color: $lighter;
     font-size: $font-size-L;
+=======
+  @import "../../assets/scss/010-variables";
+  @import "../../../node_modules/vue-slider-component/theme/material.css";
+
+  .audio {
+    .setting {
+      display: flex;
+      justify-content: space-between;
+      padding: $abstand-M;
+      color: $lighter;
+      font-size: $font-size-L;
+    }
+
+    i {
+      font-size: $font-size-XL;
+      color: $lighter;
+    }
+
+    .saveButton {
+      position: absolute;
+      right: $abstand-M;
+      background: $accent;
+      padding: $abstand-S;
+      margin-top: $abstand-M;
+      border-radius: 5px;
+      border: none;
+      color: $lighter;
+    }
+
+    .slider {
+      color: $lighter;
+      margin-left: $abstand-L;
+      margin-right: $abstand-L;
+    }
+>>>>>>> master:frontend/src/views/settings/Audio.vue
   }
 
   i {

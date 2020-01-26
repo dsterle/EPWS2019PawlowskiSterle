@@ -12,8 +12,8 @@
 </template>
 
 <script>
-    import headBar from "../components/headBar";
-    import toolBar from "../components/toolBar";
+    import headBar from "../../components/headBar";
+    import toolBar from "../../components/toolBar";
     import VueCookies from 'vue-cookies';
     import Vue from "vue";
 
@@ -25,7 +25,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/scss/010-variables.scss";
+  @import "../../assets/scss/010-variables";
 
   .colors {
     .setting {
