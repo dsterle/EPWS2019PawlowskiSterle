@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <p
-      class="normal-text"
-    >Wenn Sie möchten kann ich Ihnen die Informationen auch vorlesen, dann können Sie Kopfhörer anschließen und Ihr Handy in der Hosentasche lassen</p>
+      class="headline"
+    >Ich kann Ihnen die Informationen auch vorlesen, damit Sie Ihr Handy in der Hosentasche lassen können</p>
     <div class="button-wrapper">
       <div class="button --grey">
         <p class="button-text">Nein</p>
