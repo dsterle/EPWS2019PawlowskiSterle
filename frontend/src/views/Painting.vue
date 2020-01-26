@@ -95,17 +95,25 @@ export default {
         return;
       }
     }
-    this.checkCategoriesToShow(
-      localStorage.categoriesToShow,
-      this.painting.infos
-    );
     this.setupPaintingInfos();
     if (localStorage.autoplay === "true")
       this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
+    this.updateHistory();
   },
   mounted() {
+    let _this = this;
+    //quick&dirty lösung: checkCategoriesToShow muss nach setupPaintingInfos ausgeführt werden
+    //TODO bessere Lösung
+    setTimeout(function () {
+        //Wenn das Layout angepasst wurde, sollen nur bestimmte Kategorien angezeigt werden
+        if (localStorage.categoriesToShow)
+            _this.checkCategoriesToShow(
+                localStorage.categoriesToShow,
+                _this.painting.infos
+            );
+    }, 300);
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
     // console.log("mounted started");
@@ -114,6 +122,23 @@ export default {
     // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
+      /**
+       * updateHistory fügt das aktuelle Painting dem Verlauf hinzu
+       */
+      updateHistory() {
+          let storage = JSON.parse(localStorage.paintingHistory);
+          storage.push({
+              id: parseInt(this.$route.params.id),
+              title: this.painting.title,
+              dated: this.painting.dated,
+              imgSrc: this.painting.imgSrc[0]
+          });
+          localStorage.paintingHistory = JSON.stringify(storage);
+      },
+      /**
+       * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
+       * nur bestimmte Kategorien angezeigt werden sollen
+       */
     checkCategoriesToShow(categoriesToShow, paintingInfos) {
       let _this = this;
       let newInfos = [];

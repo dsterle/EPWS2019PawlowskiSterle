@@ -36,8 +36,8 @@
 </template>
 
 <script>
-    import headBar from "../components/headBar";
-    import toolBar from "../components/toolBar";
+    import headBar from "../../components/headBar";
+    import toolBar from "../../components/toolBar";
     import slider from "vue-slider-component";
     import { Howl, Howler } from "howler";
     import Vue from "vue";
@@ -91,8 +91,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/scss/010-variables.scss";
-  @import "../../node_modules/vue-slider-component/theme/material.css";
+  @import "../../assets/scss/010-variables";
+  @import "../../../node_modules/vue-slider-component/theme/material.css";
 
   .audio {
     .setting {

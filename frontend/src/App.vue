@@ -15,7 +15,21 @@ export default {
         }
     },
     created() {
-        Vue.prototype.$audioHowls = []
+        Vue.prototype.$audioHowls = [];
+        // localStorage.paintingHistory = JSON.stringify([
+        //     {
+        //         id: 1,
+        //         title: "Bildnis des Johannes Cuspinian",
+        //         dated: 1502,
+        //         imgSrc: "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg"
+        //     },
+        //     {
+        //         id: 2,
+        //         title: "Bildnis des Johannes Cuspinian",
+        //         dated: 1502,
+        //         imgSrc: "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg"
+        //     }]);
+        localStorage.paintingHistory = JSON.stringify([]);
     }
 };
 </script>
