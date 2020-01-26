@@ -80,22 +80,20 @@ export default {
   height: 100%;
 
   .page {
-    padding: 128px $abstand-L $abstand-L $abstand-L;
+    padding: $abstand-XXL $abstand-L $abstand-L $abstand-L;
     display: none;
 
     .floating-action-button.prev {
       position: absolute;
-      left: $abstand-M;
+      left: $abstand-L;
       bottom: $abstand-L;
-      // float: left;
       background: $light;
     }
 
     .floating-action-button.next {
       position: absolute;
-      right: $abstand-M;
+      right: $abstand-L;
       bottom: $abstand-L;
-      // float: right;
 
       .icon {
         z-index: 6;
@@ -117,6 +115,7 @@ export default {
     position: absolute;
     bottom: 0;
     justify-content: center;
+    margin-bottom: $abstand-M;
 
     .dot {
       width: 10px;
