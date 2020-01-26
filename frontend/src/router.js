@@ -58,11 +58,19 @@ export default new Router({
       }
     },
     {
+      path: "/user/:userid/history",
+      name: 'history',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/History.vue')
+      }
+    },
+    {
       path: "/user/:userid/settings",
       name: 'settings',
       props: true,
       component: function () {
-        return import(/* webpackChunkName: "about" */ './views/Settings.vue')
+        return import(/* webpackChunkName: "about" */ './views/settings/Settings.vue')
       }
     },
     {
@@ -70,7 +78,7 @@ export default new Router({
       name: 'layout',
       props: true,
       component: function () {
-        return import(/* webpackChunkName: "about" */ './views/Layout.vue')
+        return import(/* webpackChunkName: "about" */ './views/settings/Layout.vue')
       }
     },
     {
@@ -78,7 +86,7 @@ export default new Router({
       name: 'colors',
       props: true,
       component: function () {
-        return import(/* webpackChunkName: "about" */ './views/Colors.vue')
+        return import(/* webpackChunkName: "about" */ './views/settings/Colors.vue')
       }
     },
     {
@@ -86,7 +94,7 @@ export default new Router({
       name: 'language',
       props: true,
       component: function () {
-        return import(/* webpackChunkName: "about" */ './views/Language.vue')
+        return import(/* webpackChunkName: "about" */ './views/settings/Language.vue')
       }
     },
     {
@@ -94,7 +102,7 @@ export default new Router({
       name: 'audio',
       props: true,
       component: function () {
-        return import(/* webpackChunkName: "about" */ './views/Audio.vue')
+        return import(/* webpackChunkName: "about" */ './views/settings/Audio.vue')
       }
     },
     {
