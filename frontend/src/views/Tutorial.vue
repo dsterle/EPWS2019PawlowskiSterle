@@ -80,7 +80,7 @@ export default {
   height: 100%;
 
   .page {
-    padding: $abstand-XXXL $abstand-XL $abstand-L $abstand-XL;
+    padding: $abstand-XXXL $abstand-L $abstand-L $abstand-L;
     display: none;
 
     .floating-action-button.prev {
