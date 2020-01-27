@@ -5,6 +5,12 @@
         <firstScreen class="animate fadeI"></firstScreen>
       </div>
       <div class="navigation">
+        <div
+          class="floating-action-button prev animated bounceIn"
+          v-on:click="$router.push({ name: `home` })"
+        >
+          <img class="icon" :src="icon_arrowBack" alt />
+        </div>
         <div class="floating-action-button next animated bounceIn" v-on:click="showSlide(1)">
           <img class="icon" :src="icon_arrowBack" alt />
         </div>
