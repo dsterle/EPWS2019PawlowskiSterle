@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home animated fadeIn">
     <div>
       <h1 class="welcome-text">Willkommen im Lucas Cranach Archiv</h1>
     </div>
