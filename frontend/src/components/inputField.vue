@@ -61,7 +61,7 @@ export default {
   justify-content: space-between;
 
   .input-field {
-    padding: $abstand-S $abstand-M $abstand-S $abstand-M;
+    padding: $button-padding $abstand-M $button-padding $abstand-M;
     color: white;
     flex-grow: 1;
     flex-shrink: 1;
@@ -80,7 +80,7 @@ export default {
 
   .button-submit {
     background: $accent;
-    padding: 0 $abstand-M 0 $abstand-M;
+    padding: 0 $abstand-XM 0 $abstand-XM;
     border-radius: 5px;
     color: $lighter;
     cursor: pointer;
