@@ -8,7 +8,7 @@
         v-bind:name="inputID"
         v-bind:id="inputID"
         v-bind:placeholder="inputPlaceholder"
-        v-bind:class="{'input-field-error':this.error}"
+        v-bind:class="{'input-field-error animated shake':this.error}"
         type="text"
         v-on:focus="setErrorFalse"
         size="4"
@@ -23,7 +23,7 @@
       <label
         v-if="this.error"
         v-bind:for="inputID"
-        class="error-text input-field-error-msg"
+        class="error-text input-field-error-msg animated fadeIn"
       >{{ error }}</label>
       <input
         class="button-submit button-text"
