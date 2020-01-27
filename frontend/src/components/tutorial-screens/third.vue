@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <p class="headline animated fadeIn">Möchten Sie, dass ich Ihnen die Informationen vorlese?</p>
+    <p class="normal-text animated fadeIn">Möchten Sie, dass ich Ihnen die Informationen vorlese?</p>
     <div class="illustration-wrapper">
       <img class="person one animated fadeIn" src="../../assets/illustrations/person_one.png" alt />
       <img class="person two animated fadeIn" src="../../assets/illustrations/person_two.png" alt />
@@ -51,7 +51,7 @@ export default {};
       justify-content: center;
       width: 40%;
       background: $accent;
-      padding: $abstand-M 0;
+      padding: $button-padding 0;
       border-radius: 5px;
       color: $lighter;
       cursor: pointer;

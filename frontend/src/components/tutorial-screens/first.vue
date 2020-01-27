@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="headline animated fadeIn">Guten Tag!</p>
-    <p class="headline animated fadeIn">Ich bin Ihr Museums-Assistent</p>
+    <p class="normal-text animated fadeIn">bin Ihr Museums-Assistent</p>
     <div class="illustration-wrapper animated fadeIn">
       <img class="illustration" src="../../assets/illustrations/wavinghand.svg" alt />
     </div>

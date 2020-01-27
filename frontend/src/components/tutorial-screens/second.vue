@@ -1,7 +1,7 @@
 <template>
   <div>
     <p
-      class="headline animated fadeIn"
+      class="normal-text animated fadeIn"
     >Wenn Sie Informationen zu einem Gemälde lesen oder hören wollen, müssen Sie nur Ihren Chip an das dazugehörige Lesegerät halten</p>
     <div class="illustration-wrapper animated fadeIn">
       <img src="../../assets/illustrations/handwithchip.svg" alt />
