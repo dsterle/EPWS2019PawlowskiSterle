@@ -4,10 +4,16 @@
       v-if="painting.title !== undefined"
       v-bind:headline="painting.title.substring(0, 18) + '...'"
     ></headBar>
-    <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
-    <imgSlider class="image" v-bind:imgSrc="painting.imgSrc"></imgSlider>
+    <fab
+      js-fab
+      class="fab animated bounceIn"
+      v-bind:src="fabIcon"
+      alt="Pause Knopf"
+      v-on:fab-clicked="pause"
+    ></fab>
+    <imgSlider class="image animated fadeIn" v-bind:imgSrc="painting.imgSrc"></imgSlider>
     <!-- <img v-bind:src="painting.imgSrc" alt /> -->
-    <div class="title-wrapper">
+    <div class="title-wrapper animated fadeIn">
       <h1 class="title-text">{{ painting.title }}</h1>
       <p class="hint-text year">{{ painting.dated }}</p>
     </div>
@@ -467,6 +473,7 @@ export default {
     right: 0;
     bottom: $abstand-XL;
     margin: 0 $abstand-M $abstand-M 0;
+    animation-delay: 200ms;
   }
 
   .image {
