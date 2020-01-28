@@ -59,10 +59,11 @@ const startServer = async () => {
 
   try {
     console.log("Connecting to MongoDB...");
-    await mongoose.connect("mongodb+srv://graphqlUser:0OSGawDtAuW3qn7w@inguidecluster-cuy5l.mongodb.net/inGuideDatabase?retryWrites=true&w=majority", { useNewUrlParser: true });
+    await mongoose.connect("mongodb+srv://clientUser:zY5IxxysJgzWScxq@inguidecluster-cuy5l.mongodb.net/inGuideDatabase?retryWrites=true&w=majority&authSource=admin", { useNewUrlParser: true });
   } catch (err) {
-    console.log("Error occured:");
+    console.log("\n\nError occured:");
     console.log(err);
+    console.log("\n\n");
   }
 
   app.listen(4000);

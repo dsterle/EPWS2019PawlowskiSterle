@@ -63,10 +63,9 @@ export default {
     this.id = parseInt(this.$route.params.id);
 
     let _this = this;
-    // window.onblur = function() {
-    //     if (_this.getPlayingInfo() !== undefined)
-    //         _this.pause();
-    // };
+    window.onblur = function() {
+      if (_this.getPlayingInfo() !== undefined) _this.pause();
+    };
     let result = await axios({
       method: "POST",
       url: "http://localhost:4000/graphql",
@@ -89,6 +88,71 @@ export default {
       }
     });
     this.painting = result.data.data.painting;
+
+    //** FOR DEBUGGING */
+    // this.painting = {
+    //   id: 1,
+    //   objectName: "FR006",
+    //   inventarnummer: "CH_SORW_1925-1b",
+    //   title: "Bildnis des Johannes Cuspinian",
+    //   imgSrc: [
+    //     "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
+    //     "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_2008-11_Overall.jpg",
+    //     "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_image-date-unknown_Overall-002.jpg"
+    //   ],
+    //   dated: 1502,
+    //   infos: [
+    //     {
+    //       id: 0,
+    //       name: "Kurzbeschreibung",
+    //       inhalt:
+    //         "Brustbildnis des Historiographen Dr. Johannes Cuspinian (eigentlich Spiessheimer)\nTeil eines Diptychons (Gegenstück zum Bildnis der Anna Cuspinian)",
+    //       audioSrc:
+    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/2-Kurzbeschreibung.mp3"
+    //     },
+    //     {
+    //       id: 1,
+    //       name: "Provenienz",
+    //       inhalt:
+    //         "Sammlung Charles I, König von England\n- Familie Locker-Lampson, England \n- Baron of Sandys, England\n- Kunsthandel  A. -G., Luzern, Julius Böhler gall.\n- 1925 durch Reinhart erworben",
+    //       audioSrc:
+    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/3-Provenienz.mp3"
+    //     },
+    //     {
+    //       id: 2,
+    //       name: "Maße",
+    //       inhalt:
+    //         "Maße Bildträger: 60,3 x 45,5 x 0,45-0,55 cm (Format nahezu original)",
+    //       audioSrc:
+    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/4-Maße.mp3"
+    //     },
+    //     {
+    //       id: 3,
+    //       name: "Material/Technik",
+    //       inhalt: "Malerei auf Fichtenholz (Picea sp.)",
+    //       audioSrc:
+    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/5-MaterialTechnik.mp3"
+    //     },
+    //     {
+    //       id: 4,
+    //       name: "Beschriftung",
+    //       inhalt:
+    //         "Ein gemaltes Allianzwappen der Familien Spiessheimer (latinisiert Cuspinianus) und Putsch auf der Rückseite fragmentarisch erhalten",
+    //       audioSrc:
+    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/6-Beschriftung.mp3"
+    //     },
+    //     {
+    //       id: 5,
+    //       name: "Ausstellungsgeschichte",
+    //       inhalt:
+    //         "Bern 1939-1940, Nr. 62-63, Taf. III\nZürich 1940-1941, Nr. 39-40, Taf. XI-XII\nWinterthur 1955, Nr. 42-43, Taf. V.\nKronach 1994, Nr. 118",
+    //       audioSrc:
+    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/7-Ausstellungsgeschichte.mp3"
+    //     }
+    //   ]
+    // };
+    //** FOR DEBUGGING */
+
     for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
       if (Vue.prototype.$audioHowls[i] !== undefined) {
         console.log("abgefangen");
@@ -96,8 +160,7 @@ export default {
       }
     }
     this.setupPaintingInfos();
-    if (localStorage.autoplay === "true")
-      this.setCurrent(0);
+    if (localStorage.autoplay === "true") this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
     this.updateHistory();
@@ -106,13 +169,13 @@ export default {
     let _this = this;
     //quick&dirty lösung: checkCategoriesToShow muss nach setupPaintingInfos ausgeführt werden
     //TODO bessere Lösung
-    setTimeout(function () {
-        //Wenn das Layout angepasst wurde, sollen nur bestimmte Kategorien angezeigt werden
-        if (localStorage.categoriesToShow)
-            _this.checkCategoriesToShow(
-                localStorage.categoriesToShow,
-                _this.painting.infos
-            );
+    setTimeout(function() {
+      //Wenn das Layout angepasst wurde, sollen nur bestimmte Kategorien angezeigt werden
+      if (localStorage.categoriesToShow)
+        _this.checkCategoriesToShow(
+          localStorage.categoriesToShow,
+          _this.painting.infos
+        );
     }, 300);
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
@@ -122,23 +185,23 @@ export default {
     // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
-      /**
-       * updateHistory fügt das aktuelle Painting dem Verlauf hinzu
-       */
-      updateHistory() {
-          let storage = JSON.parse(localStorage.paintingHistory);
-          storage.push({
-              id: parseInt(this.$route.params.id),
-              title: this.painting.title,
-              dated: this.painting.dated,
-              imgSrc: this.painting.imgSrc[0]
-          });
-          localStorage.paintingHistory = JSON.stringify(storage);
-      },
-      /**
-       * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
-       * nur bestimmte Kategorien angezeigt werden sollen
-       */
+    /**
+     * updateHistory fügt das aktuelle Painting dem Verlauf hinzu
+     */
+    updateHistory() {
+      let storage = JSON.parse(localStorage.paintingHistory);
+      storage.push({
+        id: parseInt(this.$route.params.id),
+        title: this.painting.title,
+        dated: this.painting.dated,
+        imgSrc: this.painting.imgSrc[0]
+      });
+      localStorage.paintingHistory = JSON.stringify(storage);
+    },
+    /**
+     * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
+     * nur bestimmte Kategorien angezeigt werden sollen
+     */
     checkCategoriesToShow(categoriesToShow, paintingInfos) {
       let _this = this;
       let newInfos = [];

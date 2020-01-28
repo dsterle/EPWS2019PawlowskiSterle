@@ -1,8 +1,11 @@
 <template>
-  <div class="home">
-    <div class="welcome-text">
-      <h1 class="headline">Willkommen im Lucas Cranach Archiv</h1>
+  <div class="home animated fadeIn">
+    <div>
+      <h1 class="welcome-text">Willkommen im Lucas Cranach Archiv</h1>
     </div>
+    <p
+      class="normal-text hinweis"
+    >Bitte geben Sie die Nummer des Chips ein, den Sie an der Rezeption bekommen haben</p>
     <inputField
       class="inputField"
       inputID="input-transponder"
@@ -12,7 +15,7 @@
       v-on:event-clicked="validateIDs"
     ></inputField>
 
-    <input type="button" value="Tutorial starten" class="button-text tutorialButton" @click="$router.push({name: 'tutorial'})">
+    <!-- <input type="button" value="Tutorial starten" class="button-text tutorialButton" @click="$router.push({name: 'tutorial'})"> -->
   </div>
 </template>
 
@@ -31,7 +34,7 @@ export default {
   methods: {
     validateIDs(data) {
       if (this.paintingIDs.includes(parseInt(data))) {
-        this.$router.push({ path: `waiting/${data}` });
+        this.$router.push({ path: `user/${data}/tutorial` });
       } else if (document.querySelector(".input-field").value === "") {
         this.errorMsg = "Bitte geben Sie eine Nummer ein";
       } else {
@@ -54,6 +57,10 @@ export default {
     margin-top: $abstand-XXL;
   }
 
+  .hinweis {
+    margin-top: $abstand-L;
+  }
+
   .inputField {
     margin-top: $abstand-XL;
   }
@@ -63,17 +70,17 @@ export default {
     margin-bottom: 0;
   }
 
-  .tutorialButton {
-    background: none;
-    padding: $abstand-S $abstand-M $abstand-S $abstand-M;
-    margin-top: $abstand-XXL;
-    border-radius: 5px;
-    border: 2px solid $accent;
-    color: $accent;
-    width: 100%;
-    cursor: pointer;
-    transition: 0.5s;
-  }
+  // .tutorialButton {
+  //   background: none;
+  //   padding: $abstand-S $abstand-M $abstand-S $abstand-M;
+  //   margin-top: $abstand-XXL;
+  //   border-radius: 5px;
+  //   border: 2px solid $accent;
+  //   color: $accent;
+  //   width: 100%;
+  //   cursor: pointer;
+  //   transition: 0.5s;
+  // }
 
   ol {
     list-style-type: "decimal";
