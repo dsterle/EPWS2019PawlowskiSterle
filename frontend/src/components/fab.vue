@@ -1,6 +1,6 @@
 <template>
-  <div class="floating-action-button">
-    <img js-icon class="icon" v-bind:src="src" v-bind:alt="alt" v-on:click="clicked" />
+  <div class="floating-action-button" v-on:click="clicked">
+    <img js-icon class="icon" v-bind:src="src" v-bind:alt="alt" />
   </div>
 </template>
     
