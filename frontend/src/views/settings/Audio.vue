@@ -94,7 +94,6 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../assets/scss/010-variables";
-@import "../../../node_modules/vue-slider-component/theme/material.css";
 
 .audio {
   .setting {
@@ -148,32 +147,5 @@ i {
   color: $lighter;
   margin-left: $abstand-L;
   margin-right: $abstand-L;
-}
-
-//*********************** Following classes are there to style the vue-slider-comonent
-
-.vue-slider-rail {
-  height: 2px;
-  background-color: $light;
-}
-
-.vue-slider-process {
-  background-color: $accentDark;
-}
-
-.vue-slider-mark-step {
-  background-color: $accent;
-}
-
-.vue-slider-dot-handle {
-  background-color: $accent;
-}
-
-.vue-slider-dot-tooltip-inner {
-  background-color: $accent;
-}
-
-.vue-slider-dot-handle::after {
-  background-color: $accentTransparent;
 }
 </style>
