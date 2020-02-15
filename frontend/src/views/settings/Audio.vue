@@ -48,6 +48,7 @@ export default {
   components: { headBar, toolBar, slider, Vue, Howl },
   data() {
     return {
+      user: {},
       soundValue: 1,
       speedValue: 1
     };

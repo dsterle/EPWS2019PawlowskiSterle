@@ -21,6 +21,7 @@
 
 <script>
 import inputField from "../components/inputField.vue";
+import Vue from "vue";
 
 export default {
   name: "home",
@@ -34,6 +35,7 @@ export default {
   methods: {
     validateIDs(data) {
       if (this.paintingIDs.includes(parseInt(data))) {
+          Vue.prototype.$user = data;
         this.$router.push({ path: `user/${data}/tutorial` });
       } else if (document.querySelector(".input-field").value === "") {
         this.errorMsg = "Bitte geben Sie eine Nummer ein";
