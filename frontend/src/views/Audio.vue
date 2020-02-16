@@ -1,6 +1,10 @@
 <template>
-  <div class="audio">
-    <headBar headline="Audio"></headBar>
+  <div class="audio" >
+    <headBar headline="Audio"
+             page-info-headline="Audio:"
+             page-info="Hier können Sie einstellen, mit welcher Geschwindigkeit und Lautstärke die Audios der Gemälde
+                        abgespielt werden. Außerdem können Sie einstellen, ob die Audios bei Aufruf eines Gemäldes automatisch
+                        abgespielt werden sollen. Klicken Sie auf speichern, um Ihre Einstellungen zu speichern."></headBar>
     <div class="content">
       <span class="setting">Autoplay
         <i class="fas fa-toggle-on toggleAutoplay" v-on:click="toggle"></i>

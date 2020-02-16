@@ -1,6 +1,10 @@
 <template>
   <div class="layout">
-    <headBar headline="Darstellung"></headBar>
+    <headBar headline="Darstellung"
+             page-info-headline="Darstellung:"
+             page-info="Hier können Sie einstellen, ob der dark mode eingeschaltet sein soll, welche Informationen bei
+                        Gemälden angezeigt werden sollen oder die Schriftgröße anpassen. Klicken Sie auf speichern,
+                        um Ihre Einstellungen zu speichern."></headBar>
     <div class="content">
       <span class="setting">Dark Mode <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i></span>
       <span class="setting">Kategorien anzeigen:</span>

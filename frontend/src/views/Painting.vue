@@ -4,6 +4,11 @@
     <headBar
       v-if="painting.title !== undefined"
       v-bind:headline="painting.title.substring(0, 18) + '...'"
+      page-info-headline="Gemäldeansicht:"
+      page-info="Hier erhalten sie textuelle und auditive Informationen. Das Bild können Sie (sofern mehr als ein Punkt
+                  auf dem Bild zusehen ist) nach links wischen, um alternative Gemäldeansichten zu sehen.
+                  Über die Lautsprechericons starten sie eine Audio.
+                  Über den violetten Button unten links können Sie die Audio pausieren."
     ></headBar>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
     <imgSlider
@@ -179,10 +184,9 @@ export default {
      */
     setupPaintingInfos() {
       let _this = this;
-      let counter = 0;
 
       // Schleife über jede Info (Accordion)
-      this.painting.infos.forEach(info => {
+      _this.painting.infos.forEach(info => {
         // current zeigt an, ob die Info ausgewählt ist (kann währenddessen auch pausiert sein)
         info.current = false;
         // paused zeigt an, ob die Info pausiert ist
@@ -265,6 +269,7 @@ export default {
           playingInfo.currentValue = currentValue;
           // _this.rerenderInfo(info);
           _this.rerenderInfo(playingInfo);
+          //Wenn die letzte Audio erreicht ist
         } else if (playingInfo.id === _this.painting.infos[_this.painting.infos.length-1].id) {
             //Um vorzeitiges Beenden der Audio zu verhindern
             setTimeout(function () {
@@ -289,7 +294,7 @@ export default {
         this.updateSlider(pausedInfo);
       } else {
         // Wenn noch keine Audio angefangen wurde, wird von die erste gestartet
-        this.setCurrent(0);
+        this.setCurrent(this.painting.infos[0].id);
       }
     },
     /**

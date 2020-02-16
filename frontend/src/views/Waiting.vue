@@ -1,6 +1,10 @@
 <template>
   <div class="waiting">
-    <headBar headline="Home"></headBar>
+    <headBar headline="Home"
+             page-info-headline="Willkommen:"
+             page-info="In der Toolbar unten können Sie zwischen der Home-Seite, Suche, aktuelles Gemälde, Verlauf und
+                          den Einstellungen wechseln.">
+    </headBar>
     <div class="content-wrapper">
       <p class="hint-text note-text">Halten Sie Ihren Chip vor ein Gemälde...</p>
     </div>
