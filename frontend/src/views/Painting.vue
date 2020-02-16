@@ -98,10 +98,6 @@ export default {
         return;
       }
     }
-    this.checkCategoriesToShow(
-      localStorage.categoriesToShow,
-      this.painting.infos
-    );
     this.setupPaintingInfos();
     if (localStorage.autoplay === "true")
       this.setCurrent(0);
@@ -109,6 +105,15 @@ export default {
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   mounted() {
+    let _this = this;
+    //TODO bessere Lösung
+    //Muss nach created ausgeführt werden, aber in mounted
+    setTimeout(function () {
+        _this.checkCategoriesToShow(
+            localStorage.categoriesToShow,
+            _this.painting.infos
+        );
+    }, 300);
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
     if (!this.getPlayingInfo())
