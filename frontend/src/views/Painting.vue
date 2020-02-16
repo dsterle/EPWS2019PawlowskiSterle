@@ -1,11 +1,16 @@
 <template>
   <div class="painting">
+    <div class="maximizedImageBackground minimized"></div>
     <headBar
       v-if="painting.title !== undefined"
       v-bind:headline="painting.title.substring(0, 18) + '...'"
     ></headBar>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
-    <imgSlider class="image" v-bind:imgSrc="painting.imgSrc" v-on:img-clicked="displayImageInfo"></imgSlider>
+    <imgSlider
+            class="image"
+            v-bind:imgSrc="painting.imgSrc"
+            v-on:img-clicked="displayImageInfo">
+    </imgSlider>
     <!-- <img v-bind:src="painting.imgSrc" alt /> -->
     <div class="title-wrapper">
       <h1 class="title-text">{{ painting.title }}</h1>
@@ -40,6 +45,8 @@ import axios from "axios";
 import https from "https";
 import headBar from "../components/headBar";
 import toolBar from "../components/toolBar";
+import inputField from "../components/inputField";
+
 
 export default {
   name: "painting",
@@ -88,7 +95,6 @@ export default {
     this.painting = result.data.data.painting;
     for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
       if (Vue.prototype.$audioHowls[i] !== undefined) {
-        console.log("abgefangen");
         return;
       }
     }
@@ -105,6 +111,8 @@ export default {
   mounted() {
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
+    if (!this.getPlayingInfo())
+        this.fabIcon = this.playIcon;
   },
   methods: {
     displayImageInfo() {
@@ -183,7 +191,7 @@ export default {
           },
           onplay: function() {
             clearInterval(_this.currentLoop);
-            _this.updateSlider(_this.painting.infos.indexOf(info));
+            _this.updateSlider(_this.painting.infos[_this.painting.infos.indexOf(info)]);
           },
           onend: function() {
             info.currentValue = 0;
@@ -192,7 +200,6 @@ export default {
             _this.setCurrent(_this.painting.infos[_this.painting.infos.indexOf(info) + 1].id);
           }
         });
-        info.audio = Vue.prototype.$audioHowls[info.id];
       });
     },
     /**
@@ -204,14 +211,14 @@ export default {
       this.painting.infos.forEach(info => {
         if (info.id === id) {
           // Falls die Audioinfo, die angeklickt wurde noch aktiv ist, wird diese zuerst gestoppt
-          info.audio.stop();
+          Vue.prototype.$audioHowls[info.id].stop();
           // Wenn die id übereinstimmt, wird current auf true gesetzt und currentValue auf 0 zurückgesetzt
           clearInterval(_this.currentLoop);
           info.current = true;
           info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
           this.rerenderInfo(info);
-          info.audio.play();
+            Vue.prototype.$audioHowls[info.id].play();
         } else {
           // Wenn die id nicht übereinstimmt, wird die Info resettet
           _this.resetInfo(info);
@@ -227,7 +234,7 @@ export default {
      */
     setSlider(info) {
       info.min = 0;
-      info.max = parseInt(info.audio.duration().toFixed(0));
+      info.max = parseInt(Vue.prototype.$audioHowls[info.id].duration().toFixed(0));
       info.currentValue = 0;
 
       this.rerenderInfo(info);
@@ -238,7 +245,7 @@ export default {
      */
     updateSlider(info) {
       let _this = this;
-      let playingInfo = this.getPlayingInfo();
+      let playingInfo = info;
 
       this.currentLoop = setInterval(() => {
         // let currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
@@ -253,6 +260,11 @@ export default {
           playingInfo.currentValue = currentValue;
           // _this.rerenderInfo(info);
           _this.rerenderInfo(playingInfo);
+        } else if (playingInfo.id === _this.painting.infos[_this.painting.infos.length-1].id) {
+            //Um vorzeitiges Beenden der Audio zu verhindern
+            setTimeout(function () {
+                _this.resetInfo(playingInfo)
+            }, 300);
         }
       }, 100);
     },
@@ -261,14 +273,18 @@ export default {
      */
     pause() {
       let playingInfo = this.getPlayingInfo();
+      let pausedInfo = this.getPausedInfo();
 
       if (playingInfo) {
         // Die aktuell spielende Info wird pausiert
         this.pauseInfo(playingInfo);
-      } else {
+      } else if (pausedInfo) {
         // Die pausierte Info wird wieder abgespielt
-        this.playInfo(this.getPausedInfo());
-        this.updateSlider(this.getPausedInfo());
+        this.playInfo(pausedInfo);
+        this.updateSlider(pausedInfo);
+      } else {
+        // Wenn noch keine Audio angefangen wurde, wird von die erste gestartet
+        this.setCurrent(0);
       }
     },
     /**
@@ -323,7 +339,7 @@ export default {
      * resetInfo setzt die Attribute der übergebenen Info zurück
      */
     resetInfo(info) {
-      info.audio.stop();
+      Vue.prototype.$audioHowls[info.id].stop();
       info.current = false;
       info.paused = false;
       info.currentValue = 0;
@@ -332,14 +348,17 @@ export default {
      * getPlayingInfo gibt die Info, die gerade abgespielt wird
      */
     getPlayingInfo() {
-      // return this.painting.infos.find(info => {
-      //   return info.audio.playing();
-      // });
+      let info;
       for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
         if (Vue.prototype.$audioHowls[i] !== undefined)
-          if (Vue.prototype.$audioHowls[i].playing())
-            return this.painting.infos[i];
+          if (Vue.prototype.$audioHowls[i].playing()) {
+              this.painting.infos.forEach(function (elm) {
+                  if (i === elm.id)
+                      return info = elm;
+              })
+          }
       }
+      return info;
     },
     /**
      * getPausedInfo gibt die die Info, die aktuell pausiert ist

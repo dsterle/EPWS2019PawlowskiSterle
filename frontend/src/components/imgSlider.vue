@@ -2,10 +2,10 @@
   <div class="container">
     <carousel v-bind:per-page="1">
       <slide v-for="image in imgSrc" :key="image">
-        <img class="image" v-bind:src="image" alt v-on:click="clicked" />
+        <img class="image" v-bind:src="image" alt v-on:click="imageClicked" />
         <div class="flexContainer">
           <div class="imageInfo notDisplayed animated bounceIn">
-            <span>LOLOL</span>
+            <span>test</span>
           </div>
         </div>
       </slide>
@@ -15,6 +15,7 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import Zooming from 'zooming';
 
 export default {
   name: "imgSlider",
@@ -28,8 +29,13 @@ export default {
       images: 0
     };
   },
+    mounted() {
+        // new Zooming({
+        //     bgColor: "rgb(24, 25, 26)"
+        // }).listen('img');
+    },
     methods: {
-        clicked() {
+        imageClicked() {
             this.$emit("img-clicked");
         }
     }
@@ -45,6 +51,7 @@ export default {
   .image {
     width: 100%;
     height: auto;
+    z-index: 100000000;
   }
 
   .flexContainer {
