@@ -8,7 +8,7 @@
         v-bind:name="inputID"
         v-bind:id="inputID"
         v-bind:placeholder="inputPlaceholder"
-        v-bind:class="{'input-field-error':this.error}"
+        v-bind:class="{'input-field-error animated shake':this.error}"
         type="text"
         v-on:focus="setErrorFalse"
         size="4"
@@ -23,7 +23,7 @@
       <label
         v-if="this.error"
         v-bind:for="inputID"
-        class="error-text input-field-error-msg"
+        class="error-text input-field-error-msg animated fadeIn"
       >{{ error }}</label>
       <input
         class="button-submit button-text"
@@ -61,7 +61,7 @@ export default {
   justify-content: space-between;
 
   .input-field {
-    padding: $abstand-S $abstand-M $abstand-S $abstand-M;
+    padding: $button-padding $abstand-M $button-padding $abstand-M;
     color: white;
     flex-grow: 1;
     flex-shrink: 1;
@@ -80,7 +80,7 @@ export default {
 
   .button-submit {
     background: $accent;
-    padding: 0 $abstand-M 0 $abstand-M;
+    padding: 0 $abstand-XM 0 $abstand-XM;
     border-radius: 5px;
     color: $lighter;
     cursor: pointer;

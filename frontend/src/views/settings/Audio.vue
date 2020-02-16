@@ -2,32 +2,33 @@
   <div class="audio">
     <headBar headline="Audio"></headBar>
     <div class="content">
-      <span class="setting">Autoplay
+      <span class="setting">
+        Autoplay
         <i class="fas fa-toggle-on toggleAutoplay" v-on:click="toggle"></i>
       </span>
       <span class="setting">Lautstärke</span>
       <slider
-              class="slider"
-              ref="volumeSlider"
-              v-model="soundValue"
-              :value="soundValue"
-              :adsorb="true"
-              :interval="1"
-              :max="9"
-              :drag-on-click="true"
-              :contained="true"
+        class="slider"
+        ref="volumeSlider"
+        v-model="soundValue"
+        :value="soundValue"
+        :adsorb="true"
+        :interval="1"
+        :max="9"
+        :drag-on-click="true"
+        :contained="true"
       ></slider>
       <span class="setting">Geschwindigkeit</span>
       <slider
-              class="slider"
-              ref="speedSlider"
-              v-model="speedValue"
-              :value="speedValue"
-              :adsorb="true"
-              :interval="0.1"
-              :max="2"
-              :drag-on-click="true"
-              :contained="true"
+        class="slider"
+        ref="speedSlider"
+        v-model="speedValue"
+        :value="speedValue"
+        :adsorb="true"
+        :interval="0.1"
+        :max="2"
+        :drag-on-click="true"
+        :contained="true"
       ></slider>
       <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
@@ -36,121 +37,115 @@
 </template>
 
 <script>
-    import headBar from "../../components/headBar";
-    import toolBar from "../../components/toolBar";
-    import slider from "vue-slider-component";
-    import { Howl, Howler } from "howler";
-    import Vue from "vue";
+import headBar from "../../components/headBar";
+import toolBar from "../../components/toolBar";
+import slider from "vue-slider-component";
+import { Howl, Howler } from "howler";
+import Vue from "vue";
 
-    export default {
-        name: "Audio",
-        components: {headBar, toolBar, slider, Vue, Howl},
-        data() {
-            return {
-                soundValue: 1,
-                speedValue: 1,
-            }
-        },
-        mounted() {
-            this.checkLocalStorage();
-        },
-        methods: {
-            toggle() {
-                let toggleIcon = document.querySelector(".toggleAutoplay");
-                if (toggleIcon.classList.contains("fa-toggle-on")) {
-                    toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
-                } else {
-                    toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
-                }
-            },
-            saveSettings() {
-                let autoplay = document.querySelector(".fa-toggle-off");
-                localStorage.autoplay = autoplay === null;
-                localStorage.volume = this.$refs.volumeSlider.getValue();
-                localStorage.audioSpeed = this.$refs.speedSlider.getValue();
-            },
-            checkLocalStorage() {
-                if (localStorage.autoplay) {
-                    if (localStorage.autoplay === "true")
-                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-on toggleAutoplay";
-                    else
-                        document.querySelector(".toggleAutoplay").className = "fas fa-toggle-off toggleAutoplay";
-                }
-                if (localStorage.volume) {
-                  this.soundValue = parseInt(localStorage.volume);
-                  this.$refs.volumeSlider.setValue(parseFloat(localStorage.volume));
-                }
-                if (localStorage.audioSpeed) {
-                    this.speedValue = parseFloat(localStorage.audioSpeed);
-                    this.$refs.speedSlider.setValue(parseFloat(localStorage.audioSpeed));
-                }
-
-            }
-        }
+export default {
+  name: "Audio",
+  components: { headBar, toolBar, slider, Vue, Howl },
+  data() {
+    return {
+      soundValue: 1,
+      speedValue: 1
+    };
+  },
+  mounted() {
+    this.checkLocalStorage();
+  },
+  methods: {
+    toggle() {
+      let toggleIcon = document.querySelector(".toggleAutoplay");
+      if (toggleIcon.classList.contains("fa-toggle-on")) {
+        toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
+      } else {
+        toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
+      }
+    },
+    saveSettings() {
+      let autoplay = document.querySelector(".fa-toggle-off");
+      localStorage.autoplay = autoplay === null;
+      localStorage.volume = this.$refs.volumeSlider.getValue();
+      localStorage.audioSpeed = this.$refs.speedSlider.getValue();
+    },
+    checkLocalStorage() {
+      if (localStorage.autoplay) {
+        if (localStorage.autoplay === "true")
+          document.querySelector(".toggleAutoplay").className =
+            "fas fa-toggle-on toggleAutoplay";
+        else
+          document.querySelector(".toggleAutoplay").className =
+            "fas fa-toggle-off toggleAutoplay";
+      }
+      if (localStorage.volume) {
+        this.soundValue = parseInt(localStorage.volume);
+        this.$refs.volumeSlider.setValue(parseFloat(localStorage.volume));
+      }
+      if (localStorage.audioSpeed) {
+        this.speedValue = parseFloat(localStorage.audioSpeed);
+        this.$refs.speedSlider.setValue(parseFloat(localStorage.audioSpeed));
+      }
     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/scss/010-variables";
-  @import "../../../node_modules/vue-slider-component/theme/material.css";
+@import "../../assets/scss/010-variables";
 
-  .audio {
-    .setting {
-      display: flex;
-      justify-content: space-between;
-      padding: $abstand-M;
-      color: $lighter;
-      font-size: $font-size-L;
-    }
-
-    i {
-      font-size: $font-size-XL;
-      color: $lighter;
-    }
-
-    .saveButton {
-      position: absolute;
-      right: $abstand-M;
-      background: $accent;
-      padding: $abstand-S;
-      margin-top: $abstand-M;
-      border-radius: 5px;
-      border: none;
-      color: $lighter;
-    }
-
-    .slider {
-      color: $lighter;
-      margin-left: $abstand-L;
-      margin-right: $abstand-L;
-    }
+.audio {
+  .setting {
+    display: flex;
+    justify-content: space-between;
+    padding: $abstand-M;
+    color: $lighter;
+    font-size: $font-size-L;
   }
 
-  //*********************** Following classes are there to style the vue-slider-comonent
-
-  .vue-slider-rail {
-    height: 2px;
-    background-color: $light;
+  i {
+    font-size: $font-size-XL;
+    color: $lighter;
   }
 
-  .vue-slider-process {
-    background-color: $accentDark;
+  .saveButton {
+    position: absolute;
+    right: $abstand-M;
+    background: $accent;
+    padding: $abstand-S;
+    margin-top: $abstand-M;
+    border-radius: 5px;
+    border: none;
+    color: $lighter;
   }
 
-  .vue-slider-mark-step {
-    background-color: $accent;
+  .slider {
+    color: $lighter;
+    margin-left: $abstand-L;
+    margin-right: $abstand-L;
   }
+}
 
-  .vue-slider-dot-handle {
-    background-color: $accent;
-  }
+i {
+  font-size: $font-size-XL;
+  color: $lighter;
+}
 
-  .vue-slider-dot-tooltip-inner {
-    background-color: $accent;
-  }
+.saveButton {
+  position: absolute;
+  right: $abstand-M;
+  background: $accent;
+  padding: $abstand-S;
+  margin-top: $abstand-M;
+  border-radius: 5px;
+  border: none;
+  color: $lighter;
+}
 
-  .vue-slider-dot-handle::after {
-    background-color: $accentTransparent;
-  }
-
+.slider {
+  color: $lighter;
+  margin-left: $abstand-L;
+  margin-right: $abstand-L;
+}
 </style>

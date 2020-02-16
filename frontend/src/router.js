@@ -13,17 +13,17 @@ export default new Router({
       name: 'home',
       component: Home
     },
-    {
-      path: '/tutorial',
-      name: 'tutorial',
-      props: true,
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: function () {
-        return import(/* webpackChunkName: "about" */ './views/Tutorial.vue')
-      }
-    },
+    // {
+    //   path: '/tutorial',
+    //   name: 'tutorial',
+    //   props: true,
+    //   // route level code-splitting
+    //   // this generates a separate chunk (about.[hash].js) for this route
+    //   // which is lazy-loaded when the route is visited.
+    //   component: function () {
+    //     return import(/* webpackChunkName: "about" */ './views/Tutorial.vue')
+    //   }
+    // },
     {
       path: '/waiting/:userid',
       name: 'waiting',
@@ -110,6 +110,13 @@ export default new Router({
       name: 'documentation',
       component: function () {
         return import(/* webpackChunkName: "about" */ './views/Docs.vue')
+      }
+    },
+    {
+      path: '/user/:userid/tutorial',
+      name: 'tutorial',
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Tutorial.vue')
       }
     }
   ],
