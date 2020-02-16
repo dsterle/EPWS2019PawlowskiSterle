@@ -55,18 +55,19 @@ export default {
       // currentLoop beinhaltet eine setInterval-Methode, die sich um die
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
-      topic: {}
+      topic: {},
+      history: []
     };
   },
   async created() {
+    if (localStorage.paintingHistory) {
+        this.history = JSON.parse(localStorage.paintingHistory);
+    } else
+        this.history = [];
     this.topic = this.$route.params.userid;
     this.id = parseInt(this.$route.params.id);
 
     let _this = this;
-    // window.onblur = function() {
-    //     if (_this.getPlayingInfo() !== undefined)
-    //         _this.pause();
-    // };
     let result = await axios({
       method: "POST",
       url: "http://localhost:4000/graphql",
@@ -100,7 +101,7 @@ export default {
       this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
-    this.updateHistory();
+      this.updateHistory();
   },
   mounted() {
     let _this = this;
@@ -116,24 +117,23 @@ export default {
     }, 300);
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
-    // console.log("mounted started");
-    // this.setCurrent(0);
-    // const MQTTHandler = require("../assets/js/MQTTHandler");
-    // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
       /**
        * updateHistory fügt das aktuelle Painting dem Verlauf hinzu
        */
       updateHistory() {
-          let storage = JSON.parse(localStorage.paintingHistory);
-          storage.push({
+          let time = new Date();
+          time = time.getDate() + "." + time.getMonth() + "." + time.getFullYear() + " " +
+                  time.getHours() + "." + time.getMinutes() + "." + time.getSeconds()
+          this.history.unshift({
               id: parseInt(this.$route.params.id),
               title: this.painting.title,
               dated: this.painting.dated,
-              imgSrc: this.painting.imgSrc[0]
+              imgSrc: this.painting.imgSrc[0],
+              time: time
           });
-          localStorage.paintingHistory = JSON.stringify(storage);
+          localStorage.setItem("paintingHistory", JSON.stringify(this.history));
       },
       /**
        * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob

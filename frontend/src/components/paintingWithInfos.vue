@@ -4,6 +4,7 @@
     <ul>
       <li class="title">{{name}}</li>
       <li class="title">{{dated}}</li>
+      <li class="title">{{time}}</li>
     </ul>
   </div>
 </template>
@@ -11,7 +12,7 @@
 <script>
     export default {
         name: "paintingWithInfos",
-        props: ["src", "alt", "name", "dated", "paintingId"],
+        props: ["src", "alt", "name", "dated", "paintingId", "time"],
         data() {
             return {
                 user: {}
