@@ -2,7 +2,12 @@
   <div class="container">
     <carousel v-bind:per-page="1">
       <slide v-for="image in imgSrc" :key="image">
-        <img class="image" v-bind:src="image" alt />
+        <img class="image" v-bind:src="image" alt v-on:click="clicked" />
+        <div class="flexContainer">
+          <div class="imageInfo notDisplayed animated bounceIn">
+            <span>LOLOL</span>
+          </div>
+        </div>
       </slide>
     </carousel>
   </div>
@@ -22,7 +27,12 @@ export default {
     return {
       images: 0
     };
-  }
+  },
+    methods: {
+        clicked() {
+            this.$emit("img-clicked");
+        }
+    }
 };
 </script>
 
@@ -35,6 +45,29 @@ export default {
   .image {
     width: 100%;
     height: auto;
+  }
+
+  .flexContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .imageInfo {
+    position: absolute;
+    top: $abstand-XL;
+    padding: $abstand-S;
+    border-radius: 10px;
+    background: $evenDarker;
+    box-shadow: 0 0 10px 2px $light;
+    span {
+      color: $lighter;
+      text-align: center;
+    }
+    transition: 0.3s;
+  }
+
+  .notDisplayed {
+    opacity: 0;
   }
 
   // modifying the classes of vue-carousel

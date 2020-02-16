@@ -5,7 +5,7 @@
       v-bind:headline="painting.title.substring(0, 18) + '...'"
     ></headBar>
     <fab js-fab class="fab" v-bind:src="fabIcon" alt="Pause Knopf" v-on:fab-clicked="pause"></fab>
-    <imgSlider class="image" v-bind:imgSrc="painting.imgSrc"></imgSlider>
+    <imgSlider class="image" v-bind:imgSrc="painting.imgSrc" v-on:img-clicked="displayImageInfo"></imgSlider>
     <!-- <img v-bind:src="painting.imgSrc" alt /> -->
     <div class="title-wrapper">
       <h1 class="title-text">{{ painting.title }}</h1>
@@ -55,7 +55,8 @@ export default {
       // currentLoop beinhaltet eine setInterval-Methode, die sich um die
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
-      topic: {}
+      topic: {},
+      timeout: {}
     };
   },
   async created() {
@@ -63,10 +64,6 @@ export default {
     this.id = parseInt(this.$route.params.id);
 
     let _this = this;
-    // window.onblur = function() {
-    //     if (_this.getPlayingInfo() !== undefined)
-    //         _this.pause();
-    // };
     let result = await axios({
       method: "POST",
       url: "http://localhost:4000/graphql",
@@ -108,12 +105,31 @@ export default {
   mounted() {
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
-    // console.log("mounted started");
-    // this.setCurrent(0);
-    // const MQTTHandler = require("../assets/js/MQTTHandler");
-    // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
+    displayImageInfo() {
+        let _this = this;
+        clearTimeout(_this.timeout);
+        // let imageInfo = document.createElement("div");
+        // let info = document.createElement("span");
+        // info.innerHTML = this.painting.imgSrc[0];
+        // imageInfo.appendChild(info);
+        // imageInfo.className = "bounceIn animated imageInfo";
+        // document.querySelector(".image").appendChild(imageInfo);
+        let imageInfo = document.querySelector(".imageInfo");
+        if (imageInfo.classList.contains("notDisplayed")) {
+            imageInfo.classList.remove("notDisplayed");
+            _this.timeout = setTimeout(function () {
+                if (!imageInfo.classList.contains("notDisplayed"))
+                    imageInfo.classList.add("notDisplayed");
+                else
+                    clearTimeout(_this.timeout);
+            }, 2000);
+        } else {
+            imageInfo.classList.add("notDisplayed");
+        }
+
+    },
     checkCategoriesToShow(categoriesToShow, paintingInfos) {
       let _this = this;
       let newInfos = [];
@@ -167,13 +183,13 @@ export default {
           },
           onplay: function() {
             clearInterval(_this.currentLoop);
-            _this.updateSlider(info);
+            _this.updateSlider(_this.painting.infos.indexOf(info));
           },
           onend: function() {
             info.currentValue = 0;
             info.current = false;
             clearInterval(_this.currentLoop);
-            _this.setCurrent(info.id + 1);
+            _this.setCurrent(_this.painting.infos[_this.painting.infos.indexOf(info) + 1].id);
           }
         });
         info.audio = Vue.prototype.$audioHowls[info.id];

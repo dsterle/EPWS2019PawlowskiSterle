@@ -1,15 +1,29 @@
 //* Colors *//
 
-$evenDarker: #18191a;
-$darker: #222324;
-$light: #4a4a4a;
-$middleLight: #cdcdcd;
-$lighter: #fff;
-$input-outline: #919192;
-$accent: #708ce0;
-$accentDark: #4c62a7;
-$accentTransparent: #00c3ff38;
-$error: #c84f4f;
+//@if($darkTheme) {
+  $evenDarker: rgb(24, 25, 26);
+  $darker: #222324;
+  $light: #4a4a4a;
+  $middleLight: #cdcdcd;
+  $lighter: #fff;
+  $input-outline: #919192;
+  $accent: #708ce0;
+  $accentDark: #4c62a7;
+  $accentTransparent: #00c3ff38;
+  $error: #c84f4f;
+//} @else {
+//  $evenDarker: #fff;
+//  $darker: #fff;
+//  $light: #4a4a4a;
+//  $middleLight: #cdcdcd;
+//  $lighter: #18191a;
+//  $input-outline: #919192;
+//  $accent: #708ce0;
+//  $accentDark: #4c62a7;
+//  $accentTransparent: #00c3ff38;
+//  $error: #c84f4f;
+//}
+
 
 //* Sizes *//
 // 1rem = 16px
