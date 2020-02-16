@@ -38,5 +38,6 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/scss/010-variables.scss";
 
 </style>
