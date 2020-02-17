@@ -114,6 +114,9 @@ export default {
     //TODO bessere Lösung
     //Muss nach created ausgeführt werden, aber in mounted
     setTimeout(function () {
+        console.log(_this.getPlayingInfo());
+        if (!_this.getPlayingInfo() && !_this.getPausedInfo())
+            _this.setupPaintingInfos();
         _this.checkCategoriesToShow(
             localStorage.categoriesToShow,
             _this.painting.infos
@@ -146,7 +149,6 @@ export default {
         } else {
             imageInfo.classList.add("notDisplayed");
         }
-
     },
     checkCategoriesToShow(categoriesToShow, paintingInfos) {
       let _this = this;
@@ -206,7 +208,8 @@ export default {
             info.currentValue = 0;
             info.current = false;
             clearInterval(_this.currentLoop);
-            _this.setCurrent(_this.painting.infos[_this.painting.infos.indexOf(info) + 1].id);
+            if (_this.painting.infos.indexOf(info)+1 !== _this.painting.infos.length)
+              _this.setCurrent(_this.painting.infos[_this.painting.infos.indexOf(info) + 1].id);
           }
         });
       });

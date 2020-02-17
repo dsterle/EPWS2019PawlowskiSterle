@@ -9,11 +9,14 @@
   "dependencies": {
     "axios": "^0.19.1",
     "howler": "^2.1.2",
+    "v-img": "^0.2.0",
     "vue": "^2.6.10",
     "vue-carousel": "^0.18.0",
     "vue-cookies": "^1.6.1",
+    "vue-fullscreen": "^2.1.5",
     "vue-router": "^3.0.3",
     "vue-slider-component": "^3.0.40",
+    "vue-zoomer": "^0.3.6",
     "zooming": "^2.1.1"
   },
   "devDependencies": {
