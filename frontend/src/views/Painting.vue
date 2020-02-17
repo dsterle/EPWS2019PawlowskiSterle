@@ -114,7 +114,6 @@ export default {
     //TODO bessere Lösung
     //Muss nach created ausgeführt werden, aber in mounted
     setTimeout(function () {
-        console.log(_this.getPlayingInfo());
         if (!_this.getPlayingInfo() && !_this.getPausedInfo())
             _this.setupPaintingInfos();
         _this.checkCategoriesToShow(

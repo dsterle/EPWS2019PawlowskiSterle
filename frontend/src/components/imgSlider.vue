@@ -17,12 +17,10 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import VueImg from 'v-img';
 import Vue from 'vue';
 import VueZoomer from 'vue-zoomer';
-import Zooming from 'zooming';
 
-Vue.use(VueZoomer, VueImg);
+Vue.use(VueZoomer);
 
 export default {
   name: "imgSlider",
