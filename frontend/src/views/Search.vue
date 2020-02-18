@@ -2,10 +2,10 @@
   <div class="search">
     <head-bar headline="Suche"></head-bar>
     <div class="wrapper">
-      <input type="search" class="searchInput animated fadeIn" placeholder="Tippe um zu suchen...">
+      <input type="search" class="searchInput animated bounceIn" placeholder="Tippe um zu suchen...">
     </div>
     <ul>
-      <li v-for="painting in paintingMatch" v-bind:key="painting.title">
+      <li class="animated fadeIn" v-for="painting in paintingMatch" v-bind:key="painting.title">
         <painting-with-infos
                 v-bind:src="painting.imgSrc[0]"
                 v-bind:alt="painting.title"
@@ -168,7 +168,6 @@
             }
         },
         async created() {
-            let _this = this;
             let result = await axios({
                 method: "POST",
                 url: "http://localhost:4000/graphql",
@@ -217,6 +216,7 @@
                 return findings;
             },
             addSearchListener() {
+                let _this = this;
                 let searchInput = document.querySelector(".searchInput");
                 searchInput.addEventListener("input", function () {
                     if (!isNaN(parseInt(searchInput.value)))
