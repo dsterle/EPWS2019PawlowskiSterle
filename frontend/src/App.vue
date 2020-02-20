@@ -29,7 +29,7 @@ export default {
         //         dated: 1502,
         //         imgSrc: "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg"
         //     }]);
-        localStorage.paintingHistory = JSON.stringify([]);
+        //localStorage.paintingHistory = JSON.stringify([]);
     }
 };
 </script>
