@@ -1,6 +1,8 @@
 <template>
   <div class="settings">
-    <headBar headline="Einstellungen"></headBar>
+    <headBar headline="Einstellungen"
+             page-info-headline="Einstellungen:"
+             page-info="Hier können Sie die Einstellungen, bezüglich Darstellung, Audio oder Sprache anpassen."></headBar>
     <div class="content">
       <settingButton icon="fas fa-align-left" description="Darstellung" page="layout"></settingButton>
 <!--      <settingButton icon="fas fa-palette" description="Farben" page="colors"></settingButton>-->

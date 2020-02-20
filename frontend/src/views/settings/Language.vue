@@ -1,6 +1,8 @@
 <template>
   <div class="language">
-    <headBar headline="Sprache"></headBar>
+    <headBar headline="Sprache"
+             page-info-headline="Sprache:"
+             page-info="Hier können Sie die Sprache einstellen, diese wird automatisch gespeichert."></headBar>
     <div class="content">
       <ul class="languageList">
         <language-button language="Deutsch" language-id="german" :lang-src="require('../../assets/flags/german.png')" lang-class="selected"></language-button>

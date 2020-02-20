@@ -4,14 +4,30 @@
       <img src="../assets/icons/arrow_back.svg" alt="back" />
     </a>
     <span>{{headline}}</span>
-    <i class="fas fa-info-circle pageInfo"></i>
+    <i class="fas fa-info-circle pageInfoButton" @click="displayPageInfo"></i>
+    <div class="pageInfo notDisplayed">
+      <div class="corner"></div>
+      <h1 class="headline">{{pageInfoHeadline}}</h1>
+      <span class="normal-text">
+        {{pageInfo}}
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
     export default {
         name: "headBar",
-        props: ["headline"]
+        props: ["headline", "pageInfoHeadline", "pageInfo"],
+        methods: {
+            displayPageInfo() {
+                let pageInfo = document.querySelector(".pageInfo");
+                if (pageInfo.classList.contains("notDisplayed"))
+                    pageInfo.classList.replace("notDisplayed", "displayed");
+                else
+                    pageInfo.classList.replace("displayed", "notDisplayed");
+            }
+        }
     }
 </script>
 
@@ -31,14 +47,56 @@
     font-weight: $weight-semibold;
     background: $evenDarker;
 
+    .pageInfo {
+      position: absolute;
+      left: $abstand-S;
+      right: $abstand-S;
+      top: $abstand-XL;
+      padding: $abstand-S;
+      border-radius: 10px;
+      background: $evenDarker;
+      box-shadow: 0 0 10px 2px $light;
+      z-index: 10;
+
+      .corner {
+        position: absolute;
+        top: -15px;
+        right: $abstand-S;
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 15px solid $evenDarker;
+        opacity: 0.8;
+      }
+
+      h1 {
+        margin-bottom: $abstand-S;
+      }
+
+      span {
+        text-align: center;
+      }
+      transition: 0.3s;
+    }
+
     .back-icon {
       margin-left: $abstand-M;
       margin-right: $abstand-M;
     }
 
-    .pageInfo {
+    .pageInfoButton {
       position: absolute;
       right: $abstand-M;
+    }
+
+    .notDisplayed {
+      display: none;
+      opacity: 0;
+    }
+
+    .displayed {
+      opacity: 0.9;
     }
 
   }

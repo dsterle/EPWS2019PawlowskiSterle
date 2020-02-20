@@ -2,7 +2,14 @@
   <div class="container">
     <carousel v-bind:per-page="1">
       <slide v-for="image in imgSrc" :key="image">
-        <img class="image" v-bind:src="image" alt />
+        <v-zoomer>
+          <img class="image" v-bind:src="image" alt v-on:click="imageClicked"/>
+        </v-zoomer>
+        <div class="flexContainer">
+          <div class="imageInfo notDisplayed animated bounceIn">
+            <span>test</span>
+          </div>
+        </div>
       </slide>
     </carousel>
   </div>
@@ -10,6 +17,10 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import Vue from 'vue';
+import VueZoomer from 'vue-zoomer';
+
+Vue.use(VueZoomer);
 
 export default {
   name: "imgSlider",
@@ -20,9 +31,17 @@ export default {
   },
   data: function() {
     return {
-      images: 0
+      images: 0,
+      fullscreen: false
     };
-  }
+  },
+    mounted() {
+    },
+    methods: {
+        imageClicked() {
+            this.$emit("img-clicked");
+        }
+    }
 };
 </script>
 
@@ -35,6 +54,30 @@ export default {
   .image {
     width: 100%;
     height: auto;
+    z-index: 100000000;
+  }
+
+  .flexContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .imageInfo {
+    position: absolute;
+    top: $abstand-XL;
+    padding: $abstand-S;
+    border-radius: 10px;
+    background: $evenDarker;
+    box-shadow: 0 0 10px 2px $light;
+    span {
+      color: $lighter;
+      text-align: center;
+    }
+    transition: 0.3s;
+  }
+
+  .notDisplayed {
+    opacity: 0;
   }
 
   // modifying the classes of vue-carousel
