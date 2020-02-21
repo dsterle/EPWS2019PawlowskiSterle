@@ -101,20 +101,6 @@ export default {
   z-index: 5;
   box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.5);
 
-  // .home-icon {
-  //   width: auto;
-  //   height: auto;
-  //   background: url("../assets/icons/home.svg");
-  // }
-
-  i {
-    font-size: $font-size-XL;
-  }
-
-  .currentPage {
-    color: $accent;
-  }
-
   .inActive {
     opacity: 0.3;
   }
