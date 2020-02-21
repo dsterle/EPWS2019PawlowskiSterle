@@ -1,14 +1,12 @@
 <template>
   <div class="container">
-    <carousel v-bind:per-page="1">
-      <slide v-for="image in imgSrc" :key="image">
-        <v-zoomer>
-          <img class="image" v-bind:src="image" alt v-on:click="imageClicked"/>
+    <carousel v-bind:per-page="1" v-on:change="fun">
+      <slide v-for="image in img" :key="image.id" v-on:change="fun">
+        <v-zoomer class="zommer">
+          <img class="image" v-bind:src="image.src" alt v-on:click="imageClicked" />
         </v-zoomer>
-        <div class="flexContainer">
-          <div class="imageInfo notDisplayed animated bounceIn">
-            <span>test</span>
-          </div>
+        <div class="infoContainer">
+          <p class="imageInfo">{{ image.description }}</p>
         </div>
       </slide>
     </carousel>
@@ -17,14 +15,14 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
-import Vue from 'vue';
-import VueZoomer from 'vue-zoomer';
+import Vue from "vue";
+import VueZoomer from "vue-zoomer";
 
 Vue.use(VueZoomer);
 
 export default {
   name: "imgSlider",
-  props: ["imgSrc"],
+  props: ["img"],
   components: {
     Carousel,
     Slide
@@ -35,13 +33,18 @@ export default {
       fullscreen: false
     };
   },
-    mounted() {
-    },
-    methods: {
-        imageClicked() {
-            this.$emit("img-clicked");
-        }
+  mounted() {},
+  methods: {
+    imageClicked() {
+      this.$emit("img-clicked");
     }
+  },
+  methods: {
+    fun() {
+      console.log("changed");
+    },
+    imageClicked() {}
+  }
 };
 </script>
 
@@ -54,26 +57,22 @@ export default {
   .image {
     width: 100%;
     height: auto;
-    z-index: 100000000;
   }
 
-  .flexContainer {
+  .infoContainer {
     display: flex;
     justify-content: center;
-  }
-
-  .imageInfo {
     position: absolute;
-    top: $abstand-XL;
-    padding: $abstand-S;
-    border-radius: 10px;
-    background: $evenDarker;
-    box-shadow: 0 0 10px 2px $light;
-    span {
+    top: 0;
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+    animation-delay: 2000ms;
+
+    .imageInfo {
       color: $lighter;
-      text-align: center;
+      padding: $abstand-S;
+      transition: 0.3s;
     }
-    transition: 0.3s;
   }
 
   .notDisplayed {
