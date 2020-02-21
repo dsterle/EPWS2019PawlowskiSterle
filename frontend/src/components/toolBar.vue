@@ -14,9 +14,21 @@
     ></i>-->
     <!-- <i class="fas fa-history" @click="$router.push({name: 'history', params: {userid: user}})"></i> -->
     <!-- <i class="fas fa-cog" @click="$router.push({name: 'settings', params: {userid: user}})"></i> -->
-    <img src="../assets/icons/home.svg" alt />
-    <img src="../assets/icons/painting.svg" alt />
-    <img src="../assets/icons/settings.svg" alt />
+    <img
+      src="../assets/icons/home.svg"
+      alt
+      @click="$router.push({name: 'waiting', params: {userid: user}})"
+    />
+    <img
+      src="../assets/icons/painting.svg"
+      alt
+      @click="$router.push({name: 'painting', params: {userid: user, id: paintingId}})"
+    />
+    <img
+      src="../assets/icons/settings.svg"
+      alt
+      @click="$router.push({name: 'settings', params: {userid: user}})"
+    />
   </div>
 </template>
 
@@ -78,7 +90,6 @@ export default {
   background: $darker;
   color: $lighter;
   z-index: 5;
-  // border-top: 2px solid $light;
   box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.5);
 
   i {
