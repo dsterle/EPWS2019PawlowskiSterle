@@ -1,16 +1,16 @@
 //* Colors *//
 
 //@if($darkTheme) {
-  $evenDarker: rgb(24, 25, 26);
-  $darker: #222324;
-  $light: #4a4a4a;
-  $middleLight: #cdcdcd;
-  $lighter: #fff;
-  $input-outline: #919192;
-  $accent: #708ce0;
-  $accentDark: #4c62a7;
-  $accentTransparent: #00c3ff38;
-  $error: #c84f4f;
+$evenDarker: rgb(24, 25, 26);
+$darker: #252627;
+$light: #4a4a4a;
+$middleLight: #cdcdcd;
+$lighter: #fff;
+$input-outline: #919192;
+$accent: #708ce0;
+$accentDark: #4c62a7;
+$accentTransparent: #00c3ff38;
+$error: #c84f4f;
 //} @else {
 //  $evenDarker: #fff;
 //  $darker: #fff;
@@ -24,7 +24,6 @@
 //  $error: #c84f4f;
 //}
 
-
 //* Sizes *//
 // 1rem = 16px
 $golden-ratio: 1.618;
@@ -37,6 +36,7 @@ $abstand-L: 1rem * 2; // 32
 $abstand-XL: 1rem * 4; // 64
 $abstand-XXL: 1rem * 4.5; // 72
 $abstand-XXXL: 1rem * 5; // 80
+$abstand-XXXXL: 1rem * 10; // 160
 
 $button-padding: 1rem * 0.75;
 
