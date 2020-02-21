@@ -82,7 +82,7 @@ export default {
     let _this = this;
     let result = await axios({
       method: "POST",
-      url: "http://192.168.178.70:4000/graphql",
+      url: "http://localhost/graphql",
       data: {
         query: `
             {
