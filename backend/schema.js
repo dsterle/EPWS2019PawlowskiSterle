@@ -1,14 +1,5 @@
 var { buildSchema } = require("graphql");
 
-// type Painting {
-//   id: String!
-//   title: String!
-//   link: String!
-//   imgSrc: [String!]!
-//   dated: Int!
-//   infos: [Info!]!
-// }
-
 const schema = buildSchema(`
     type Chip {
       chipnr: ID!
@@ -19,9 +10,14 @@ const schema = buildSchema(`
     type Painting {
       id: String!
       title: String!
-      imgSrc: [String!]!
+      img: [Img]
       dated: Int!
       infos: [Info!]!
+    }
+
+    type Img {
+      src: String
+      description: String
     }
 
     type Info {
