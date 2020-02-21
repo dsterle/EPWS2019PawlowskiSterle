@@ -82,7 +82,7 @@ export default {
     let _this = this;
     let result = await axios({
       method: "POST",
-      url: "http://localhost/graphql",
+      url: "http://192.168.178.70:4000/graphql",
       data: {
         query: `
             {
@@ -472,7 +472,7 @@ export default {
   }
 
   .info-list {
-    margin-bottom: $abstand-XXXL;
+    margin-bottom: $abstand-XXXXL;
   }
 }
 </style>
