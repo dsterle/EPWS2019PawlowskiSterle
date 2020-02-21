@@ -78,8 +78,8 @@ export default {
   background: $darker;
   color: $lighter;
   z-index: 5;
-  // border-top: 2px solid $evenDarker;
-  box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.25);
+  // border-top: 2px solid $light;
+  box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.5);
 
   i {
     font-size: $font-size-XL;
