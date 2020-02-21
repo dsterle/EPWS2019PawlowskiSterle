@@ -8,96 +8,92 @@
     <div class="pageInfo notDisplayed">
       <div class="corner"></div>
       <h1 class="headline">{{pageInfoHeadline}}</h1>
-      <span class="normal-text">
-        {{pageInfo}}
-      </span>
+      <span class="normal-text">{{pageInfo}}</span>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
-        name: "headBar",
-        props: ["headline", "pageInfoHeadline", "pageInfo"],
-        methods: {
-            displayPageInfo() {
-                let pageInfo = document.querySelector(".pageInfo");
-                if (pageInfo.classList.contains("notDisplayed"))
-                    pageInfo.classList.replace("notDisplayed", "displayed");
-                else
-                    pageInfo.classList.replace("displayed", "notDisplayed");
-            }
-        }
+export default {
+  name: "headBar",
+  props: ["headline", "pageInfoHeadline", "pageInfo"],
+  methods: {
+    displayPageInfo() {
+      let pageInfo = document.querySelector(".pageInfo");
+      if (pageInfo.classList.contains("notDisplayed"))
+        pageInfo.classList.replace("notDisplayed", "displayed");
+      else pageInfo.classList.replace("displayed", "notDisplayed");
     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/scss/010-variables.scss";
+@import "../assets/scss/010-variables.scss";
 
-  .headBar {
-    position: relative;
-    left: 0;
-    top: 0;
-    display: flex;
-    height: $app-bar-height;
-    width: 100%;
-    align-items: center;
-    color: $lighter;
-    font-size: $font-size-L;
-    font-weight: $weight-semibold;
+.headBar {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: flex;
+  height: $app-bar-height;
+  width: 100%;
+  align-items: center;
+  color: $lighter;
+  font-size: $font-size-L;
+  font-weight: $weight-semibold;
+  background: $darker;
+
+  .pageInfo {
+    position: absolute;
+    left: $abstand-S;
+    right: $abstand-S;
+    top: $abstand-XL;
+    padding: $abstand-S;
+    border-radius: 10px;
     background: $evenDarker;
+    box-shadow: 0 0 10px 2px $light;
+    z-index: 10;
 
-    .pageInfo {
+    .corner {
       position: absolute;
-      left: $abstand-S;
+      top: -15px;
       right: $abstand-S;
-      top: $abstand-XL;
-      padding: $abstand-S;
-      border-radius: 10px;
-      background: $evenDarker;
-      box-shadow: 0 0 10px 2px $light;
-      z-index: 10;
-
-      .corner {
-        position: absolute;
-        top: -15px;
-        right: $abstand-S;
-        width: 0;
-        height: 0;
-        border-left: 20px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 15px solid $evenDarker;
-        opacity: 0.8;
-      }
-
-      h1 {
-        margin-bottom: $abstand-S;
-      }
-
-      span {
-        text-align: center;
-      }
-      transition: 0.3s;
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 15px solid $evenDarker;
+      opacity: 0.8;
     }
 
-    .back-icon {
-      margin-left: $abstand-M;
-      margin-right: $abstand-M;
+    h1 {
+      margin-bottom: $abstand-S;
     }
 
-    .pageInfoButton {
-      position: absolute;
-      right: $abstand-M;
+    span {
+      text-align: center;
     }
-
-    .notDisplayed {
-      display: none;
-      opacity: 0;
-    }
-
-    .displayed {
-      opacity: 0.9;
-    }
-
+    transition: 0.3s;
   }
+
+  .back-icon {
+    margin-left: $abstand-M;
+    margin-right: $abstand-M;
+  }
+
+  .pageInfoButton {
+    position: absolute;
+    right: $abstand-M;
+  }
+
+  .notDisplayed {
+    display: none;
+    opacity: 0;
+  }
+
+  .displayed {
+    opacity: 0.9;
+  }
+}
 </style>
