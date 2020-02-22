@@ -1,10 +1,11 @@
 <template>
   <div class="setting" @click="$router.push({name: page})">
     <div class="left">
-      <i v-bind:class="icon"></i>
+      <i class="icon" v-bind:class="icon"></i>
       <p class="text button-text setting-description">{{description}}</p>
     </div>
-    <i class="fas fa-chevron-right"></i>
+    <!-- <i class="icon fas fa-chevron-right"></i> -->
+    <img class="icon-right" src="../assets/icons/arrow_down.svg" alt />
   </div>
 </template>
 
@@ -37,5 +38,16 @@ export default {
       margin-left: $abstand-M;
     }
   }
+}
+
+.icon {
+  color: $lighter;
+  font-size: $font-size-L;
+  margin-right: $abstand-S;
+}
+
+.icon-right {
+  transform: rotate(-90deg);
+  width: $abstand-L;
 }
 </style>
