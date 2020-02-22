@@ -4,7 +4,7 @@ server = {
     reconnectTimeout: 10000
 };
 
-exports.handleMQTTConnection = function (this_component, topic, clientName) {
+exports.handleMQTTConnection = function (this_component, topic) {
     // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
     const client = new Paho.MQTT.Client(
         server.host,

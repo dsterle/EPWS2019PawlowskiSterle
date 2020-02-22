@@ -114,7 +114,7 @@ export default {
     this.setupPaintingInfos();
     if (localStorage.autoplay === "true") this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
+    MQTTHandler.handleMQTTConnection(this, this.topic);
     this.updateHistory();
   },
   mounted() {

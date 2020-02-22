@@ -1,10 +1,11 @@
 <template>
   <div class="waiting">
-    <headBar headline="Home"
-             page-info-headline="Willkommen:"
-             page-info="In der Toolbar unten können Sie zwischen der Home-Seite, Suche, aktuelles Gemälde, Verlauf und
-                          den Einstellungen wechseln.">
-    </headBar>
+    <headBar
+      headline="Home"
+      page-info-headline="Willkommen:"
+      page-info="In der Toolbar unten können Sie zwischen der Home-Seite, Suche, aktuelles Gemälde, Verlauf und
+                          den Einstellungen wechseln."
+    ></headBar>
     <div class="content-wrapper">
       <p class="hint-text note-text">Halten Sie Ihren Chip vor ein Gemälde...</p>
     </div>
@@ -19,7 +20,7 @@ import headBar from "../components/headBar";
 
 export default {
   name: "waiting",
-  components: {toolBar, headBar},
+  components: { toolBar, headBar },
   data() {
     return {
       topic: {}
@@ -31,7 +32,7 @@ export default {
   },
   mounted() {
     const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "waitingClient");
+    MQTTHandler.handleMQTTConnection(this, this.topic);
 
     /// TEST ///
     /*
