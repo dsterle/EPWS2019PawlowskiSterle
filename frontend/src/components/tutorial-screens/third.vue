@@ -6,10 +6,10 @@
       <img class="person two animated fadeIn" src="../../assets/illustrations/person_two.png" alt />
     </div>
     <div class="button-wrapper">
-      <div class="button --grey animated bounceIn">
+      <div class="button --grey animated bounceIn" @click="answer(false)">
         <p class="button-text">Nein</p>
       </div>
-      <div class="button --normal animated bounceIn">
+      <div class="button --normal animated bounceIn" @click="answer(true)">
         <p class="button-text">Ja</p>
       </div>
     </div>
@@ -17,7 +17,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+    methods: {
+        answer(response) {
+            localStorage.autoplay = response;
+            this.$router.push({ name: 'waiting', params: {userid: this.$route.params.userid}});
+        }
+    }
+};
 </script>
 
 <style lang="scss" scoped>
