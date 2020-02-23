@@ -1,5 +1,5 @@
 <template>
-  <span class="layout">
+  <label class="layout">
     <headBar
       headline="Darstellung"
       page-info-headline="Darstellung:"
@@ -9,53 +9,65 @@
     ></headBar>
     <div class="content">
       <div class="card darkmode-card">
-        <span class="setting headline">Dark Mode</span>
-        <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i>
+        <p class="setting headline">Dark Mode</p>
+        <div class="switch">
+          <label>
+            <input js-toggle-dark-mode type="checkbox" checked />
+            <span class="lever"></span>
+          </label>
+        </div>
+        <!-- <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i> -->
       </div>
       <div class="card">
         <span class="setting headline">Diese Kategorien werden Ihnen in der Gemäldeansicht angezeigt</span>
         <ul class="normal-text category-ul">
           <li>
-            <label for="kurzbeschreibung">Kurzbeschreibung</label>
-            <input
-              class="category"
-              name="kurzbeschreibung"
-              id="kurzbeschreibung"
-              type="checkbox"
-              checked
-            />
+            <label>
+              <input
+                class="category"
+                name="kurzbeschreibung"
+                id="kurzbeschreibung"
+                type="checkbox"
+                checked
+              />
+              <span>Kurzbeschreibung</span>
+            </label>
           </li>
           <li>
-            <label for="provenienz">Provenienz</label>
-            <input
-              class="category checkbox"
-              name="provenienz"
-              id="provenienz"
-              type="checkbox"
-              checked
-            />
+            <label>
+              <input class="category" name="provenienz" id="provenienz" type="checkbox" checked />
+              <span for="provenienz">Provenienz</span>
+            </label>
           </li>
           <li>
-            <label for="masse">Maße</label>
-            <input class="category" name="masse" id="masse" type="checkbox" checked />
+            <label>
+              <input class="category" name="masse" id="masse" type="checkbox" checked />
+              <span for="masse">Maße</span>
+            </label>
           </li>
           <li>
-            <label for="material">Material/Technik</label>
-            <input class="category" name="material" id="material" type="checkbox" checked />
+            <label>
+              <input class="category" name="material" id="material" type="checkbox" checked />
+              <span for="material">Material/Technik</span>
+            </label>
           </li>
           <li>
-            <label for="beschriftung">Beschriftung</label>
-            <input class="category" name="beschriftung" id="beschriftung" type="checkbox" checked />
+            <label>
+              <input class="category" name="beschriftung" id="beschriftung" type="checkbox" checked />
+              <span for="beschriftung">Beschriftung</span>
+            </label>
           </li>
           <li class="last-li">
-            <label for="ausstellungsgeschichte">Ausstellungsgeschichte</label>
-            <input
-              class="category"
-              name="ausstellungsgeschichte"
-              id="ausstellungsgeschichte"
-              type="checkbox"
-              checked
-            />
+            <label>
+              <input
+                class="category"
+                name="ausstellungsgeschichte"
+                id="ausstellungsgeschichte"
+                type="checkbox"
+                checked
+              />
+              <span for="ausstellungsgeschichte">Ausstellungsgeschichte</span>
+            </label>
           </li>
         </ul>
       </div>
@@ -74,7 +86,7 @@
       <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
     <toolBar current-page="settings"></toolBar>
-  </span>
+  </label>
 </template>
 
 <script>
@@ -96,22 +108,11 @@ export default {
     this.checkLocalStorage();
   },
   methods: {
-    toggle() {
-      let toggleIcon = document.querySelector(".toggleDarkMode");
-      if (toggleIcon.classList.contains("fa-toggle-on")) {
-        toggleIcon.classList.replace("fa-toggle-on", "fa-toggle-off");
-      } else {
-        toggleIcon.classList.replace("fa-toggle-off", "fa-toggle-on");
-      }
-    },
     checkLocalStorage() {
       if (localStorage.darkMode) {
         if (localStorage.darkMode === "true")
-          document.querySelector(".toggleDarkMode").className =
-            "fas fa-toggle-on toggleDarkMode";
-        else
-          document.querySelector(".toggleDarkMode").className =
-            "fas fa-toggle-off toggleDarkMode";
+          document.querySelector("[js-toggle-dark-mode]").checked = true;
+        else document.querySelector("[js-toggle-dark-mode]").checked = false;
       }
       let categories = document.querySelectorAll(".category");
       let categoriesToShow = localStorage.categoriesToShow;
@@ -129,9 +130,9 @@ export default {
     },
     saveSettings() {
       let categories = document.querySelectorAll(".category");
-      let darkMode = document.querySelector(".fa-toggle-off");
+      let darkMode = document.querySelector("[js-toggle-dark-mode]");
 
-      localStorage.darkMode = darkMode === null;
+      localStorage.darkMode = darkMode.checked;
       let categoriesToShow = [];
       for (let i = 0; i < categories.length; i++) {
         if (categories[i].checked) categoriesToShow.push(categories[i].name);
@@ -227,6 +228,7 @@ export default {
       0 0 14px rgba(0, 0, 0, 0.12);
   }
 }
+
 //*********************** Following classes are there to style the vue-slider-comonent
 
 .vue-slider-rail {
