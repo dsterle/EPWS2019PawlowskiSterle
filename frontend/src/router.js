@@ -66,6 +66,14 @@ export default new Router({
       }
     },
     {
+      path: "/user/:userid/search",
+      name: 'search',
+      props: true,
+      component: function () {
+        return import(/* webpackChunkName: "about" */ './views/Search.vue')
+      }
+    },
+    {
       path: "/user/:userid/settings",
       name: 'settings',
       props: true,
