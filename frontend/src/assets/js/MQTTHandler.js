@@ -4,15 +4,12 @@ server = {
     reconnectTimeout: 10000
 };
 
-exports.handleMQTTConnection = function (this_component, topic, clientName) {
-    //quick&dirty Lösung, damit mehrere user sich mit der selben topic verbinden können
-    //TODO bessere Lösung finden (z.B. Verzeichnis mit clientIDs erstellen)
-    clientName = clientName + topic + "_" + Math.random();
+exports.handleMQTTConnection = function (this_component, topic) {
     // Erstelle einen MQTT-Client mit den jeweiligen Angaben für den Server
     const client = new Paho.MQTT.Client(
         server.host,
         server.port,
-        clientName
+        ""
     );
 
     client.onConnectionLost = onConnectionLost;

@@ -14,7 +14,6 @@
 </template>
 
 <script>
-// import handleMQTTConnection from "../assets/js/handleMQTTConnection";
 import toolBar from "../components/toolBar.vue";
 import headBar from "../components/headBar";
 
@@ -32,7 +31,7 @@ export default {
   },
   mounted() {
     const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "waitingClient");
+    MQTTHandler.handleMQTTConnection(this, this.topic);
   }
 };
 </script>
