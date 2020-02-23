@@ -36,7 +36,7 @@ export default {
   left: 0;
   top: 0;
   display: flex;
-  // z-index: 100;
+  z-index: 100;
   height: $app-bar-height;
   width: 100%;
   align-items: center;
