@@ -50,10 +50,10 @@ export default {
 @import "../../assets/scss/010-variables";
 .settings {
   .content {
-    margin-top: $abstand-M;
+    padding: $abstand-M;
 
     .settings-button {
-      margin: 0 $abstand-M $abstand-M $abstand-M;
+      margin-bottom: $abstand-M;
     }
   }
 }
