@@ -10,11 +10,22 @@ export default {
   props: ["src", "alt", "enabled"],
   methods: {
     clicked() {
-      this.$emit("fab-clicked");
+      let fab = document.querySelector(".floating-action-button");
+      // Der fab kann nur geklickt werden, wenn er NICHT disabled ist
+      if (!fab.classList.contains("disabled")) {
+        this.$emit("fab-clicked");
+      }
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "../assets/scss/010-variables.scss";
+
+.disabled {
+  opacity: 0.5;
+  background: $light;
+  transition: 0.3s;
+}
 </style>
