@@ -5,7 +5,6 @@
 html {
   background: $darker;
   font-family: $font;
-  height: 110%; //Damit für die Toolbar Platz ist
 }
 
 label {
@@ -74,6 +73,20 @@ input:active {
   border-radius: 5px;
 }
 
+// Anpassungen für materialize.css
+
 .container {
   width: auto;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: none;
+  box-shadow: none !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: none !important;
+  background-image: none !important;
+  color: none !important;
 }

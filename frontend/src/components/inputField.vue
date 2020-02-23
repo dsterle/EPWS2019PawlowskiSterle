@@ -75,7 +75,7 @@ export default {
   }
 
   .input-field:focus {
-    border: 1px $accent solid;
+    border: 1px $accent solid !important;
     transition: 0.5s;
     outline: none;
   }
