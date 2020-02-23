@@ -168,27 +168,6 @@ export default {
       });
       localStorage.setItem("paintingHistory", JSON.stringify(this.history));
     },
-    // checkCategoryToPlay() {
-    //   if (localStorage.categoriesToShow !== null) {
-    //     let categories = localStorage.categoriesToShow.split(",");
-    //     switch (categories[0]) {
-    //       case "kurzbeschreibung":
-    //         return 0;
-    //       case "provenienz":
-    //         return 1;
-    //       case "masse":
-    //         return 2;
-    //       case "material":
-    //         return 3;
-    //       case "beschriftung":
-    //         return 4;
-    //       case "ausstellungsgeschichte":
-    //         return 6;
-    //       default:
-    //         return null;
-    //     }
-    //   }
-    // },
     /**
      * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
      * nur bestimmte Kategorien angezeigt werden sollen
@@ -232,14 +211,12 @@ export default {
             _this.setSlider(info);
           },
           onplay: function() {
-            console.log("onplay");
             clearInterval(_this.currentLoop);
             _this.updateSlider(
               _this.painting.infos[_this.painting.infos.indexOf(info)]
             );
           },
           onend: function() {
-            console.log("onend");
             info.currentValue = 0;
             info.current = false;
             clearInterval(_this.currentLoop);
