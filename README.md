@@ -5,7 +5,7 @@ Dieses Projekt fand seinen Ursprung im Rahmen des Kurses "Web-Development" an de
 
 ## Link zur Web Anwendung :link:
 
-https://dsterle.github.io/cranach_erweiterte_interaktion/
+https://dsterle.github.io/EPWS2019PawlowskiSterle/
 
 ---
 

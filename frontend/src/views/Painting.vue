@@ -1,8 +1,14 @@
 <template>
   <div class="painting">
+    <div class="maximizedImageBackground minimized"></div>
     <headBar
       v-if="painting.title !== undefined"
       v-bind:headline="painting.title.substring(0, 18) + '...'"
+      page-info-headline="Gemäldeansicht:"
+      page-info="Hier erhalten sie textuelle und auditive Informationen. Das Bild können Sie (sofern mehr als ein Punkt
+                  auf dem Bild zusehen ist) nach links wischen, um alternative Gemäldeansichten zu sehen.
+                  Über die Lautsprechericons starten sie eine Audio.
+                  Über den violetten Button unten links können Sie die Audio pausieren."
     ></headBar>
     <fab
       js-fab
@@ -11,27 +17,29 @@
       alt="Pause Knopf"
       v-on:fab-clicked="pause"
     ></fab>
-    <imgSlider class="image animated fadeIn" v-bind:imgSrc="painting.imgSrc"></imgSlider>
-    <!-- <img v-bind:src="painting.imgSrc" alt /> -->
-    <div class="title-wrapper animated fadeIn">
-      <h1 class="title-text">{{ painting.title }}</h1>
-      <p class="hint-text year">{{ painting.dated }}</p>
+    <div class="content">
+      <imgSlider class="image animated fadeIn" v-bind:img="painting.img"></imgSlider>
+      <!-- <img v-bind:src="painting.imgSrc" alt /> -->
+      <div class="title-wrapper animated fadeIn">
+        <h1 class="title-text">{{ painting.title }}</h1>
+        <p class="hint-text year">{{ painting.dated }}</p>
+      </div>
+      <ul class="info-list">
+        <li v-for="info in painting.infos" v-bind:key="info.name">
+          <accordion
+            v-bind:id="info.id"
+            v-bind:name="info.name"
+            v-bind:text="info.inhalt"
+            v-bind:current="info.current"
+            v-bind:min="info.min"
+            v-bind:max="info.max"
+            v-bind:currentValue="info.currentValue"
+            v-on:play-audio="setCurrent"
+            v-on:jump-to="jumpTo"
+          ></accordion>
+        </li>
+      </ul>
     </div>
-    <ul class="info-list">
-      <li v-for="info in painting.infos" v-bind:key="info.name">
-        <accordion
-          v-bind:id="info.id"
-          v-bind:name="info.name"
-          v-bind:text="info.inhalt"
-          v-bind:current="info.current"
-          v-bind:min="info.min"
-          v-bind:max="info.max"
-          v-bind:currentValue="info.currentValue"
-          v-on:play-audio="setCurrent"
-          v-on:jump-to="jumpTo"
-        ></accordion>
-      </li>
-    </ul>
     <toolBar current-page="painting"></toolBar>
   </div>
 </template>
@@ -46,6 +54,7 @@ import axios from "axios";
 import https from "https";
 import headBar from "../components/headBar";
 import toolBar from "../components/toolBar";
+import inputField from "../components/inputField";
 
 export default {
   name: "painting",
@@ -61,26 +70,31 @@ export default {
       // currentLoop beinhaltet eine setInterval-Methode, die sich um die
       // Aktualisierung des Audio-SLiders kümmert
       currentLoop: {},
-      topic: {}
+      topic: {},
+      history: []
     };
   },
   async created() {
+    console.log("created");
+    if (localStorage.paintingHistory) {
+      this.history = JSON.parse(localStorage.paintingHistory);
+    } else this.history = [];
     this.topic = this.$route.params.userid;
     this.id = parseInt(this.$route.params.id);
 
     let _this = this;
-    window.onblur = function() {
-      if (_this.getPlayingInfo() !== undefined) _this.pause();
-    };
     let result = await axios({
       method: "POST",
-      url: "http://localhost:4000/graphql",
+      url: "http://192.168.178.22:4000/graphql",
       data: {
         query: `
             {
               painting(id: ${this.id}) {
                 title
-                imgSrc
+                img {
+                  src
+                  description
+                }
                 dated
                 infos {
                   id
@@ -95,81 +109,33 @@ export default {
     });
     this.painting = result.data.data.painting;
 
-    //** FOR DEBUGGING */
-    // this.painting = {
-    //   id: 1,
-    //   objectName: "FR006",
-    //   inventarnummer: "CH_SORW_1925-1b",
-    //   title: "Bildnis des Johannes Cuspinian",
-    //   imgSrc: [
-    //     "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_c1995_Overall-001.jpg",
-    //     "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_2008-11_Overall.jpg",
-    //     "http://lucascranach.org/thumbnails/CH_SORW_1925-1b_FR006/01_Overall/CH_SORW_1925-1b_FR006_image-date-unknown_Overall-002.jpg"
-    //   ],
-    //   dated: 1502,
-    //   infos: [
-    //     {
-    //       id: 0,
-    //       name: "Kurzbeschreibung",
-    //       inhalt:
-    //         "Brustbildnis des Historiographen Dr. Johannes Cuspinian (eigentlich Spiessheimer)\nTeil eines Diptychons (Gegenstück zum Bildnis der Anna Cuspinian)",
-    //       audioSrc:
-    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/2-Kurzbeschreibung.mp3"
-    //     },
-    //     {
-    //       id: 1,
-    //       name: "Provenienz",
-    //       inhalt:
-    //         "Sammlung Charles I, König von England\n- Familie Locker-Lampson, England \n- Baron of Sandys, England\n- Kunsthandel  A. -G., Luzern, Julius Böhler gall.\n- 1925 durch Reinhart erworben",
-    //       audioSrc:
-    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/3-Provenienz.mp3"
-    //     },
-    //     {
-    //       id: 2,
-    //       name: "Maße",
-    //       inhalt:
-    //         "Maße Bildträger: 60,3 x 45,5 x 0,45-0,55 cm (Format nahezu original)",
-    //       audioSrc:
-    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/4-Maße.mp3"
-    //     },
-    //     {
-    //       id: 3,
-    //       name: "Material/Technik",
-    //       inhalt: "Malerei auf Fichtenholz (Picea sp.)",
-    //       audioSrc:
-    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/5-MaterialTechnik.mp3"
-    //     },
-    //     {
-    //       id: 4,
-    //       name: "Beschriftung",
-    //       inhalt:
-    //         "Ein gemaltes Allianzwappen der Familien Spiessheimer (latinisiert Cuspinianus) und Putsch auf der Rückseite fragmentarisch erhalten",
-    //       audioSrc:
-    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/6-Beschriftung.mp3"
-    //     },
-    //     {
-    //       id: 5,
-    //       name: "Ausstellungsgeschichte",
-    //       inhalt:
-    //         "Bern 1939-1940, Nr. 62-63, Taf. III\nZürich 1940-1941, Nr. 39-40, Taf. XI-XII\nWinterthur 1955, Nr. 42-43, Taf. V.\nKronach 1994, Nr. 118",
-    //       audioSrc:
-    //         "https://raw.githubusercontent.com/dsterle/EPWS2019PawlowskiSterle/za-FrontendBackend-Database/audiofiles/painting-1/7-Ausstellungsgeschichte.mp3"
-    //     }
-    //   ]
-    // };
-    //** FOR DEBUGGING */
+    console.log("2");
 
-    for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
-      if (Vue.prototype.$audioHowls[i] !== undefined) {
-        console.log("abgefangen");
-        return;
-      }
-    }
+    // for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
+    //   if (Vue.prototype.$audioHowls[i] !== undefined) {
+    //     return;
+    //   }
+    // }
+
+    console.log("3");
+
+    console.log("directly before");
     this.setupPaintingInfos();
-    if (localStorage.autoplay === "true") this.setCurrent(0);
+    if (localStorage.autoplay === "true" && this.checkCategoryToPlay() !== null)
+        this.setCurrent(this.checkCategoryToPlay());
     const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
+    MQTTHandler.handleMQTTConnection(this, this.topic);
     this.updateHistory();
+
+    // this.painting.infos.forEach(info => {
+    //   this.rerenderInfo(info);
+    // });
+  },
+  destroyed() {
+    console.log("destroyed");
+    this.painting.infos.forEach(info => {
+      this.resetInfo(info);
+    });
   },
   mounted() {
     let _this = this;
@@ -185,24 +151,54 @@ export default {
     }, 300);
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
-    // console.log("mounted started");
-    // this.setCurrent(0);
-    // const MQTTHandler = require("../assets/js/MQTTHandler");
-    // MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
   },
   methods: {
     /**
      * updateHistory fügt das aktuelle Painting dem Verlauf hinzu
      */
     updateHistory() {
-      let storage = JSON.parse(localStorage.paintingHistory);
-      storage.push({
+      let time = new Date();
+      time =
+        time.getDate() +
+        "." +
+        time.getMonth() +
+        "." +
+        time.getFullYear() +
+        " " +
+        time.getHours() +
+        "." +
+        time.getMinutes() +
+        "." +
+        time.getSeconds();
+      this.history.unshift({
         id: parseInt(this.$route.params.id),
         title: this.painting.title,
         dated: this.painting.dated,
-        imgSrc: this.painting.imgSrc[0]
+        // imgSrc: this.painting.imgSrc[0],
+        time: time
       });
-      localStorage.paintingHistory = JSON.stringify(storage);
+      localStorage.setItem("paintingHistory", JSON.stringify(this.history));
+    },
+    checkCategoryToPlay() {
+        if (localStorage.categoriesToShow !== null) {
+            let categories = localStorage.categoriesToShow.split(",");
+            switch (categories[0]) {
+                case "kurzbeschreibung":
+                    return 0;
+                case "provenienz":
+                    return 1;
+                case "masse":
+                    return 2;
+                case "material":
+                    return 3;
+                case "beschriftung":
+                    return 4;
+                case "ausstellungsgeschichte":
+                    return 6;
+                default:
+                    return null;
+            }
+        }
     },
     /**
      * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
@@ -243,11 +239,11 @@ export default {
      * Es werden Informationen gespeichert, ob die Datei gerade läuft oder pausiert wurde usw.
      */
     setupPaintingInfos() {
+      console.log("setupPaintingInfos");
       let _this = this;
-      let counter = 0;
 
       // Schleife über jede Info (Accordion)
-      this.painting.infos.forEach(info => {
+      _this.painting.infos.forEach(info => {
         // current zeigt an, ob die Info ausgewählt ist (kann währenddessen auch pausiert sein)
         info.current = false;
         // paused zeigt an, ob die Info pausiert ist
@@ -261,16 +257,23 @@ export default {
           },
           onplay: function() {
             clearInterval(_this.currentLoop);
-            _this.updateSlider(info);
+            _this.updateSlider(
+              _this.painting.infos[_this.painting.infos.indexOf(info)]
+            );
           },
           onend: function() {
             info.currentValue = 0;
             info.current = false;
             clearInterval(_this.currentLoop);
-            _this.setCurrent(info.id + 1);
+            if (
+              _this.painting.infos.indexOf(info) + 1 !==
+              _this.painting.infos.length
+            )
+              _this.setCurrent(
+                _this.painting.infos[_this.painting.infos.indexOf(info) + 1].id
+              );
           }
         });
-        info.audio = Vue.prototype.$audioHowls[info.id];
       });
     },
     /**
@@ -282,14 +285,14 @@ export default {
       this.painting.infos.forEach(info => {
         if (info.id === id) {
           // Falls die Audioinfo, die angeklickt wurde noch aktiv ist, wird diese zuerst gestoppt
-          info.audio.stop();
+          Vue.prototype.$audioHowls[info.id].stop();
           // Wenn die id übereinstimmt, wird current auf true gesetzt und currentValue auf 0 zurückgesetzt
           clearInterval(_this.currentLoop);
           info.current = true;
           info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
+          Vue.prototype.$audioHowls[info.id].play();
           this.rerenderInfo(info);
-          info.audio.play();
         } else {
           // Wenn die id nicht übereinstimmt, wird die Info resettet
           _this.resetInfo(info);
@@ -305,7 +308,9 @@ export default {
      */
     setSlider(info) {
       info.min = 0;
-      info.max = parseInt(info.audio.duration().toFixed(0));
+      info.max = parseInt(
+        Vue.prototype.$audioHowls[info.id].duration().toFixed(0)
+      );
       info.currentValue = 0;
 
       this.rerenderInfo(info);
@@ -316,7 +321,7 @@ export default {
      */
     updateSlider(info) {
       let _this = this;
-      let playingInfo = this.getPlayingInfo();
+      let playingInfo = info;
 
       this.currentLoop = setInterval(() => {
         // let currentValue = parseInt(playingInfo.audio.seek().toFixed(0));
@@ -331,6 +336,15 @@ export default {
           playingInfo.currentValue = currentValue;
           // _this.rerenderInfo(info);
           _this.rerenderInfo(playingInfo);
+          //Wenn die letzte Audio erreicht ist
+        } else if (
+          playingInfo.id ===
+          _this.painting.infos[_this.painting.infos.length - 1].id
+        ) {
+          //Um vorzeitiges Beenden der Audio zu verhindern
+          setTimeout(function() {
+            _this.resetInfo(playingInfo);
+          }, 300);
         }
       }, 100);
     },
@@ -339,14 +353,18 @@ export default {
      */
     pause() {
       let playingInfo = this.getPlayingInfo();
+      let pausedInfo = this.getPausedInfo();
 
       if (playingInfo) {
         // Die aktuell spielende Info wird pausiert
         this.pauseInfo(playingInfo);
-      } else {
+      } else if (pausedInfo) {
         // Die pausierte Info wird wieder abgespielt
-        this.playInfo(this.getPausedInfo());
-        this.updateSlider(this.getPausedInfo());
+        this.playInfo(pausedInfo);
+        this.updateSlider(pausedInfo);
+      } else {
+        // Wenn noch keine Audio angefangen wurde, wird von die erste gestartet
+        this.setCurrent(this.painting.infos[0].id);
       }
     },
     /**
@@ -401,7 +419,7 @@ export default {
      * resetInfo setzt die Attribute der übergebenen Info zurück
      */
     resetInfo(info) {
-      info.audio.stop();
+      Vue.prototype.$audioHowls[info.id].stop();
       info.current = false;
       info.paused = false;
       info.currentValue = 0;
@@ -410,14 +428,16 @@ export default {
      * getPlayingInfo gibt die Info, die gerade abgespielt wird
      */
     getPlayingInfo() {
-      // return this.painting.infos.find(info => {
-      //   return info.audio.playing();
-      // });
+      let info;
       for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
         if (Vue.prototype.$audioHowls[i] !== undefined)
-          if (Vue.prototype.$audioHowls[i].playing())
-            return this.painting.infos[i];
+          if (Vue.prototype.$audioHowls[i].playing()) {
+            this.painting.infos.forEach(function(elm) {
+              if (i === elm.id) return (info = elm);
+            });
+          }
       }
+      return info;
     },
     /**
      * getPausedInfo gibt die die Info, die aktuell pausiert ist
@@ -441,7 +461,10 @@ export default {
           {
             painting(id: ${this.id}) {
               title
-              imgSrc
+              img {
+                src
+                description
+              }
               dated
               infos {
                 id
@@ -476,22 +499,25 @@ export default {
     animation-delay: 200ms;
   }
 
-  .image {
-    margin-top: $abstand-S;
-    width: 100%;
-    height: 100%;
-  }
+  .content {
+    margin-top: $app-bar-height;
 
-  .title-wrapper {
-    padding: $abstand-M $abstand-M 0 $abstand-M;
-
-    .year {
-      margin: $abstand-S 0 $abstand-S 0;
+    .image {
+      width: 100%;
+      height: 100%;
     }
-  }
 
-  .info-list {
-    margin-bottom: $abstand-XXXL;
+    .title-wrapper {
+      padding: $abstand-M $abstand-M 0 $abstand-M;
+
+      .year {
+        margin: $abstand-S 0 $abstand-S 0;
+      }
+    }
+
+    .info-list {
+      margin-bottom: $abstand-XXXXL;
+    }
   }
 }
 </style>

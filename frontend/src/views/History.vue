@@ -8,7 +8,8 @@
                 v-bind:alt="painting.title"
                 v-bind:name="painting.title"
                 v-bind:dated="painting.dated"
-                v-bind:painting-id="painting.id">
+                v-bind:painting-id="painting.id"
+                v-bind:time="painting.time">
         </painting-with-infos>
       </li>
     </ul>
@@ -31,10 +32,12 @@
             }
         },
         created() {
+            console.log(JSON.parse(localStorage.paintingHistory))
         }
     }
 </script>
 
 <style lang="scss" scoped>
+  @import "../assets/scss/010-variables.scss";
 
 </style>

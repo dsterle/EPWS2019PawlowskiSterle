@@ -5,7 +5,7 @@ const cors = require("cors");
 var mongoose = require("mongoose");
 
 var schema = require('./schema.js').schema;
-const DB_paintings = require("./data/database").paintings;
+// const DB_paintings = require("./data/database").paintings;
 
 //** Models */
 const Painting = require("./models/painting");
@@ -34,12 +34,6 @@ const startServer = async () => {
         return Painting.find();
       },
       painting: (args) => {
-
-        // const painting = new Painting({
-        //   id: 10,
-        //   title: "Test Painting"
-        // });
-        // painting.save().then().catch(err => console.log(err));
 
         return Painting.find({ id: args.id }).then(painting => {
           console.log(painting[0]);

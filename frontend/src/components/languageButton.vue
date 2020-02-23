@@ -1,51 +1,56 @@
 <template>
-  <div class="languageButton">
-    <li v-bind:id="languageId" v-bind:class="langClass" @click="changeLanguage(languageId)">
-        <span>
-          {{language}}
-        </span>
-      <img v-bind:src="langSrc" v-bind:alt="languageId">
-    </li>
+  <div
+    class="languageButton card"
+    v-bind:class="langClass"
+    @click="changeLanguage(languageId)"
+    v-bind:id="languageId"
+  >
+    <div class="wrapper">
+      <p class="headline">{{language}}</p>
+      <img class="flag" v-bind:src="langSrc" v-bind:alt="languageId" />
+    </div>
   </div>
 </template>
 
 <script>
-
-    export default {
-        name: "languageButton",
-        props: ["languageId", "language", "langSrc", "langClass"],
-        methods: {
-            changeLanguage(id) {
-                document.querySelector(".selected").classList.remove("selected");
-                document.querySelector("#" + id).classList.add("selected");
-                localStorage.language = document.querySelector(".selected").id;
-            }
-        }
+export default {
+  name: "languageButton",
+  props: ["languageId", "language", "langSrc", "langClass"],
+  methods: {
+    changeLanguage(id) {
+      document.querySelector(".selected").classList.remove("selected");
+      document.querySelector("#" + id).classList.add("selected");
+      localStorage.language = document.querySelector(".selected").id;
     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/scss/010-variables.scss";
+@import "../assets/scss/010-variables.scss";
 
-  li {
+.languageButton {
+  .wrapper {
     display: flex;
     justify-content: space-between;
-    padding: $abstand-S $abstand-M $abstand-S $abstand-M;
-    color: $lighter;
-    font-size: $font-size-L;
-    line-height: $font-line-height-L;
 
-    img {
+    .headline {
+    }
+
+    .flag {
       width: $abstand-XL;
       height: $abstand-L;
     }
   }
 
-  li:active {
-    background: $light;
-  }
+  &.selected {
+    // border: 1px solid $accent;
 
-  .selected {
-    color: $accent;
+    .wrapper {
+      .headline {
+        color: $accent;
+      }
+    }
   }
+}
 </style>

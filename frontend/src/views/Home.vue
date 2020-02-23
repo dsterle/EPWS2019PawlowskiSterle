@@ -14,8 +14,6 @@
       v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
     ></inputField>
-
-    <!-- <input type="button" value="Tutorial starten" class="button-text tutorialButton" @click="$router.push({name: 'tutorial'})"> -->
   </div>
 </template>
 

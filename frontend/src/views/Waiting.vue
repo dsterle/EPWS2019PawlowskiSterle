@@ -1,7 +1,12 @@
 <template>
   <div class="waiting">
-    <headBar headline="Home"></headBar>
-    <div class="content-wrapper">
+    <headBar
+      headline="Home"
+      page-info-headline="Willkommen:"
+      page-info="In der Toolbar unten können Sie zwischen der Home-Seite, Suche, aktuelles Gemälde, Verlauf und
+                          den Einstellungen wechseln."
+    ></headBar>
+    <div class="content">
       <p class="hint-text note-text">Halten Sie Ihren Chip vor ein Gemälde...</p>
     </div>
     <toolBar current-page="home"></toolBar>
@@ -9,13 +14,12 @@
 </template>
 
 <script>
-// import handleMQTTConnection from "../assets/js/handleMQTTConnection";
 import toolBar from "../components/toolBar.vue";
 import headBar from "../components/headBar";
 
 export default {
   name: "waiting",
-  components: {toolBar, headBar},
+  components: { toolBar, headBar },
   data() {
     return {
       topic: {}
@@ -27,21 +31,7 @@ export default {
   },
   mounted() {
     const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "waitingClient");
-
-    /// TEST ///
-    /*
-    this.$router.push(
-      {
-        name: "painting",
-        params: { userid: 100, id: 2 }
-      },
-      () => {
-        this_component.$router.go(0);
-      }
-    );
-    */
-    /// TEST ///
+    MQTTHandler.handleMQTTConnection(this, this.topic);
   }
 };
 </script>
@@ -54,7 +44,8 @@ export default {
   right: $abstand-M;
 }
 
-.content-wrapper {
+.content {
+  margin-top: $app-bar-height;
   width: 100%;
   height: 80vh;
   display: flex;
