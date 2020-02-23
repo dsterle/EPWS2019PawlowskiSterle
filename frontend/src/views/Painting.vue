@@ -16,6 +16,7 @@
       v-bind:src="fabIcon"
       alt="Pause Knopf"
       v-on:fab-clicked="pause"
+      v-bind:enabled="anyAudioCurrent"
     ></fab>
     <div class="content">
       <imgSlider class="image animated fadeIn" v-bind:img="painting.img"></imgSlider>
@@ -126,9 +127,15 @@ export default {
     MQTTHandler.handleMQTTConnection(this, this.topic);
     this.updateHistory();
 
-    // this.painting.infos.forEach(info => {
-    //   this.rerenderInfo(info);
-    // });
+    let __this = this;
+    // setInterval(() => {
+    //   console.log("currentLoop " + __this.currentLoop);
+    //   // if (this.getPlayingInfo()) {
+    //   // console.log("something plays");
+    //   // }
+    // }, 500);
+
+    document.querySelector(".fab").enabled = this.anyAudioCurrent;
   },
   destroyed() {
     console.log("destroyed");
@@ -426,8 +433,17 @@ export default {
         return info.paused;
       });
     },
-    anyAudioPlaying() {
-      this.painting.infos.forEach(info => {});
+    anyAudioCurrent() {
+      let anyAudioCurrent = false;
+      // console.log(this.painting.infos);
+      this.painting.infos.forEach(info => {
+        // console.log(info.current);
+        if (info.current === true) {
+          console.log("return true");
+          anyAudioCurrent = true;
+        }
+      });
+      return anyAudioCurrent;
     }
   },
   async beforeRouteUpdate(to, from, next) {

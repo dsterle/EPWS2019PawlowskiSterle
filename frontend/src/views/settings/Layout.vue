@@ -1,5 +1,5 @@
 <template>
-  <label class="layout">
+  <div class="layout">
     <headBar
       headline="Darstellung"
       page-info-headline="Darstellung:"
@@ -85,7 +85,7 @@
       <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
     <toolBar current-page="settings"></toolBar>
-  </label>
+  </div>
 </template>
 
 <script>
@@ -153,14 +153,6 @@ export default {
     padding: $abstand-M;
     padding-bottom: $abstand-XXXL;
     margin-top: $app-bar-height;
-
-    // .card {
-    //   border-radius: 10px;
-    //   background: $dark;
-    //   padding: $card-padding;
-    //   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
-    //   margin-bottom: $abstand-M;
-    // }
 
     .darkmode-card {
       display: flex;

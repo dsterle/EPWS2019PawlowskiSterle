@@ -1,12 +1,9 @@
 <template>
-  <span class="audio">
+  <div class="audio">
     <headBar headline="Audio"></headBar>
     <div class="content">
       <div class="card card-autoplay">
-        <p class="setting headline">
-          Autoplay
-          <!-- <i class="fas fa-toggle-on toggleAutoplay" v-on:click="toggle"></i> -->
-        </p>
+        <p class="setting headline">Autoplay</p>
         <div class="switch">
           <label>
             <input js-toggle-autoplay type="checkbox" checked />
@@ -45,7 +42,7 @@
       <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
     <toolBar current-page="settings"></toolBar>
-  </span>
+  </div>
 </template>
 
 <script>
