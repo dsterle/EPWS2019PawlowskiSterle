@@ -16,7 +16,6 @@
             <span class="lever"></span>
           </label>
         </div>
-        <!-- <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i> -->
       </div>
       <div class="card">
         <span class="setting headline">Diese Kategorien werden Ihnen in der Gemäldeansicht angezeigt</span>
@@ -154,13 +153,13 @@ export default {
     padding: $abstand-M;
     padding-bottom: $abstand-XXXL;
 
-    .card {
-      border-radius: 10px;
-      background: $dark;
-      padding: $card-padding;
-      box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
-      margin-bottom: $abstand-M;
-    }
+    // .card {
+    //   border-radius: 10px;
+    //   background: $dark;
+    //   padding: $card-padding;
+    //   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+    //   margin-bottom: $abstand-M;
+    // }
 
     .darkmode-card {
       display: flex;
@@ -172,7 +171,7 @@ export default {
       .headline {
         margin-bottom: $abstand-M;
       }
-      padding-bottom: $abstand-L;
+      padding-bottom: 48px;
     }
   }
 
@@ -191,7 +190,6 @@ export default {
       margin-bottom: $abstand-M;
       margin-right: $abstand-S;
       color: $lighter;
-      // font-size: $font-size-M;
     }
 
     .last-li {
@@ -204,11 +202,6 @@ export default {
     color: $lighter;
   }
 
-  // .category {
-  //   width: $font-size-M;
-  //   height: $font-size-M;
-  // }
-
   .slider {
     color: $lighter;
     margin-left: $abstand-L;
@@ -216,11 +209,8 @@ export default {
   }
 
   .saveButton {
-    // position: absolute;
-    // right: $abstand-M;
-    // bottom: $abstand-L;
     background: $accent;
-    padding: $button-padding;
+    padding: $button-padding $abstand-L $button-padding $abstand-L;
     border-radius: 5px;
     border: none;
     color: $lighter;
