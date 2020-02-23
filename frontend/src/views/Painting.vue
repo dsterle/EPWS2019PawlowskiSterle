@@ -86,7 +86,7 @@ export default {
     let _this = this;
     let result = await axios({
       method: "POST",
-      url: "http://192.168.178.70:4000/graphql",
+      url: "http://192.168.178.22:4000/graphql",
       data: {
         query: `
             {
@@ -111,7 +111,8 @@ export default {
     this.painting = result.data.data.painting;
 
     this.setupPaintingInfos();
-    if (localStorage.autoplay === "true") this.setCurrent(0);
+    if (localStorage.autoplay === "true" && this.checkCategoryToPlay() !== null)
+        this.setCurrent(this.checkCategoryToPlay());
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic);
     this.updateHistory();
@@ -166,39 +167,60 @@ export default {
       });
       localStorage.setItem("paintingHistory", JSON.stringify(this.history));
     },
+    checkCategoryToPlay() {
+        if (localStorage.categoriesToShow !== null) {
+            let categories = localStorage.categoriesToShow.split(",");
+            switch (categories[0]) {
+                case "kurzbeschreibung":
+                    return 0;
+                case "provenienz":
+                    return 1;
+                case "masse":
+                    return 2;
+                case "material":
+                    return 3;
+                case "beschriftung":
+                    return 4;
+                case "ausstellungsgeschichte":
+                    return 6;
+                default:
+                    return null;
+            }
+        }
+    },
     /**
      * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
      * nur bestimmte Kategorien angezeigt werden sollen
      */
     checkCategoriesToShow(categoriesToShow, paintingInfos) {
-      // let _this = this;
-      // let newInfos = [];
-      // if (categoriesToShow !== null) {
-      //   categoriesToShow = categoriesToShow.split(",");
-      //   for (let i = 0; i < categoriesToShow.length; i++) {
-      //     switch (categoriesToShow[i]) {
-      //       case "kurzbeschreibung":
-      //         newInfos.push(paintingInfos[0]);
-      //         break;
-      //       case "provenienz":
-      //         newInfos.push(paintingInfos[1]);
-      //         break;
-      //       case "masse":
-      //         newInfos.push(paintingInfos[2]);
-      //         break;
-      //       case "material":
-      //         newInfos.push(paintingInfos[3]);
-      //         break;
-      //       case "beschriftung":
-      //         newInfos.push(paintingInfos[4]);
-      //         break;
-      //       case "ausstellungsgeschichte":
-      //         newInfos.push(paintingInfos[5]);
-      //         break;
-      //     }
-      //   }
-      //   _this.painting.infos = newInfos;
-      // }
+      let _this = this;
+      let newInfos = [];
+      if (categoriesToShow !== null) {
+        categoriesToShow = categoriesToShow.split(",");
+        for (let i = 0; i < categoriesToShow.length; i++) {
+          switch (categoriesToShow[i]) {
+            case "kurzbeschreibung":
+              newInfos.push(paintingInfos[0]);
+              break;
+            case "provenienz":
+              newInfos.push(paintingInfos[1]);
+              break;
+            case "masse":
+              newInfos.push(paintingInfos[2]);
+              break;
+            case "material":
+              newInfos.push(paintingInfos[3]);
+              break;
+            case "beschriftung":
+              newInfos.push(paintingInfos[4]);
+              break;
+            case "ausstellungsgeschichte":
+              newInfos.push(paintingInfos[5]);
+              break;
+          }
+        }
+        _this.painting.infos = newInfos;
+      }
     },
     /**
      * setupPaintingInfos ist dazu da jedes Info-Accordion mit einer Sounddatei zu versehen
