@@ -5,7 +5,7 @@
       class="active"
       src="../assets/icons/home.svg"
       alt
-      @click="$router.push({name: 'waiting', params: {userid: user}})"
+      @click="$router.push({name: 'waiting', params: {userid: user}});"
     />
     <img
       js-painting

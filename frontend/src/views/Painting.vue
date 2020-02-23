@@ -411,6 +411,7 @@ export default {
     }
   },
   async beforeRouteUpdate(to, from, next) {
+    console.log("beforeRouteUpdate");
     if (to.path !== from.path) {
       this.id = parseInt(to.params.id);
 
@@ -439,7 +440,6 @@ export default {
         }
       });
       this.painting = result.data.data.painting;
-      console.log(this.painting);
       this.$router.go(0);
       next();
     } else {

@@ -33,20 +33,6 @@ export default {
   mounted() {
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "waitingClient");
-
-    /// TEST ///
-    /*
-    this.$router.push(
-      {
-        name: "painting",
-        params: { userid: 100, id: 2 }
-      },
-      () => {
-        this_component.$router.go(0);
-      }
-    );
-    */
-    /// TEST ///
   }
 };
 </script>
