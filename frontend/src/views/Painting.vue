@@ -110,32 +110,13 @@ export default {
     });
     this.painting = result.data.data.painting;
 
-    console.log("2");
-
-    // for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
-    //   if (Vue.prototype.$audioHowls[i] !== undefined) {
-    //     return;
-    //   }
-    // }
-
-    console.log("3");
-
-    console.log("directly before");
     this.setupPaintingInfos();
     if (localStorage.autoplay === "true") this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic);
     this.updateHistory();
 
-    let __this = this;
-    // setInterval(() => {
-    //   console.log("currentLoop " + __this.currentLoop);
-    //   // if (this.getPlayingInfo()) {
-    //   // console.log("something plays");
-    //   // }
-    // }, 500);
-
-    document.querySelector(".fab").enabled = this.anyAudioCurrent;
+    this.disableFab();
   },
   destroyed() {
     console.log("destroyed");
@@ -224,7 +205,6 @@ export default {
      * Es werden Informationen gespeichert, ob die Datei gerade läuft oder pausiert wurde usw.
      */
     setupPaintingInfos() {
-      console.log("setupPaintingInfos");
       let _this = this;
 
       // Schleife über jede Info (Accordion)
@@ -241,22 +221,29 @@ export default {
             _this.setSlider(info);
           },
           onplay: function() {
+            console.log("onplay");
             clearInterval(_this.currentLoop);
             _this.updateSlider(
               _this.painting.infos[_this.painting.infos.indexOf(info)]
             );
           },
           onend: function() {
+            console.log("onend");
             info.currentValue = 0;
             info.current = false;
             clearInterval(_this.currentLoop);
             if (
               _this.painting.infos.indexOf(info) + 1 !==
               _this.painting.infos.length
-            )
+            ) {
               _this.setCurrent(
                 _this.painting.infos[_this.painting.infos.indexOf(info) + 1].id
               );
+            }
+          },
+          onstop: function() {
+            // Jedesmal wenn irgendeine Audionachricht gestoppt wird, wird geschaut ob der fab angepasst
+            _this.disableFab();
           }
         });
       });
@@ -265,6 +252,8 @@ export default {
      * setCurrent ist dazu da eine Info mit der übergebenen id auszuwählen
      */
     setCurrent(id) {
+      this.enableFab();
+
       let _this = this;
 
       this.painting.infos.forEach(info => {
@@ -286,6 +275,17 @@ export default {
       });
       // Das fabIcon wird auf Pause zurückgesetzt
       this.fabIcon = this.pauseIcon;
+    },
+    enableFab() {
+      let fab = document.querySelector(".fab");
+      if (fab.classList.contains("disabled")) {
+        fab.classList.remove("disabled");
+      }
+    },
+    disableFab() {
+      if (!this.anyAudioCurrent()) {
+        document.querySelector(".fab").classList.add("disabled");
+      }
     },
     /**
      * setSlider dient dazu den Audio-Slider zu setzen
@@ -439,7 +439,6 @@ export default {
       this.painting.infos.forEach(info => {
         // console.log(info.current);
         if (info.current === true) {
-          console.log("return true");
           anyAudioCurrent = true;
         }
       });
@@ -494,6 +493,7 @@ export default {
     bottom: $abstand-XL;
     margin: 0 $abstand-M $abstand-M 0;
     animation-delay: 200ms;
+    transition: 0.3s;
   }
 
   .content {
