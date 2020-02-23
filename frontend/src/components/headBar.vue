@@ -32,10 +32,11 @@ export default {
 @import "../assets/scss/010-variables.scss";
 
 .headBar {
-  position: relative;
+  position: fixed;
   left: 0;
   top: 0;
   display: flex;
+  z-index: 100;
   height: $app-bar-height;
   width: 100%;
   align-items: center;
@@ -43,6 +44,7 @@ export default {
   font-size: $font-size-L;
   font-weight: $weight-semibold;
   background: $darker;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
 
   .pageInfo {
     position: absolute;
