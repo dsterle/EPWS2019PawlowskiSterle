@@ -2,7 +2,7 @@
   <div class="setting" @click="$router.push({name: page})">
     <div class="left">
       <i class="icon" v-bind:class="icon"></i>
-      <p class="text button-text setting-description">{{description}}</p>
+      <p class="text headline setting-description">{{description}}</p>
     </div>
     <!-- <i class="icon fas fa-chevron-right"></i> -->
     <img class="icon-right" src="../assets/icons/arrow_down.svg" alt />
