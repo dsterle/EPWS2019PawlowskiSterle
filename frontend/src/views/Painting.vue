@@ -112,7 +112,7 @@ export default {
 
     this.setupPaintingInfos();
     if (localStorage.autoplay === "true" && this.checkCategoryToPlay() !== null)
-        this.setCurrent(this.checkCategoryToPlay());
+      this.setCurrent(this.checkCategoryToPlay());
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic);
     this.updateHistory();
@@ -168,25 +168,25 @@ export default {
       localStorage.setItem("paintingHistory", JSON.stringify(this.history));
     },
     checkCategoryToPlay() {
-        if (localStorage.categoriesToShow !== null) {
-            let categories = localStorage.categoriesToShow.split(",");
-            switch (categories[0]) {
-                case "kurzbeschreibung":
-                    return 0;
-                case "provenienz":
-                    return 1;
-                case "masse":
-                    return 2;
-                case "material":
-                    return 3;
-                case "beschriftung":
-                    return 4;
-                case "ausstellungsgeschichte":
-                    return 6;
-                default:
-                    return null;
-            }
+      if (localStorage.categoriesToShow !== null) {
+        let categories = localStorage.categoriesToShow.split(",");
+        switch (categories[0]) {
+          case "kurzbeschreibung":
+            return 0;
+          case "provenienz":
+            return 1;
+          case "masse":
+            return 2;
+          case "material":
+            return 3;
+          case "beschriftung":
+            return 4;
+          case "ausstellungsgeschichte":
+            return 6;
+          default:
+            return null;
         }
+      }
     },
     /**
      * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
