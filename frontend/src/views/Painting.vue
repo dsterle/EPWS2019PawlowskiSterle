@@ -86,7 +86,7 @@ export default {
     let _this = this;
     let result = await axios({
       method: "POST",
-      url: "http://192.168.178.22:4000/graphql",
+      url: "http://localhost:4000/graphql",
       data: {
         query: `
             {
@@ -110,33 +110,34 @@ export default {
     });
     this.painting = result.data.data.painting;
 
-    this.setupPaintingInfos();
-    if (localStorage.autoplay === "true" && this.checkCategoryToPlay() !== null)
-      this.setCurrent(this.checkCategoryToPlay());
+    // if (localStorage.autoplay === "true" && this.checkCategoryToPlay() !== null)
+    //   this.setCurrent(this.checkCategoryToPlay());
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic);
     this.updateHistory();
 
     this.disableFab();
+
+    if (localStorage.categoriesToShow)
+      await _this.checkCategoriesToShow(
+        localStorage.categoriesToShow,
+        _this.painting.infos
+      );
+
+    this.setupPaintingInfos();
+
+    // Wenn autoplay aktiviert ist fängt die erste Info an zu spielen
+    if (localStorage.autoplay === "true") {
+      this.setCurrent(0);
+    }
   },
   destroyed() {
-    console.log("destroyed");
     this.painting.infos.forEach(info => {
       this.resetInfo(info);
     });
   },
   mounted() {
     let _this = this;
-    //quick&dirty lösung: checkCategoriesToShow muss nach setupPaintingInfos ausgeführt werden
-    //TODO bessere Lösung
-    setTimeout(function() {
-      //Wenn das Layout angepasst wurde, sollen nur bestimmte Kategorien angezeigt werden
-      if (localStorage.categoriesToShow)
-        _this.checkCategoriesToShow(
-          localStorage.categoriesToShow,
-          _this.painting.infos
-        );
-    }, 300);
     this.currentPainting = parseInt(this.$route.params.id);
     localStorage.currentPainting = parseInt(this.$route.params.id);
   },
@@ -167,60 +168,48 @@ export default {
       });
       localStorage.setItem("paintingHistory", JSON.stringify(this.history));
     },
-    checkCategoryToPlay() {
-      if (localStorage.categoriesToShow !== null) {
-        let categories = localStorage.categoriesToShow.split(",");
-        switch (categories[0]) {
-          case "kurzbeschreibung":
-            return 0;
-          case "provenienz":
-            return 1;
-          case "masse":
-            return 2;
-          case "material":
-            return 3;
-          case "beschriftung":
-            return 4;
-          case "ausstellungsgeschichte":
-            return 6;
-          default:
-            return null;
-        }
-      }
-    },
+    // checkCategoryToPlay() {
+    //   if (localStorage.categoriesToShow !== null) {
+    //     let categories = localStorage.categoriesToShow.split(",");
+    //     switch (categories[0]) {
+    //       case "kurzbeschreibung":
+    //         return 0;
+    //       case "provenienz":
+    //         return 1;
+    //       case "masse":
+    //         return 2;
+    //       case "material":
+    //         return 3;
+    //       case "beschriftung":
+    //         return 4;
+    //       case "ausstellungsgeschichte":
+    //         return 6;
+    //       default:
+    //         return null;
+    //     }
+    //   }
+    // },
     /**
      * checkCategoriesToShow prüft den localstorage.categoriesToShow darauf hin, ob
      * nur bestimmte Kategorien angezeigt werden sollen
      */
-    checkCategoriesToShow(categoriesToShow, paintingInfos) {
+    async checkCategoriesToShow(categoriesToShow, paintingInfos) {
       let _this = this;
       let newInfos = [];
+      let index = 0;
+
       if (categoriesToShow !== null) {
-        categoriesToShow = categoriesToShow.split(",");
-        for (let i = 0; i < categoriesToShow.length; i++) {
-          switch (categoriesToShow[i]) {
-            case "kurzbeschreibung":
-              newInfos.push(paintingInfos[0]);
-              break;
-            case "provenienz":
-              newInfos.push(paintingInfos[1]);
-              break;
-            case "masse":
-              newInfos.push(paintingInfos[2]);
-              break;
-            case "material":
-              newInfos.push(paintingInfos[3]);
-              break;
-            case "beschriftung":
-              newInfos.push(paintingInfos[4]);
-              break;
-            case "ausstellungsgeschichte":
-              newInfos.push(paintingInfos[5]);
-              break;
+        await paintingInfos.forEach(info => {
+          if (localStorage.categoriesToShow.includes(info.name.toLowerCase())) {
+            // info.id = index;
+            let newInfo = info;
+            newInfo.id = index;
+            newInfos.push(newInfo);
+            index++;
           }
-        }
-        _this.painting.infos = newInfos;
+        });
       }
+      this.painting.infos = newInfos;
     },
     /**
      * setupPaintingInfos ist dazu da jedes Info-Accordion mit einer Sounddatei zu versehen
@@ -300,13 +289,18 @@ export default {
     },
     enableFab() {
       let fab = document.querySelector(".fab");
-      if (fab.classList.contains("disabled")) {
-        fab.classList.remove("disabled");
+      if (fab) {
+        if (fab.classList.contains("disabled")) {
+          fab.classList.remove("disabled");
+        }
       }
     },
     disableFab() {
       if (!this.anyAudioCurrent()) {
-        document.querySelector(".fab").classList.add("disabled");
+        let fab = document.querySelector(".fab");
+        if (fab) {
+          fab.classList.add("disabled");
+        }
       }
     },
     /**

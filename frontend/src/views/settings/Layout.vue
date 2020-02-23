@@ -40,13 +40,13 @@
           </li>
           <li>
             <label>
-              <input class="category" name="masse" id="masse" type="checkbox" checked />
+              <input class="category" name="maße" id="maße" type="checkbox" checked />
               <span for="masse">Maße</span>
             </label>
           </li>
           <li>
             <label>
-              <input class="category" name="material" id="material" type="checkbox" checked />
+              <input class="category" name="material/technik" id="material" type="checkbox" checked />
               <span for="material">Material/Technik</span>
             </label>
           </li>
