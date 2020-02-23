@@ -24,7 +24,7 @@ export default {
 @import "../assets/scss/010-variables.scss";
 
 .disabled {
-  opacity: 0.5;
+  display: none;
   background: $light;
   transition: 0.3s;
 }
