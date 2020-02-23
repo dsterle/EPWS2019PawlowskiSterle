@@ -17,27 +17,29 @@
       alt="Pause Knopf"
       v-on:fab-clicked="pause"
     ></fab>
-    <imgSlider class="image animated fadeIn" v-bind:img="painting.img"></imgSlider>
-    <!-- <img v-bind:src="painting.imgSrc" alt /> -->
-    <div class="title-wrapper animated fadeIn">
-      <h1 class="title-text">{{ painting.title }}</h1>
-      <p class="hint-text year">{{ painting.dated }}</p>
+    <div class="content">
+      <imgSlider class="image animated fadeIn" v-bind:img="painting.img"></imgSlider>
+      <!-- <img v-bind:src="painting.imgSrc" alt /> -->
+      <div class="title-wrapper animated fadeIn">
+        <h1 class="title-text">{{ painting.title }}</h1>
+        <p class="hint-text year">{{ painting.dated }}</p>
+      </div>
+      <ul class="info-list">
+        <li v-for="info in painting.infos" v-bind:key="info.name">
+          <accordion
+            v-bind:id="info.id"
+            v-bind:name="info.name"
+            v-bind:text="info.inhalt"
+            v-bind:current="info.current"
+            v-bind:min="info.min"
+            v-bind:max="info.max"
+            v-bind:currentValue="info.currentValue"
+            v-on:play-audio="setCurrent"
+            v-on:jump-to="jumpTo"
+          ></accordion>
+        </li>
+      </ul>
     </div>
-    <ul class="info-list">
-      <li v-for="info in painting.infos" v-bind:key="info.name">
-        <accordion
-          v-bind:id="info.id"
-          v-bind:name="info.name"
-          v-bind:text="info.inhalt"
-          v-bind:current="info.current"
-          v-bind:min="info.min"
-          v-bind:max="info.max"
-          v-bind:currentValue="info.currentValue"
-          v-on:play-audio="setCurrent"
-          v-on:jump-to="jumpTo"
-        ></accordion>
-      </li>
-    </ul>
     <toolBar current-page="painting"></toolBar>
   </div>
 </template>
@@ -73,6 +75,7 @@ export default {
     };
   },
   async created() {
+    console.log("created");
     if (localStorage.paintingHistory) {
       this.history = JSON.parse(localStorage.paintingHistory);
     } else this.history = [];
@@ -106,16 +109,32 @@ export default {
     });
     this.painting = result.data.data.painting;
 
-    for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
-      if (Vue.prototype.$audioHowls[i] !== undefined) {
-        return;
-      }
-    }
+    console.log("2");
+
+    // for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
+    //   if (Vue.prototype.$audioHowls[i] !== undefined) {
+    //     return;
+    //   }
+    // }
+
+    console.log("3");
+
+    console.log("directly before");
     this.setupPaintingInfos();
     if (localStorage.autoplay === "true") this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
     this.updateHistory();
+
+    // this.painting.infos.forEach(info => {
+    //   this.rerenderInfo(info);
+    // });
+  },
+  destroyed() {
+    console.log("destroyed");
+    this.painting.infos.forEach(info => {
+      this.resetInfo(info);
+    });
   },
   mounted() {
     let _this = this;
@@ -164,40 +183,41 @@ export default {
      * nur bestimmte Kategorien angezeigt werden sollen
      */
     checkCategoriesToShow(categoriesToShow, paintingInfos) {
-      let _this = this;
-      let newInfos = [];
-      if (categoriesToShow !== null) {
-        categoriesToShow = categoriesToShow.split(",");
-        for (let i = 0; i < categoriesToShow.length; i++) {
-          switch (categoriesToShow[i]) {
-            case "kurzbeschreibung":
-              newInfos.push(paintingInfos[0]);
-              break;
-            case "provenienz":
-              newInfos.push(paintingInfos[1]);
-              break;
-            case "masse":
-              newInfos.push(paintingInfos[2]);
-              break;
-            case "material":
-              newInfos.push(paintingInfos[3]);
-              break;
-            case "beschriftung":
-              newInfos.push(paintingInfos[4]);
-              break;
-            case "ausstellungsgeschichte":
-              newInfos.push(paintingInfos[5]);
-              break;
-          }
-        }
-        _this.painting.infos = newInfos;
-      }
+      // let _this = this;
+      // let newInfos = [];
+      // if (categoriesToShow !== null) {
+      //   categoriesToShow = categoriesToShow.split(",");
+      //   for (let i = 0; i < categoriesToShow.length; i++) {
+      //     switch (categoriesToShow[i]) {
+      //       case "kurzbeschreibung":
+      //         newInfos.push(paintingInfos[0]);
+      //         break;
+      //       case "provenienz":
+      //         newInfos.push(paintingInfos[1]);
+      //         break;
+      //       case "masse":
+      //         newInfos.push(paintingInfos[2]);
+      //         break;
+      //       case "material":
+      //         newInfos.push(paintingInfos[3]);
+      //         break;
+      //       case "beschriftung":
+      //         newInfos.push(paintingInfos[4]);
+      //         break;
+      //       case "ausstellungsgeschichte":
+      //         newInfos.push(paintingInfos[5]);
+      //         break;
+      //     }
+      //   }
+      //   _this.painting.infos = newInfos;
+      // }
     },
     /**
      * setupPaintingInfos ist dazu da jedes Info-Accordion mit einer Sounddatei zu versehen
      * Es werden Informationen gespeichert, ob die Datei gerade läuft oder pausiert wurde usw.
      */
     setupPaintingInfos() {
+      console.log("setupPaintingInfos");
       let _this = this;
 
       // Schleife über jede Info (Accordion)
@@ -249,8 +269,8 @@ export default {
           info.current = true;
           info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
-          this.rerenderInfo(info);
           Vue.prototype.$audioHowls[info.id].play();
+          this.rerenderInfo(info);
         } else {
           // Wenn die id nicht übereinstimmt, wird die Info resettet
           _this.resetInfo(info);
@@ -436,7 +456,6 @@ export default {
         }
       });
       this.painting = result.data.data.painting;
-      console.log(this.painting);
       this.$router.go(0);
       next();
     } else {
@@ -458,21 +477,25 @@ export default {
     animation-delay: 200ms;
   }
 
-  .image {
-    width: 100%;
-    height: 100%;
-  }
+  .content {
+    margin-top: $app-bar-height;
 
-  .title-wrapper {
-    padding: $abstand-M $abstand-M 0 $abstand-M;
-
-    .year {
-      margin: $abstand-S 0 $abstand-S 0;
+    .image {
+      width: 100%;
+      height: 100%;
     }
-  }
 
-  .info-list {
-    margin-bottom: $abstand-XXXXL;
+    .title-wrapper {
+      padding: $abstand-M $abstand-M 0 $abstand-M;
+
+      .year {
+        margin: $abstand-S 0 $abstand-S 0;
+      }
+    }
+
+    .info-list {
+      margin-bottom: $abstand-XXXXL;
+    }
   }
 }
 </style>

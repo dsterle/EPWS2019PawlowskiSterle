@@ -1,26 +1,11 @@
 <template>
   <div class="toolBar">
-    <!-- <i class="fas fa-home" @click="$router.push({name: 'waiting', params: {userid: user}})"></i> -->
-    <!-- <i class="fas fa-search" @click="$router.push({name: 'search'})"></i> -->
-    <!-- <i
-      v-if="!isNaN(currentPageAvailable)"
-      class="fas fa-image"
-      @click="$router.push({name: 'painting', params: {userid: user, id: paintingId}})"
-    ></i>-->
-    <!-- <i
-      v-else
-      class="fas fa-image"
-      @click="$router.push({name: 'noPainting', params: {userid: user}})"
-    ></i>-->
-    <!-- <i class="fas fa-history" @click="$router.push({name: 'history', params: {userid: user}})"></i> -->
-    <!-- <i class="fas fa-cog" @click="$router.push({name: 'settings', params: {userid: user}})"></i> -->
-
     <img
       js-home
       class="active"
       src="../assets/icons/home.svg"
       alt
-      @click="$router.push({name: 'waiting', params: {userid: user}})"
+      @click="$router.push({name: 'waiting', params: {userid: user}});"
     />
     <img
       js-painting
@@ -95,11 +80,13 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: $abstand-M 0 $abstand-M 0;
+  padding: $abstand-S 0 $abstand-S 0;
   background: $darker;
   color: $lighter;
   z-index: 5;
-  box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.5);
+  height: $app-bar-height;
+  // border-top: 2px solid $dark;
+  box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.25);
 
   .inActive {
     opacity: 0.3;

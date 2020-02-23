@@ -26,7 +26,6 @@ exports.handleMQTTConnection = function (this_component, topic, clientName) {
     // Wird aufgerufen, wenn sich der Client verbindet
     function onConnect() {
         client.subscribe(topic);
-        console.log("subscricbed: " + topic);
     }
 
     // Wird aufgerufen, wenn die Verbindung veloren geht
