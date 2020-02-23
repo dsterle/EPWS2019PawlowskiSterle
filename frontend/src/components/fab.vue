@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "fab",
-  props: ["src", "alt"],
+  props: ["src", "alt", "enabled"],
   methods: {
     clicked() {
       this.$emit("fab-clicked");
