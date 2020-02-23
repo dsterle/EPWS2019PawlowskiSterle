@@ -75,6 +75,7 @@ export default {
     };
   },
   async created() {
+    console.log("created");
     if (localStorage.paintingHistory) {
       this.history = JSON.parse(localStorage.paintingHistory);
     } else this.history = [];
@@ -107,18 +108,33 @@ export default {
       }
     });
     this.painting = result.data.data.painting;
-    console.log(this.painting);
 
-    for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
-      if (Vue.prototype.$audioHowls[i] !== undefined) {
-        return;
-      }
-    }
+    console.log("2");
+
+    // for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
+    //   if (Vue.prototype.$audioHowls[i] !== undefined) {
+    //     return;
+    //   }
+    // }
+
+    console.log("3");
+
+    console.log("directly before");
     this.setupPaintingInfos();
     if (localStorage.autoplay === "true") this.setCurrent(0);
     const MQTTHandler = require("../assets/js/MQTTHandler");
     MQTTHandler.handleMQTTConnection(this, this.topic, "paintingClient");
     this.updateHistory();
+
+    // this.painting.infos.forEach(info => {
+    //   this.rerenderInfo(info);
+    // });
+  },
+  destroyed() {
+    console.log("destroyed");
+    this.painting.infos.forEach(info => {
+      this.resetInfo(info);
+    });
   },
   mounted() {
     let _this = this;
@@ -201,6 +217,7 @@ export default {
      * Es werden Informationen gespeichert, ob die Datei gerade läuft oder pausiert wurde usw.
      */
     setupPaintingInfos() {
+      console.log("setupPaintingInfos");
       let _this = this;
 
       // Schleife über jede Info (Accordion)
@@ -411,7 +428,6 @@ export default {
     }
   },
   async beforeRouteUpdate(to, from, next) {
-    console.log("beforeRouteUpdate");
     if (to.path !== from.path) {
       this.id = parseInt(to.params.id);
 
