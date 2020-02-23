@@ -43,7 +43,7 @@ export default {
   font-size: $font-size-L;
   font-weight: $weight-semibold;
   background: $darker;
-  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
 
   .pageInfo {
     position: absolute;
