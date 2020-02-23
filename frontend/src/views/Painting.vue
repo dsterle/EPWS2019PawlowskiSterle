@@ -107,6 +107,7 @@ export default {
       }
     });
     this.painting = result.data.data.painting;
+    console.log(this.painting);
 
     for (let i = 0; i < Vue.prototype.$audioHowls.length; i++) {
       if (Vue.prototype.$audioHowls[i] !== undefined) {
@@ -166,34 +167,34 @@ export default {
      * nur bestimmte Kategorien angezeigt werden sollen
      */
     checkCategoriesToShow(categoriesToShow, paintingInfos) {
-      let _this = this;
-      let newInfos = [];
-      if (categoriesToShow !== null) {
-        categoriesToShow = categoriesToShow.split(",");
-        for (let i = 0; i < categoriesToShow.length; i++) {
-          switch (categoriesToShow[i]) {
-            case "kurzbeschreibung":
-              newInfos.push(paintingInfos[0]);
-              break;
-            case "provenienz":
-              newInfos.push(paintingInfos[1]);
-              break;
-            case "masse":
-              newInfos.push(paintingInfos[2]);
-              break;
-            case "material":
-              newInfos.push(paintingInfos[3]);
-              break;
-            case "beschriftung":
-              newInfos.push(paintingInfos[4]);
-              break;
-            case "ausstellungsgeschichte":
-              newInfos.push(paintingInfos[5]);
-              break;
-          }
-        }
-        _this.painting.infos = newInfos;
-      }
+      // let _this = this;
+      // let newInfos = [];
+      // if (categoriesToShow !== null) {
+      //   categoriesToShow = categoriesToShow.split(",");
+      //   for (let i = 0; i < categoriesToShow.length; i++) {
+      //     switch (categoriesToShow[i]) {
+      //       case "kurzbeschreibung":
+      //         newInfos.push(paintingInfos[0]);
+      //         break;
+      //       case "provenienz":
+      //         newInfos.push(paintingInfos[1]);
+      //         break;
+      //       case "masse":
+      //         newInfos.push(paintingInfos[2]);
+      //         break;
+      //       case "material":
+      //         newInfos.push(paintingInfos[3]);
+      //         break;
+      //       case "beschriftung":
+      //         newInfos.push(paintingInfos[4]);
+      //         break;
+      //       case "ausstellungsgeschichte":
+      //         newInfos.push(paintingInfos[5]);
+      //         break;
+      //     }
+      //   }
+      //   _this.painting.infos = newInfos;
+      // }
     },
     /**
      * setupPaintingInfos ist dazu da jedes Info-Accordion mit einer Sounddatei zu versehen
