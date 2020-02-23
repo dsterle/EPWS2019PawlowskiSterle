@@ -32,7 +32,7 @@ export default {
   },
   mounted() {
     const MQTTHandler = require("../assets/js/MQTTHandler");
-    MQTTHandler.handleMQTTConnection(this, this.topic, "waitingClient");
+    MQTTHandler.handleMQTTConnection(this, this.topic);
   }
 };
 </script>
