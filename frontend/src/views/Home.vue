@@ -14,7 +14,6 @@
       v-bind:error="errorMsg"
       v-on:event-clicked="validateIDs"
     ></inputField>
-    <button type="button" @click="toggle">Fullscreen</button>
   </div>
 </template>
 
