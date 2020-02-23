@@ -51,6 +51,7 @@ export default {
 .settings {
   .content {
     padding: $abstand-M;
+    margin-top: $app-bar-height;
 
     .settings-button {
       margin-bottom: $abstand-M;

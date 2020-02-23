@@ -17,27 +17,29 @@
       alt="Pause Knopf"
       v-on:fab-clicked="pause"
     ></fab>
-    <imgSlider class="image animated fadeIn" v-bind:img="painting.img"></imgSlider>
-    <!-- <img v-bind:src="painting.imgSrc" alt /> -->
-    <div class="title-wrapper animated fadeIn">
-      <h1 class="title-text">{{ painting.title }}</h1>
-      <p class="hint-text year">{{ painting.dated }}</p>
+    <div class="content">
+      <imgSlider class="image animated fadeIn" v-bind:img="painting.img"></imgSlider>
+      <!-- <img v-bind:src="painting.imgSrc" alt /> -->
+      <div class="title-wrapper animated fadeIn">
+        <h1 class="title-text">{{ painting.title }}</h1>
+        <p class="hint-text year">{{ painting.dated }}</p>
+      </div>
+      <ul class="info-list">
+        <li v-for="info in painting.infos" v-bind:key="info.name">
+          <accordion
+            v-bind:id="info.id"
+            v-bind:name="info.name"
+            v-bind:text="info.inhalt"
+            v-bind:current="info.current"
+            v-bind:min="info.min"
+            v-bind:max="info.max"
+            v-bind:currentValue="info.currentValue"
+            v-on:play-audio="setCurrent"
+            v-on:jump-to="jumpTo"
+          ></accordion>
+        </li>
+      </ul>
     </div>
-    <ul class="info-list">
-      <li v-for="info in painting.infos" v-bind:key="info.name">
-        <accordion
-          v-bind:id="info.id"
-          v-bind:name="info.name"
-          v-bind:text="info.inhalt"
-          v-bind:current="info.current"
-          v-bind:min="info.min"
-          v-bind:max="info.max"
-          v-bind:currentValue="info.currentValue"
-          v-on:play-audio="setCurrent"
-          v-on:jump-to="jumpTo"
-        ></accordion>
-      </li>
-    </ul>
     <toolBar current-page="painting"></toolBar>
   </div>
 </template>
@@ -249,8 +251,8 @@ export default {
           info.current = true;
           info.currentValue = 0;
           // die ausgewählte Audio Information beginnt zu spielen
-          this.rerenderInfo(info);
           Vue.prototype.$audioHowls[info.id].play();
+          this.rerenderInfo(info);
         } else {
           // Wenn die id nicht übereinstimmt, wird die Info resettet
           _this.resetInfo(info);
@@ -458,21 +460,25 @@ export default {
     animation-delay: 200ms;
   }
 
-  .image {
-    width: 100%;
-    height: 100%;
-  }
+  .content {
+    margin-top: $app-bar-height;
 
-  .title-wrapper {
-    padding: $abstand-M $abstand-M 0 $abstand-M;
-
-    .year {
-      margin: $abstand-S 0 $abstand-S 0;
+    .image {
+      width: 100%;
+      height: 100%;
     }
-  }
 
-  .info-list {
-    margin-bottom: $abstand-XXXXL;
+    .title-wrapper {
+      padding: $abstand-M $abstand-M 0 $abstand-M;
+
+      .year {
+        margin: $abstand-S 0 $abstand-S 0;
+      }
+    }
+
+    .info-list {
+      margin-bottom: $abstand-XXXXL;
+    }
   }
 }
 </style>

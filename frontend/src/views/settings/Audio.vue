@@ -100,6 +100,7 @@ export default {
   .content {
     padding: $abstand-M;
     padding-bottom: $abstand-XXXL;
+    margin-top: $app-bar-height;
 
     .card-autoplay {
       display: flex;
@@ -111,7 +112,7 @@ export default {
   .setting {
     display: flex;
     justify-content: space-between;
-    
+
     // padding: $abstand-M;
     color: $lighter;
     font-size: $font-size-L;

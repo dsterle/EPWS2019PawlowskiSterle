@@ -152,6 +152,7 @@ export default {
   .content {
     padding: $abstand-M;
     padding-bottom: $abstand-XXXL;
+    margin-top: $app-bar-height;
 
     // .card {
     //   border-radius: 10px;

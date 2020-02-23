@@ -95,10 +95,11 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: $abstand-M 0 $abstand-M 0;
+  padding: $abstand-S 0 $abstand-S 0;
   background: $darker;
   color: $lighter;
   z-index: 5;
+  height: $app-bar-height;
   // border-top: 2px solid $dark;
   box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.25);
 

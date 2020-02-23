@@ -70,6 +70,7 @@ export default {
 
 .language {
   .content {
+    margin-top: $app-bar-height;
     padding: $abstand-M;
     padding-bottom: $abstand-XXXL;
   }
