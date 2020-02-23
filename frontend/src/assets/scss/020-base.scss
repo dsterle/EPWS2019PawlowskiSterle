@@ -5,7 +5,11 @@
 html {
   background: $darker;
   font-family: $font;
-  height: 110%;   //Damit für die Toolbar Platz ist
+  height: 110%; //Damit für die Toolbar Platz ist
+}
+
+label {
+  color: $lighter;
 }
 
 input {
