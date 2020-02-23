@@ -70,6 +70,8 @@ export default {
     border-radius: 5px;
     border: 1px $light solid;
     transition: 0.5s;
+    height: auto;
+    margin-bottom: 0;
   }
 
   .input-field:focus {
