@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <span class="layout">
     <headBar
       headline="Darstellung"
       page-info-headline="Darstellung:"
@@ -8,63 +8,73 @@
                         um Ihre Einstellungen zu speichern."
     ></headBar>
     <div class="content">
-      <span class="setting">
-        Dark Mode
+      <div class="card darkmode-card">
+        <span class="setting headline">Dark Mode</span>
         <i class="fas fa-toggle-on toggleDarkMode" v-on:click="toggle"></i>
-      </span>
-      <span class="setting">Kategorien anzeigen:</span>
-      <ul>
-        <li>
-          <label for="kurzbeschreibung">Kurzbeschreibung</label>
-          <input
-            class="category"
-            name="kurzbeschreibung"
-            id="kurzbeschreibung"
-            type="checkbox"
-            checked
-          />
-        </li>
-        <li>
-          <label for="provenienz">Provenienz</label>
-          <input class="category" name="provenienz" id="provenienz" type="checkbox" checked />
-        </li>
-        <li>
-          <label for="masse">Maße</label>
-          <input class="category" name="masse" id="masse" type="checkbox" checked />
-        </li>
-        <li>
-          <label for="material">Material/Technik</label>
-          <input class="category" name="material" id="material" type="checkbox" checked />
-        </li>
-        <li>
-          <label for="beschriftung">Beschriftung</label>
-          <input class="category" name="beschriftung" id="beschriftung" type="checkbox" checked />
-        </li>
-        <li>
-          <label for="ausstellungsgeschichte">Ausstellungsgeschichte</label>
-          <input
-            class="category"
-            name="ausstellungsgeschichte"
-            id="ausstellungsgeschichte"
-            type="checkbox"
-            checked
-          />
-        </li>
-      </ul>
-      <span class="setting">Schriftgröße</span>
-      <slider
-        class="slider"
-        ref="slider"
-        v-model="sliderValue"
-        :adsorb="true"
-        :data="data"
-        :marks="true"
-        :drag-on-click="true"
-      ></slider>
+      </div>
+      <div class="card">
+        <span class="setting headline">Diese Kategorien werden Ihnen in der Gemäldeansicht angezeigt</span>
+        <ul class="normal-text category-ul">
+          <li>
+            <label for="kurzbeschreibung">Kurzbeschreibung</label>
+            <input
+              class="category"
+              name="kurzbeschreibung"
+              id="kurzbeschreibung"
+              type="checkbox"
+              checked
+            />
+          </li>
+          <li>
+            <label for="provenienz">Provenienz</label>
+            <input
+              class="category checkbox"
+              name="provenienz"
+              id="provenienz"
+              type="checkbox"
+              checked
+            />
+          </li>
+          <li>
+            <label for="masse">Maße</label>
+            <input class="category" name="masse" id="masse" type="checkbox" checked />
+          </li>
+          <li>
+            <label for="material">Material/Technik</label>
+            <input class="category" name="material" id="material" type="checkbox" checked />
+          </li>
+          <li>
+            <label for="beschriftung">Beschriftung</label>
+            <input class="category" name="beschriftung" id="beschriftung" type="checkbox" checked />
+          </li>
+          <li class="last-li">
+            <label for="ausstellungsgeschichte">Ausstellungsgeschichte</label>
+            <input
+              class="category"
+              name="ausstellungsgeschichte"
+              id="ausstellungsgeschichte"
+              type="checkbox"
+              checked
+            />
+          </li>
+        </ul>
+      </div>
+      <div class="card schrift-card">
+        <span class="setting headline">Schriftgröße</span>
+        <slider
+          class="slider"
+          ref="slider"
+          v-model="sliderValue"
+          :adsorb="true"
+          :data="data"
+          :marks="true"
+          :drag-on-click="true"
+        ></slider>
+      </div>
       <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
     <toolBar current-page="settings"></toolBar>
-  </div>
+  </span>
 </template>
 
 <script>
@@ -140,24 +150,52 @@ export default {
   min-height: 610px;
 
   .content {
+    padding: $abstand-M;
+    padding-bottom: $abstand-XXXL;
+
+    .card {
+      border-radius: 10px;
+      background: $dark;
+      padding: $card-padding;
+      box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+      margin-bottom: $abstand-M;
+    }
+
+    .darkmode-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .schrift-card {
+      .headline {
+        margin-bottom: $abstand-M;
+      }
+      padding-bottom: $abstand-L;
+    }
   }
 
   .setting {
     display: flex;
     justify-content: space-between;
-    padding: $abstand-M;
     color: $lighter;
-    font-size: $font-size-L;
   }
 
-  li {
-    display: flex;
-    justify-content: space-between;
-    padding: $abstand-S;
-    margin-left: $abstand-L;
-    margin-right: $abstand-S;
-    color: $lighter;
-    font-size: $font-size-M;
+  .category-ul {
+    margin-top: $abstand-L;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: $abstand-M;
+      margin-right: $abstand-S;
+      color: $lighter;
+      // font-size: $font-size-M;
+    }
+
+    .last-li {
+      margin-bottom: 0;
+    }
   }
 
   i {
@@ -165,10 +203,10 @@ export default {
     color: $lighter;
   }
 
-  .category {
-    width: $font-size-M;
-    height: $font-size-M;
-  }
+  // .category {
+  //   width: $font-size-M;
+  //   height: $font-size-M;
+  // }
 
   .slider {
     color: $lighter;
@@ -177,14 +215,16 @@ export default {
   }
 
   .saveButton {
-    position: absolute;
-    right: $abstand-M;
-    bottom: $abstand-L;
+    // position: absolute;
+    // right: $abstand-M;
+    // bottom: $abstand-L;
     background: $accent;
-    padding: $abstand-S;
+    padding: $button-padding;
     border-radius: 5px;
     border: none;
     color: $lighter;
+    box-shadow: 0 14px 14px rgba(0, 0, 0, 0.237602),
+      0 0 14px rgba(0, 0, 0, 0.12);
   }
 }
 //*********************** Following classes are there to style the vue-slider-comonent
