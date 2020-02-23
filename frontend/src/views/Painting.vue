@@ -405,6 +405,9 @@ export default {
       return this.painting.infos.find(info => {
         return info.paused;
       });
+    },
+    anyAudioPlaying() {
+      this.painting.infos.forEach(info => {});
     }
   },
   async beforeRouteUpdate(to, from, next) {
