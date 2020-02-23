@@ -5,7 +5,7 @@
     </a>
     <span>{{headline}}</span>
     <i class="fas fa-info-circle pageInfoButton" @click="displayPageInfo"></i>
-    <div class="pageInfo notDisplayed">
+    <div class="pageInfo notDisplayed animated fadeInDown">
       <div class="corner"></div>
       <h1 class="headline">{{pageInfoHeadline}}</h1>
       <span class="normal-text">{{pageInfo}}</span>
@@ -60,7 +60,7 @@ export default {
     .corner {
       position: absolute;
       top: -15px;
-      right: $abstand-S;
+      right: $abstand-M;
       width: 0;
       height: 0;
       border-left: 20px solid transparent;
