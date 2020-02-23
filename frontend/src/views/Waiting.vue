@@ -14,7 +14,6 @@
 </template>
 
 <script>
-// import handleMQTTConnection from "../assets/js/handleMQTTConnection";
 import toolBar from "../components/toolBar.vue";
 import headBar from "../components/headBar";
 
