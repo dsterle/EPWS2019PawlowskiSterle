@@ -10,20 +10,19 @@
         class="settings-button"
         icon="fas fa-align-left"
         description="Darstellung"
-        page="layout"
+        v-on:clicked="openLayout"
       ></settingButton>
-      <!--      <settingButton icon="fas fa-palette" description="Farben" page="colors"></settingButton>-->
       <settingButton
         class="settings-button"
         icon="fas fa-headphones-alt"
         description="Audio"
-        page="audio"
+        v-on:clicked="openAudio"
       ></settingButton>
       <settingButton
         class="settings-button"
         icon="fas fa-globe-americas"
         description="Sprache"
-        page="language"
+        v-on:clicked="openLanguage"
       ></settingButton>
     </div>
     <toolBar current-page="settings"></toolBar>
@@ -42,7 +41,18 @@ export default {
     return {};
   },
   created() {},
-  mounted() {}
+  mounted() {},
+  methods: {
+    openLayout() {
+      this.$router.push({ name: "layout" });
+    },
+    openAudio() {
+      this.$router.push({ name: "audio" });
+    },
+    openLanguage() {
+      this.$router.push({ name: "language" });
+    }
+  }
 };
 </script>
 

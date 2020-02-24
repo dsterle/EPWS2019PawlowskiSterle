@@ -1,5 +1,5 @@
 <template>
-  <div class="setting" @click="$router.push({name: page})">
+  <div class="setting" v-on:click="$emit('clicked')">
     <div class="left">
       <i class="icon" v-bind:class="icon"></i>
       <p class="text headline setting-description">{{description}}</p>

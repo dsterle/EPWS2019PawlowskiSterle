@@ -159,6 +159,7 @@ export default {
         time.getMinutes() +
         "." +
         time.getSeconds();
+      console.log(this.painting);
       this.history.unshift({
         id: parseInt(this.$route.params.id),
         title: this.painting.title,
