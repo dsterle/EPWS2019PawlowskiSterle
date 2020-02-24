@@ -7,18 +7,20 @@
         class="searchInput animated fadeIn"
         placeholder="Tippe um zu suchen..."
       />
+      <input type="submit" value="Ok" class="button-submit button-text" @click="findPaintingsByTitle">
     </div>
     <ul>
       <li class="animated fadeIn" v-for="painting in paintingMatch" v-bind:key="painting.title">
         <painting-with-infos
-          v-bind:src="painting.imgSrc[0]"
+          v-bind:src="painting.img[0].src"
           v-bind:alt="painting.title"
           v-bind:name="painting.title"
           v-bind:painting-id="painting.id"
+          v-bind:dated="painting.dated"
         ></painting-with-infos>
       </li>
     </ul>
-    <toolBar current-page="search"></toolBar>
+    <toolBar current-page="home"></toolBar>
   </div>
 </template>
 
@@ -27,26 +29,37 @@ import toolBar from "../components/toolBar.vue";
 import headBar from "../components/headBar";
 import axios from "axios";
 import paintingWithInfos from "../components/paintingWithInfos";
+import inputField from "../components/inputField";
 
 export default {
   name: "Search",
-  components: { toolBar, headBar, paintingWithInfos },
+  components: { toolBar, headBar, paintingWithInfos, inputField },
   data() {
     return {
-      id: 0,
-      paintingMatch: []
+      paintingMatch: [],
+      paintingList: [],
+      searchValue: ""
     };
   },
   async created() {
-    let result = await axios({
-      method: "POST",
-      url: "http://localhost:4000/graphql",
-      data: {
-        query: `
+
+  },
+  methods: {
+    async findPaintingsByTitle() {
+        let title = document.querySelector(".searchInput").value;
+        let result = await axios({
+            method: "POST",
+            url: "http://localhost:4000/graphql",
+            data: {
+                query: `
             {
-              painting(id: ${this.id}) {
+              paintings(title: "${title}") {
+                id
                 title
-                imgSrc
+                img {
+                  src
+                  description
+                }
                 dated
                 infos {
                   id
@@ -57,27 +70,25 @@ export default {
               }
             }
           `
-      }
-    });
-    this.addSearchListener();
-  },
-  methods: {
-    findPaintingsByTitle(title) {
-      title = title.toUpperCase();
-      let findings = [];
-      this.paintingList.forEach(function(elm) {
-        let elmTitle = elm.title.toUpperCase();
-        if (elmTitle.substring(0, title.length) === title) findings.push(elm);
-      });
-      return findings;
+            }
+        });
+
+      this.paintingList = result.data.data.paintings;
+      console.log(this.paintingList[0])
+      // this.paintingList.forEach(function(elm) {
+      //   let elmTitle = elm.title.toUpperCase();
+      //   if (elmTitle.substring(0, title.length) === title) findings.push(elm);
+      // });
+      return this.paintingMatch = this.paintingList;
     },
-    findPaintingsByDate(date) {
+    findPaintingsByDate() {
+      let date = document.querySelector(".searchInput").value;
       let findings = [];
       this.paintingList.forEach(function(elm) {
         let datedString = elm.dated.toString();
         if (datedString.substring(0, date.length) === date) findings.push(elm);
       });
-      return findings;
+      return this.paintingMatch = findings;
     },
     addSearchListener() {
       let _this = this;
@@ -101,29 +112,24 @@ export default {
 .wrapper {
   display: flex;
   justify-content: center;
-  margin-top: $app-bar-height;
+  margin: $abstand-XL $abstand-S 0 $abstand-S;
 }
 
-.input-field {
+.button-submit {
+  background: $accent;
   padding: $button-padding $abstand-M $button-padding $abstand-M;
-  color: white;
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin-right: $abstand-M;
-  box-sizing: border-box;
+  height: $app-bar-height;
   border-radius: 5px;
-  border: 1px $light solid;
-  transition: 0.5s;
-  height: auto;
-  margin-bottom: 0;
+  color: $lighter;
+  margin-left: $abstand-S;
 }
 
 .searchInput {
   position: relative;
+  height: $app-bar-height;
   width: 100%;
-  margin: $abstand-M;
   padding: $button-padding $abstand-M $button-padding $abstand-M;
-  color: white;
+  color: $lighter;
   box-sizing: border-box;
   border-radius: 5px;
   border: 1px $light solid;

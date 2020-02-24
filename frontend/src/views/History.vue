@@ -15,7 +15,7 @@
         </li>
       </ul>
     </div>
-    <toolBar current-page="history"></toolBar>
+    <toolBar current-page="home"></toolBar>
   </div>
 </template>
 
