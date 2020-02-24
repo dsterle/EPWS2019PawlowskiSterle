@@ -46,7 +46,6 @@
           :contained="true"
         ></slider>
       </div>
-      <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
     <toolBar current-page="settings"></toolBar>
   </div>
@@ -67,7 +66,7 @@ export default {
     return {
       soundValue: 1,
       speedValue: 1,
-      saveIcon: require("../../assets/icons/play.svg")
+      saveIcon: require("../../assets/icons/done.svg")
     };
   },
   mounted() {

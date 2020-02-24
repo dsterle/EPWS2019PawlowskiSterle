@@ -15,7 +15,7 @@
       v-on:fab-clicked="saveSettings"
     ></fab>
     <div class="content">
-      <div class="card darkmode-card">
+      <div class="card darkmode-card animated fadeIn">
         <p class="setting headline">Dark Mode</p>
         <div class="switch">
           <label>
@@ -24,7 +24,7 @@
           </label>
         </div>
       </div>
-      <div class="card">
+      <div class="card category-card animated fadeIn">
         <span class="setting headline">Diese Kategorien werden Ihnen in der Gemäldeansicht angezeigt</span>
         <ul class="normal-text category-ul">
           <li>
@@ -77,7 +77,7 @@
           </li>
         </ul>
       </div>
-      <div class="card schrift-card">
+      <div class="card typo-card animated fadeIn">
         <span class="setting headline">Schriftgröße</span>
         <slider
           class="slider"
@@ -89,7 +89,6 @@
           :drag-on-click="true"
         ></slider>
       </div>
-      <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
     <toolBar current-page="settings"></toolBar>
   </div>
@@ -108,7 +107,7 @@ export default {
     return {
       sliderValue: "a",
       data: ["Klein", "Mittel", "Groß"],
-      saveIcon: require("../../assets/icons/play.svg")
+      saveIcon: require("../../assets/icons/done.svg")
     };
   },
   created() {},
@@ -172,7 +171,7 @@ export default {
 
   .content {
     padding: $abstand-M;
-    padding-bottom: $abstand-XXXL;
+    padding-bottom: $abstand-XXXXL;
     margin-top: $app-bar-height;
 
     .darkmode-card {
@@ -181,7 +180,7 @@ export default {
       justify-content: space-between;
     }
 
-    .schrift-card {
+    .typo-card {
       .headline {
         margin-bottom: $abstand-M;
       }
