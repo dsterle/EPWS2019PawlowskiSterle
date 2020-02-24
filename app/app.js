@@ -5,10 +5,10 @@ const cors = require("cors");
 const serveStatic = require("serve-static");
 const path = require("path");
 var mongoose = require("mongoose");
-var schema = require('./backend/schema.js').schema;
+var schema = require('./graphql/schema.js').schema;
 
 //** Models */
-const Painting = require("./backend/models/painting");
+const Painting = require("./graphql/models/painting");
 
 const startServer = async () => {
 
