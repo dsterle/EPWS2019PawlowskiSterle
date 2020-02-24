@@ -30,7 +30,7 @@ const schema = buildSchema(`
     type Query {
       chips: [Chip!]!
       chip: Chip!
-      paintings: [Painting!]!
+      paintings(title: String): [Painting!]!
       painting(id: ID!): Painting
     }
 
