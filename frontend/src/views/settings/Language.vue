@@ -3,7 +3,7 @@
     <headBar
       headline="Sprache"
       page-info-headline="Sprache:"
-      page-info="Hier können Sie die Sprache einstellen"
+      page-info="Hier können Sie die Sprache einstellen."
     ></headBar>
     <fab
       js-fab

@@ -8,7 +8,7 @@
       page-info="Hier erhalten sie textuelle und auditive Informationen. Das Bild können Sie (sofern mehr als ein Punkt
                   auf dem Bild zusehen ist) nach links wischen, um alternative Gemäldeansichten zu sehen.
                   Über die Lautsprechericons starten sie eine Audio.
-                  Über den violetten Button unten links können Sie die Audio pausieren."
+                  Über den violetten Button unten rechts können Sie die Audio pausieren."
     ></headBar>
     <fab
       js-fab

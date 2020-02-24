@@ -1,6 +1,9 @@
 <template>
   <div class="history">
-    <headBar headline="Verlauf"></headBar>
+    <headBar headline="Verlauf"
+    page-info-headline="Verlauf:"
+    page-info="Hier können Sie auf die letzten Gemälde zugreifen, die Sie sich angeschaut haben. Die Anzahl der Einträge
+                ist auf 10 begrenzt."></headBar>
     <div class="content">
       <ul>
         <li v-for="painting in paintingHistory" v-bind:key="painting.id">
@@ -46,5 +49,6 @@ export default {
 
 .content {
   margin-top: $app-bar-height;
+  margin-bottom: $app-bar-height;
 }
 </style>
