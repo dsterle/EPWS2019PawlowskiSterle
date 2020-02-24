@@ -5,12 +5,12 @@
       <ul>
         <li v-for="painting in paintingHistory" v-bind:key="painting.id">
           <painting-with-infos
-            v-bind:src="painting.imgSrc"
+            v-bind:src="painting.src"
             v-bind:alt="painting.title"
             v-bind:name="painting.title"
             v-bind:dated="painting.dated"
             v-bind:painting-id="painting.id"
-            v-bind:time="painting.time"
+            v-bind:time="painting.time + ' Uhr'"
           ></painting-with-infos>
         </li>
       </ul>

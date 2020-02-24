@@ -79,7 +79,8 @@ export default {
     console.log("created");
     if (localStorage.paintingHistory) {
       this.history = JSON.parse(localStorage.paintingHistory);
-    } else this.history = [];
+    } else
+        this.history = [];
     this.topic = this.$route.params.userid;
     this.id = parseInt(this.$route.params.id);
 
@@ -164,9 +165,11 @@ export default {
         id: parseInt(this.$route.params.id),
         title: this.painting.title,
         dated: this.painting.dated,
-        // imgSrc: this.painting.imgSrc[0],
+        src: this.painting.img[0].src,
         time: time
       });
+      if (this.history.length === 11)
+          this.history.pop();
       localStorage.setItem("paintingHistory", JSON.stringify(this.history));
     },
     /**

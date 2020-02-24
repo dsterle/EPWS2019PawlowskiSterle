@@ -5,7 +5,7 @@
       <input
         type="search input-field"
         class="searchInput animated fadeIn"
-        placeholder="Tippe um zu suchen..."
+        placeholder="Titel z.B. Bildnis des Johannes Cuspinian"
       />
       <input type="submit" value="Ok" class="button-submit button-text" @click="findPaintingsByTitle">
     </div>
