@@ -7,6 +7,13 @@
                         Gemälden angezeigt werden sollen oder die Schriftgröße anpassen. Klicken Sie auf speichern,
                         um Ihre Einstellungen zu speichern."
     ></headBar>
+    <fab
+      js-fab
+      class="fab animated bounceIn"
+      v-bind:src="saveIcon"
+      alt="Speichern Knopf"
+      v-on:fab-clicked="saveSettings"
+    ></fab>
     <div class="content">
       <div class="card darkmode-card">
         <p class="setting headline">Dark Mode</p>
@@ -92,14 +99,16 @@
 import headBar from "../../components/headBar";
 import toolBar from "../../components/toolBar";
 import slider from "vue-slider-component";
+import fab from "../../components/fab";
 
 export default {
   name: "Layout",
-  components: { headBar, toolBar, slider },
+  components: { headBar, toolBar, slider, fab },
   data() {
     return {
       sliderValue: "a",
-      data: ["Klein", "Mittel", "Groß"]
+      data: ["Klein", "Mittel", "Groß"],
+      saveIcon: require("../../assets/icons/play.svg")
     };
   },
   created() {},
@@ -128,6 +137,7 @@ export default {
       }
     },
     saveSettings() {
+      console.log("saveSettings");
       let categories = document.querySelectorAll(".category");
       let darkMode = document.querySelector("[js-toggle-dark-mode]");
 
@@ -138,6 +148,8 @@ export default {
       }
       localStorage.categoriesToShow = categoriesToShow;
       localStorage.fontSize = this.$refs.slider.getValue();
+
+      this.$router.push({ name: "settings" });
     }
   }
 };
@@ -148,6 +160,15 @@ export default {
 
 .layout {
   min-height: 610px;
+
+  .fab {
+    position: fixed;
+    right: 0;
+    bottom: $abstand-XL;
+    margin: 0 $abstand-M $abstand-M 0;
+    animation-delay: 200ms;
+    transition: 0.3s;
+  }
 
   .content {
     padding: $abstand-M;

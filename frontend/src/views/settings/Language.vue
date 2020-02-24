@@ -3,7 +3,7 @@
     <headBar
       headline="Sprache"
       page-info-headline="Sprache:"
-      page-info="Hier können Sie die Sprache einstellen, diese wird automatisch gespeichert."
+      page-info="Hier können Sie die Sprache einstellen"
     ></headBar>
     <div class="content">
       <ul class="languageList">
@@ -69,6 +69,15 @@ export default {
 @import "../../assets/scss/010-variables";
 
 .language {
+  .fab {
+    position: fixed;
+    right: 0;
+    bottom: $abstand-XL;
+    margin: 0 $abstand-M $abstand-M 0;
+    animation-delay: 200ms;
+    transition: 0.3s;
+  }
+
   .content {
     margin-top: $app-bar-height;
     padding: $abstand-M;

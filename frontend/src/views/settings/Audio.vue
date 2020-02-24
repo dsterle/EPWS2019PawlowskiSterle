@@ -1,6 +1,13 @@
 <template>
   <div class="audio">
     <headBar headline="Audio"></headBar>
+    <fab
+      js-fab
+      class="fab animated bounceIn"
+      v-bind:src="saveIcon"
+      alt="Speichern Knopf"
+      v-on:fab-clicked="saveSettings"
+    ></fab>
     <div class="content">
       <div class="card card-autoplay">
         <p class="setting headline">Autoplay</p>
@@ -51,14 +58,16 @@ import toolBar from "../../components/toolBar";
 import slider from "vue-slider-component";
 import { Howl, Howler } from "howler";
 import Vue from "vue";
+import fab from "../../components/fab";
 
 export default {
   name: "Audio",
-  components: { headBar, toolBar, slider, Vue, Howl },
+  components: { headBar, toolBar, slider, Vue, Howl, fab },
   data() {
     return {
       soundValue: 1,
-      speedValue: 1
+      speedValue: 1,
+      saveIcon: require("../../assets/icons/play.svg")
     };
   },
   mounted() {
@@ -70,6 +79,8 @@ export default {
       localStorage.autoplay = autoplay.checked;
       localStorage.volume = this.$refs.volumeSlider.getValue();
       localStorage.audioSpeed = this.$refs.speedSlider.getValue();
+
+      this.$router.push({ name: "settings" });
     },
     checkLocalStorage() {
       if (localStorage.autoplay) {
@@ -94,6 +105,15 @@ export default {
 @import "../../assets/scss/010-variables";
 
 .audio {
+  .fab {
+    position: fixed;
+    right: 0;
+    bottom: $abstand-XL;
+    margin: 0 $abstand-M $abstand-M 0;
+    animation-delay: 200ms;
+    transition: 0.3s;
+  }
+
   .content {
     padding: $abstand-M;
     padding-bottom: $abstand-XXXL;
