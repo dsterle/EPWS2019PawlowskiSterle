@@ -8,10 +8,17 @@
       @click="$router.push({name: 'waiting', params: {userid: user}});"
     />
     <img
+      v-if="!isNaN(currentPainting)"
       js-painting
       src="../assets/icons/painting.svg"
       alt
       @click="$router.push({name: 'painting', params: {userid: user, id: paintingId}})"
+    />
+    <img v-else
+      js-painting
+      src="../assets/icons/painting.svg"
+      alt
+      @click="$router.push({name: 'noPainting', params: {userid: user}})"
     />
     <img
       js-settings
@@ -36,7 +43,8 @@ export default {
       painting_icon: require("../assets/icons/painting.svg"),
       painting_icon_accent: require("../assets/icons/painting_accent.svg"),
       settings_icon: require("../assets/icons/settings.svg"),
-      settings_icon_accent: require("../assets/icons/settings_accent.svg")
+      settings_icon_accent: require("../assets/icons/settings_accent.svg"),
+      currentPainting: localStorage.currentPainting
     };
   },
   methods: {

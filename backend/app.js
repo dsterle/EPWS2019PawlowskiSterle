@@ -27,8 +27,17 @@ const startServer = async () => {
         // return args.name;
 
       },
-      paintings: () => {
-        return DB_paintings;
+      paintings: async (args) => {
+        let result_title = await Painting.find({ title: { "$regex": args.title } }).then(painting => {
+          // console.log(painting);
+          return painting;
+
+        }).catch(err => {
+          console.log(err);
+          return 0;
+
+        });
+        return result_title;
       },
       test: () => {
         return Painting.find();
