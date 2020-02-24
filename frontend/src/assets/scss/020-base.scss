@@ -1,3 +1,42 @@
+// Farb-Anpassungen der materialize.css styles
+
+.switch label input[type="checkbox"]:checked + .lever {
+  background-color: $accentDark;
+}
+
+.switch label input[type="checkbox"]:checked + .lever:after {
+  background-color: $accent;
+}
+
+[type="checkbox"]:checked + span:not(.lever):before {
+  border-right: 2px solid $accent;
+  border-bottom: 2px solid $accent;
+}
+
+[type="checkbox"] + span:not(.lever):before,
+[type="checkbox"]:not(.filled-in) + span:not(.lever):after {
+  border: 2px solid $light;
+  border-radius: 5px;
+}
+
+// Anpassungen für materialize.css
+
+.container {
+  width: auto;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: none;
+  box-shadow: none !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: none !important;
+  background-image: none !important;
+  color: none !important;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -50,43 +89,4 @@ input:active {
   margin-bottom: $abstand-M;
   margin-top: 0;
   position: static;
-}
-
-// Farb-Anpassungen der materialize.css styles
-
-.switch label input[type="checkbox"]:checked + .lever {
-  background-color: $accentDark;
-}
-
-.switch label input[type="checkbox"]:checked + .lever:after {
-  background-color: $accent;
-}
-
-[type="checkbox"]:checked + span:not(.lever):before {
-  border-right: 2px solid $accent;
-  border-bottom: 2px solid $accent;
-}
-
-[type="checkbox"] + span:not(.lever):before,
-[type="checkbox"]:not(.filled-in) + span:not(.lever):after {
-  border: 2px solid $light;
-  border-radius: 5px;
-}
-
-// Anpassungen für materialize.css
-
-.container {
-  width: auto;
-}
-
-input:focus {
-  outline: none;
-  border-bottom: none;
-  box-shadow: none !important;
-}
-
-input:-internal-autofill-selected {
-  background-color: none !important;
-  background-image: none !important;
-  color: none !important;
 }
