@@ -60,20 +60,6 @@ export default {
   display: flex;
   justify-content: space-between;
 
-  .input-field {
-    padding: $button-padding $abstand-M $button-padding $abstand-M;
-    color: white;
-    flex-grow: 1;
-    flex-shrink: 1;
-    margin-right: $abstand-M;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 1px $light solid;
-    transition: 0.5s;
-    height: auto;
-    margin-bottom: 0;
-  }
-
   .input-field:focus {
     border: 1px $accent solid !important;
     transition: 0.5s;
@@ -87,6 +73,20 @@ export default {
     color: $lighter;
     cursor: pointer;
     transition: 0.5s;
+  }
+
+  .input-field {
+    padding: $button-padding $abstand-M $button-padding $abstand-M;
+    color: white;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-right: $abstand-M;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px $light solid;
+    transition: 0.5s;
+    height: auto;
+    margin-bottom: 0;
   }
 
   .button-error {
