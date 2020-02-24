@@ -7,19 +7,19 @@
     ></headBar>
     <div class="content">
       <settingButton
-        class="settings-button"
+        class="settings-button first animated fadeIn"
         icon="fas fa-align-left"
         description="Darstellung"
         v-on:clicked="openLayout"
       ></settingButton>
       <settingButton
-        class="settings-button"
+        class="settings-button second animated fadeIn"
         icon="fas fa-headphones-alt"
         description="Audio"
         v-on:clicked="openAudio"
       ></settingButton>
       <settingButton
-        class="settings-button"
+        class="settings-button third animated fadeIn"
         icon="fas fa-globe-americas"
         description="Sprache"
         v-on:clicked="openLanguage"
@@ -65,6 +65,17 @@ export default {
 
     .settings-button {
       margin-bottom: $abstand-M;
+
+      &.first {
+      }
+
+      &.second {
+        animation-delay: 200ms;
+      }
+
+      &.third {
+        animation-delay: 400ms;
+      }
     }
   }
 }

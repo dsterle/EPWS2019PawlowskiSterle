@@ -2,7 +2,7 @@
   <div
     class="languageButton card"
     v-bind:class="langClass"
-    @click="changeLanguage(languageId)"
+    v-on:click="$emit('language-button-clicked', languageId)"
     v-bind:id="languageId"
   >
     <div class="wrapper">
@@ -15,14 +15,7 @@
 <script>
 export default {
   name: "languageButton",
-  props: ["languageId", "language", "langSrc", "langClass"],
-  methods: {
-    changeLanguage(id) {
-      document.querySelector(".selected").classList.remove("selected");
-      document.querySelector("#" + id).classList.add("selected");
-      localStorage.language = document.querySelector(".selected").id;
-    }
-  }
+  props: ["languageId", "language", "langSrc", "langClass"]
 };
 </script>
 

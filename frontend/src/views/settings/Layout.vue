@@ -7,8 +7,15 @@
                         Gemälden angezeigt werden sollen oder die Schriftgröße anpassen. Klicken Sie auf speichern,
                         um Ihre Einstellungen zu speichern."
     ></headBar>
+    <fab
+      js-fab
+      class="fab animated bounceIn"
+      v-bind:src="saveIcon"
+      alt="Speichern Knopf"
+      v-on:fab-clicked="saveSettings"
+    ></fab>
     <div class="content">
-      <div class="card darkmode-card">
+      <div class="card darkmode-card animated fadeIn">
         <p class="setting headline">Dark Mode</p>
         <div class="switch">
           <label>
@@ -17,7 +24,7 @@
           </label>
         </div>
       </div>
-      <div class="card">
+      <div class="card category-card animated fadeIn">
         <span class="setting headline">Diese Kategorien werden Ihnen in der Gemäldeansicht angezeigt</span>
         <ul class="normal-text category-ul">
           <li>
@@ -70,7 +77,7 @@
           </li>
         </ul>
       </div>
-      <div class="card schrift-card">
+      <div class="card typo-card animated fadeIn">
         <span class="setting headline">Schriftgröße</span>
         <slider
           class="slider"
@@ -82,7 +89,6 @@
           :drag-on-click="true"
         ></slider>
       </div>
-      <button class="saveButton button-text" @click="saveSettings">Speichern</button>
     </div>
     <toolBar current-page="settings"></toolBar>
   </div>
@@ -92,14 +98,16 @@
 import headBar from "../../components/headBar";
 import toolBar from "../../components/toolBar";
 import slider from "vue-slider-component";
+import fab from "../../components/fab";
 
 export default {
   name: "Layout",
-  components: { headBar, toolBar, slider },
+  components: { headBar, toolBar, slider, fab },
   data() {
     return {
       sliderValue: "a",
-      data: ["Klein", "Mittel", "Groß"]
+      data: ["Klein", "Mittel", "Groß"],
+      saveIcon: require("../../assets/icons/done.svg")
     };
   },
   created() {},
@@ -128,6 +136,7 @@ export default {
       }
     },
     saveSettings() {
+      console.log("saveSettings");
       let categories = document.querySelectorAll(".category");
       let darkMode = document.querySelector("[js-toggle-dark-mode]");
 
@@ -138,6 +147,8 @@ export default {
       }
       localStorage.categoriesToShow = categoriesToShow;
       localStorage.fontSize = this.$refs.slider.getValue();
+
+      this.$router.push({ name: "settings" });
     }
   }
 };
@@ -149,9 +160,18 @@ export default {
 .layout {
   min-height: 610px;
 
+  .fab {
+    position: fixed;
+    right: 0;
+    bottom: $abstand-XL;
+    margin: 0 $abstand-M $abstand-M 0;
+    animation-delay: 200ms;
+    transition: 0.3s;
+  }
+
   .content {
     padding: $abstand-M;
-    padding-bottom: $abstand-XXXL;
+    padding-bottom: $abstand-XXXXL;
     margin-top: $app-bar-height;
 
     .darkmode-card {
@@ -160,7 +180,7 @@ export default {
       justify-content: space-between;
     }
 
-    .schrift-card {
+    .typo-card {
       .headline {
         margin-bottom: $abstand-M;
       }
