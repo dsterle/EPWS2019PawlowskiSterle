@@ -1,0 +1,95 @@
+// Farb-Anpassungen der materialize.css styles
+
+.switch label input[type="checkbox"]:checked + .lever {
+  background-color: $accentDark;
+}
+
+.switch label input[type="checkbox"]:checked + .lever:after {
+  background-color: $accent;
+}
+
+[type="checkbox"]:checked + span:not(.lever):before {
+  border-right: 2px solid $accent;
+  border-bottom: 2px solid $accent;
+}
+
+[type="checkbox"] + span:not(.lever):before,
+[type="checkbox"]:not(.filled-in) + span:not(.lever):after {
+  border: 2px solid $light;
+  border-radius: 5px;
+}
+
+// Anpassungen für materialize.css
+
+.container {
+  width: auto;
+  border-bottom: none !important;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: none;
+  box-shadow: none !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: none !important;
+  background-image: none !important;
+  color: none !important;
+}
+
+/////////////
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: $darker;
+  font-family: $font;
+}
+
+label {
+  color: $lighter;
+}
+
+input {
+  outline: none;
+  background: none;
+  text-decoration: none;
+  border: none;
+  border-radius: 0;
+  font-family: $font;
+  font-weight: $weight-regular;
+  font-size: $font-size-M;
+}
+
+input:active {
+  background-color: transparent;
+}
+
+.floating-action-button {
+  z-index: 6;
+  background: $accent;
+  width: $fab-size;
+  height: $fab-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  box-shadow: 0 14px 14px rgba(0, 0, 0, 0.237602), 0 0 14px rgba(0, 0, 0, 0.12);
+}
+
+.floating-action-button:active {
+  background: $accentDark;
+}
+
+.card {
+  border-radius: 10px;
+  background: $dark;
+  padding: $card-padding;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+  margin-bottom: $abstand-M;
+  margin-top: 0;
+  position: static;
+}

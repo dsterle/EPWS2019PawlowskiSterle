@@ -1,0 +1,78 @@
+//* Colors *//
+
+//@if($darkTheme) {
+$evenDarker: rgb(24, 25, 26);
+$darker: #252627;
+$dark: #303133;
+$light: #4a4a4a;
+$middleLight: #cdcdcd;
+$lighter: #fff;
+$input-outline: #919192;
+$accent: #708ce0;
+$accentDark: #4c62a7;
+$accentTransparent: #00c3ff38;
+$error: #c84f4f;
+//} @else {
+//  $evenDarker: #fff;
+//  $darker: #fff;
+//  $light: #4a4a4a;
+//  $middleLight: #cdcdcd;
+//  $lighter: #18191a;
+//  $input-outline: #919192;
+//  $accent: #708ce0;
+//  $accentDark: #4c62a7;
+//  $accentTransparent: #00c3ff38;
+//  $error: #c84f4f;
+//}
+
+//* Sizes *//
+// 1rem = 16px
+$golden-ratio: 1.618;
+
+$abstand-XS: 1rem * 0.25; // 4
+$abstand-S: 1rem * 0.5; // 8
+$abstand-M: 1rem; // 16
+$abstand-XM: 1rem * 1.5;
+$abstand-L: 1rem * 2; // 32
+$abstand-XL: 1rem * 4; // 64
+$abstand-XXL: 1rem * 4.5; // 72
+$abstand-XXXL: 1rem * 5; // 80
+$abstand-XXXXL: 1rem * 10; // 160
+
+$button-padding: 1rem * 0.75;
+$card-padding: 1rem * 1.5;
+
+$app-bar-height: 1rem * 3.375; // 54
+$icon-wrapper-width: 1rem * 3; // 48
+$fab-size: 1rem * 4; // 56
+$button-width: 1rem * 7;
+
+//* Font Sizes *//
+
+$font-size-XS: 1rem * 0.5; // 8
+$font-size-S: 1rem * 0.75; // 12
+$font-size-M: 1rem; // 16
+$font-size-L: 1rem * 1.25; // 20
+$font-size-XL: 1rem * 1.5; // 24
+$font-size-XXL: 1rem * 1.75; // 28
+$font-size-XXXL: 1rem * 2; // 32
+$font-size-welcome-text: 1rem * $golden-ratio;
+
+// Der Zeilenabstand steht im goldenen Schnitt zur font-size
+$font-line-height-S: $font-size-S * $golden-ratio;
+$font-line-height-M: $font-size-M * $golden-ratio;
+$font-line-height-L: $font-size-L * $golden-ratio;
+$font-line-height-XL: $font-size-XL * $golden-ratio;
+$font-line-height-XXXL: $font-size-XXXL * $golden-ratio;
+$font-line-height-welcome-text: $font-size-welcome-text * $golden-ratio;
+
+//* Font *//
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,500,600&display=swap");
+
+$font: "Montserrat", Helvetica, sans-serif;
+
+$weight-light: 300;
+$weight-regular: 400;
+$weight-medium: 500;
+$weight-semibold: 600;

@@ -1,0 +1,51 @@
+.welcome-text {
+  font-size: $font-size-welcome-text;
+  line-height: $font-line-height-welcome-text;
+  color: $lighter;
+}
+
+.headline {
+  font-size: $font-size-L;
+  line-height: $font-line-height-L;
+  color: $lighter;
+}
+
+.title-text {
+  font-size: $font-size-L;
+  line-height: $font-line-height-L;
+  font-weight: $weight-semibold;
+  color: $lighter;
+}
+
+.normal-text {
+  font-size: $font-size-M;
+  line-height: $font-line-height-M;
+  font-weight: $weight-regular;
+  color: $lighter;
+}
+
+.button-text {
+  font-size: $font-size-L;
+  font-weight: $weight-medium;
+  color: $lighter;
+}
+
+.hint-text {
+  font-size: $font-size-M;
+  font-weight: $weight-regular;
+  line-height: $font-line-height-M;
+  color: $lighter;
+}
+
+.error-text {
+  font-size: $font-size-S;
+  font-weight: $weight-regular;
+  color: $error;
+}
+
+.description-text {
+  font-size: $font-size-M;
+  font-weight: $weight-regular;
+  line-height: $font-line-height-M;
+  color: $lighter;
+}
