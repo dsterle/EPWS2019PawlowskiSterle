@@ -3,7 +3,7 @@
     <head-bar headline="Suche"></head-bar>
     <div class="wrapper">
       <input
-        type="search"
+        type="search input-field"
         class="searchInput animated bounceIn"
         placeholder="Tippe um zu suchen..."
       />
@@ -271,6 +271,21 @@ export default {
 .wrapper {
   display: flex;
   justify-content: center;
+  margin-top: $app-bar-height;
+}
+
+.input-field {
+  padding: $button-padding $abstand-M $button-padding $abstand-M;
+  color: white;
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin-right: $abstand-M;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px $light solid;
+  transition: 0.5s;
+  height: auto;
+  margin-bottom: 0;
 }
 
 .searchInput {
