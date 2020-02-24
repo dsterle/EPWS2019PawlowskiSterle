@@ -3,8 +3,8 @@
     <headBar
       headline="Home"
       page-info-headline="Willkommen:"
-      page-info="In der Toolbar unten können Sie zwischen der Home-Seite, Suche, aktuelles Gemälde, Verlauf und
-                          den Einstellungen wechseln."
+      page-info="Hier können Sie auf Ihren Verlauf zugreifen oder manuell nach einem bestimmten Gemälde in unserem Archiv suchen.
+                  In der Toolbar unten können Sie zwischen der Home-Seite, Ihrem aktuellen Gemälde und den Einstellungen wechseln."
     ></headBar>
     <div class="content">
       <div class="text-wrapper">
@@ -13,12 +13,12 @@
       <div class="button-wrapper">
         <settingbutton
           v-on:clicked="historyClicked"
-          class="setting-button"
+          class="setting-button first animated fadeIn"
           description="Ihr Verlauf"
         ></settingbutton>
         <settingbutton
           v-on:clicked="sucheClicked"
-          class="setting-button"
+          class="setting-button second animated fadeIn"
           description="Gemälde suchen"
         ></settingbutton>
         <toolBar current-page="home"></toolBar>
@@ -93,6 +93,12 @@ export default {
 
     .setting-button {
       margin-bottom: $abstand-M;
+    }
+  }
+
+  .setting-button {
+    &.second {
+      animation-delay: 200ms;
     }
   }
 }

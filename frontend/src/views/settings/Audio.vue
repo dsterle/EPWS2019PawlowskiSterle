@@ -1,6 +1,9 @@
 <template>
   <div class="audio">
-    <headBar headline="Audio"></headBar>
+    <headBar headline="Audio"
+    page-info-headline="Audio:"
+    page-info="Hier können Sie einstellen, ob die Audios der Gemälde automatisch abgespielt werden sollen, oder Sie diese manuell
+                starten möchten. Außerdem können Sie die Lautstärke und die Wiedergabegeschwindigkeit anpassen."></headBar>
     <fab
       js-fab
       class="fab animated bounceIn"

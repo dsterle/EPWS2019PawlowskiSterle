@@ -2,7 +2,8 @@
   <div>
     <p
       class="normal-text animated fadeIn"
-    >Wenn Sie Informationen zu einem Gemälde lesen oder hören wollen, müssen Sie nur Ihren Chip an das dazugehörige Lesegerät halten</p>
+    >Wenn Sie Informationen zu einem Gemälde lesen oder hören wollen, müssen Sie nur Ihren Chip an das dazugehörige Lesegerät halten.
+    Dies ist zu jeder Zeit möglich.</p>
     <div class="illustration-wrapper animated fadeIn">
       <img class="illustration" src="../../assets/illustrations/handwithchip.svg" alt />
     </div>

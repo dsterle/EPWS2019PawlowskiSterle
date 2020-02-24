@@ -1,11 +1,15 @@
 <template>
   <div class="search">
-    <head-bar headline="Suche"></head-bar>
+    <head-bar headline="Suche"
+              page-info-headline="Gemäldesuche:"
+              page-info="Hier können Sie manuell nach einem bestimmten Gemälde in unserem Archiv suchen. Geben Sie dazu einfach
+                          den Titel des Gemäldes ein und tippen auf 'Ok'. Sie können das Eingabefeld auch leer lassen und auf 'Ok'
+                          tippen, um alle verfügbaren Gemälde anzeigen zu lassen."></head-bar>
     <div class="wrapper">
       <input
         type="search input-field"
         class="searchInput animated fadeIn"
-        placeholder="Tippe um zu suchen..."
+        placeholder="Titel z.B. Bildnis des Johannes Cuspinian"
       />
       <input type="submit" value="Ok" class="button-submit button-text" @click="findPaintingsByTitle">
     </div>

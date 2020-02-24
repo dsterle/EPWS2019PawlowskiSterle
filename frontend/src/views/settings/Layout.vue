@@ -4,7 +4,7 @@
       headline="Darstellung"
       page-info-headline="Darstellung:"
       page-info="Hier können Sie einstellen, ob der dark mode eingeschaltet sein soll, welche Informationen bei
-                        Gemälden angezeigt werden sollen oder die Schriftgröße anpassen. Klicken Sie auf speichern,
+                        Gemälden angezeigt werden sollen oder die Schriftgröße anpassen. Tippen Sie auf den Haken unten rechts,
                         um Ihre Einstellungen zu speichern."
     ></headBar>
     <fab
