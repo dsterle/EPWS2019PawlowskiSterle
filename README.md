@@ -3,9 +3,9 @@
 Willkommen zu unserem Projekt inGuide!
 Dieses Projekt fand seinen Ursprung im Rahmen des Kurses "Web-Development" an der TH-Köln im Studiengang Medieninformatik. Aktuell wird es mit dem nun folgenden Problemraum und der Zielsetzung in dem Kurs "Entwicklungsprojekt" weiter entwickelt.
 
-## Link zur Web Anwendung :link:
+## Link zur Web Anwendung (jedoch aktuell nicht voll funktionsfähig) :link:
 
-https://dsterle.github.io/EPWS2019PawlowskiSterle/
+http://in-guide-lucas-cranach.herokuapp.com/#/
 
 ---
 
