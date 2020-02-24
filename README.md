@@ -43,5 +43,7 @@ Die neue Zielsetzung dieses Projekts besteht darin den vorhandenen Prototypen so
 6. Microcontroller starten
 7. http://localhost:4000/ aufrufen
 
+Man kann sich mit den NFC-Chip Nummern 100, 101 und 102 anmelden.
+
 Geben Sie anschließend die Nummer auf der Rückseite des NFC-Tags ein (Zu Testzwecken nehmen Sie unseren konfigurierten NFC-Tag und geben Sie "100" ein) und drücken auf "Ok". Nun halten Sie Ihr NFC-Tag an den NFC-Reader und erfahren Sie mehr über das jeweilige Gemälde... 
 
