@@ -3,9 +3,7 @@ var graphqlHTTP = require("express-graphql");
 const app = express();
 const cors = require("cors");
 var mongoose = require("mongoose");
-
 var schema = require('./schema.js').schema;
-// const DB_paintings = require("./data/database").paintings;
 
 //** Models */
 const Painting = require("./models/painting");
@@ -45,7 +43,6 @@ const startServer = async () => {
       painting: (args) => {
 
         return Painting.find({ id: args.id }).then(painting => {
-          console.log(painting[0]);
           return painting[0];
 
         }).catch(err => {
