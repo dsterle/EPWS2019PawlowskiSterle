@@ -8,7 +8,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
